@@ -368,3 +368,39 @@ body.dark .welcome-cta { color:#133c2d; background:#e5f4e9; }
 .tutor-followup{margin-top:14px;padding:14px;border-radius:16px;background:var(--bg);border:1px solid var(--border)}
 .tutor-followup>div{display:flex;gap:9px;margin-top:7px}.tutor-followup input{text-align:right;flex:1}.tutor-followup button{white-space:nowrap}
 @media(max-width:680px){.tutor-message{width:100%}.tutor-followup>div{align-items:stretch}.tutor-followup button{padding-inline:13px}}
+
+.section-nav{position:sticky;top:68px;z-index:18;display:flex;justify-content:center;gap:8px;overflow-x:auto;padding:9px 4%;background:color-mix(in srgb,var(--card) 90%,transparent);border-bottom:1px solid var(--border);backdrop-filter:blur(14px);scrollbar-width:none}
+.section-nav::-webkit-scrollbar{display:none}.section-nav a{flex:0 0 auto;padding:7px 13px;border-radius:999px;color:var(--muted);font-size:12px;font-weight:800;text-decoration:none;transition:background .2s,color .2s}
+.section-nav a:hover,.section-nav a:focus-visible{background:var(--soft);color:var(--primary)}
+.welcome-secondary-cta{display:inline-flex;align-items:center;margin-inline-start:12px;color:#e7f4ec;font-size:13px;font-weight:700;text-decoration:none}
+.learning-exchange{grid-column:1/-1;padding:clamp(20px,3vw,34px);background:linear-gradient(145deg,var(--card),color-mix(in srgb,var(--soft) 40%,var(--card)))}
+.teacher-layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.85fr);gap:15px;margin-top:18px}
+.teacher-feature{position:relative;display:flex;min-width:0;flex-direction:column;align-items:flex-start;gap:10px;padding:clamp(20px,3vw,30px);overflow:hidden;border:1px solid var(--border);border-radius:22px;background:var(--card);box-shadow:0 12px 35px rgba(0,35,20,.06);transition:transform .25s,border-color .25s}
+.teacher-feature:hover{transform:translateY(-3px);border-color:var(--primary)}
+.physics-feature{color:#f1fff7;background:radial-gradient(circle at 10% 15%,#ffffff18,transparent 38%),linear-gradient(135deg,#123e30,#17664a 75%,#1a805b);border-color:#ffffff17}
+.physics-feature h3,.physics-feature p{color:inherit}
+.provider-tag{display:inline-flex;padding:6px 11px;border-radius:999px;background:var(--soft);color:var(--primary-dark);font-size:11px;font-weight:800}
+.physics-feature .provider-tag{color:#f3d7a4;background:#ffffff16}
+.teacher-feature h3,.course-discovery h3{margin:2px 0;font-size:clamp(18px,2.2vw,24px);line-height:1.5}
+.teacher-feature p,.course-discovery p{margin:0;color:var(--muted);font-size:13px;line-height:1.9}
+.physics-feature p,.physics-feature small{color:#d7ece1}
+.lesson-flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:5px 0 3px}
+.lesson-flow span{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800}
+.lesson-flow b{display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#ffffff1a;color:#f3d7a4}
+.lesson-flow i{color:#f3d7a4;font-style:normal}
+.feature-button{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:43px;padding:10px 16px;border-radius:13px;background:#edc77e;color:#173b2d;font-size:13px;font-weight:800;text-decoration:none;transition:transform .2s,filter .2s}
+.feature-button:hover{transform:translateY(-2px);filter:brightness(1.04)}
+.teacher-feature small,.provider-disclaimer{color:var(--muted);font-size:10px;line-height:1.8}
+.physics-feature small{color:#c7e2d4}
+.english-feature{background:radial-gradient(circle at 90% 0,#b3d5f045,transparent 40%),var(--card)}
+.english-units{display:flex;flex-wrap:wrap;gap:7px;margin:2px 0}
+.english-units span{padding:7px 10px;border:1px solid var(--border);border-radius:10px;background:var(--bg);font-size:11px;font-weight:800}
+.english-feature .feature-button{background:#23477e;color:white}
+.course-discovery{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:20px;margin-top:14px;padding:20px;border:1px solid var(--border);border-radius:18px;background:var(--bg)}
+.course-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:10px}
+.soft-button{background:var(--primary);color:#fff}.text-link{padding:9px 7px;color:var(--primary-dark);font-size:12px;font-weight:800;text-decoration:none}
+.text-link:hover{text-decoration:underline}.provider-disclaimer{display:block;margin-top:10px}
+@media(max-width:940px){.section-nav{top:62px}.teacher-layout{grid-template-columns:minmax(0,1.1fr) minmax(240px,.9fr)}}
+@media(max-width:680px){.section-nav{justify-content:flex-start;top:60px;padding-inline:3%}.section-nav a{padding:7px 10px;font-size:11px}.teacher-layout{grid-template-columns:1fr}.teacher-feature{border-radius:18px}.course-discovery{grid-template-columns:1fr;gap:13px;padding:17px}.course-actions{justify-content:flex-start}.welcome-secondary-cta{margin:12px 4px 0}}
+@media(max-width:390px){.lesson-flow{gap:5px}.lesson-flow span{font-size:10px}.lesson-flow i{font-size:11px}.feature-button{font-size:12px;padding-inline:12px}}
+@media(prefers-reduced-motion:reduce){.teacher-feature,.section-nav a,.feature-button{transition:none}}
