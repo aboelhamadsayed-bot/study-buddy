@@ -45,6 +45,25 @@
     @keyframes account-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
     @keyframes slow-drift{from{transform:translate3d(0,0,0)}to{transform:translate3d(12px,-10px,0)}}
     @media(prefers-reduced-motion:reduce){.story,.story:before,.story:after,.card,.message{animation:none!important}.brand-mark,.tab,.submit{transition:none!important}}
+  
+    @media(max-width:1024px) and (min-width:851px){
+      .shell{grid-template-columns:minmax(280px,.9fr) minmax(370px,1.1fr);gap:18px;padding:18px}
+      .story{padding:clamp(26px,4vw,44px)}
+      .card{padding:clamp(24px,3.2vw,36px)}
+    }
+    @media(max-width:560px){
+      body{padding:10px}
+      .shell{min-height:100svh;padding:4px;gap:8px}
+      .form-side{padding:4px 0}
+      .card{width:100%;padding:24px 18px;border-radius:21px}
+      .field input{height:48px;font-size:16px}
+      .submit{height:49px}
+    }
+    @media(max-width:360px){
+      .card{padding:20px 14px}
+      .form-head h2{font-size:25px}
+      .tabs{margin:22px 0 19px}
+    }
   </style>
 </head>
 <body>

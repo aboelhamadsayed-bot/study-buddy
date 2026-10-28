@@ -229,3 +229,91 @@ body.dark .welcome-cta { color:#133c2d; background:#e5f4e9; }
   .welcome,.card,.stats,.welcome-stamp,.welcome-orbit,.welcome h1 span { animation:none!important; }
   .card,.stat-box,.account-link,.welcome-cta { transition:none!important; }
 }
+
+
+/* Adaptive dashboard layout */
+.container {
+  display:grid;
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  column-gap:18px;
+  row-gap:18px;
+  width:min(1180px,94%);
+  margin:26px auto 32px;
+  align-items:stretch;
+}
+.container>.welcome { grid-column:1/-1; }
+.container>.timer-card { grid-column:span 7; }
+.container>.stats { grid-column:span 5; align-self:center; margin:0; }
+.container>.goal-card { grid-column:span 5; }
+.container>.tasks-card { grid-column:span 7; }
+.container>.weekly-card,
+.container>.quran-progress-card,
+.container>.prayer-card,
+.container>.skill-card,
+.container>.quran-card,
+.container>.motivation { grid-column:span 6; }
+.container>.rewards-card { grid-column:1/-1; }
+.container>.card { margin:0; min-width:0; }
+.container>.rewards-card>.stats { width:100%; }
+.card { height:100%; }
+.task-form>*,
+.settings>*,
+.goal-controls>* { min-width:0; }
+.timer { font-size:clamp(58px,8vw,96px); }
+@media(max-width:940px) {
+  .container { grid-template-columns:repeat(6,minmax(0,1fr)); width:min(900px,94%); gap:15px; }
+  .container>.timer-card,
+  .container>.stats,
+  .container>.rewards-card,
+  .container>.welcome { grid-column:1/-1; }
+  .container>.goal-card,
+  .container>.tasks-card,
+  .container>.weekly-card,
+  .container>.quran-progress-card,
+  .container>.prayer-card,
+  .container>.skill-card,
+  .container>.quran-card,
+  .container>.motivation { grid-column:span 3; }
+  .container>.stats { align-self:stretch; }
+  .timer { font-size:clamp(62px,12vw,92px); }
+}
+@media(max-width:680px) {
+  .container { display:grid; grid-template-columns:minmax(0,1fr); width:94%; gap:13px; margin:16px auto 24px; }
+  .container>.welcome,
+  .container>.timer-card,
+  .container>.stats,
+  .container>.goal-card,
+  .container>.tasks-card,
+  .container>.weekly-card,
+  .container>.quran-progress-card,
+  .container>.prayer-card,
+  .container>.skill-card,
+  .container>.rewards-card,
+  .container>.quran-card,
+  .container>.motivation { grid-column:1; }
+  .container>.card { height:auto; }
+  .welcome { min-height:280px; }
+  .timer-card { padding:20px 15px; }
+  .timer { font-size:clamp(58px,19vw,82px); }
+  .settings { gap:12px; }
+  .settings label { flex:1 1 135px; }
+  .settings input { max-width:100%; }
+  .task-form { grid-template-columns:minmax(0,1fr); }
+  .task-form textarea,.task-form button { grid-column:1; }
+  .task-item { align-items:flex-start; }
+  .task-name { min-width:0; }
+  .prayer-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:390px) {
+  .navbar { gap:8px; }
+  .nav-brand { gap:7px; }
+  .nav-brand-copy strong { font-size:15px; }
+  .nav-actions { gap:6px; }
+  .account-link { padding:8px 9px; }
+  #themeBtn { padding:8px 10px; }
+  .welcome { min-height:300px; padding:24px 17px; }
+  .welcome h1 { font-size:31px; }
+  .welcome-stamp { transform:scale(.9) rotate(-5deg); transform-origin:left bottom; }
+  .prayer-grid { grid-template-columns:minmax(0,1fr); }
+  .stats { grid-template-columns:repeat(3,minmax(0,1fr)); }
+}
