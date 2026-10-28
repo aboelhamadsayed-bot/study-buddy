@@ -305,7 +305,3 @@ html = r'''<!DOCTYPE html>
   </script>
 </body>
 </html>
-'''
-path = Path("/mnt/data/account.html")
-path.write_text(html, encoding="utf-8")
-print(f"Created upgraded account.html ({path.stat().st_size} bytes)")
