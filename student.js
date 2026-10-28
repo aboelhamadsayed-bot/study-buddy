@@ -67,20 +67,35 @@
   function refreshGrades(){setVideoOptions(gradeSelect,gradeData[stageSelect.value]);refreshVideoFinder();}
   stageSelect.addEventListener("change",refreshGrades);gradeSelect.addEventListener("change",refreshVideoFinder);systemSelect.addEventListener("change",refreshVideoFinder);pathSelect.addEventListener("change",refreshVideoFinder);refreshGrades();
   $("video-finder").addEventListener("submit",e=>{e.preventDefault();const stage=stageSelect.value,grade=gradeSelect.value,gradeLabel=gradeSelect.selectedOptions[0]?.textContent||"",system=systemSelect.value,path=pathSelect.selectedOptions[0]?.textContent||"",subject=subjectSelect.value;const systemLabel=stage==="secondary"?(system==="bac"?"البكالوريا المصرية":"الثانوية العامة"):"المرحلة الإعدادية";const search=[subject,gradeLabel,systemLabel,stage==="secondary"&&system==="bac"&&grade==="s2"?path:"","شرح منهج مصر"].filter(Boolean).join(" ");$("video-results-title").textContent="فيديوهات "+subject+" · "+gradeLabel+(stage==="secondary"?" · "+systemLabel:"");$("video-youtube").href="https://www.youtube.com/results?search_query="+encodeURIComponent(search);$("video-bac-books").classList.toggle("hidden",!(stage==="secondary"&&system==="bac"));$("video-results").hidden=false;});
-  $("tutor-form").addEventListener("submit",async e=>{
-    e.preventDefault();if(!db||!user||!session)return say("tutor-status","سجّل الدخول بحسابك عشان تستخدم المساعد.",true);
+  const tutorGradeNames={primary1:"الصف الأول الابتدائي",primary2:"الصف الثاني الابتدائي",primary3:"الصف الثالث الابتدائي",primary4:"الصف الرابع الابتدائي",primary5:"الصف الخامس الابتدائي",primary6:"الصف السادس الابتدائي",prep1:"الصف الأول الإعدادي",prep2:"الصف الثاني الإعدادي",prep3:"الصف الثالث الإعدادي",secondary1:"الصف الأول الثانوي",secondary2:"الصف الثاني الثانوي",secondary3:"الصف الثالث الثانوي"};
+  let tutorHistory=[];
+  $("tutor-grade").addEventListener("change",refreshTutorTrack);
+  $("tutor-system").addEventListener("change",refreshTutorTrack);
+  function refreshTutorTrack(){const grade=$("tutor-grade").value,isSecond=grade==="secondary2";$("tutor-system-wrap").classList.toggle("hidden",!isSecond);$("tutor-track-wrap").classList.toggle("hidden",!isSecond||$("tutor-system").value!=="bac");}
+  refreshTutorTrack();
+  function addTutorMessage(role,text){const message=document.createElement("div");message.className="tutor-message "+role;const label=document.createElement("strong");label.textContent=role==="teacher"?"الأستاذ":"أنت";const content=document.createElement("span");content.textContent=text;message.append(label,content);$("tutor-answer").append(message);}
+  async function askTutor(question,mode,button){
+    if(!db||!user||!session)return say("tutor-status","سجّل الدخول بحسابك عشان تستخدم المساعد.",true);
     if(!profile?.age_group)return say("tutor-status","حدد تاريخ ميلادك أولًا عشان نضبط الشرح على مرحلتك.",true);
-    const question=$("tutor-question").value.trim(),subject=$("tutor-subject").value.trim(),mode=$("tutor-mode").value;
-    if(!question||!subject)return say("tutor-status","اكتب المادة والسؤال أو اسم الدرس.",true);
-    const button=$("tutor-submit"),answer=$("tutor-answer");button.disabled=true;answer.hidden=true;say("tutor-status","المساعد بيرتب الشرح المناسب لمرحلتك…");
+    const subject=$("tutor-subject").value.trim(),grade=$("tutor-grade").value,system=grade==="secondary2"?$("tutor-system").value:"",track=grade==="secondary2"&&system==="bac"?$("tutor-track").value:"";
+    if(!subject||!question.trim())return say("tutor-status","اكتب المادة والسؤال أو المسألة.",true);
+    const answer=$("tutor-answer");button.disabled=true;say("tutor-status","الأستاذ بيقرأ سؤالك وبيجهز الحل المناسب لصفك…");
     try{
-      const response=await fetch(URL+"/functions/v1/qimma-tutor",{method:"POST",headers:{apikey:KEY,Authorization:"Bearer "+session.access_token,"Content-Type":"application/json"},body:JSON.stringify({age_group:profile.age_group,mode,subject,question})});
+      const response=await fetch(URL+"/functions/v1/qimma-tutor",{method:"POST",headers:{apikey:KEY,Authorization:"Bearer "+session.access_token,"Content-Type":"application/json"},body:JSON.stringify({age_group:profile.age_group,grade,system,track,mode,subject,question:question.trim(),history:tutorHistory.slice(-6)})});
       const data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.error||"تعذر تشغيل المساعد حاليًا.");
-      answer.textContent=data.answer||"لم يصل شرح. جرّب إعادة صياغة السؤال.";answer.hidden=false;say("tutor-status","اتفضل شرحك — اسأل تاني لو محتاج تبسيط نقطة.");
+      if(roleNeedsQuestionBubble(mode,answer)){addTutorMessage("student",question.trim());}
+      addTutorMessage("teacher",data.answer||"لم يصل شرح. جرّب إعادة صياغة السؤال.");
+      tutorHistory.push({role:"user",content:question.trim()},{role:"assistant",content:String(data.answer||"")});tutorHistory=tutorHistory.slice(-6);
+      answer.hidden=false;$("tutor-followup").classList.remove("hidden");$("tutor-followup-question").value="";
+      say("tutor-status","اتفضل يا بطل — لو حاجة مش واضحة، كمل سؤالك والأستاذ هيوضحها.");
       const link=$("tutor-video-search");link.href="https://www.youtube.com/results?search_query="+encodeURIComponent(subject+" "+question.slice(0,100)+" شرح عربي");link.hidden=false;
+      answer.lastElementChild?.scrollIntoView({behavior:"smooth",block:"nearest"});
     }catch(error){const msg=error.message==="OPENAI_API_KEY is missing"?"المساعد جاهز، وباقي إضافة مفتاح OpenAI في إعدادات Supabase. لا تضع المفتاح في الموقع.":error.message;say("tutor-status",msg||"حصلت مشكلة اتصال. حاول مرة أخرى.",true);}
     finally{button.disabled=false;}
-  });
+  }
+  function roleNeedsQuestionBubble(_mode,_answer){return true;}
+  $("tutor-form").addEventListener("submit",e=>{e.preventDefault();tutorHistory=[];$("tutor-answer").replaceChildren();$("tutor-answer").hidden=false;$("tutor-followup").classList.add("hidden");askTutor($("tutor-question").value,$("tutor-mode").value,$("tutor-submit"));});
+  $("tutor-followup").addEventListener("submit",e=>{e.preventDefault();const q=$("tutor-followup-question").value;askTutor(q,"explain",e.submitter||$("tutor-followup").querySelector("button"));});
   db?.auth.onAuthStateChange((_event,next)=>{session=next;user=next?.user||null;setTimeout(()=>ensureProfile().catch(()=>say("community-status","تعذر تحميل بيانات حسابك الآن.",true)),0);});
   ensureProfile().catch(()=>say("community-status","تعذر تحميل الملف الدراسي الآن.",true));
 })();
