@@ -7,7 +7,7 @@
   <meta name="description" content="مساحة الأستاذ الذكي من قِمّة: شرح مبسط، حل خطوة بخطوة، ملخص وخريطة ذهنية مناسبة لصفك.">
   <title>الأستاذ الذكي | قِمّة</title>
   <link rel="stylesheet" href="style.css?v=desktop-layout-challenge-20261029">
-  <link rel="stylesheet" href="tool-pages.css?v=2">
+  <link rel="stylesheet" href="tool-pages.css?v=3">
 </head>
 <body>
   <header class="navbar tool-navbar">
@@ -29,7 +29,8 @@
           <div id="tutor-system-wrap" class="hidden"><label for="tutor-system">اختار النظام</label><select id="tutor-system"><option value="general">الثانوية العامة</option><option value="bac">البكالوريا المصرية</option></select></div>
           <div id="tutor-track-wrap" class="hidden"><label for="tutor-track">مسار البكالوريا</label><select id="tutor-track"><option value="medicine">الطب وعلوم الحياة</option><option value="engineering">الهندسة وعلوم الحاسب</option><option value="business">الأعمال</option><option value="arts">الآداب والفنون</option></select></div>
           <label for="tutor-subject">المادة</label><input id="tutor-subject" maxlength="80" placeholder="مثال: رياضيات، علوم، عربي" required>
-          <label for="tutor-question">السؤال أو الجزء اللي محتاج تفهمه</label><textarea id="tutor-question" rows="5" maxlength="1800" placeholder="اكتب المسألة، أو اسم الدرس والنقطة اللي مش واضحة…" required></textarea>
+          <label for="tutor-question">السؤال أو الجزء اللي محتاج تفهمه</label><textarea id="tutor-question" rows="5" maxlength="1800" placeholder="اكتب المسألة، أو اسم الدرس والنقطة اللي مش واضحة… ولو هتصور السؤال سيبها فاضية"></textarea>
+          <div class="photo-attachment"><input id="tutor-image" type="file" accept="image/*" capture="environment" hidden><label class="camera-button" for="tutor-image">📷 صوّر السؤال أو اختار صورة</label><small>صوّر الورقة بإضاءة كويسة، وخلي السؤال كامل وواضح.</small><div id="photo-preview" class="photo-preview" hidden><img id="photo-preview-image" alt="معاينة صورة السؤال قبل إرسالها"><div><strong id="photo-name"></strong><button id="remove-photo" class="secondary" type="button">شيل الصورة</button></div></div></div>
           <button id="tutor-submit" class="primary" type="submit">ابدأ الشرح ✦</button>
         </form>
         <p id="tutor-status" class="tool-status" role="status" aria-live="polite">سجّل الدخول بحسابك عشان نبدأ.</p>
@@ -39,7 +40,7 @@
       </section>
       <aside class="tool-aside">
         <section class="card lesson-compass"><span class="compass-icon">🧭</span><h2>إجابة تفهمها فعلًا</h2><ol><li><b>١</b><span>نحدد المطلوب والمعطيات.</span></li><li><b>٢</b><span>نشرح الفكرة قبل الحل.</span></li><li><b>٣</b><span>نراجع النتيجة وسببها.</span></li></ol></section>
-        <section class="card tutor-privacy"><h2>مساحتك آمنة</h2><p>اكتب السؤال الدراسي فقط. بلاش اسم كامل، رقم هاتف، أو أي بيانات شخصية.</p><a href="account.html">إعداد حساب الطالب ←</a></section>
+        <section class="card tutor-privacy"><h2>مساحتك آمنة</h2><p>اكتب السؤال الدراسي فقط، وصوّر الورقة من غير اسم كامل أو رقم هاتف أو أي بيانات شخصية.</p><a href="account.html">إعداد حساب الطالب ←</a></section>
       </aside>
     </div>
   </main>
@@ -47,7 +48,7 @@
   <nav class="tool-mobile-nav" aria-label="التنقل بين الأدوات"><a href="index.html"><span>⌂</span><small>الرئيسية</small></a><a aria-current="page" href="tutor.html"><span>✦</span><small>الأستاذ</small></a><a href="videos.html"><span>▷</span><small>الفيديو</small></a><a href="challenge.html"><span>🏆</span><small>التحدّي</small></a></nav>
   <script>if(localStorage.getItem('studyBuddyDark')==='true')document.body.classList.add('dark');const t=document.getElementById('themeBtn');t.textContent=document.body.classList.contains('dark')?'☀️':'🌙';t.addEventListener('click',()=>{document.body.classList.toggle('dark');const d=document.body.classList.contains('dark');localStorage.setItem('studyBuddyDark',String(d));t.textContent=d?'☀️':'🌙'});</script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="tutor-page.js?v=1" defer></script>
+  <script src="tutor-page.js?v=2" defer></script>
 </body>
 </html>
 

@@ -18,9 +18,10 @@ Deno.serve(async(req:Request)=>{
   const who=await fetch(url+"/auth/v1/user",{headers:{apikey:anon,Authorization:"Bearer "+token}});
   if(!who.ok)return reply(401,{error:"Authentication required"});
   const user=await who.json(),userId=String(user.id||"");if(!userId)return reply(401,{error:"Authentication required"});
-  const body=await req.json(),group=String(body.age_group||""),mode=String(body.mode||""),subject=String(body.subject||"").trim(),question=String(body.question||"").trim(),grade=String(body.grade||""),system=String(body.system||""),track=String(body.track||""),history=body.history;
+  const body=await req.json(),group=String(body.age_group||""),mode=String(body.mode||""),subject=String(body.subject||"").trim(),question=String(body.question||"").trim(),image=typeof body.image==="string"?body.image:"",grade=String(body.grade||""),system=String(body.system||""),track=String(body.track||""),history=body.history;
   const validHistory=Array.isArray(history)&&history.length<=6&&history.every((item:any)=>(item.role==="user"||item.role==="assistant")&&typeof item.content==="string"&&item.content.length<=2200);
-  if(!groups.has(group)||!modes[mode]||subject.length<1||subject.length>80||question.length<3||question.length>1800||!validHistory)return reply(400,{error:"راجع السؤال أو ابدأ شرحًا جديدًا."});
+  const validImage=!image||(image.length<=4_200_000&&/^data:image\/jpeg;base64,[A-Za-z0-9+/]+={0,2}$/.test(image));
+  if(!groups.has(group)||!modes[mode]||subject.length<1||subject.length>80||(question.length<3&&!image)||question.length>1800||!validHistory||!validImage)return reply(400,{error:"راجع السؤال أو الصورة أو ابدأ شرحًا جديدًا."});
   if(grade&&!gradeNames[grade])return reply(400,{error:"اختار صفًا دراسيًا صحيحًا."});
   if(grade==="secondary2"&&(system!=="general"&&system!=="bac"))return reply(400,{error:"اختار نظام تانية ثانوي."});
   if(grade==="secondary2"&&system==="bac"&&!tracks[track])return reply(400,{error:"اختار مسار البكالوريا."});
@@ -31,11 +32,14 @@ Deno.serve(async(req:Request)=>{
   if(await usage.json()!==true)return reply(429,{error:"وصلت للحد اليومي للمساعد (20 سؤالًا). ارجع بكرة أو راجع ملخصك."});
   const path=grade==="secondary2"&&system==="bac"?" — البكالوريا المصرية، مسار "+tracks[track]:grade==="secondary2"?" — الثانوية العامة":"";
   const gradeContext=grade?gradeNames[grade]+path:"غير محدد؛ اعتمد على الفئة العمرية";
-  const instructions="أنت أستاذ عربي خاص، صبور ومشجع. مستوى العمر: "+age[group]+". الصف: "+gradeContext+". المطلوب: "+modes[mode]+" ابدأ بالإجابة مباشرة ولا تطلب إعادة السؤال إذا كان مفهومًا. في المسائل اكتب المعطيات ثم خطوات الحل والنتيجة وتحققًا سريعًا. عرّف المصطلحات الصعبة حسب صف الطالب. في المتابعة اقرأ الحوار السابق وأجب عن آخر نقطة فقط دون تكرار الشرح كله. استخدم العربية الواضحة ولا تخترع حقائق، وقل إذا نقص سياق السؤال. لا تطلب بيانات شخصية.";
-  const input=[...history.map((item:any)=>({role:item.role,content:item.content})),{role:"user",content:"المادة: "+subject+"\nسؤال الطالب أو الدرس:\n"+question}];
+  const instructions="أنت أستاذ عربي خاص، صبور ومشجع. مستوى العمر: "+age[group]+". الصف: "+gradeContext+". المطلوب: "+modes[mode]+" إذا أرسل الطالب صورة، اقرأ النص والرموز والمعادلات والرسوم الظاهرة فيها، ثم أجب عن السؤال الموجود. لو الصورة غير واضحة أو ناقصة، اطلب صورة أوضح ولا تخمّن. ابدأ بالإجابة مباشرة ولا تطلب إعادة السؤال إذا كان مفهومًا. في المسائل اكتب المعطيات ثم خطوات الحل والنتيجة وتحققًا سريعًا. عرّف المصطلحات الصعبة حسب صف الطالب. في المتابعة اقرأ الحوار السابق وأجب عن آخر نقطة فقط مع مراجعة الصورة المرفقة، دون تكرار الشرح كله. استخدم العربية الواضحة ولا تخترع حقائق، وقل إذا نقص سياق السؤال. لا تطلب بيانات شخصية.";
+  const userContent:any[]=[{type:"input_text",text:"المادة: "+subject+"\nسؤال الطالب أو الدرس:\n"+question}];
+  if(image)userContent.push({type:"input_image",image_url:image});
+  const input=[...history.map((item:any)=>({role:item.role,content:item.content})),{role:"user",content:userContent}];
   const result=await fetch("https://api.openai.com/v1/responses",{method:"POST",headers:{"Authorization":"Bearer "+apiKey,"Content-Type":"application/json"},body:JSON.stringify({model:"gpt-6-luna",instructions,input,max_output_tokens:900})});
   const data=await result.json().catch(()=>({}));if(!result.ok)return reply(502,{error:"تعذر الحصول على شرح الآن. حاول بعد قليل."});
   const answer=String(data.output_text||((data.output||[]).flatMap((x:any)=>x.content||[]).find((x:any)=>x.type==="output_text")?.text)||"").slice(0,9000);
   return answer?reply(200,{answer}):reply(502,{error:"لم يصل شرح واضح. جرّب صياغة أخرى."});
  }catch(_){return reply(500,{error:"حدث خطأ غير متوقع. حاول مرة أخرى."});}
 });
+
