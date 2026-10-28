@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#087de1">
   <title>قِمّة | منصتك التعليمية</title>
-  <link rel="stylesheet" href="style.css?v=bassthalk-inspired-20261029">
+  <link rel="stylesheet" href="style.css?v=mobile-navigation-20261029">
   <link rel="manifest" href="manifest.json">
 
 </head>
@@ -256,6 +256,14 @@
   </main>
 
 
+  <nav class="mobile-tabbar" aria-label="تنقل سريع">
+    <a href="#dashboard-home" data-nav-section="dashboard-home" aria-label="الرئيسية"><span aria-hidden="true">⌂</span><small>الرئيسية</small></a>
+    <a href="#focus-timer" data-nav-section="focus-timer" aria-label="جلسة المذاكرة"><span aria-hidden="true">◷</span><small>المذاكرة</small></a>
+    <a href="#smart-tutor" data-nav-section="smart-tutor" aria-label="الأستاذ الذكي"><span aria-hidden="true">✦</span><small>الأستاذ</small></a>
+    <a href="#learning-videos" data-nav-section="learning-videos" aria-label="الفيديوهات"><span aria-hidden="true">▷</span><small>الفيديو</small></a>
+    <button id="moreTab" type="button" aria-label="المزيد" aria-haspopup="dialog" aria-controls="more-menu"><span aria-hidden="true">•••</span><small>المزيد</small></button>
+  </nav>
+
   <dialog id="more-menu" class="more-sheet" aria-labelledby="more-title">
     <div class="more-sheet-head">
       <span class="sheet-handle" aria-hidden="true"></span>
@@ -286,7 +294,7 @@
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="script.js"></script>
-  <script src="student.js?v=bassthalk-inspired-20261029" defer></script>
+  <script src="student.js?v=mobile-navigation-20261029" defer></script>
 </body>
 </html>
 

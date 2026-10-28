@@ -974,8 +974,25 @@ body.dark {
   .step-card { min-height:225px; padding:17px; }
 }
 @media (max-width:680px) {
-  body { padding-bottom:0; }
-  .mobile-tabbar { display:none !important; }
+  body { padding-bottom:calc(94px + env(safe-area-inset-bottom)); }
+  .mobile-tabbar {
+    position:fixed; z-index:50; right:auto; left:50%; bottom:calc(10px + env(safe-area-inset-bottom));
+    display:grid !important; grid-template-columns:repeat(5,minmax(0,1fr));
+    width:min(440px,calc(100% - 24px)); min-height:70px; padding:7px 8px;
+    transform:translateX(-50%); border:1px solid #dce8f0; border-radius:23px;
+    background:color-mix(in srgb,var(--card) 96%,transparent); backdrop-filter:blur(18px);
+    box-shadow:0 10px 32px #16375a20;
+  }
+  .mobile-tabbar a,.mobile-tabbar button {
+    display:grid; align-content:center; justify-items:center; gap:2px; min-width:0;
+    padding:4px 2px; border:0; border-radius:16px; color:#77849a; background:transparent;
+    text-decoration:none; transition:color .18s,background .18s,transform .18s;
+  }
+  .mobile-tabbar a span,.mobile-tabbar button>span { font-size:22px; line-height:1.1; }
+  .mobile-tabbar a small,.mobile-tabbar button>small { font-size:9px; font-weight:800; }
+  .mobile-tabbar a[aria-current="location"] { color:#087de1; background:#e8f4ff; }
+  .mobile-tabbar a[aria-current="location"] span { transform:translateY(-1px); }
+  .mobile-tabbar button:hover,.mobile-tabbar button:focus-visible { color:#087de1; background:#e8f4ff; }
   .navbar {
     position:sticky; top:8px; z-index:35;
     width:calc(100% - 24px); height:72px; min-height:72px;
@@ -1011,8 +1028,8 @@ body.dark {
   .step-card { min-height:205px; padding:19px; border-radius:20px; }
   .step-number { top:8px; left:16px; font-size:58px; }
   .step-icon { margin-top:31px; }
-  .assistant-float { left:18px; bottom:calc(16px + env(safe-area-inset-bottom)); min-height:48px; padding:9px 15px; }
-  .scroll-top { left:18px; bottom:calc(75px + env(safe-area-inset-bottom)); width:48px; height:48px; }
+  .assistant-float { display:none; }
+  .scroll-top { left:18px; bottom:calc(91px + env(safe-area-inset-bottom)); width:46px; height:46px; }
   .more-sheet { max-height:calc(100dvh - 92px); }
 }
 @media (prefers-reduced-motion:reduce) { .step-card,.assistant-float { transition:none; } }

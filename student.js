@@ -63,10 +63,10 @@
   const bacTracks={medicine:["الرياضيات","الفيزياء"],engineering:["الكيمياء","البرمجة والذكاء الاصطناعي"],business:["المحاسبة","إدارة الأعمال"],arts:["علم النفس","اللغة الأجنبية الثانية"]};
   const stageSelect=$("video-stage"),gradeSelect=$("video-grade"),systemSelect=$("video-system"),pathSelect=$("video-path"),subjectSelect=$("video-subject");
   function setVideoOptions(select,values){select.replaceChildren(...values.map(([value,label])=>{const o=document.createElement("option");o.value=value;o.textContent=label;return o;}));}
-  function refreshVideoFinder(){const stage=stageSelect.value,grade=gradeSelect.value,system=systemSelect.value,path=pathSelect.value;const secondary=stage==="secondary",isBac2=secondary&&grade==="s2"&&system==="bac";$("video-system-wrap").classList.toggle("hidden",!secondary);$("video-path-wrap").classList.toggle("hidden",!isBac2);const subjects=stage==="prep"?prepSubjects:(isBac2?[...bacCommon,...(bacTracks[path]||[])]:generalSubjects);setVideoOptions(subjectSelect,subjects.map(s=>[s,s]));}
+  function refreshVideoFinder(){const stage=stageSelect.value,grade=gradeSelect.value,system=systemSelect.value,path=pathSelect.value,secondSecondary=stage==="secondary"&&grade==="s2",isBac2=secondSecondary&&system==="bac";$("video-system-wrap").classList.toggle("hidden",!secondSecondary);$("video-path-wrap").classList.toggle("hidden",!isBac2);const subjects=stage==="prep"?prepSubjects:(isBac2?[...bacCommon,...(bacTracks[path]||[])]:generalSubjects);setVideoOptions(subjectSelect,subjects.map(s=>[s,s]));}
   function refreshGrades(){setVideoOptions(gradeSelect,gradeData[stageSelect.value]);refreshVideoFinder();}
   stageSelect.addEventListener("change",refreshGrades);gradeSelect.addEventListener("change",refreshVideoFinder);systemSelect.addEventListener("change",refreshVideoFinder);pathSelect.addEventListener("change",refreshVideoFinder);refreshGrades();
-  $("video-finder").addEventListener("submit",e=>{e.preventDefault();const stage=stageSelect.value,grade=gradeSelect.value,gradeLabel=gradeSelect.selectedOptions[0]?.textContent||"",system=systemSelect.value,path=pathSelect.selectedOptions[0]?.textContent||"",subject=subjectSelect.value;const systemLabel=stage==="secondary"?(system==="bac"?"البكالوريا المصرية":"الثانوية العامة"):"المرحلة الإعدادية";const search=[subject,gradeLabel,systemLabel,stage==="secondary"&&system==="bac"&&grade==="s2"?path:"","شرح منهج مصر"].filter(Boolean).join(" ");$("video-results-title").textContent="فيديوهات "+subject+" · "+gradeLabel+(stage==="secondary"?" · "+systemLabel:"");$("video-youtube").href="https://www.youtube.com/results?search_query="+encodeURIComponent(search);$("video-bac-books").classList.toggle("hidden",!(stage==="secondary"&&system==="bac"));$("video-results").hidden=false;});
+  $("video-finder").addEventListener("submit",e=>{e.preventDefault();const stage=stageSelect.value,grade=gradeSelect.value,gradeLabel=gradeSelect.selectedOptions[0]?.textContent||"",system=systemSelect.value,path=pathSelect.selectedOptions[0]?.textContent||"",subject=subjectSelect.value,secondSecondary=stage==="secondary"&&grade==="s2",systemLabel=system==="bac"?"البكالوريا المصرية":"الثانوية العامة";const search=[subject,gradeLabel,secondSecondary?systemLabel:"",secondSecondary&&system==="bac"?path:"","شرح منهج مصر"].filter(Boolean).join(" ");$("video-results-title").textContent="فيديوهات "+subject+" · "+gradeLabel+(secondSecondary?" · "+systemLabel:"");$("video-youtube").href="https://www.youtube.com/results?search_query="+encodeURIComponent(search);$("video-bac-books").classList.toggle("hidden",!(secondSecondary&&system==="bac"));$("video-results").hidden=false;});
   const tutorGradeNames={primary1:"الصف الأول الابتدائي",primary2:"الصف الثاني الابتدائي",primary3:"الصف الثالث الابتدائي",primary4:"الصف الرابع الابتدائي",primary5:"الصف الخامس الابتدائي",primary6:"الصف السادس الابتدائي",prep1:"الصف الأول الإعدادي",prep2:"الصف الثاني الإعدادي",prep3:"الصف الثالث الإعدادي",secondary1:"الصف الأول الثانوي",secondary2:"الصف الثاني الثانوي",secondary3:"الصف الثالث الثانوي"};
   let tutorHistory=[];
   $("tutor-grade").addEventListener("change",refreshTutorTrack);
@@ -110,5 +110,14 @@
   const scrollTop=$("scrollTop");
   scrollTop?.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
   window.addEventListener("scroll",()=>{if(scrollTop)scrollTop.hidden=window.scrollY<420;},{passive:true});
+  const mobileNavLinks=[...document.querySelectorAll(".mobile-tabbar [data-nav-section]")];
+  if(mobileNavLinks.length&&"IntersectionObserver" in window){
+    const navObserver=new IntersectionObserver(entries=>{
+      const active=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+      if(!active)return;
+      mobileNavLinks.forEach(link=>{if(link.dataset.navSection===active.target.id)link.setAttribute("aria-current","location");else link.removeAttribute("aria-current");});
+    },{rootMargin:"-20% 0px -62% 0px",threshold:[0,.1,.25,.5]});
+    mobileNavLinks.forEach(link=>{const section=$(link.dataset.navSection);if(section)navObserver.observe(section);});
+  }
 })();
 
