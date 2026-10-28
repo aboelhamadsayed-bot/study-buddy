@@ -98,4 +98,11 @@
   $("tutor-followup").addEventListener("submit",e=>{e.preventDefault();const q=$("tutor-followup-question").value;askTutor(q,"explain",e.submitter||$("tutor-followup").querySelector("button"));});
   db?.auth.onAuthStateChange((_event,next)=>{session=next;user=next?.user||null;setTimeout(()=>ensureProfile().catch(()=>say("community-status","تعذر تحميل بيانات حسابك الآن.",true)),0);});
   ensureProfile().catch(()=>say("community-status","تعذر تحميل الملف الدراسي الآن.",true));
+  const moreMenu=$("more-menu"),moreButton=$("moreTab");
+  function closeMoreMenu(){if(!moreMenu)return;if(typeof moreMenu.close==="function"&&moreMenu.open)moreMenu.close();else moreMenu.removeAttribute("open");}
+  moreButton?.addEventListener("click",()=>{if(typeof moreMenu?.showModal==="function"){if(!moreMenu.open)moreMenu.showModal();}else moreMenu?.setAttribute("open","");});
+  moreMenu?.querySelector("[data-close-more]")?.addEventListener("click",closeMoreMenu);
+  moreMenu?.querySelectorAll("a").forEach(link=>link.addEventListener("click",closeMoreMenu));
+  moreMenu?.addEventListener("click",event=>{if(event.target===moreMenu)closeMoreMenu();});
 })();
+

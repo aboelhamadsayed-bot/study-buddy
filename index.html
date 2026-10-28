@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#16845b">
   <title>قِمّة | منصتك التعليمية</title>
-  <link rel="stylesheet" href="style.css?v=dashboard-stack-20261029">
+  <link rel="stylesheet" href="style.css?v=more-menu-20261029">
   <link rel="manifest" href="manifest.json">
 
 </head>
@@ -170,7 +170,7 @@
       <button type="button" id="clearCompleted" class="secondary full-width">حذف المهام المكتملة</button>
     </section>
 
-    <section class="card weekly-card">
+    <section class="card weekly-card" id="student-schedule">
       <h2>📅 جدول المذاكرة الأسبوعي</h2>
       <p>أضف المواد والأنشطة التي تريد تخصيص وقت لها.</p>
       <form id="scheduleForm" class="task-form">
@@ -188,7 +188,7 @@
       <ul id="scheduleList" class="task-list"></ul>
     </section>
 
-    <section class="card quran-progress-card">
+    <section class="card quran-progress-card" id="daily-quran">
       <h2>📖 ورد القرآن اليومي</h2>
       <p>حدد هدفًا يوميًا للقراءة وسجّل ما أنجزته اليوم.</p>
       <label for="quranTarget">هدفي اليومي بالصفحات</label>
@@ -201,7 +201,7 @@
       <a class="quran-link" href="https://quran.com/ar" target="_blank" rel="noopener noreferrer">📖 افتح المصحف</a>
     </section>
 
-    <section class="card prayer-card">
+    <section class="card prayer-card" id="prayer-times">
       <h2>🕌 مواقيت الصلاة</h2>
       <p id="prayerLocation">الجيزة، مصر</p>
       <p id="prayerDate">جارٍ تحميل مواقيت الصلاة...</p>
@@ -211,7 +211,7 @@
       <p id="prayerMessage">تحتاج التنبيهات إلى إذن الإشعارات وبقاء الموقع مفتوحًا.</p>
     </section>
 
-    <section class="card skill-card">
+    <section class="card skill-card" id="skill-builder">
       <h2>🚀 تعلّم مهارة</h2>
       <p>اختر مهارة، وحدد وقت التدريب اليومي.</p>
       <label for="skillName">المهارة</label>
@@ -259,8 +259,28 @@
     <a href="#smart-tutor" aria-label="الأستاذ الذكي"><span aria-hidden="true">✦</span><small>الأستاذ</small></a>
     <a href="#learning-videos" aria-label="الفيديوهات"><span aria-hidden="true">▷</span><small>الفيديوهات</small></a>
     <a href="#book-library" aria-label="المكتبة"><span aria-hidden="true">▤</span><small>المكتبة</small></a>
-    <a href="#student-community" aria-label="مجتمع الطلاب"><span aria-hidden="true">◎</span><small>المجتمع</small></a>
+    <button id="moreTab" type="button" aria-label="المزيد" aria-haspopup="dialog" aria-controls="more-menu"><span aria-hidden="true">•••</span><small>المزيد</small></button>
   </nav>
+
+  <dialog id="more-menu" class="more-sheet" aria-labelledby="more-title">
+    <div class="more-sheet-head">
+      <span class="sheet-handle" aria-hidden="true"></span>
+      <div class="more-heading"><span class="more-heading-icon" aria-hidden="true">✦</span><div><h2 id="more-title">مذاكرتك في مكان واحد</h2><p>اختار الأداة اللي تساعدك دلوقتي</p></div></div>
+      <button class="sheet-close" type="button" aria-label="إغلاق القائمة" data-close-more>×</button>
+    </div>
+    <nav class="more-list" aria-label="أدوات قِمّة">
+      <a class="more-row" href="#focus-timer"><span class="more-icon lilac">⏱️</span><span class="more-copy"><strong>جلسة تركيز</strong><small>ابدأ مؤقت المذاكرة والراحة</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
+      <a class="more-row" href="#student-tasks"><span class="more-icon rose">📝</span><span class="more-copy"><strong>مهامي اليومية</strong><small>رتّب المطلوب منك وأنجزه</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
+      <a class="more-row" href="#student-schedule"><span class="more-icon blue">📅</span><span class="more-copy"><strong>جدول المذاكرة</strong><small>خطط لموادك على مدار الأسبوع</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
+      <a class="more-row" href="#smart-tutor"><span class="more-icon lilac">✦</span><span class="more-copy"><strong>الأستاذ الذكي</strong><small>شرح مبسط، تلخيص، وخريطة ذهنية</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
+      <a class="more-row" href="#learning-videos"><span class="more-icon orange">▶️</span><span class="more-copy"><strong>فيديوهات الشرح</strong><small>اختار صفك ومادتك وابدأ</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
+      <a class="more-row" href="#book-library"><span class="more-icon mint">📚</span><span class="more-copy"><strong>مكتبة الكتب</strong><small>مصادر وكتب تعليمية لمرحلتك</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
+      <a class="more-row" href="#student-community"><span class="more-icon mint">👥</span><span class="more-copy"><strong>مجتمع الطلاب</strong><small>شارك سؤالًا دراسيًا مع مجموعتك</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
+      <a class="more-row" href="#daily-quran"><span class="more-icon orange">📖</span><span class="more-copy"><strong>الورد القرآني</strong><small>حدد وردك وسجل قراءتك</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
+      <a class="more-row" href="#prayer-times"><span class="more-icon blue">🕌</span><span class="more-copy"><strong>مواقيت الصلاة</strong><small>تابع الصلاة القادمة في الجيزة</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
+      <a class="more-row" href="#skill-builder"><span class="more-icon rose">🚀</span><span class="more-copy"><strong>تعلّم مهارة</strong><small>تابع تدريبك اليومي خطوة بخطوة</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
+    </nav>
+  </dialog>
 
   <footer class="site-footer">
     <span class="footer-mark" aria-hidden="true">ق</span>
