@@ -542,9 +542,14 @@ body.dark {
 .welcome-dashboard .welcome-cta:hover { color: #fff; background: #29264f; }
 .welcome-dashboard .welcome-secondary-cta { color: #fff; }
 .welcome-visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
   flex: 0 1 390px;
   min-width: 285px;
   min-height: 255px;
+  border-radius: 24px;
   border: 1px solid #ffffff48;
   background: linear-gradient(145deg,#ffffff19,#ffffff08);
 }
