@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>قِمّة | إنشاء الحساب</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      padding: 25px;
+      color: #172033;
+    }
+    main {
+      max-width: 400px;
+      margin: 30px auto;
+      padding: 24px;
+      background: white;
+      border-radius: 16px;
+    }
+    input, button {
+      box-sizing: border-box;
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin-top: 12px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+    }
+    button {
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+    }
+    p { line-height: 1.7; }
+  </style>
+</head>
+<body>
+  <main>
+    <h2>قِمّة 📚</h2>
+    <p>أهلاً بك! صفحة إنشاء حساب الطالب.</p>
+
+    <label for="name">اسم الطالب</label>
+    <input id="name" placeholder="اسمك">
+
+    <label for="email">البريد الإلكتروني</label>
+    <input id="email" type="email" placeholder="البريد الإلكتروني">
+
+    <label for="password">كلمة المرور</label>
+    <input id="password" type="password"
+      minlength="8" placeholder="8 أحرف على الأقل">
+
+    <button type="button" onclick="alert('سنربط التسجيل بقاعدة البيانات في الخطوة التالية.')">
+      إنشاء حساب
+    </button>
+
+    <p>دي واجهة مبدئية فقط؛ التسجيل الحقيقي لسه مش متصل بقاعدة البيانات.</p>
+    <a href="index.html">العودة للصفحة الرئيسية</a>
+  </main>
+</body>
+</html>
