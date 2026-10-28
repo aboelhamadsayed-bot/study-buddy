@@ -44,6 +44,8 @@ create table if not exists public.tutor_usage (
 alter table public.tutor_usage enable row level security;
 revoke all on public.tutor_usage from public, anon, authenticated;
 grant all on public.tutor_usage to service_role;
+drop policy if exists "Service role manages tutor usage" on public.tutor_usage;
+create policy "Service role manages tutor usage" on public.tutor_usage for all to service_role using (true) with check (true);
 create or replace function public.consume_tutor_request(p_user_id uuid, p_limit integer default 20)
 returns boolean language plpgsql security definer set search_path = ''
 as $$
