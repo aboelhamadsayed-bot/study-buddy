@@ -103,6 +103,7 @@
   function openMoreMenu(){if(typeof moreMenu?.showModal==="function"){if(!moreMenu.open)moreMenu.showModal();}else moreMenu?.setAttribute("open","");}
   moreButton?.addEventListener("click",openMoreMenu);
   $("menuToggle")?.addEventListener("click",openMoreMenu);
+  $("searchToggle")?.addEventListener("click",()=>{const section=$("learning-videos");section?.scrollIntoView({behavior:"smooth",block:"start"});setTimeout(()=>$("video-stage")?.focus({preventScroll:true}),450);});
   moreMenu?.querySelector("[data-close-more]")?.addEventListener("click",closeMoreMenu);
   moreMenu?.querySelectorAll("a").forEach(link=>link.addEventListener("click",closeMoreMenu));
   moreMenu?.addEventListener("click",event=>{if(event.target===moreMenu)closeMoreMenu();});

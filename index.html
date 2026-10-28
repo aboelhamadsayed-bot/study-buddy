@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#16845b">
+  <meta name="theme-color" content="#087de1">
   <title>قِمّة | منصتك التعليمية</title>
-  <link rel="stylesheet" href="style.css?v=green-detail-20261029">
+  <link rel="stylesheet" href="style.css?v=bassthalk-inspired-20261029">
   <link rel="manifest" href="manifest.json">
 
 </head>
@@ -18,6 +18,7 @@
     </a>
     <div class="nav-actions">
       <a href="account.html" class="account-link"><span aria-hidden="true">✦</span> حساب الطالب</a>
+      <button id="searchToggle" class="search-toggle" type="button" aria-label="ابحث عن شرح لصفك"><span aria-hidden="true">⌕</span></button>
       <button id="themeBtn" class="theme-toggle" type="button" aria-label="تغيير المظهر">🌙</button>
     </div>
   </header>
@@ -33,21 +34,21 @@
   <main class="container">
     <section class="welcome welcome-dashboard" id="dashboard-home">
       <div class="welcome-copy">
-        <p class="small"><span class="live-dot"></span> مساحتك للإنجاز اليوم</p>
-        <h1>جاهز تحقق<br>خطوة جديدة؟ <span>✦</span></h1>
-        <p>اختار حاجة واحدة تبدأ بيها، وسيب قِمّة تساعدك تكمّل يومك بتركيز.</p>
+        <p class="small"><span class="live-dot"></span> كل أدوات مذاكرتك في مكان واحد</p>
+        <h1>منصة متكاملة<br>عشان توصل للقِمّة <span>✦</span></h1>
+        <p>اختار صفك، اسأل الأستاذ الذكي، نظّم مهامك، وذاكر بالطريقة اللي تناسبك.</p>
         <p class="dua">﴿ وَقُل رَّبِّ زِدْنِي عِلْمًا ﴾</p>
         <div class="welcome-actions">
-          <a class="welcome-cta" href="#focus-timer">ابدأ جلسة تركيز <span aria-hidden="true">←</span></a>
-          <a class="welcome-secondary-cta" href="#smart-tutor">اسأل الأستاذ الذكي</a>
+          <a class="welcome-cta" href="#student-schedule">ابدأ رحلتك <span aria-hidden="true">←</span></a>
+          <a class="welcome-secondary-cta" href="#learning-videos">اكتشف الشروحات</a>
         </div>
       </div>
       <div class="welcome-visual" aria-hidden="true">
         <div class="visual-grid"></div>
         <div class="visual-ring visual-ring-one"></div><div class="visual-ring visual-ring-two"></div>
         <div class="visual-mark">ق</div>
-        <div class="visual-session"><span>جلسة اليوم</span><strong>٢٥:٠٠</strong><small><i></i> تركيزك يبدأ بخطوة</small></div>
-        <div class="visual-note"><span>✓</span><div><b>تقدّمك محفوظ</b><small>كمّل على مهلك</small></div></div>
+        <div class="visual-session"><span>خطة مذاكرتك</span><strong>خطوة ١</strong><small><i></i> اختار صفك ومادتك</small></div>
+        <div class="visual-note"><span>✓</span><div><b>شرح وتنظيم وإنجاز</b><small>كلها مع قِمّة</small></div></div>
       </div>
     </section>
 
@@ -57,13 +58,12 @@
       <div class="stat-box"><span>⏳</span><h3 id="minutes">0</h3><p>دقائق مذاكرة</p></div>
     </section>
 
-    <section class="card quick-access" aria-labelledby="quick-access-title">
-      <div class="section-heading"><div><span class="section-kicker">كل اللي تحتاجه قريب</span><h2 id="quick-access-title">ابدأ من هنا</h2></div><span class="age-pill">اختصارات قِمّة</span></div>
-      <div class="quick-grid">
-        <a class="quick-tile" href="#smart-tutor"><span class="quick-icon tutor-icon">✦</span><strong>الأستاذ الذكي</strong><small>اسأل وافهم بطريقتك</small></a>
-        <a class="quick-tile" href="#learning-videos"><span class="quick-icon video-icon">▷</span><strong>فيديوهات الشرح</strong><small>اختار صفك ومادتك</small></a>
-        <a class="quick-tile" href="#book-library"><span class="quick-icon library-icon">▤</span><strong>مكتبة الكتب</strong><small>مصادرك الدراسية</small></a>
-        <a class="quick-tile" href="#student-community"><span class="quick-icon community-icon">◎</span><strong>مجتمع الطلاب</strong><small>اتعلّموا مع بعض</small></a>
+    <section class="card journey-steps" aria-labelledby="journey-title">
+      <div class="section-heading"><div><span class="section-kicker">ابدأ بخطوات واضحة</span><h2 id="journey-title">رحلتك للمذاكرة في ٣ خطوات</h2></div><span class="age-pill">اختار وابدأ</span></div>
+      <div class="step-grid">
+        <a class="step-card step-one" href="#learning-videos"><span class="step-number">١</span><span class="step-icon">▤</span><h3>اختار صفك ومادتك</h3><p>حدد مرحلتك عشان توصل لشروحات أقرب لمنهجك.</p><span class="step-link">اختار الصف ←</span></a>
+        <a class="step-card step-two" href="#smart-tutor"><span class="step-number">٢</span><span class="step-icon">✦</span><h3>افهم بالطريقة اللي تناسبك</h3><p>اسأل الأستاذ الذكي، واطلب شرحًا أو ملخصًا أو تدريبًا.</p><span class="step-link">اسأل الأستاذ ←</span></a>
+        <a class="step-card step-three" href="#focus-timer"><span class="step-number">٣</span><span class="step-icon">⏱</span><h3>نظّم وقتك وكمّل</h3><p>ابدأ جلسة تركيز، رتّب مهامك، وتابع إنجازك.</p><span class="step-link">ابدأ جلسة ←</span></a>
       </div>
     </section>
 
@@ -255,13 +255,6 @@
     </section>
   </main>
 
-  <nav class="mobile-tabbar" aria-label="تنقل سريع">
-    <a href="#dashboard-home" aria-label="الرئيسية"><span aria-hidden="true">⌂</span><small>الرئيسية</small></a>
-    <a href="#smart-tutor" aria-label="الأستاذ الذكي"><span aria-hidden="true">✦</span><small>الأستاذ</small></a>
-    <a href="#learning-videos" aria-label="الفيديوهات"><span aria-hidden="true">▷</span><small>الفيديوهات</small></a>
-    <a href="#book-library" aria-label="المكتبة"><span aria-hidden="true">▤</span><small>المكتبة</small></a>
-    <button id="moreTab" type="button" aria-label="المزيد" aria-haspopup="dialog" aria-controls="more-menu"><span aria-hidden="true">•••</span><small>المزيد</small></button>
-  </nav>
 
   <dialog id="more-menu" class="more-sheet" aria-labelledby="more-title">
     <div class="more-sheet-head">
@@ -270,6 +263,7 @@
       <button class="sheet-close" type="button" aria-label="إغلاق القائمة" data-close-more>×</button>
     </div>
     <nav class="more-list" aria-label="أدوات قِمّة">
+      <a class="more-row" href="account.html"><span class="more-icon blue">👤</span><span class="more-copy"><strong>حساب الطالب</strong><small>سجّل الدخول وتابع بياناتك</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
       <a class="more-row" href="#focus-timer"><span class="more-icon lilac">⏱️</span><span class="more-copy"><strong>جلسة تركيز</strong><small>ابدأ مؤقت المذاكرة والراحة</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
       <a class="more-row" href="#student-tasks"><span class="more-icon rose">📝</span><span class="more-copy"><strong>مهامي اليومية</strong><small>رتّب المطلوب منك وأنجزه</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
       <a class="more-row" href="#student-schedule"><span class="more-icon blue">📅</span><span class="more-copy"><strong>جدول المذاكرة</strong><small>خطط لموادك على مدار الأسبوع</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
@@ -283,6 +277,7 @@
     </nav>
   </dialog>
   <button id="scrollTop" class="scroll-top" type="button" aria-label="العودة إلى أعلى الصفحة" hidden>⌃</button>
+  <a class="assistant-float" href="#smart-tutor" aria-label="تواصل مع الأستاذ الذكي"><span aria-hidden="true">✦</span><strong>اسأل الأستاذ</strong></a>
 
   <footer class="site-footer">
     <span class="footer-mark" aria-hidden="true">ق</span>
@@ -291,7 +286,7 @@
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="script.js"></script>
-  <script src="student.js" defer></script>
+  <script src="student.js?v=bassthalk-inspired-20261029" defer></script>
 </body>
 </html>
 

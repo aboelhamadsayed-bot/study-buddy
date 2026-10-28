@@ -851,4 +851,170 @@ body.dark {
 }
 @media (prefers-reduced-motion: reduce) { .scroll-top { transition: none; } }
 
+/* واجهة قِمّة الزرقاء: مقدمة وخطوات ومسار واضح للطالب */
+:root {
+  --bg: #f2f8ff;
+  --card: #ffffff;
+  --text: #111d34;
+  --muted: #687992;
+  --primary: #087de1;
+  --primary-dark: #0565bd;
+  --soft: #e6f3ff;
+  --border: #dceaf6;
+  --accent: #59c46a;
+}
+body { color: var(--text); background: linear-gradient(180deg,#e9f5ff 0,#f5faff 44rem,var(--bg)); }
+body.dark {
+  --bg: #121b2a;
+  --card: #1c293b;
+  --text: #f4f7ff;
+  --muted: #b5c2d5;
+  --primary: #56aafa;
+  --primary-dark: #2589e8;
+  --soft: #233b56;
+  --border: #32465f;
+}
+.navbar { border-color: var(--border); }
+.nav-mark,.footer-mark { background: linear-gradient(145deg,#1694ef,#0668c8); }
+.account-link,.primary { background: linear-gradient(120deg,#087de1,#0873d2); }
+.account-link:hover,.primary:hover { background: var(--primary-dark); }
+.section-nav { border-color: var(--border); background: var(--card); }
+.section-nav a span { color: var(--primary); }
+.section-nav a:hover,.section-nav a:focus-visible { color:var(--primary); background:var(--soft); }
+.container>.journey-steps { grid-column: 1/-1; }
+.container>.card,.card,.stat-box,.step-card { border-color: var(--border); }
+.card { background: var(--card); box-shadow: 0 12px 30px #193a600d; }
+.welcome-dashboard {
+  min-height: 0;
+  color: #14213b;
+  background: linear-gradient(145deg,#f8fcff 0%,#e7f4ff 55%,#d6edff 100%);
+  box-shadow: 0 18px 48px #1865a514;
+}
+.welcome-dashboard .small { color:#1267a9; border-color:#c9e2f6; background:#fff9; }
+.welcome-dashboard .live-dot { background:#18a2ef; box-shadow:0 0 0 5px #18a2ef20; }
+.welcome-dashboard h1 { color:#101d34; }
+.welcome-dashboard h1 span { color:#087de1; }
+.welcome-dashboard .welcome-copy>p:not(.small):not(.dua) { color:#596c85; }
+.welcome-dashboard .dua { color:#0875cf !important; }
+.welcome-dashboard .welcome-cta { color:#fff; background:#4cbd5d; box-shadow:0 8px 18px #31a94630; }
+.welcome-dashboard .welcome-cta:hover { color:#fff; background:#329d48; }
+.welcome-dashboard .welcome-secondary-cta { color:#0876d1; }
+.welcome-visual { border-color:#ffffff80; background:linear-gradient(145deg,#0875e5,#48b5f5); }
+.visual-grid { background-image:linear-gradient(#ffffff19 1px,transparent 1px),linear-gradient(90deg,#ffffff19 1px,transparent 1px); }
+.visual-ring,.visual-ring-two { border-color:#ffffff39; }
+.visual-mark { color:#087de1; background:#fff; }
+.visual-session,.visual-note { border-color:#ffffff95; }
+.visual-session i,.visual-note>span { background:#1884df; }
+.dashboard-stats .stat-box { border-color:var(--border); background:var(--card); }
+.journey-steps { padding:clamp(18px,3vw,30px); }
+.step-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:18px; }
+.step-card {
+  position:relative;
+  display:flex;
+  min-width:0;
+  min-height:245px;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:9px;
+  overflow:hidden;
+  padding:22px;
+  border:1px solid transparent;
+  border-radius:22px;
+  color:#14213b;
+  text-decoration:none;
+  transition:transform .2s,box-shadow .2s;
+}
+.step-card:hover { transform:translateY(-3px); box-shadow:0 14px 30px #11456e1a; }
+.step-one { background:#087de1; color:#fff; }
+.step-two { background:#dff4ff; }
+.step-three { background:#e1f7e5; }
+.step-number { position:absolute; top:8px; left:17px; color:#ffffffdd; font-size:64px; font-weight:800; line-height:1; }
+.step-two .step-number,.step-three .step-number { color:#13243d; }
+.step-icon { display:grid; place-items:center; width:46px; height:46px; margin-top:43px; border-radius:15px; color:var(--primary); background:#ffffffdb; font-size:23px; }
+.step-card h3 { margin:2px 0 0; font-size:18px; line-height:1.5; }
+.step-card p { margin:0; color:inherit; opacity:.82; font-size:13px; line-height:1.8; }
+.step-link { margin-top:auto; font-size:12px; font-weight:800; }
+.step-one .step-link { color:#fff; }
+.quick-access { display:none; }
+.physics-feature { background:linear-gradient(135deg,#086bc7,#138de5 78%,#48b7ec); }
+.physics-feature h3,.physics-feature p,.physics-feature small { color:#fff; }
+.english-feature { background:linear-gradient(145deg,#eef8ff,#fff); }
+.primary { color:#fff; }
+.age-pill,.section-icon { color:var(--primary); background:var(--soft); }
+.more-sheet { border-color:var(--border); }
+.more-heading-icon { color:var(--primary); background:var(--soft); }
+.more-icon.lilac { color:#087de1; background:#e8f4ff; }
+.more-icon.blue { color:#087de1; background:#e8f4ff; }
+.more-icon.mint { color:#1e9a62; background:#e6f7eb; }
+.menu-toggle,.search-toggle { display:none; }
+.search-toggle { border:0; }
+.assistant-float {
+  position:fixed;
+  z-index:44;
+  left:20px;
+  bottom:18px;
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  min-height:50px;
+  padding:10px 17px;
+  border-radius:999px;
+  color:#fff;
+  background:#087de1;
+  box-shadow:0 10px 25px #087de144;
+  font-size:13px;
+  font-weight:800;
+  text-decoration:none;
+}
+.assistant-float span { font-size:18px; }
+.assistant-float:hover { background:#0565bd; }
+.scroll-top { bottom:78px; left:20px; background:#35b957; }
+@media (max-width:940px) {
+  .step-grid { gap:10px; }
+  .step-card { min-height:225px; padding:17px; }
+}
+@media (max-width:680px) {
+  body { padding-bottom:0; }
+  .mobile-tabbar { display:none !important; }
+  .navbar {
+    position:sticky; top:8px; z-index:35;
+    width:calc(100% - 24px); height:72px; min-height:72px;
+    margin:8px 12px 14px; padding:0 12px;
+    justify-content:center;
+    border:0; border-radius:999px;
+    background:linear-gradient(110deg,#0878e4,#168ff1);
+    box-shadow:0 10px 26px #076bc733;
+  }
+  .menu-toggle { position:absolute; left:12px; display:grid; place-items:center; width:42px; height:42px; padding:0; border:0; border-radius:12px; color:#fff; background:#ffffff24; font-size:22px; }
+  .nav-brand { position:absolute; left:50%; gap:7px; transform:translateX(-50%); }
+  .nav-brand-copy strong { color:#fff; font-size:17px; }
+  .nav-mark { width:33px; height:33px; border:1px solid #ffffff70; border-radius:11px; color:#fff; background:#ffffff20; font-size:18px; box-shadow:none; }
+  .nav-actions { position:absolute; right:10px; gap:6px; }
+  .account-link { display:none; }
+  .search-toggle,#themeBtn { display:grid; place-items:center; width:40px; height:40px; padding:0; border:0; border-radius:50%; color:#172c44; background:#f3f7fb; }
+  .search-toggle { font-size:26px; }
+  #themeBtn { color:#edbb36; background:#ffffff24; font-size:19px; }
+  .section-nav { display:none; }
+  .container { width:calc(100% - 24px); margin:0 auto 28px; }
+  .welcome-dashboard { gap:18px; padding:24px 19px; border-radius:26px; }
+  .welcome-dashboard .welcome-copy { width:100%; }
+  .welcome-dashboard h1 { font-size:clamp(32px,8.6vw,43px); }
+  .welcome-dashboard .welcome-copy>p:not(.small):not(.dua) { font-size:14px; }
+  .welcome-dashboard .welcome-cta { min-height:48px; justify-content:space-between; }
+  .welcome-visual { min-height:225px; }
+  .visual-mark { width:88px; height:88px; border-radius:27px; font-size:50px; }
+  .visual-ring { width:170px; height:170px; }
+  .visual-session { top:14px; inset-inline-start:13px; }
+  .visual-note { right:12px; bottom:14px; }
+  .container>.journey-steps { grid-column:1; }
+  .step-grid { grid-template-columns:minmax(0,1fr); gap:12px; margin-top:14px; }
+  .step-card { min-height:205px; padding:19px; border-radius:20px; }
+  .step-number { top:8px; left:16px; font-size:58px; }
+  .step-icon { margin-top:31px; }
+  .assistant-float { left:18px; bottom:calc(16px + env(safe-area-inset-bottom)); min-height:48px; padding:9px 15px; }
+  .scroll-top { left:18px; bottom:calc(75px + env(safe-area-inset-bottom)); width:48px; height:48px; }
+  .more-sheet { max-height:calc(100dvh - 92px); }
+}
+@media (prefers-reduced-motion:reduce) { .step-card,.assistant-float { transition:none; } }
+
 
