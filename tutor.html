@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#087de1">
   <meta name="description" content="مساحة الأستاذ الذكي من قِمّة: شرح مبسط، حل خطوة بخطوة، ملخص وخريطة ذهنية مناسبة لصفك.">
   <title>الأستاذ الذكي | قِمّة</title>
-  <link rel="stylesheet" href="style.css?v=desktop-layout-challenge-20261029">
+  <link rel="stylesheet" href="style.css?v=community-post-tutor-20261029">
   <link rel="stylesheet" href="tool-pages.css?v=3">
 </head>
 <body>
@@ -24,8 +24,8 @@
         <form id="tutor-form" class="tool-form">
           <label for="tutor-mode">تحب أساعدك إزاي؟</label>
           <select id="tutor-mode"><option value="solve">حل السؤال بالتفصيل خطوة بخطوة</option><option value="explain">اشرحلي الفكرة ببساطة</option><option value="summary">لخّص الدرس في نقاط</option><option value="mindmap">رتّب الدرس في خريطة ذهنية</option><option value="quiz">اسألني أسئلة أتأكد بيها من فهمي</option></select>
-          <label for="tutor-grade">الصف الدراسي</label>
-          <select id="tutor-grade" required><option value="">اختار صفك</option><optgroup label="المرحلة الابتدائية"><option value="primary1">أولى ابتدائي</option><option value="primary2">تانية ابتدائي</option><option value="primary3">تالتة ابتدائي</option><option value="primary4">رابعة ابتدائي</option><option value="primary5">خامسة ابتدائي</option><option value="primary6">سادسة ابتدائي</option></optgroup><optgroup label="المرحلة الإعدادية"><option value="prep1">أولى إعدادي</option><option value="prep2">تانية إعدادي</option><option value="prep3">تالتة إعدادي</option></optgroup><optgroup label="المرحلة الثانوية"><option value="secondary1">أولى ثانوي</option><option value="secondary2">تانية ثانوي</option><option value="secondary3">تالتة ثانوي</option></optgroup></select>
+          <label for="tutor-grade">الصف الدراسي <small>اختياري؛ الفئة العمرية تكفي لضبط الشرح</small></label>
+          <select id="tutor-grade"><option value="">اختياري — استخدم فئتي العمرية</option><optgroup label="المرحلة الابتدائية"><option value="primary1">أولى ابتدائي</option><option value="primary2">تانية ابتدائي</option><option value="primary3">تالتة ابتدائي</option><option value="primary4">رابعة ابتدائي</option><option value="primary5">خامسة ابتدائي</option><option value="primary6">سادسة ابتدائي</option></optgroup><optgroup label="المرحلة الإعدادية"><option value="prep1">أولى إعدادي</option><option value="prep2">تانية إعدادي</option><option value="prep3">تالتة إعدادي</option></optgroup><optgroup label="المرحلة الثانوية"><option value="secondary1">أولى ثانوي</option><option value="secondary2">تانية ثانوي</option><option value="secondary3">تالتة ثانوي</option></optgroup></select>
           <div id="tutor-system-wrap" class="hidden"><label for="tutor-system">اختار النظام</label><select id="tutor-system"><option value="general">الثانوية العامة</option><option value="bac">البكالوريا المصرية</option></select></div>
           <div id="tutor-track-wrap" class="hidden"><label for="tutor-track">مسار البكالوريا</label><select id="tutor-track"><option value="medicine">الطب وعلوم الحياة</option><option value="engineering">الهندسة وعلوم الحاسب</option><option value="business">الأعمال</option><option value="arts">الآداب والفنون</option></select></div>
           <label for="tutor-subject">المادة</label><input id="tutor-subject" maxlength="80" placeholder="مثال: رياضيات، علوم، عربي" required>
@@ -48,7 +48,7 @@
   <nav class="tool-mobile-nav" aria-label="التنقل بين الأدوات"><a href="index.html"><span>⌂</span><small>الرئيسية</small></a><a aria-current="page" href="tutor.html"><span>✦</span><small>الأستاذ</small></a><a href="videos.html"><span>▷</span><small>الفيديو</small></a><a href="challenge.html"><span>🏆</span><small>التحدّي</small></a></nav>
   <script>if(localStorage.getItem('studyBuddyDark')==='true')document.body.classList.add('dark');const t=document.getElementById('themeBtn');t.textContent=document.body.classList.contains('dark')?'☀️':'🌙';t.addEventListener('click',()=>{document.body.classList.toggle('dark');const d=document.body.classList.contains('dark');localStorage.setItem('studyBuddyDark',String(d));t.textContent=d?'☀️':'🌙'});</script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="tutor-page.js?v=2" defer></script>
+  <script src="tutor-page.js?v=community-post-tutor-20261029" defer></script>
 </body>
 </html>
 
