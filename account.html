@@ -121,7 +121,7 @@
       .card { padding-top: 18px; padding-bottom: 18px; }
     }
 
-  </style>
+  .consent-label{display:flex;align-items:flex-start;gap:8px;line-height:1.7;color:var(--muted);font-size:12px}.consent-label input{width:auto;min-width:18px;margin-top:4px;accent-color:#16845b}</style>
 </head>
 <body>
   <main class="shell">
@@ -152,7 +152,7 @@
             <button class="submit" id="save-password" type="submit">حفظ كلمة المرور</button>
           </form>
         </section>        <form id="auth-form" novalidate>
-          <div class="field hidden" id="name-field"><label for="name">الاسم</label><input id="name" name="name" type="text" autocomplete="name" maxlength="80" placeholder="الاسم الذي تحب أن نناديك به"></div>
+          <div class="field hidden" id="name-field"><label for="name">الاسم</label><input id="name" name="name" type="text" autocomplete="name" maxlength="80" placeholder="الاسم الذي تحب أن نناديك به"></div><div class="field hidden" id="birth-field"><label for="birth-date">تاريخ الميلاد</label><input id="birth-date" name="birth-date" type="date" autocomplete="bday"><p class="hint">هنستخدمه لحساب الفئة العمرية فقط، ومش هنحفظ التاريخ نفسه.</p><div class="hint hidden" id="guardian-consent-wrap"><label class="consent-label"><input id="guardian-consent" type="checkbox"> لدي موافقة ولي أمري على استخدام الحساب والمجتمع الطلابي.</label></div></div>
           <div class="field"><label for="email">البريد الإلكتروني</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required placeholder="name@example.com" dir="ltr" aria-describedby="email-hint"><p class="hint" id="email-hint">استخدم البريد المرتبط بحسابك.</p></div>
           <div class="field" id="password-field"><div class="field-row"><label for="password">كلمة المرور</label><button class="forgot" id="forgot-button" type="button">نسيت كلمة المرور؟</button></div><div class="input-wrap"><input class="password-input" id="password" name="password" type="password" autocomplete="current-password" minlength="6" maxlength="128" required placeholder="أدخل كلمة المرور" dir="ltr"><button class="show-pass" type="button" data-toggle-password="password" aria-label="إظهار كلمة المرور">إظهار</button></div><p class="hint hidden" id="password-hint">استخدم 8 أحرف على الأقل، ويفضّل الجمع بين الحروف والأرقام.</p></div>
           <div class="field hidden" id="confirm-field"><label for="confirm-password">تأكيد كلمة المرور</label><div class="input-wrap"><input class="password-input" id="confirm-password" name="confirm-password" type="password" autocomplete="new-password" maxlength="128" placeholder="أعد كتابة كلمة المرور" dir="ltr"><button class="show-pass" type="button" data-toggle-password="confirm-password" aria-label="إظهار كلمة المرور">إظهار</button></div></div>

@@ -35,6 +35,19 @@
       <div class="welcome-stamp" aria-hidden="true"><span>٢٥</span><small>دقيقة<br>تركيز</small></div>
     </section>
 
+<section class="card tutor-card" id="smart-tutor">
+<div class="section-heading"><div><span class="section-kicker">رفيقك وقت ما تتعطّل</span><h2>✨ المساعد الذكي</h2></div><span class="age-pill" id="student-age-label">اضبط فئتك العمرية</span></div>
+<p>اسأله عن درس أو سؤال، واختر شرحًا مبسطًا أو ملخصًا أو خريطة ذهنية أو تدريبًا.</p>
+<form id="tutor-form" class="tutor-form"><label for="tutor-mode">طريقة المساعدة</label><select id="tutor-mode"><option value="explain">اشرحها لي ببساطة</option><option value="summary">لخّص الدرس</option><option value="mindmap">اعمل خريطة ذهنية</option><option value="quiz">اختبر فهمي</option><option value="solve">ساعدني أحل خطوة بخطوة</option></select><label for="tutor-subject">المادة</label><input id="tutor-subject" maxlength="80" placeholder="مثال: علوم، رياضيات، عربي" required><label for="tutor-question">اكتب الدرس أو السؤال اللي واقف معاك</label><textarea id="tutor-question" rows="4" maxlength="1800" placeholder="اكتب سؤالك من غير بيانات شخصية…" required></textarea><button id="tutor-submit" class="primary" type="submit">ابدأ الشرح ✦</button></form>
+<p id="tutor-status" role="status" aria-live="polite"></p><article id="tutor-answer" class="tutor-answer" hidden aria-live="polite"></article><a id="tutor-video-search" class="resource-link" href="#" target="_blank" rel="noopener noreferrer" hidden>▶ ابحث عن فيديو شرح للدرس</a><small class="privacy-note">المساعد أداة تعليمية؛ راجع المسائل المهمة مع مدرسك ولا تكتب بيانات شخصية.</small></section>
+<section class="card library-card" id="book-library"><div class="section-heading"><div><span class="section-kicker">مصادر تتراجع لها</span><h2>📚 مكتبة الكتب</h2></div><span class="section-icon">↗</span></div><p>روابط لمصادر تعليمية، اختار المرحلة وافتح الكتاب من المصدر.</p><div class="resource-grid">
+<a class="resource-tile" href="https://studentbooks.moe.gov.eg/" target="_blank" rel="noopener noreferrer"><span>🏫</span><strong>كتب وزارة التربية والتعليم</strong><small>الكتب المدرسية الرسمية</small></a>
+<a class="resource-tile" href="https://ellibrary.moe.gov.eg/" target="_blank" rel="noopener noreferrer"><span>🗂️</span><strong>المكتبة الإلكترونية</strong><small>محتوى تعليمي من الوزارة</small></a>
+<a class="resource-tile" href="https://nafham.com/" target="_blank" rel="noopener noreferrer"><span>📖</span><strong>نفهم</strong><small>شرح دروس ومراجعات بالعربية</small></a></div><p class="resource-footnote">قد تختلف المواد المتاحة حسب الصف الدراسي.</p></section>
+<section class="card video-card" id="learning-videos"><div class="section-heading"><div><span class="section-kicker">شوف الفكرة وهي بتتشرح</span><h2>▶ فيديوهات تعليمية</h2></div><span class="section-icon">✦</span></div><p>اختار المرحلة المناسبة للفيديوهات، أو اطلب من المساعد رابط بحث عن شرح درسك.</p><div class="video-levels">
+<a href="https://www.youtube.com/results?search_query=شرح+دروس+المرحلة+الابتدائية+مصر" target="_blank" rel="noopener noreferrer">ابتدائي <span>فيديوهات شرح ←</span></a><a href="https://www.youtube.com/results?search_query=شرح+دروس+المرحلة+الإعدادية+مصر" target="_blank" rel="noopener noreferrer">إعدادي <span>فيديوهات شرح ←</span></a><a href="https://www.youtube.com/results?search_query=شرح+دروس+المرحلة+الثانوية+مصر" target="_blank" rel="noopener noreferrer">ثانوي <span>فيديوهات شرح ←</span></a></div><a class="resource-link" href="https://nafham.com/" target="_blank" rel="noopener noreferrer">افتح مكتبة فيديوهات نفهم ↗</a><small class="privacy-note">الفيديوهات على منصات خارجية؛ راجع محتواها قبل استخدامها مع الصغار.</small></section>
+<section class="card community-card" id="student-community"><div class="section-heading"><div><span class="section-kicker">نتعلم مع بعض</span><h2>👥 مجتمع الطلاب</h2></div><span class="age-pill" id="community-group-label">مجموعة عمرك</span></div><p>شارك سؤالًا أو فكرة دراسية مع طلاب مجموعتك. استخدم اسمًا مستعارًا فقط.</p><form id="community-form" class="community-form"><label for="community-name">الاسم الظاهر</label><input id="community-name" maxlength="40" placeholder="اسم أول أو اسم مستعار" required><label for="community-post">مشاركتك</label><textarea id="community-post" rows="3" maxlength="450" placeholder="سؤال دراسي من غير بيانات تواصل أو صور…" required></textarea><button class="primary" id="community-submit" type="submit">شارك في مجموعتي</button></form><p id="community-status" role="status" aria-live="polite"></p><div id="community-feed" class="community-feed" aria-live="polite"><p class="muted">سجّل الدخول لعرض المجموعة.</p></div><small class="privacy-note">المشاركات ظاهرة لطلاب مجموعتك. لا تنشر بيانات تواصل أو مكانك، واطلب مساعدة ولي أمرك إذا أزعجك محتوى.</small></section>
+<dialog id="age-onboarding" class="age-dialog" aria-labelledby="age-title"><form id="age-form"><span class="dialog-mark">ق</span><h2 id="age-title">نظبط المحتوى على مرحلتك؟</h2><p>نحسب الفئة العمرية من تاريخ الميلاد فقط، ولا نحفظ التاريخ نفسه.</p><label for="profile-dob">تاريخ الميلاد</label><input id="profile-dob" type="date" required><button class="primary" type="submit">احفظ الفئة العمرية</button><p id="age-status" role="status" aria-live="polite"></p></form></dialog>
     <section class="card timer-card" id="focus-timer">
       <p id="mode">🎯 وقت المذاكرة</p>
       <div id="timer" class="timer">25:00</div>
@@ -189,6 +202,8 @@
     <p>خطوة صغيرة اليوم، قِمّة أكبر بكرة. <span>✦</span></p>
     <small>قِمّة · رفيق المذاكرة والقرآن · © 2026</small>
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="script.js"></script>
+  <script src="student.js" defer></script>
 </body>
 </html>

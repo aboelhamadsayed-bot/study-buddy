@@ -11,9 +11,22 @@
       const form = $("auth-form"), message = $("message"), submit = $("submit-button");
       const recoveryPanel = $("recovery-panel"), recoveryForm = $("recovery-form");
       const loginTab = $("login-tab"), signupTab = $("signup-tab");
-      const nameField = $("name-field"), confirmField = $("confirm-field");
+      const nameField = $("name-field"), confirmField = $("confirm-field"), birthField = $("birth-field"), birthDate = $("birth-date");
       const password = $("password"), email = $("email");
       let mode = "login", client = null, busy = false;
+      let selectedAgeGroup = "";
+      const todayForDate = new Date(); todayForDate.setMinutes(todayForDate.getMinutes() - todayForDate.getTimezoneOffset());
+      birthDate.max = todayForDate.toISOString().slice(0, 10);
+      function ageFromBirthDate(value) {
+        const date = new Date(value + "T00:00:00");
+        if (!value || Number.isNaN(date.getTime()) || date > new Date()) return null;
+        const now = new Date();
+        let age = now.getFullYear() - date.getFullYear();
+        if (now.getMonth() < date.getMonth() || (now.getMonth() === date.getMonth() && now.getDate() < date.getDate())) age--;
+        return age >= 6 && age <= 120 ? age : null;
+      }
+      function ageGroupFor(age) { return age <= 8 ? "6-8" : age <= 11 ? "9-11" : age <= 14 ? "12-14" : age <= 17 ? "15-17" : "18+"; }
+      birthDate.addEventListener("input", () => { const age = ageFromBirthDate(birthDate.value); $("guardian-consent-wrap").classList.toggle("hidden", age === null || age >= 13); if (age === null || age >= 13) $("guardian-consent").checked = false; });
       const configured = /^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(SUPABASE_URL) &&
         SUPABASE_ANON_KEY.length > 20 && !SUPABASE_ANON_KEY.includes("YOUR_");
       if (configured && window.supabase?.createClient) client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
@@ -25,14 +38,14 @@
       function setMode(next) {
         mode = next; const isSignup = mode === "signup";
         loginTab.setAttribute("aria-selected", String(!isSignup)); signupTab.setAttribute("aria-selected", String(isSignup));
-        nameField.classList.toggle("hidden", !isSignup); confirmField.classList.toggle("hidden", !isSignup);
+        nameField.classList.toggle("hidden", !isSignup); birthField.classList.toggle("hidden", !isSignup); confirmField.classList.toggle("hidden", !isSignup);
         $("password-hint").classList.toggle("hidden", !isSignup);
         $("form-title").textContent = isSignup ? "ابدأ رحلتك" : "أهلاً بعودتك";
         $("form-subtitle").textContent = isSignup ? "أنشئ حسابك وخلي كل خطوة تقرّبك من هدفك." : "سجّل دخولك لتكمل من حيث توقفت.";
         $("submit-button").textContent = isSignup ? "إنشاء حساب" : "تسجيل الدخول";
         $("forgot-button").classList.toggle("hidden", isSignup);
         password.autocomplete = isSignup ? "new-password" : "current-password";
-        $("name").required = isSignup; $("confirm-password").required = isSignup;
+        $("name").required = isSignup; $("birth-date").required = isSignup; $("confirm-password").required = isSignup;
         clearMessage();
       }
       loginTab.addEventListener("click", () => setMode("login"));
@@ -61,14 +74,16 @@
         email.value = email.value.trim();
         if (!email.checkValidity()) { email.setAttribute("aria-invalid", "true"); email.focus(); return notify("تحقق من كتابة البريد الإلكتروني بشكل صحيح.", "error"); }
         if (password.value.length < 6) { password.setAttribute("aria-invalid", "true"); password.focus(); return notify("كلمة المرور يجب ألا تقل عن 6 أحرف.", "error"); }
+        if (mode === "signup" && !$("name").value.trim()) { $("name").focus(); return notify("اكتب الاسم الذي تحب أن نناديك به.", "error"); }
         if (mode === "signup" && password.value.length < 8) { password.focus(); return notify("اختر كلمة مرور من 8 أحرف على الأقل لحماية حسابك.", "error"); }
+        if (mode === "signup") { const age = ageFromBirthDate(birthDate.value); if (age === null) { birthDate.focus(); return notify("أدخل تاريخ ميلاد صحيحًا؛ يجب أن يكون العمر 6 سنوات أو أكثر.", "error"); } if (age < 13 && !$("guardian-consent").checked) { $("guardian-consent-wrap").classList.remove("hidden"); $("guardian-consent").focus(); return notify("لإكمال التسجيل لمن هم دون 13 سنة، يلزم تأكيد موافقة ولي الأمر.", "error"); } selectedAgeGroup = ageGroupFor(age); }
         if (mode === "signup" && password.value !== $("confirm-password").value) { $("confirm-password").focus(); return notify("كلمتا المرور غير متطابقتين.", "error"); }
         if (!client) return notify("الصفحة جاهزة، لكن يلزم وضع رابط مشروع Supabase ومفتاحه العام في الإعدادات أعلى الكود.", "error");
         busy = true; submit.disabled = true; submit.textContent = mode === "signup" ? "جارٍ إنشاء الحساب…" : "جارٍ تسجيل الدخول…";
         try {
           if (mode === "signup") {
             const { data, error } = await client.auth.signUp({ email: email.value, password: password.value,
-              options: { data: { display_name: $("name").value.trim() }, emailRedirectTo: AUTH_RETURN_URL } });
+              options: { data: { display_name: $("name").value.trim(), age_group: selectedAgeGroup }, emailRedirectTo: AUTH_RETURN_URL } });
             if (error) throw error;
             if (data.session) { notify("تم إنشاء حسابك بنجاح. جارٍ فتح مساحة الدراسة…", "success"); window.location.assign(REDIRECT_AFTER_AUTH); return; }
             notify("تم إنشاء الحساب. افحص بريدك الإلكتروني واضغط رابط التأكيد قبل تسجيل الدخول.", "success");

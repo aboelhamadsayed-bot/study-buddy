@@ -317,3 +317,37 @@ body.dark .welcome-cta { color:#133c2d; background:#e5f4e9; }
   .prayer-grid { grid-template-columns:minmax(0,1fr); }
   .stats { grid-template-columns:repeat(3,minmax(0,1fr)); }
 }
+
+.container>.tutor-card,.container>.community-card{grid-column:1/-1}
+.container>.library-card,.container>.video-card{grid-column:span 6}
+.section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.section-heading h2{margin:3px 0 0}.section-kicker{font-size:11px;color:var(--primary);font-weight:800}
+.age-pill,.section-icon{display:inline-grid;place-items:center;min-height:34px;padding:5px 12px;border-radius:999px;background:var(--soft);color:var(--primary);font-size:12px;font-weight:800;white-space:nowrap}
+.section-icon{width:36px;padding:0;font-size:20px}
+.tutor-form{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}
+.tutor-form label,.community-form label{grid-column:1/-1;margin-top:2px}
+.tutor-form input,.tutor-form select,.tutor-form textarea,.community-form input,.community-form textarea{text-align:right}
+.tutor-form textarea,.tutor-form button{grid-column:1/-1}
+.tutor-answer{white-space:pre-wrap;line-height:2;background:var(--soft);border-inline-start:4px solid var(--primary);border-radius:14px;padding:18px;margin:14px 0;overflow-wrap:anywhere}
+.privacy-note,.resource-footnote{display:block;color:var(--muted);line-height:1.8;margin-top:12px}
+.resource-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:18px}
+.resource-tile{display:flex;min-width:0;flex-direction:column;gap:7px;padding:16px;border:1px solid var(--border);border-radius:15px;background:var(--bg);color:var(--text);text-decoration:none;transition:transform .2s,border-color .2s}
+.resource-tile:hover,.video-levels a:hover{transform:translateY(-2px);border-color:var(--primary)}
+.resource-tile>span{font-size:23px}.resource-tile strong{font-size:14px}.resource-tile small,.video-levels span{font-size:11px;color:var(--muted);line-height:1.6}
+.video-levels{display:grid;gap:9px;margin:17px 0}
+.video-levels a{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:13px 15px;background:var(--bg);border:1px solid var(--border);border-radius:13px;text-decoration:none;color:var(--text);font-weight:800;transition:transform .2s,border-color .2s}
+.resource-link{display:inline-flex;margin-top:10px;padding:11px 15px;border-radius:12px;background:var(--soft);color:var(--primary-dark);font-weight:800;text-decoration:none}
+.community-form{display:grid;gap:8px;margin:16px 0}.community-form button{justify-self:start}
+.community-feed{display:grid;gap:10px;margin-top:12px}
+.community-post{padding:14px;border:1px solid var(--border);border-radius:14px;background:var(--bg)}
+.community-post header{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted)}
+.community-post strong{color:var(--primary)}.community-post p{margin:8px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.8}
+.muted{color:var(--muted)}
+.age-dialog{width:min(440px,calc(100% - 28px));border:1px solid var(--border);border-radius:22px;padding:26px;background:var(--card);color:var(--text);box-shadow:0 24px 80px #10291f45}
+.age-dialog::backdrop{background:#0b2019a8;backdrop-filter:blur(4px)}.age-dialog form{display:grid;gap:10px}.age-dialog h2{margin:0}
+.dialog-mark{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;background:var(--primary);color:#fff;font-size:24px;font-weight:800}
+.age-dialog p{line-height:1.8;color:var(--muted)}.age-dialog button{margin-top:6px}
+@media(max-width:940px){.container>.tutor-card,.container>.community-card{grid-column:1/-1}.container>.library-card,.container>.video-card{grid-column:span 3}.resource-grid{grid-template-columns:1fr}}
+@media(max-width:680px){.container>.tutor-card,.container>.community-card,.container>.library-card,.container>.video-card{grid-column:1}.tutor-form{grid-template-columns:1fr}.tutor-form label{grid-column:1}.resource-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.section-heading{align-items:flex-start}.video-levels a{align-items:flex-start;flex-direction:column}}
+@media(max-width:380px){.resource-grid{grid-template-columns:1fr}.age-pill{font-size:11px;padding-inline:9px}}
+@media(prefers-reduced-motion:reduce){.resource-tile,.video-levels a{transition:none}}
