@@ -7,28 +7,35 @@
   <title>قِمّة | منصتك التعليمية</title>
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#16875b">
+
 </head>
 <body>
   <header class="navbar">
-
-<h2>قِمّة 📚</h2>
-
-<a href="account.html" class="primary">إنشاء حساب / تسجيل الدخول</a>
-
-<button id="themeBtn" aria-label="تغيير المظهر">🌙</button>
-
-</header>
+    <a class="nav-brand" href="index.html" aria-label="قِمّة، الصفحة الرئيسية">
+      <span class="nav-mark" aria-hidden="true">ق</span>
+      <span class="nav-brand-copy"><strong>قِمّة</strong><small>رفيق المذاكرة والإنجاز</small></span>
+    </a>
+    <div class="nav-actions">
+      <a href="account.html" class="account-link"><span aria-hidden="true">✦</span> حساب الطالب</a>
+      <button id="themeBtn" class="theme-toggle" type="button" aria-label="تغيير المظهر">🌙</button>
+    </div>
+  </header>
 
   <main class="container">
     <section class="welcome">
-      <p class="small">بسم الله الرحمن الرحيم</p>
-      <h1>مستقبلك يستحق تعبك ✨</h1>
-      <p>ذاكر بإخلاص، وخذ بالأسباب، واستعن بالله.</p>
-      <p class="dua">﴿ وَقُل رَّبِّ زِدْنِي عِلْمًا ﴾</p>
+      <span class="welcome-orbit orbit-one" aria-hidden="true"></span>
+      <span class="welcome-orbit orbit-two" aria-hidden="true"></span>
+      <div class="welcome-copy">
+        <p class="small"><span class="live-dot"></span> مساحتك اليومية للتركيز</p>
+        <h1>كل جلسة تقرّبك<br>من القِمّة <span>✦</span></h1>
+        <p>رتّب يومك، ركّز على خطوة واحدة، وشوف إنجازك يكبر جلسة بعد جلسة.</p>
+        <p class="dua">﴿ وَقُل رَّبِّ زِدْنِي عِلْمًا ﴾</p>
+        <a class="welcome-cta" href="#focus-timer">ابدأ جلسة تركيز <span aria-hidden="true">←</span></a>
+      </div>
+      <div class="welcome-stamp" aria-hidden="true"><span>٢٥</span><small>دقيقة<br>تركيز</small></div>
     </section>
 
-    <section class="card timer-card">
+    <section class="card timer-card" id="focus-timer">
       <p id="mode">🎯 وقت المذاكرة</p>
       <div id="timer" class="timer">25:00</div>
       <div class="progress"><div id="progressBar"></div></div>
@@ -177,11 +184,11 @@
     </section>
   </main>
 
-  <footer>
-    <p>صغير من الإنجاز كل يوم يصنع فرقًا كبيرًا 🌱</p>
-  <p>صُنع بكل حب ❤️ بواسطة أحمد ابوالحمد</p>
-  <p>رفيق المذاكرة والقرآن © 2026</p>
-</footer>
+  <footer class="site-footer">
+    <span class="footer-mark" aria-hidden="true">ق</span>
+    <p>خطوة صغيرة اليوم، قِمّة أكبر بكرة. <span>✦</span></p>
+    <small>قِمّة · رفيق المذاكرة والقرآن · © 2026</small>
+  </footer>
   <script src="script.js"></script>
 </body>
 </html>
