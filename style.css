@@ -404,3 +404,49 @@ body.dark .welcome-cta { color:#133c2d; background:#e5f4e9; }
 @media(max-width:680px){.section-nav{justify-content:flex-start;top:60px;padding-inline:3%}.section-nav a{padding:7px 10px;font-size:11px}.teacher-layout{grid-template-columns:1fr}.teacher-feature{border-radius:18px}.course-discovery{grid-template-columns:1fr;gap:13px;padding:17px}.course-actions{justify-content:flex-start}.welcome-secondary-cta{margin:12px 4px 0}}
 @media(max-width:390px){.lesson-flow{gap:5px}.lesson-flow span{font-size:10px}.lesson-flow i{font-size:11px}.feature-button{font-size:12px;padding-inline:12px}}
 @media(prefers-reduced-motion:reduce){.teacher-feature,.section-nav a,.feature-button{transition:none}}
+
+
+/* Mobile touch and narrow-screen compatibility */
+html { min-width: 320px; overflow-x: hidden; }
+body { min-width: 320px; overflow-x: hidden; }
+img, video, iframe, canvas, svg { max-width: 100%; }
+.container, .card, .welcome, .teacher-layout, .teacher-feature, .course-discovery,
+.section-heading, .tutor-form, .video-finder, .community-form, .task-form { min-width: 0; }
+@media (max-width: 680px) {
+  html { scroll-padding-top: 112px; }
+  .navbar { position: sticky; top: 0; z-index: 30; min-height: 58px; }
+  .section-nav { top: 58px; z-index: 29; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; }
+  .container { width: calc(100% - 24px); margin-inline: auto; }
+  .card { padding: 18px; }
+  .section-heading { flex-wrap: wrap; }
+  .section-heading > div { min-width: 0; flex: 1 1 180px; }
+  .section-heading h2, .teacher-feature h3, .course-discovery h3 { overflow-wrap: anywhere; }
+  .teacher-feature, .course-discovery { width: 100%; }
+  .feature-button, .course-actions .text-link { max-width: 100%; overflow-wrap: anywhere; }
+  .buttons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .buttons button:first-child { grid-column: 1 / -1; }
+  button, .feature-button, .resource-link, .section-nav a { min-height: 44px; }
+  input, select, textarea { min-height: 44px; font-size: 16px; }
+  textarea { min-height: 96px; }
+  .task-form, .tutor-form, .video-finder { grid-template-columns: minmax(0, 1fr); }
+  .task-form > *, .tutor-form > *, .video-finder > * { grid-column: 1 / -1; }
+  .community-form button { justify-self: stretch; }
+  .community-post header { flex-wrap: wrap; }
+  .age-dialog { max-height: calc(100dvh - 24px); overflow-y: auto; }
+}
+@media (max-width: 390px) {
+  .navbar { padding-inline: 12px; }
+  .account-link { gap: 5px; font-size: 11px; }
+  .nav-brand-copy strong { font-size: 14px; }
+  .nav-actions { gap: 5px; }
+  .theme-toggle { padding: 8px; }
+  .container { width: calc(100% - 18px); }
+  .card { padding: 15px; border-radius: 17px; }
+  .stats { gap: 5px; }
+  .stat-box p { font-size: 10px; }
+  .age-pill { white-space: normal; text-align: center; }
+  .welcome-cta, .welcome-secondary-cta { max-width: 100%; }
+}
+@supports (overflow: clip) {
+  html, body { overflow-x: clip; }
+}
