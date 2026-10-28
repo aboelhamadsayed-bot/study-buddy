@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#16845b">
   <title>قِمّة | منصتك التعليمية</title>
-  <link rel="stylesheet" href="style.css?v=mobile-20261029">
+  <link rel="stylesheet" href="style.css?v=dashboard-20261029">
   <link rel="manifest" href="manifest.json">
 
 </head>
@@ -21,26 +21,69 @@
     </div>
   </header>
 
-<nav class="section-nav" aria-label="اختصارات المنصة"><a href="#teacher-paths">المسارات</a><a href="#smart-tutor">الأستاذ الذكي</a><a href="#learning-videos">الفيديوهات</a><a href="#book-library">المكتبة</a><a href="#student-community">مجتمع الطلاب</a></nav>
+<nav class="section-nav" aria-label="أقسام المنصة">
+  <a href="#dashboard-home"><span aria-hidden="true">⌂</span> الرئيسية</a>
+  <a href="#focus-timer"><span aria-hidden="true">◷</span> جلسة التركيز</a>
+  <a href="#smart-tutor"><span aria-hidden="true">✦</span> الأستاذ الذكي</a>
+  <a href="#learning-videos"><span aria-hidden="true">▷</span> الفيديوهات</a>
+  <a href="#book-library"><span aria-hidden="true">▤</span> مكتبة الكتب</a>
+  <a href="#student-community"><span aria-hidden="true">◎</span> مجتمع الطلاب</a>
+</nav>
   <main class="container">
-    <section class="welcome welcome-monochrome">
+    <section class="welcome welcome-dashboard" id="dashboard-home">
       <div class="welcome-copy">
-        <p class="small"><span class="live-dot"></span> قِمّة · مساحة مذاكرتك</p>
-        <h1>خطوة صغيرة،<br>مستقبل كبير <span>✦</span></h1>
-        <p>خطط يومك، ركّز في جلسة واحدة، وتابع إنجازك يكبر خطوة بعد خطوة.</p>
+        <p class="small"><span class="live-dot"></span> مساحتك للإنجاز اليوم</p>
+        <h1>جاهز تحقق<br>خطوة جديدة؟ <span>✦</span></h1>
+        <p>اختار حاجة واحدة تبدأ بيها، وسيب قِمّة تساعدك تكمّل يومك بتركيز.</p>
         <p class="dua">﴿ وَقُل رَّبِّ زِدْنِي عِلْمًا ﴾</p>
         <div class="welcome-actions">
           <a class="welcome-cta" href="#focus-timer">ابدأ جلسة تركيز <span aria-hidden="true">←</span></a>
-          <a class="welcome-secondary-cta" href="#teacher-paths">اكتشف مصادر المذاكرة</a>
+          <a class="welcome-secondary-cta" href="#smart-tutor">اسأل الأستاذ الذكي</a>
         </div>
       </div>
       <div class="welcome-visual" aria-hidden="true">
         <div class="visual-grid"></div>
         <div class="visual-ring visual-ring-one"></div><div class="visual-ring visual-ring-two"></div>
         <div class="visual-mark">ق</div>
-        <div class="visual-session"><span>جلسة تركيز</span><strong>٢٥:٠٠</strong><small><i></i> جاهز تبدأ؟</small></div>
-        <div class="visual-note"><span>✓</span><div><b>إنجازك بيتراكم</b><small>كل دقيقة لها قيمة</small></div></div>
+        <div class="visual-session"><span>جلسة اليوم</span><strong>٢٥:٠٠</strong><small><i></i> تركيزك يبدأ بخطوة</small></div>
+        <div class="visual-note"><span>✓</span><div><b>تقدّمك محفوظ</b><small>كمّل على مهلك</small></div></div>
       </div>
+    </section>
+
+    <section class="stats dashboard-stats" aria-label="ملخص إنجازك">
+      <div class="stat-box"><span>🏆</span><h3 id="sessions">0</h3><p>جلسات مكتملة</p></div>
+      <div class="stat-box"><span>⭐</span><h3 id="points">0</h3><p>نقاط الإنجاز</p></div>
+      <div class="stat-box"><span>⏳</span><h3 id="minutes">0</h3><p>دقائق مذاكرة</p></div>
+    </section>
+
+    <section class="card quick-access" aria-labelledby="quick-access-title">
+      <div class="section-heading"><div><span class="section-kicker">كل اللي تحتاجه قريب</span><h2 id="quick-access-title">ابدأ من هنا</h2></div><span class="age-pill">اختصارات قِمّة</span></div>
+      <div class="quick-grid">
+        <a class="quick-tile" href="#smart-tutor"><span class="quick-icon tutor-icon">✦</span><strong>الأستاذ الذكي</strong><small>اسأل وافهم بطريقتك</small></a>
+        <a class="quick-tile" href="#learning-videos"><span class="quick-icon video-icon">▷</span><strong>فيديوهات الشرح</strong><small>اختار صفك ومادتك</small></a>
+        <a class="quick-tile" href="#book-library"><span class="quick-icon library-icon">▤</span><strong>مكتبة الكتب</strong><small>مصادرك الدراسية</small></a>
+        <a class="quick-tile" href="#student-community"><span class="quick-icon community-icon">◎</span><strong>مجتمع الطلاب</strong><small>اتعلّموا مع بعض</small></a>
+      </div>
+    </section>
+
+    <section class="card timer-card" id="focus-timer">
+      <p id="mode">🎯 وقت المذاكرة</p>
+      <div id="timer" class="timer">25:00</div>
+      <div class="progress"><div id="progressBar"></div></div>
+      <div class="buttons">
+        <button id="startBtn" class="primary">ابدأ المذاكرة</button>
+        <button id="pauseBtn" class="secondary">إيقاف مؤقت</button>
+        <button id="resetBtn" class="secondary">إعادة</button>
+      </div>
+      <div class="settings">
+        <label>مدة المذاكرة بالدقائق
+          <input id="studyMinutes" type="number" min="1" max="180" value="25">
+        </label>
+        <label>مدة الراحة بالدقائق
+          <input id="breakMinutes" type="number" min="1" max="60" value="5">
+        </label>
+      </div>
+      <p id="message" aria-live="polite">ابدأ بأول جلسة، وسيصبح الإنجاز عادة بإذن الله.</p>
     </section>
 
 <section class="card learning-exchange" id="teacher-paths">
@@ -88,32 +131,6 @@
 <small class="privacy-note">روابط الفيديو تفتح نتائج بحث خارجية؛ راجع المدرس ومحتوى الفيديو، وتأكد من مطابقته لمنهجك.</small></section>
 <section class="card community-card" id="student-community"><div class="section-heading"><div><span class="section-kicker">نتعلم مع بعض</span><h2>👥 مجتمع الطلاب</h2></div><span class="age-pill" id="community-group-label">مجموعة عمرك</span></div><p>شارك سؤالًا أو فكرة دراسية مع طلاب مجموعتك. استخدم اسمًا مستعارًا فقط.</p><form id="community-form" class="community-form"><label for="community-name">الاسم الظاهر</label><input id="community-name" maxlength="40" placeholder="اسم أول أو اسم مستعار" required><label for="community-post">مشاركتك</label><textarea id="community-post" rows="3" maxlength="450" placeholder="سؤال دراسي من غير بيانات تواصل أو صور…" required></textarea><button class="primary" id="community-submit" type="submit">شارك في مجموعتي</button></form><p id="community-status" role="status" aria-live="polite"></p><div id="community-feed" class="community-feed" aria-live="polite"><p class="muted">سجّل الدخول لعرض المجموعة.</p></div><small class="privacy-note">المشاركات ظاهرة لطلاب مجموعتك. لا تنشر بيانات تواصل أو مكانك، واطلب مساعدة ولي أمرك إذا أزعجك محتوى.</small></section>
 <dialog id="age-onboarding" class="age-dialog" aria-labelledby="age-title"><form id="age-form"><span class="dialog-mark">ق</span><h2 id="age-title">نظبط المحتوى على مرحلتك؟</h2><p>نحسب الفئة العمرية من تاريخ الميلاد فقط، ولا نحفظ التاريخ نفسه.</p><label for="profile-dob">تاريخ الميلاد</label><input id="profile-dob" type="date" required><button class="primary" type="submit">احفظ الفئة العمرية</button><p id="age-status" role="status" aria-live="polite"></p></form></dialog>
-    <section class="card timer-card" id="focus-timer">
-      <p id="mode">🎯 وقت المذاكرة</p>
-      <div id="timer" class="timer">25:00</div>
-      <div class="progress"><div id="progressBar"></div></div>
-      <div class="buttons">
-        <button id="startBtn" class="primary">ابدأ المذاكرة</button>
-        <button id="pauseBtn" class="secondary">إيقاف مؤقت</button>
-        <button id="resetBtn" class="secondary">إعادة</button>
-      </div>
-      <div class="settings">
-        <label>مدة المذاكرة بالدقائق
-          <input id="studyMinutes" type="number" min="1" max="180" value="25">
-        </label>
-        <label>مدة الراحة بالدقائق
-          <input id="breakMinutes" type="number" min="1" max="60" value="5">
-        </label>
-      </div>
-      <p id="message" aria-live="polite">ابدأ بأول جلسة، وسيصبح الإنجاز عادة بإذن الله.</p>
-    </section>
-
-    <section class="stats">
-      <div class="stat-box"><span>🏆</span><h3 id="sessions">0</h3><p>جلسات مكتملة</p></div>
-      <div class="stat-box"><span>⭐</span><h3 id="points">0</h3><p>نقاط الإنجاز</p></div>
-      <div class="stat-box"><span>⏳</span><h3 id="minutes">0</h3><p>دقائق مذاكرة</p></div>
-    </section>
-
     <section class="card goal-card">
       <h2>🎯 هدفك اليوم</h2>
       <p>حدد عدد جلسات المذاكرة التي تريد إنجازها.</p>
@@ -125,7 +142,7 @@
       <p id="goalText">أنجز أول جلسة لتحقيق هدفك!</p>
     </section>
 
-    <section class="card tasks-card">
+    <section class="card tasks-card" id="student-tasks">
       <h2>📝 مهامي اليومية</h2>
       <p>أضف مهامك، وحدد المادة، واكتب ملاحظات تساعدك.</p>
       <form id="taskForm" class="task-form">
@@ -236,6 +253,14 @@
       <button id="quoteBtn" class="secondary">رسالة تحفيزية جديدة</button>
     </section>
   </main>
+
+  <nav class="mobile-tabbar" aria-label="تنقل سريع">
+    <a href="#dashboard-home" aria-label="الرئيسية"><span aria-hidden="true">⌂</span><small>الرئيسية</small></a>
+    <a href="#smart-tutor" aria-label="الأستاذ الذكي"><span aria-hidden="true">✦</span><small>الأستاذ</small></a>
+    <a href="#learning-videos" aria-label="الفيديوهات"><span aria-hidden="true">▷</span><small>الفيديوهات</small></a>
+    <a href="#book-library" aria-label="المكتبة"><span aria-hidden="true">▤</span><small>المكتبة</small></a>
+    <a href="#student-community" aria-label="مجتمع الطلاب"><span aria-hidden="true">◎</span><small>المجتمع</small></a>
+  </nav>
 
   <footer class="site-footer">
     <span class="footer-mark" aria-hidden="true">ق</span>
