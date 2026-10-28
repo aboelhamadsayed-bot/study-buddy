@@ -100,9 +100,14 @@
   ensureProfile().catch(()=>say("community-status","تعذر تحميل الملف الدراسي الآن.",true));
   const moreMenu=$("more-menu"),moreButton=$("moreTab");
   function closeMoreMenu(){if(!moreMenu)return;if(typeof moreMenu.close==="function"&&moreMenu.open)moreMenu.close();else moreMenu.removeAttribute("open");}
-  moreButton?.addEventListener("click",()=>{if(typeof moreMenu?.showModal==="function"){if(!moreMenu.open)moreMenu.showModal();}else moreMenu?.setAttribute("open","");});
+  function openMoreMenu(){if(typeof moreMenu?.showModal==="function"){if(!moreMenu.open)moreMenu.showModal();}else moreMenu?.setAttribute("open","");}
+  moreButton?.addEventListener("click",openMoreMenu);
+  $("menuToggle")?.addEventListener("click",openMoreMenu);
   moreMenu?.querySelector("[data-close-more]")?.addEventListener("click",closeMoreMenu);
   moreMenu?.querySelectorAll("a").forEach(link=>link.addEventListener("click",closeMoreMenu));
   moreMenu?.addEventListener("click",event=>{if(event.target===moreMenu)closeMoreMenu();});
+  const scrollTop=$("scrollTop");
+  scrollTop?.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+  window.addEventListener("scroll",()=>{if(scrollTop)scrollTop.hidden=window.scrollY<420;},{passive:true});
 })();
 
