@@ -7,7 +7,17 @@
     : null;
   const functionUrl = "https://asfmnztojcdotxyqfpzd.supabase.co/functions/v1/qimma-tutor";
   const validGroups = new Set(["6-8", "9-11", "12-14", "15-17", "18+"]);
-  let session = null, profile = null, history = [], busy = false, photoUrl = "", photoData = "";
+  let session = null, profile = null, history = [], busy = false, photoUrl = "", photoData = "", communityDraft = null;
+  try {
+    const saved = sessionStorage.getItem("qimmaTutorDraft");
+    if (saved) {
+      const draft = JSON.parse(saved);
+      if (draft && typeof draft.question === "string" && draft.question.trim().length >= 3 && draft.question.length <= 450) {
+        communityDraft = { question: draft.question.trim(), subject: "سؤال من مجتمع الطلاب", mode: "explain" };
+        $("tutor-mode").value = "explain"; $("tutor-subject").value = communityDraft.subject; $("tutor-question").value = communityDraft.question;
+      } else sessionStorage.removeItem("qimmaTutorDraft");
+    }
+  } catch { try { sessionStorage.removeItem("qimmaTutorDraft"); } catch {} }
 
   $("tutor-image").addEventListener("change", () => {
     const file = $("tutor-image").files?.[0];
@@ -62,13 +72,18 @@
     profile = row;
     if (!validGroups.has(profile?.age_group)) { status("كمّل تحديد فئتك العمرية من حساب الطالب عشان الأستاذ يضبط الشرح على مرحلتك.", true); return; }
     status("جاهز يا بطل — اسأل عن نقطة واحدة، ونمشي فيها خطوة خطوة.");
+    if (communityDraft) {
+      const draft = communityDraft; communityDraft = null; sessionStorage.removeItem("qimmaTutorDraft");
+      history = []; $("tutor-answer").replaceChildren(); $("tutor-answer").hidden = false;
+      await ask(draft.question, false);
+    }
   }
 
   async function ask(question, followup = false, image = "") {
     if (busy) return;
     if (!session || !validGroups.has(profile?.age_group)) { status("سجّل الدخول وحدد فئتك العمرية من حساب الطالب الأول.", true); return; }
     const grade = $("tutor-grade").value, subject = $("tutor-subject").value.trim();
-    if (!grade || !subject || (!question.trim() && !image)) { status("اختار صفك والمادة، واكتب السؤال أو صوّره.", true); return; }
+    if (!subject || (!question.trim() && !image)) { status("اختار المادة، واكتب السؤال أو صوّره. الصف اختياري.", true); return; }
     const button = followup ? $("tutor-followup").querySelector("button") : $("tutor-submit");
     busy = true; button.disabled = true; status("الأستاذ بيجهز شرح مناسب لصفك…");
     try {
