@@ -64,6 +64,63 @@
       .form-head h2{font-size:25px}
       .tabs{margin:22px 0 19px}
     }
+  
+    /* Layout tuned for desktop, tablet, and compact phones */
+    .shell {
+      width: min(100%, 1440px);
+      min-height: 100svh;
+      grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr);
+      align-items: stretch;
+    }
+    .story, .form-side, .card { min-width: 0; }
+    .form-side { width: 100%; }
+    .field input { max-width: 100%; }
+    @media (min-width: 851px) and (max-width: 1200px) {
+      .shell {
+        grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr);
+        gap: 16px;
+        padding: 16px;
+      }
+      .story { min-height: 640px; }
+      .story h1 { font-size: clamp(34px, 4vw, 48px); }
+      .card { padding: clamp(22px, 3vw, 34px); }
+    }
+    @media (max-width: 850px) {
+      body { padding: 12px; }
+      .shell {
+        width: min(600px, 100%);
+        min-height: 100svh;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+        padding: 0;
+      }
+      .story { display: none; }
+      .form-side { display: block; padding: 8px 0; }
+      .card { width: 100%; max-width: none; min-height: 0; }
+    }
+    @media (max-width: 560px) {
+      body { padding: 8px; }
+      .shell { width: 100%; padding: 0; }
+      .card { padding: 23px 17px; border-radius: 20px; }
+      .field input { height: 49px; font-size: 16px; }
+      .tabs { margin-top: 22px; }
+      .submit { min-height: 49px; }
+    }
+    @media (max-width: 380px) {
+      body { padding: 6px; }
+      .card { padding: 20px 14px; border-radius: 18px; }
+      .form-head h2 { font-size: 24px; }
+      .form-head p { font-size: 13px; }
+      .field-row { gap: 8px; }
+      .forgot { font-size: 11px; }
+      .tabs { gap: 2px; padding: 4px; }
+      .tab { padding: 10px 5px; font-size: 13px; }
+    }
+    @media (max-height: 540px) and (max-width: 850px) {
+      .mobile-brand { margin-bottom: 14px; }
+      .card { padding-top: 18px; padding-bottom: 18px; }
+    }
+
   </style>
 </head>
 <body>
