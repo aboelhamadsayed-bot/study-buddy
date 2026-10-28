@@ -57,5 +57,16 @@
     <p>دي واجهة مبدئية فقط؛ التسجيل الحقيقي لسه مش متصل بقاعدة البيانات.</p>
     <a href="index.html">العودة للصفحة الرئيسية</a>
   </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://asfmnztojcdotxyqfpzd.supabase.co/rest/v1/";
+const SUPABASE_KEY = "sb_publishable_irqLABJB7q61DtwmEtdtcw_Ujcip94i";
+
+const db = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+</script>
 </body>
 </html>
