@@ -1,307 +1,80 @@
-from pathlib import Path
-
-html = r'''<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#087f5b">
-  <title>قِمّة 📚 | حساب الطالب</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8f4">
+  <meta name="description" content="سجّل دخولك إلى قِمّة أو أنشئ حساباً جديداً وابدأ رحلتك الدراسية.">
+  <title>حسابك | قِمّة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --green:#087f5b;--green2:#0ba875;--ink:#17352b;--muted:#718078;
-      --line:#e2ebe5;--soft:#f2faf5;--white:#fff;--shadow:0 24px 70px #123d2b18;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;min-height:100vh;padding:24px;display:grid;place-items:center;
-      font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;color:var(--ink);
-      background:radial-gradient(circle at 12% 12%,#c7f4d8 0,transparent 29%),
-                 radial-gradient(circle at 88% 82%,#d8eaff 0,transparent 28%),
-                 linear-gradient(135deg,#f3fbf6,#f7f9fc);
-      overflow-x:hidden;
-    }
-    .glow{position:fixed;width:260px;height:260px;border-radius:50%;filter:blur(55px);opacity:.22;pointer-events:none;animation:float 9s ease-in-out infinite alternate}
-    .glow.one{background:#23c483;top:-100px;right:-60px}.glow.two{background:#5b9dff;bottom:-120px;left:-60px;animation-delay:-3s}
-    .layout{width:100%;max-width:1020px;display:grid;grid-template-columns:1fr 1fr;align-items:stretch;gap:22px;position:relative;z-index:1}
-    .welcome{
-      padding:38px;border-radius:30px;color:white;position:relative;overflow:hidden;
-      background:linear-gradient(145deg,#07583f,#087f5b 55%,#11a879);
-      box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:space-between;min-height:600px;
-    }
-    .welcome:before,.welcome:after{content:"";position:absolute;border:1px solid #ffffff25;border-radius:50%;width:310px;height:310px;left:-110px;bottom:-115px}
-    .welcome:after{width:210px;height:210px;left:-60px;bottom:-65px}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:900;font-size:22px}
-    .brand-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:16px;background:#ffffff1c;font-size:27px}
-    .eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid #ffffff35;background:#ffffff12;padding:8px 12px;border-radius:999px;font-size:13px;width:max-content}
-    .dot{width:8px;height:8px;background:#6ef0b2;border-radius:50%;box-shadow:0 0 0 5px #6ef0b225}
-    .hero h1{font-size:clamp(30px,4vw,46px);line-height:1.35;margin:18px 0 14px;letter-spacing:-1px}
-    .hero p{font-size:16px;line-height:1.9;color:#e1fff0;margin:0;max-width:390px}
-    .feature-list{display:grid;gap:13px;margin-top:28px}
-    .feature{display:flex;align-items:center;gap:12px;color:#f2fff7;font-size:14px}
-    .feature-icon{width:35px;height:35px;display:grid;place-items:center;border-radius:12px;background:#ffffff18;font-size:17px}
-    .quote{border-top:1px solid #ffffff30;padding-top:20px;color:#e0ffed;font-size:13px;line-height:1.8;position:relative;z-index:1}
-    .card{background:#ffffffed;border:1px solid #ffffffd9;border-radius:30px;padding:34px;box-shadow:var(--shadow);backdrop-filter:blur(12px);min-height:600px}
-    .mobile-brand{display:none}
-    .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:25px}
-    .card h2{margin:0 0 7px;font-size:26px;letter-spacing:-.5px}
-    .card-top p{margin:0;color:var(--muted);font-size:14px;line-height:1.7}
-    .secure{font-size:12px;color:var(--green);background:#e7f8ee;border-radius:999px;padding:8px 10px;white-space:nowrap}
-    .tabs{display:grid;grid-template-columns:1fr 1fr;padding:5px;background:#f0f5f1;border-radius:15px;gap:5px;margin-bottom:23px}
-    .tab{border:0;background:transparent;padding:12px 8px;border-radius:11px;color:#66776d;font-weight:750;font-size:14px;cursor:pointer;transition:.2s}
-    .tab.active{background:white;color:var(--green);box-shadow:0 3px 12px #153d2b12}
-    .field{margin-bottom:16px}
-    label{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;font-weight:750;font-size:13px}
-    .label-note{font-size:11px;color:#8a9890;font-weight:500}
-    .input-wrap{position:relative}
-    input{width:100%;border:1px solid var(--line);background:#fbfdfb;border-radius:13px;padding:14px 15px;font-size:15px;color:var(--ink);outline:none;transition:border .2s,box-shadow .2s;font-family:inherit}
-    input:focus{border-color:#24a879;box-shadow:0 0 0 4px #0ba87517;background:white}
-    input::placeholder{color:#a4b0a8}
-    .password-input{padding-left:75px}
-    .show-pass{position:absolute;left:9px;top:50%;transform:translateY(-50%);border:0;background:#eef7f0;color:var(--green);font-size:12px;font-weight:750;border-radius:8px;padding:7px 9px;cursor:pointer}
-    .strength{display:none;margin-top:8px}
-    .strength.show{display:block}
-    .strength-track{height:5px;background:#e8eee9;border-radius:9px;overflow:hidden}
-    .strength-fill{height:100%;width:0;background:#e05252;transition:width .25s,background .25s;border-radius:9px}
-    .strength-caption{font-size:11px;color:var(--muted);margin-top:6px}
-    .forgot{display:block;text-align:left;margin-top:-5px;margin-bottom:18px;font-size:12px;color:var(--green);font-weight:700;text-decoration:none;cursor:pointer}
-    .primary{width:100%;border:0;border-radius:14px;padding:15px;background:linear-gradient(100deg,var(--green),var(--green2));color:white;font-size:15px;font-weight:850;cursor:pointer;box-shadow:0 9px 20px #087f5b24;transition:transform .18s,box-shadow .18s}
-    .primary:hover{transform:translateY(-2px);box-shadow:0 12px 24px #087f5b32}
-    .primary:active{transform:translateY(0)}
-    .primary:disabled{opacity:.65;cursor:wait;transform:none}
-    .message{display:none;margin-top:15px;padding:12px 13px;border-radius:12px;font-size:13px;line-height:1.7;overflow-wrap:anywhere}
-    .message.show{display:block}
-    .message.error{background:#fff0f0;color:#a62b2b;border:1px solid #ffd7d7}
-    .message.success{background:#eafaf0;color:#176b45;border:1px solid #c9efd8}
-    .message.info{background:#edf5ff;color:#245d93;border:1px solid #d4e7ff}
-    .fineprint{display:flex;align-items:flex-start;gap:8px;color:#849087;font-size:11px;line-height:1.8;margin-top:18px}
-    .fineprint span{color:var(--green)}
-    .footer{text-align:center;font-size:12px;color:#91a097;margin-top:20px}
-    .footer strong{color:var(--green)}
-    .hidden{display:none!important}
-    @keyframes float{from{transform:translate(0,0)}to{transform:translate(18px,-22px)}}
-    @keyframes enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-    .card{animation:enter .5s ease both}.welcome{animation:enter .45s ease both}
-    @media(max-width:760px){
-      body{padding:15px}.layout{max-width:480px;grid-template-columns:1fr;gap:14px}
-      .welcome{display:none}.card{padding:25px 21px;border-radius:24px;min-height:auto}
-      .mobile-brand{display:flex;justify-content:center;align-items:center;gap:9px;color:var(--green);font-size:21px;font-weight:900;margin-bottom:20px}
-      .card h2{font-size:24px}.card-top{margin-bottom:20px}
-      .footer{margin-bottom:5px}
-    }
-    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+    :root{color-scheme:light;--ink:#18352f;--muted:#718079;--green:#16785e;--green-dark:#105d49;--mint:#e6f1e9;--line:#e5e9e2;--paper:#fff;--bg:#f7f8f4;--orange:#e9a14b;--shadow:0 24px 70px #1b35251a}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans Arabic","DM Sans",sans-serif}
+    button,input{font:inherit}button{cursor:pointer}a{color:inherit}.shell{min-height:100vh;display:grid;grid-template-columns:minmax(330px,.92fr) minmax(420px,1.08fr);max-width:1440px;margin:auto;padding:24px;gap:24px}
+    .story{position:relative;overflow:hidden;border-radius:28px;background:#143e34;color:#fff;padding:clamp(28px,5vw,64px);display:flex;flex-direction:column;justify-content:space-between;min-height:680px;isolation:isolate}
+    .story:before,.story:after{content:"";position:absolute;border:1px solid #ffffff20;border-radius:50%;z-index:-1}.story:before{width:560px;height:560px;left:-250px;top:-155px}.story:after{width:410px;height:410px;right:-245px;bottom:-90px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:19px}.brand-mark{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:#ffffff19;color:#c5efcf;font-size:24px}
+    .story-copy{max-width:510px}.eyebrow{color:#b3ddc0;font-size:13px;font-weight:600;letter-spacing:.02em}.story h1{font-size:clamp(38px,5vw,64px);line-height:1.17;margin:16px 0 20px;letter-spacing:-.04em}.story-copy>p{color:#d2e3d9;line-height:1.95;font-size:16px;max-width:430px;margin:0}
+    .quote{margin-top:36px;padding:18px 20px;border:1px solid #ffffff27;background:#ffffff0c;border-radius:18px;max-width:420px}.quote p{margin:0;color:#f1f5f1;line-height:1.8}.quote small{display:block;color:#b8d4c4;margin-top:12px}
+    .story-foot{display:flex;justify-content:space-between;align-items:center;color:#c4d8cd;font-size:12px}.dots{display:flex;gap:6px}.dots i{display:block;width:6px;height:6px;border-radius:99px;background:#ffffff70}.dots i:first-child{width:22px;background:#b5e2c1}
+    .form-side{display:grid;place-items:center;padding:22px}.card{width:min(100%,465px);padding:clamp(26px,4vw,46px);background:var(--paper);border:1px solid #e9ece6;border-radius:26px;box-shadow:var(--shadow)}.mobile-brand{display:none;align-items:center;gap:9px;font-weight:700;margin-bottom:28px}.mobile-brand .brand-mark{background:var(--mint);color:var(--green)}
+    .form-head h2{font-size:30px;margin:0 0 8px;letter-spacing:-.03em}.form-head p{margin:0;color:var(--muted);line-height:1.8;font-size:14px}
+    .tabs{display:grid;grid-template-columns:1fr 1fr;padding:5px;background:#f3f5f1;border-radius:13px;margin:28px 0 24px;gap:4px}.tab{border:0;background:transparent;color:#65736b;padding:11px 8px;border-radius:9px;font-weight:600;font-size:14px}.tab[aria-selected="true"]{color:var(--ink);background:white;box-shadow:0 1px 5px #162e2017}
+    .field{margin:0 0 17px}.field label{display:block;font-size:13px;font-weight:600;margin-bottom:8px}.input-wrap{position:relative}.field input{width:100%;height:49px;padding:0 14px;border:1px solid #dfe5dd;border-radius:11px;background:#fff;color:var(--ink);outline:none;transition:border-color .18s,box-shadow .18s}.field input::placeholder{color:#a4aea7}.field input:focus{border-color:#49a182;box-shadow:0 0 0 3px #48a17f1b}.field input[aria-invalid="true"]{border-color:#c64b43}
+    .password-input{padding-left:66px!important}.show-pass{position:absolute;left:10px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:#617168;font-size:12px;padding:6px}.forgot{border:0;background:none;padding:2px 0;color:var(--green);font-size:12px;font-weight:600}.field-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}.field-row label{margin:0}.hint{color:var(--muted);font-size:11px;margin:7px 2px 0;line-height:1.6}.submit{width:100%;height:50px;border:0;border-radius:11px;color:white;background:var(--green);font-weight:700;box-shadow:0 8px 18px #16785e26;transition:.2s}.submit:hover{background:var(--green-dark);transform:translateY(-1px)}.submit:disabled{opacity:.7;cursor:wait;transform:none}
+    .message{display:none;margin:16px 0 0;padding:12px 14px;border-radius:11px;font-size:13px;line-height:1.7}.message[data-kind="success"]{display:block;background:#eaf5ed;color:#236346}.message[data-kind="error"]{display:block;background:#fff0ee;color:#9a3830}.message[data-kind="info"]{display:block;background:#edf4f2;color:#315b50}
+    .fineprint{margin:20px 0 0;text-align:center;font-size:11px;color:#88938c;line-height:1.7}.fineprint a{color:var(--green);text-decoration:none}.hidden{display:none!important}:focus-visible{outline:3px solid #e9a14b!important;outline-offset:3px}
+    @media(max-width:850px){.shell{grid-template-columns:1fr;max-width:600px;padding:14px}.story{display:none}.form-side{padding:10px 0}.card{box-shadow:0 12px 42px #1b352514}.mobile-brand{display:flex}}
+    @media(max-width:420px){.shell{padding:8px}.form-side{padding:4px 0}.card{padding:25px 21px;border-radius:20px}.form-head h2{font-size:27px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
 <body>
-  <div class="glow one"></div><div class="glow two"></div>
-  <main class="layout">
-    <section class="welcome" aria-label="مميزات قمة">
-      <div class="brand"><div class="brand-icon">📚</div><span>قِمّة</span></div>
-      <div class="hero">
-        <div class="eyebrow"><span class="dot"></span> خطوتك الأولى نحو التفوق</div>
-        <h1>كل يوم تتعلم فيه،<br>تقترب من القِمّة.</h1>
-        <p>مكانك لتنظيم مذاكرتك، متابعة تقدمك، والاستعداد لامتحاناتك بثقة وهدوء.</p>
-        <div class="feature-list">
-          <div class="feature"><span class="feature-icon">🎯</span><span>أهداف واضحة وخطة مذاكرة منظمة</span></div>
-          <div class="feature"><span class="feature-icon">⏱️</span><span>جلسات تركيز تساعدك تنجز أكتر</span></div>
-          <div class="feature"><span class="feature-icon">🏆</span><span>تابع تقدمك واحتفل بكل إنجاز</span></div>
-        </div>
+  <main class="shell">
+    <aside class="story" aria-label="عن قِمّة">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">ق</span><span>قِمّة <span aria-hidden="true">✦</span></span></div>
+      <div class="story-copy">
+        <span class="eyebrow">خطوة صغيرة كل يوم</span>
+        <h1>رحلتك نحو<br>قِمّتك تبدأ هنا.</h1>
+        <p>مكان هادئ ترتّب فيه أهدافك الدراسية، وتتابع تقدّمك، وتحوّل وقت المذاكرة إلى إنجازات حقيقية.</p>
+        <div class="quote"><p>«النجاح هو مجموع الجهود الصغيرة التي تتكرر كل يوم.»</p><small>ابدأ اليوم، وتقدّم على مهلك.</small></div>
       </div>
-      <div class="quote">«النجاح مش خطوة واحدة كبيرة؛ النجاح خطوات صغيرة بتكررها كل يوم.»</div>
-    </section>
-
-    <section class="card">
-      <div class="mobile-brand"><span>📚</span><span>قِمّة</span></div>
-      <div class="card-top">
-        <div><h2 id="heading">أهلًا بعودتك 👋</h2><p id="subheading">سجّل دخولك وكمّل طريقك نحو هدفك.</p></div>
-        <span class="secure">🔒 آمن</span>
+      <div class="story-foot"><span>مساحتك للدراسة بتركيز</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+    </aside>
+    <section class="form-side" aria-label="تسجيل الحساب">
+      <div class="card">
+        <div class="mobile-brand"><span class="brand-mark" aria-hidden="true">ق</span><span>قِمّة</span></div>
+        <header class="form-head"><h2 id="form-title">أهلاً بعودتك</h2><p id="form-subtitle">سجّل دخولك لتكمل من حيث توقفت.</p></header>
+        <div class="tabs" role="tablist" aria-label="نوع الحساب">
+          <button class="tab" id="login-tab" type="button" role="tab" aria-selected="true" aria-controls="auth-form">تسجيل الدخول</button>
+          <button class="tab" id="signup-tab" type="button" role="tab" aria-selected="false" aria-controls="auth-form">حساب جديد</button>
+        </div>
+        <section class="hidden" id="recovery-panel" aria-labelledby="recovery-title">
+          <h2 id="recovery-title">تعيين كلمة مرور جديدة</h2>
+          <p class="hint">اختر كلمة مرور جديدة لحسابك.</p>
+          <form id="recovery-form" novalidate>
+            <div class="field"><label for="new-password">كلمة المرور الجديدة</label><div class="input-wrap"><input class="password-input" id="new-password" type="password" minlength="8" maxlength="128" autocomplete="new-password" required><button class="show-pass" type="button" data-toggle-password="new-password" aria-label="إظهار كلمة المرور">إظهار</button></div></div>
+            <div class="field"><label for="repeat-password">تأكيد كلمة المرور</label><div class="input-wrap"><input class="password-input" id="repeat-password" type="password" minlength="8" maxlength="128" autocomplete="new-password" required><button class="show-pass" type="button" data-toggle-password="repeat-password" aria-label="إظهار كلمة المرور">إظهار</button></div></div>
+            <button class="submit" id="save-password" type="submit">حفظ كلمة المرور</button>
+          </form>
+        </section>        <form id="auth-form" novalidate>
+          <div class="field hidden" id="name-field"><label for="name">الاسم</label><input id="name" name="name" type="text" autocomplete="name" maxlength="80" placeholder="الاسم الذي تحب أن نناديك به"></div>
+          <div class="field"><label for="email">البريد الإلكتروني</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required placeholder="name@example.com" dir="ltr" aria-describedby="email-hint"><p class="hint" id="email-hint">استخدم البريد المرتبط بحسابك.</p></div>
+          <div class="field" id="password-field"><div class="field-row"><label for="password">كلمة المرور</label><button class="forgot" id="forgot-button" type="button">نسيت كلمة المرور؟</button></div><div class="input-wrap"><input class="password-input" id="password" name="password" type="password" autocomplete="current-password" minlength="6" maxlength="128" required placeholder="أدخل كلمة المرور" dir="ltr"><button class="show-pass" type="button" data-toggle-password="password" aria-label="إظهار كلمة المرور">إظهار</button></div><p class="hint hidden" id="password-hint">استخدم 8 أحرف على الأقل، ويفضّل الجمع بين الحروف والأرقام.</p></div>
+          <div class="field hidden" id="confirm-field"><label for="confirm-password">تأكيد كلمة المرور</label><div class="input-wrap"><input class="password-input" id="confirm-password" name="confirm-password" type="password" autocomplete="new-password" maxlength="128" placeholder="أعد كتابة كلمة المرور" dir="ltr"><button class="show-pass" type="button" data-toggle-password="confirm-password" aria-label="إظهار كلمة المرور">إظهار</button></div></div>
+          <button class="submit" id="submit-button" type="submit">تسجيل الدخول</button>
+          <div class="message" id="message" role="status" aria-live="polite"></div>
+        </form>
+        <p class="fineprint">بالمتابعة، أنت توافق على استخدام قِمّة بطريقة مسؤولة. <br>حسابك محمي عبر <a href="https://supabase.com/security" target="_blank" rel="noopener noreferrer">Supabase Auth</a>.</p>
       </div>
-      <div class="tabs" role="tablist" aria-label="نوع الحساب">
-        <button type="button" class="tab active" id="loginTab" role="tab" aria-selected="true">تسجيل الدخول</button>
-        <button type="button" class="tab" id="signupTab" role="tab" aria-selected="false">حساب جديد</button>
-      </div>
-
-      <form id="authForm" novalidate>
-        <div class="field hidden" id="nameField">
-          <label for="name">اسم الطالب <span class="label-note">الاسم اللي هنناديك بيه</span></label>
-          <input id="name" type="text" placeholder="اكتب اسمك" autocomplete="name" maxlength="70">
-        </div>
-        <div class="field">
-          <label for="email">البريد الإلكتروني</label>
-          <input id="email" type="email" placeholder="name@example.com" autocomplete="email" inputmode="email" required>
-        </div>
-        <div class="field">
-          <label for="password">كلمة المرور <span class="label-note">٦ أحرف على الأقل</span></label>
-          <div class="input-wrap">
-            <input class="password-input" id="password" type="password" placeholder="اكتب كلمة المرور" autocomplete="current-password" minlength="6" required>
-            <button type="button" class="show-pass" id="togglePassword">إظهار</button>
-          </div>
-          <div class="strength" id="strength">
-            <div class="strength-track"><div class="strength-fill" id="strengthFill"></div></div>
-            <div class="strength-caption" id="strengthCaption">قوة كلمة المرور</div>
-          </div>
-        </div>
-        <div class="field hidden" id="confirmField">
-          <label for="confirmPassword">تأكيد كلمة المرور</label>
-          <input id="confirmPassword" type="password" placeholder="اكتب كلمة المرور مرة ثانية" autocomplete="new-password" minlength="6">
-        </div>
-        <a class="forgot" href="#" id="forgotLink">نسيت كلمة المرور؟</a>
-        <button class="primary" id="submitBtn" type="submit">تسجيل الدخول ←</button>
-        <div class="message" id="message" role="status" aria-live="polite"></div>
-      </form>
-      <div class="fineprint"><span>✓</span><div>بياناتك مخصصة لحسابك. لا تشارك كلمة المرور أو مفاتيح الوصول مع أي شخص.</div></div>
-      <div class="footer">بداية جديدة، إنجاز جديد — <strong>قِمّة 📚</strong></div>
     </section>
   </main>
-
-  <script type="module">
-    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-
-    // ضع رابط مشروع Supabase والمفتاح العام (publishable/anon) هنا.
-    // لا تستخدم أبدًا service_role أو أي مفتاح سري في صفحة المتصفح.
-    const SUPABASE_URL = "PUT_YOUR_SUPABASE_PROJECT_URL_HERE";
-    const SUPABASE_KEY = "PUT_YOUR_SUPABASE_PUBLIC_KEY_HERE";
-
-    const $ = (id) => document.getElementById(id);
-    const form = $("authForm"), loginTab = $("loginTab"), signupTab = $("signupTab");
-    const nameField = $("nameField"), confirmField = $("confirmField");
-    const nameInput = $("name"), password = $("password"), confirmPassword = $("confirmPassword");
-    const submitBtn = $("submitBtn"), message = $("message"), forgotLink = $("forgotLink");
-    let mode = "login";
-
-    const configured = !SUPABASE_URL.includes("PUT_YOUR_") &&
-      !SUPABASE_KEY.includes("PUT_YOUR_") &&
-      /^https:\/\/.+/.test(SUPABASE_URL);
-    const supabase = configured ? createClient(SUPABASE_URL, SUPABASE_KEY) : null;
-
-    function showMessage(text, type = "info") {
-      message.textContent = text;
-      message.className = "message show " + type;
-    }
-    function clearMessage() { message.textContent = ""; message.className = "message"; }
-
-    function setMode(next) {
-      mode = next;
-      const signup = mode === "signup";
-      loginTab.classList.toggle("active", !signup);
-      signupTab.classList.toggle("active", signup);
-      loginTab.setAttribute("aria-selected", String(!signup));
-      signupTab.setAttribute("aria-selected", String(signup));
-      nameField.classList.toggle("hidden", !signup);
-      confirmField.classList.toggle("hidden", !signup);
-      $("heading").textContent = signup ? "ابدأ رحلتك 🚀" : "أهلًا بعودتك 👋";
-      $("subheading").textContent = signup
-        ? "أنشئ حسابك وابدأ تنظيم مذاكرتك."
-        : "سجّل دخولك وكمّل طريقك نحو هدفك.";
-      submitBtn.textContent = signup ? "إنشاء حسابي ←" : "تسجيل الدخول ←";
-      password.autocomplete = signup ? "new-password" : "current-password";
-      $("strength").classList.toggle("show", signup && password.value.length > 0);
-      forgotLink.classList.toggle("hidden", signup);
-      nameInput.required = signup;
-      confirmPassword.required = signup;
-      clearMessage();
-    }
-    loginTab.addEventListener("click", () => setMode("login"));
-    signupTab.addEventListener("click", () => setMode("signup"));
-
-    $("togglePassword").addEventListener("click", () => {
-      const visible = password.type === "password";
-      password.type = visible ? "text" : "password";
-      $("togglePassword").textContent = visible ? "إخفاء" : "إظهار";
-    });
-
-    password.addEventListener("input", () => {
-      const value = password.value;
-      const signup = mode === "signup";
-      $("strength").classList.toggle("show", signup && value.length > 0);
-      let score = 0;
-      if (value.length >= 6) score++;
-      if (value.length >= 10) score++;
-      if (/[A-Z]/.test(value) && /[a-z]/.test(value)) score++;
-      if (/\d/.test(value)) score++;
-      if (/[^A-Za-z0-9]/.test(value)) score++;
-      const percent = Math.min(100, score * 20);
-      $("strengthFill").style.width = percent + "%";
-      $("strengthFill").style.background = score <= 2 ? "#e05252" : score <= 3 ? "#e5a126" : "#0ba875";
-      $("strengthCaption").textContent = value.length < 6 ? "ضعيفة — استخدم ٦ أحرف على الأقل" : score <= 2 ? "مقبولة — جرّب إضافة أرقام أو رموز" : score <= 3 ? "جيدة" : "قوية جدًا";
-    });
-
-    forgotLink.addEventListener("click", async (event) => {
-      event.preventDefault();
-      clearMessage();
-      if (!configured) {
-        showMessage("قبل استخدام استعادة كلمة المرور، أضف بيانات مشروع Supabase في الكود.", "info");
-        return;
-      }
-      const email = $("email").value.trim();
-      if (!email) {
-        showMessage("اكتب بريدك الإلكتروني أولًا، وبعدها اضغط «نسيت كلمة المرور؟».", "info");
-        $("email").focus();
-        return;
-      }
-      try {
-        const { error } = await supabase.auth.resetPasswordForEmail(email, {
-          redirectTo: window.location.origin + window.location.pathname
-        });
-        if (error) throw error;
-        showMessage("لو البريد مسجّل، هتوصلك رسالة لإعادة تعيين كلمة المرور. راجع إعدادات البريد في Supabase.", "success");
-      } catch (error) {
-        showMessage("تعذّر إرسال الرسالة: " + (error?.message || "حاول مرة أخرى."), "error");
-      }
-    });
-
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      clearMessage();
-      const email = $("email").value.trim();
-      const pass = password.value;
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showMessage("اكتب بريدًا إلكترونيًا صحيحًا.", "error"); $("email").focus(); return;
-      }
-      if (pass.length < 6) {
-        showMessage("كلمة المرور لازم تكون ٦ أحرف على الأقل.", "error"); password.focus(); return;
-      }
-      if (mode === "signup") {
-        if (!nameInput.value.trim()) {
-          showMessage("اكتب اسمك الأول.", "error"); nameInput.focus(); return;
-        }
-        if (pass !== confirmPassword.value) {
-          showMessage("كلمتا المرور مش متطابقتين. راجعهما وحاول تاني.", "error"); confirmPassword.focus(); return;
-        }
-      }
-      if (!supabase) {
-        showMessage("الواجهة جاهزة، لكن يلزم إضافة رابط مشروع Supabase والمفتاح العام لتفعيل الحسابات.", "info");
-        return;
-      }
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = "لحظة واحدة...";
-      try {
-        if (mode === "signup") {
-          const { data, error } = await supabase.auth.signUp({
-            email, password: pass,
-            options: { data: { full_name: nameInput.value.trim() } }
-          });
-          if (error) throw error;
-          if (data.session) {
-            showMessage("تم إنشاء حسابك بنجاح! هننقلك للوحة الطالب...", "success");
-            setTimeout(() => { window.location.href = "index.html"; }, 900);
-          } else {
-            showMessage("تم إرسال طلب إنشاء الحساب. افتح بريدك واضغط رابط التأكيد إذا طُلب منك، وبعدها سجّل الدخول.", "success");
-          }
-        } else {
-          const { error } = await supabase.auth.signInWithPassword({ email, password: pass });
-          if (error) throw error;
-          showMessage("تم تسجيل الدخول بنجاح! جارٍ فتح لوحة الطالب...", "success");
-          setTimeout(() => { window.location.href = "index.html"; }, 650);
-        }
-      } catch (error) {
-        showMessage("تعذّر إتمام العملية: " + (error?.message || "حدث خطأ غير معروف."), "error");
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = mode === "signup" ? "إنشاء حسابي ←" : "تسجيل الدخول ←";
-      }
-    });
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="account.js" defer></script>
 </body>
 </html>
+
+
+
