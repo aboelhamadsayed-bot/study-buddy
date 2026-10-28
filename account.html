@@ -1,112 +1,174 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>إنشاء حساب | قِمّة</title>
+  <title>قِمّة | تسجيل الدخول</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f0f4ff;
-      display: grid;
-      place-items: center;
-      min-height: 100vh;
-      margin: 0;
+    *{box-sizing:border-box}
+    body{
+      margin:0;min-height:100vh;display:grid;place-items:center;
+      padding:20px;font-family:Arial,sans-serif;
+      background:linear-gradient(135deg,#e9f8ef,#f4f7fb);
+      color:#17352a
     }
-    .card {
-      background: white;
-      padding: 28px;
-      border-radius: 16px;
-      width: min(85%, 360px);
-      box-shadow: 0 5px 24px #0001;
+    .card{
+      width:100%;max-width:430px;background:white;padding:30px;
+      border-radius:24px;box-shadow:0 15px 45px #17352a16
     }
-    h1, p { text-align: center; }
-    input, button {
-      box-sizing: border-box;
-      width: 100%;
-      padding: 13px;
-      margin: 8px 0;
-      border-radius: 8px;
-      font-size: 16px;
+    .logo{text-align:center;font-size:34px;font-weight:bold;color:#168653}
+    .subtitle{text-align:center;color:#718078;margin:10px 0 25px}
+    .tabs{display:flex;gap:8px;margin-bottom:22px}
+    .tabs button{
+      flex:1;padding:12px;border:0;border-radius:12px;
+      background:#edf4ef;color:#315743;font-size:15px;cursor:pointer
     }
-    input { border: 1px solid #ccc; }
-    button {
-      background: #3459db;
-      color: white;
-      border: 0;
-      cursor: pointer;
+    .tabs button.active{background:#168653;color:white}
+    label{display:block;margin:15px 0 7px;font-weight:bold}
+    input{
+      width:100%;padding:14px;border:1px solid #dce6df;
+      border-radius:12px;font-size:16px;outline:none
     }
-    #message { overflow-wrap: anywhere; }
+    input:focus{border-color:#168653}
+    .submit{
+      width:100%;padding:15px;margin-top:22px;border:0;
+      border-radius:12px;background:#168653;color:white;
+      font-size:17px;font-weight:bold;cursor:pointer
+    }
+    .submit:disabled{opacity:.6}
+    #message{margin-top:16px;text-align:center;line-height:1.7}
+    .hint{font-size:13px;color:#718078;text-align:center;margin-top:18px}
   </style>
 </head>
 <body>
   <main class="card">
-    <h1>قِمّة 📚</h1>
-    <p>أنشئ حسابك وابدأ رحلة التفوق</p>
+    <div class="logo">قِمّة 📚</div>
+    <p class="subtitle">ابدأ رحلتك نحو التفوق الدراسي</p>
 
-    <form id="signup-form">
-      <input id="name" type="text" placeholder="اسمك" required>
-      <input id="email" type="email" placeholder="البريد الإلكتروني" required>
-      <input id="password" type="password"
-        placeholder="كلمة المرور (6 أحرف على الأقل)"
-        minlength="6" required>
-      <button id="signup" type="submit">إنشاء حساب</button>
+    <div class="tabs">
+      <button type="button" id="loginTab" class="active">تسجيل الدخول</button>
+      <button type="button" id="signupTab">إنشاء حساب</button>
+    </div>
+
+    <form id="authForm">
+      <label for="name" id="nameLabel" hidden>اسم الطالب</label>
+      <input id="name" type="text" placeholder="اسم الطالب"
+        autocomplete="name" hidden>
+
+      <label for="email">البريد الإلكتروني</label>
+      <input id="email" type="email" placeholder="example@email.com"
+        autocomplete="email" required>
+
+      <label for="password">كلمة المرور</label>
+      <input id="password" type="password" placeholder="أدخل كلمة المرور"
+        autocomplete="current-password" minlength="6" required>
+
+      <button class="submit" id="submitBtn" type="submit">
+        تسجيل الدخول
+      </button>
     </form>
 
-    <p id="message" role="status"></p>
+    <div id="message" role="status"></div>
+    <p class="hint">حافظ على بيانات حسابك ولا تشارك كلمة المرور مع أحد.</p>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
-    // ضع بيانات مشروعك الحقيقية بين علامتي التنصيص
-    const SUPABASE_URL = "https://asfmnztojcdotxyqfpzd.supabase.co/rest/v1/";
-    const SUPABASE_KEY = "sb_publishable_irqLABJB7q61DtwmEtdtcw_Ujcip94i";
+  <script type="module">
+    import { createClient } from
+      "https://esm.sh/@supabase/supabase-js@2";
 
+    // ضع بيانات مشروعك من Supabase هنا
+    const SUPABASE_URL = "PUT_YOUR_SUPABASE_PROJECT_URL_HERE";
+    const SUPABASE_KEY = "PUT_YOUR_SUPABASE_PUBLIC_KEY_HERE";
+
+    const form = document.getElementById("authForm");
+    const loginTab = document.getElementById("loginTab");
+    const signupTab = document.getElementById("signupTab");
+    const nameInput = document.getElementById("name");
+    const nameLabel = document.getElementById("nameLabel");
+    const passwordInput = document.getElementById("password");
+    const submitBtn = document.getElementById("submitBtn");
     const message = document.getElementById("message");
-    const button = document.getElementById("signup");
 
-    if (
-      SUPABASE_URL.includes("ضع_") ||
-      SUPABASE_KEY.includes("ضع_")
-    ) {
-      message.textContent = "أضف رابط مشروع Supabase والمفتاح أولًا.";
-      button.disabled = true;
-    } else {
-      const db = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-      );
+    let mode = "login";
 
-      document.getElementById("signup-form")
-        .addEventListener("submit", async (event) => {
-          event.preventDefault();
-          button.disabled = true;
-          message.textContent = "جارٍ إنشاء الحساب...";
+    const configured =
+      !SUPABASE_URL.includes("PUT_YOUR_") &&
+      !SUPABASE_KEY.includes("PUT_YOUR_");
 
-          try {
-            const name = document.getElementById("name").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const password = document.getElementById("password").value;
+    const supabase = configured
+      ? createClient(SUPABASE_URL, SUPABASE_KEY)
+      : null;
 
-            const { error } = await db.auth.signUp({
-              email,
-              password,
-              options: {
-                data: { display_name: name }
-              }
-            });
+    function setMode(nextMode) {
+      mode = nextMode;
+      const signup = mode === "signup";
 
-            if (error) throw error;
-
-            message.textContent =
-              "تم إرسال طلب إنشاء الحساب. افحص بريدك الإلكتروني لتأكيده إذا طُلب منك ذلك.";
-          } catch (error) {
-            message.textContent = "تعذر إنشاء الحساب: " + error.message;
-          } finally {
-            button.disabled = false;
-          }
-        });
+      loginTab.classList.toggle("active", !signup);
+      signupTab.classList.toggle("active", signup);
+      nameInput.hidden = !signup;
+      nameLabel.hidden = !signup;
+      nameInput.required = signup;
+      passwordInput.autocomplete =
+        signup ? "new-password" : "current-password";
+      submitBtn.textContent =
+        signup ? "إنشاء الحساب" : "تسجيل الدخول";
+      message.textContent = "";
     }
+
+    loginTab.addEventListener("click", () => setMode("login"));
+    signupTab.addEventListener("click", () => setMode("signup"));
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      message.textContent = "";
+
+      if (!supabase) {
+        message.textContent =
+          "يجب وضع رابط مشروع Supabase والمفتاح العام أولًا.";
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "جارٍ التنفيذ...";
+
+      const email = document.getElementById("email").value.trim();
+      const password = passwordInput.value;
+
+      try {
+        if (mode === "signup") {
+          const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: {
+              data: { full_name: nameInput.value.trim() }
+            }
+          });
+
+          if (error) throw error;
+
+          message.textContent = data.session
+            ? "تم إنشاء حسابك بنجاح!"
+            : "تم إنشاء الحساب. راجع بريدك الإلكتروني لتأكيده إذا طُلب منك ذلك.";
+        } else {
+          const { error } = await supabase.auth.signInWithPassword({
+            email,
+            password
+          });
+
+          if (error) throw error;
+
+          message.textContent = "تم تسجيل الدخول بنجاح! جارٍ الانتقال...";
+          window.location.href = "index.html";
+        }
+      } catch (error) {
+        message.textContent = "تعذر إتمام العملية: " + error.message;
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent =
+          mode === "signup" ? "إنشاء الحساب" : "تسجيل الدخول";
+      }
+    });
   </script>
 </body>
 </html>
