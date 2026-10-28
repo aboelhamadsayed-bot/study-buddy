@@ -50,7 +50,7 @@
     e.preventDefault();if(!user||!profile?.age_group)return say("community-status","سجّل الدخول وأكمل تحديد فئتك العمرية أولًا.",true);
     const button=$("community-submit"),body=$("community-post").value.trim(),displayName=$("community-name").value.trim();
     if(body.length<3||displayName.length<1)return say("community-status","اكتب اسمًا ظاهرًا ومشاركة قصيرة.",true);
-    if(/[\\w.+-]+@[\\w.-]+\\.[A-Za-z]{2,}|https?:\\/\\/|www\\.|(?:\\+?\\d[\\s()-]*){8,}/i.test(body))return say("community-status","احذف البريد أو رقم الهاتف أو الرابط من المشاركة لحماية خصوصيتك.",true);
+    if(/[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|https?:\/\/|www\.|(?:\+?\d[\s()-]*){8,}/i.test(body))return say("community-status","احذف البريد أو رقم الهاتف أو الرابط من المشاركة لحماية خصوصيتك.",true);
     button.disabled=true;
     const {error}=await db.from("student_posts").insert({author_id:user.id,age_group:profile.age_group,display_name:displayName.slice(0,40),body:body.slice(0,450)});
     button.disabled=false;if(error)return say("community-status","لم تُنشر المشاركة. لا تكتب بريدًا أو رقم هاتف أو رابطًا، ثم جرّب مرة أخرى.",true);
