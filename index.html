@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#16845b">
+  <title>رفيق المذاكرة والقرآن</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#16875b">
+</head>
+<body>
+  <header class="navbar">
+    <h2>📚 رفيق النجاح</h2>
+    <button id="themeBtn" aria-label="تغيير المظهر">🌙</button>
+  </header>
+
+  <main class="container">
+    <section class="welcome">
+      <p class="small">بسم الله الرحمن الرحيم</p>
+      <h1>مستقبلك يستحق تعبك ✨</h1>
+      <p>ذاكر بإخلاص، وخذ بالأسباب، واستعن بالله.</p>
+      <p class="dua">﴿ وَقُل رَّبِّ زِدْنِي عِلْمًا ﴾</p>
+    </section>
+
+    <section class="card timer-card">
+      <p id="mode">🎯 وقت المذاكرة</p>
+      <div id="timer" class="timer">25:00</div>
+      <div class="progress"><div id="progressBar"></div></div>
+      <div class="buttons">
+        <button id="startBtn" class="primary">ابدأ المذاكرة</button>
+        <button id="pauseBtn" class="secondary">إيقاف مؤقت</button>
+        <button id="resetBtn" class="secondary">إعادة</button>
+      </div>
+      <div class="settings">
+        <label>مدة المذاكرة بالدقائق
+          <input id="studyMinutes" type="number" min="1" max="180" value="25">
+        </label>
+        <label>مدة الراحة بالدقائق
+          <input id="breakMinutes" type="number" min="1" max="60" value="5">
+        </label>
+      </div>
+      <p id="message" aria-live="polite">ابدأ بأول جلسة، وسيصبح الإنجاز عادة بإذن الله.</p>
+    </section>
+
+    <section class="stats">
+      <div class="stat-box"><span>🏆</span><h3 id="sessions">0</h3><p>جلسات مكتملة</p></div>
+      <div class="stat-box"><span>⭐</span><h3 id="points">0</h3><p>نقاط الإنجاز</p></div>
+      <div class="stat-box"><span>⏳</span><h3 id="minutes">0</h3><p>دقائق مذاكرة</p></div>
+    </section>
+
+    <section class="card goal-card">
+      <h2>🎯 هدفك اليوم</h2>
+      <p>حدد عدد جلسات المذاكرة التي تريد إنجازها.</p>
+      <div class="goal-controls">
+        <input id="dailyGoal" type="number" min="1" max="30" value="4" aria-label="عدد الجلسات المستهدف">
+        <span>جلسات</span>
+      </div>
+      <div class="progress"><div id="goalBar"></div></div>
+      <p id="goalText">أنجز أول جلسة لتحقيق هدفك!</p>
+    </section>
+
+    <section class="card tasks-card">
+      <h2>📝 مهامي اليومية</h2>
+      <p>أضف مهامك، وحدد المادة، واكتب ملاحظات تساعدك.</p>
+      <form id="taskForm" class="task-form">
+        <input type="text" id="taskInput" placeholder="اسم المهمة" maxlength="120" required>
+        <select id="taskSubject" required>
+          <option value="عام">عام</option>
+          <option value="الرياضيات">الرياضيات</option>
+          <option value="الإنجليزي">الإنجليزي</option>
+          <option value="اللغة العربية">اللغة العربية</option>
+          <option value="العلوم">العلوم</option>
+          <option value="الدراسات">الدراسات</option>
+          <option value="البرمجة">البرمجة</option>
+          <option value="مهارة أخرى">مهارة أخرى</option>
+        </select>
+        <textarea id="taskNotes" placeholder="ملاحظات المهمة (اختياري)" rows="2" maxlength="500"></textarea>
+        <button type="submit" class="primary">+ إضافة المهمة</button>
+      </form>
+      <div class="task-summary">
+        <span>المكتمل: <strong id="completedTasks">0</strong></span>
+        <span>المتبقي: <strong id="remainingTasks">0</strong></span>
+      </div>
+      <div class="progress"><div id="tasksProgress"></div></div>
+      <p id="tasksMessage">ابدأ بإضافة أول مهمة ليك 💚</p>
+      <ul id="taskList" class="task-list"></ul>
+      <button type="button" id="clearCompleted" class="secondary full-width">حذف المهام المكتملة</button>
+    </section>
+
+    <section class="card">
+      <h2>📅 جدول المذاكرة الأسبوعي</h2>
+      <p>أضف المواد والأنشطة التي تريد تخصيص وقت لها.</p>
+      <form id="scheduleForm" class="task-form">
+        <select id="scheduleDay" required>
+          <option value="0">الأحد</option><option value="1">الاثنين</option>
+          <option value="2">الثلاثاء</option><option value="3">الأربعاء</option>
+          <option value="4">الخميس</option><option value="5">الجمعة</option>
+          <option value="6">السبت</option>
+        </select>
+        <input id="scheduleSubject" placeholder="المادة أو النشاط" required maxlength="100">
+        <input id="scheduleTime" type="time" required>
+        <button class="primary" type="submit">إضافة للجدول</button>
+      </form>
+      <h3 id="todayScheduleTitle">جدول اليوم</h3>
+      <ul id="scheduleList" class="task-list"></ul>
+    </section>
+
+    <section class="card">
+      <h2>📖 ورد القرآن اليومي</h2>
+      <p>حدد هدفًا يوميًا للقراءة وسجّل ما أنجزته اليوم.</p>
+      <label for="quranTarget">هدفي اليومي بالصفحات</label>
+      <input id="quranTarget" type="number" min="1" max="604" value="5">
+      <label for="quranRead">الصفحات التي قرأتها اليوم</label>
+      <input id="quranRead" type="number" min="0" max="604" value="0">
+      <div class="progress"><div id="quranProgress"></div></div>
+      <p id="quranMessage">ابدأ وردك اليومي 🌿</p>
+      <button id="saveQuran" class="primary" type="button">حفظ الورد</button>
+      <a class="quran-link" href="https://quran.com/ar" target="_blank" rel="noopener noreferrer">📖 افتح المصحف</a>
+    </section>
+
+    <section class="card">
+      <h2>🕌 مواقيت الصلاة</h2>
+      <p id="prayerLocation">الجيزة، مصر</p>
+      <p id="prayerDate">جارٍ تحميل مواقيت الصلاة...</p>
+      <div id="prayerTimes" class="prayer-grid"></div>
+      <p id="nextPrayer">جارٍ تحديد الصلاة القادمة...</p>
+      <button id="prayerNotify" type="button" class="primary">تفعيل تنبيهات الصلاة</button>
+      <p id="prayerMessage">تحتاج التنبيهات إلى إذن الإشعارات وبقاء الموقع مفتوحًا.</p>
+    </section>
+
+    <section class="card">
+      <h2>🚀 تعلّم مهارة</h2>
+      <p>اختر مهارة، وحدد وقت التدريب اليومي.</p>
+      <label for="skillName">المهارة</label>
+      <select id="skillName" class="field">
+        <option value="البرمجة">البرمجة</option><option value="الإنجليزي">الإنجليزي</option>
+        <option value="الألماني">الألماني</option><option value="المونتاج">المونتاج</option>
+        <option value="مهارة أخرى">مهارة أخرى</option>
+      </select>
+      <label for="skillMinutes">دقائق التدريب المستهدفة</label>
+      <input id="skillMinutes" type="number" min="5" max="300" value="30">
+      <label for="skillDone">دقائق أنجزتها اليوم</label>
+      <input id="skillDone" type="number" min="0" max="300" value="0">
+      <div class="progress"><div id="skillProgress"></div></div>
+      <p id="skillMessage">التقدم الصغير يوميًا يصنع فرقًا كبيرًا.</p>
+      <button id="saveSkill" type="button" class="primary">حفظ تقدم المهارة</button>
+    </section>
+
+    <section class="card">
+      <h2>🔥 سلسلة الالتزام والجوائز</h2>
+      <p>تُحتسب سلسلة الالتزام عند إكمال جلسة مذاكرة أو إنجاز مهمة في اليوم.</p>
+      <div class="stats">
+        <div class="stat-box"><span>🔥</span><h3 id="streakCount">0</h3><p>أيام متتالية</p></div>
+        <div class="stat-box"><span>🏅</span><h3 id="levelName">مبتدئ</h3><p>مستواك</p></div>
+        <div class="stat-box"><span>🎁</span><h3 id="rewardPoints">0</h3><p>نقاطك</p></div>
+      </div>
+      <p id="rewardMessage">ابدأ أول جلسة وافتح طريقك للمستوى التالي!</p>
+    </section>
+
+    <section class="card quran-card">
+      <div class="quran-icon">🕌</div>
+      <h2>استراحة مع القرآن الكريم</h2>
+      <p>اجعل للقرآن نصيبًا من يومك، واقرأ أو استمع في وقت مناسب لك.</p>
+      <a href="https://quran.com/ar" target="_blank" rel="noopener noreferrer" class="quran-link">📖 افتح القرآن الكريم</a>
+    </section>
+
+    <section class="card motivation">
+      <h2>💚 رسالة لك</h2>
+      <p id="quote">كل صفحة تذاكرها تقرّبك من هدفك.</p>
+      <button id="quoteBtn" class="secondary">رسالة تحفيزية جديدة</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>صغير من الإنجاز كل يوم يصنع فرقًا كبيرًا 🌱</p>
+  <p>صُنع بكل حب ❤️ بواسطة أحمد ابوالحمد</p>
+  <p>رفيق المذاكرة والقرآن © 2026</p>
+</footer>
+  <script src="script.js"></script>
+</body>
+</html>

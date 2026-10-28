@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+
+:root {
+  --bg: #f3f7f5; --card: #ffffff; --text: #18352b;
+  --muted: #66776f; --primary: #16845b; --primary-dark: #106746;
+  --soft: #e5f4eb; --border: #e0eae4;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; font-family: 'Cairo', sans-serif; background: var(--bg);
+  color: var(--text); transition: background .3s, color .3s;
+}
+body.dark {
+  --bg: #101a17; --card: #1b2923; --text: #e9f5ed;
+  --muted: #b0c2b7; --primary: #42bd88; --primary-dark: #239566;
+  --soft: #263c30; --border: #30463a;
+}
+.navbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 15px 7%; background: var(--card); border-bottom: 1px solid var(--border);
+}
+.navbar h2 { font-size: 20px; margin: 0; }
+button, input, select, textarea { font: inherit; }
+button {
+  cursor: pointer; border: none; border-radius: 12px; padding: 10px 16px;
+  transition: transform .2s, opacity .2s;
+}
+button:hover { transform: translateY(-2px); }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--primary); outline-offset: 2px;
+}
+#themeBtn { background: var(--soft); font-size: 20px; }
+.container { width: min(900px, 92%); margin: 30px auto; }
+.welcome { text-align: center; padding: 30px 12px; }
+.welcome h1 { font-size: clamp(25px, 5vw, 38px); margin: 8px 0; }
+.welcome p { color: var(--muted); }
+.welcome .small { color: var(--primary); font-weight: bold; }
+.dua { color: var(--primary) !important; font-size: 22px; font-weight: bold; margin-top: 20px; }
+.card, .stat-box {
+  background: var(--card); border: 1px solid var(--border); border-radius: 22px;
+  padding: 25px; margin-bottom: 20px; box-shadow: 0 8px 25px rgba(0,40,20,.04);
+}
+.timer-card { text-align: center; }
+#mode { color: var(--primary); font-weight: bold; }
+.timer { font-size: clamp(65px, 15vw, 105px); font-weight: 800; line-height: 1.5; font-variant-numeric: tabular-nums; }
+.progress { height: 10px; background: var(--soft); border-radius: 20px; overflow: hidden; margin: 15px 0; }
+#progressBar, #goalBar, #tasksProgress, #quranProgress, #skillProgress {
+  height: 100%; width: 0%; background: var(--primary); border-radius: inherit; transition: width .4s;
+}
+.buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 20px 0; }
+.primary { background: var(--primary); color: white; }
+.primary:hover { background: var(--primary-dark); }
+.secondary { background: var(--soft); color: var(--text); }
+.settings { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px; }
+.settings label { display: grid; gap: 8px; text-align: center; color: var(--muted); }
+input, select, textarea {
+  width: 100%; min-width: 0; padding: 10px; color: var(--text);
+  background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+}
+input { text-align: center; }
+textarea { resize: vertical; text-align: right; }
+#message, #goalText, #tasksMessage, #quranMessage, #skillMessage, #nextPrayer, #rewardMessage {
+  color: var(--primary); font-weight: bold; line-height: 1.8;
+}
+#message { min-height: 30px; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+.stat-box { text-align: center; margin: 0; padding: 18px 8px; }
+.stat-box span { font-size: 27px; }
+.stat-box h3 { margin: 5px 0; font-size: 24px; color: var(--primary); overflow-wrap: anywhere; }
+.stat-box p { margin: 0; font-size: 13px; color: var(--muted); }
+.goal-controls { display: flex; align-items: center; gap: 12px; max-width: 220px; }
+.goal-controls input { width: 85px; }
+.task-form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+.task-form textarea, .task-form button { grid-column: 1 / -1; }
+.task-summary { display: flex; justify-content: space-between; gap: 10px; color: var(--muted); font-size: 14px; }
+.task-list { list-style: none; padding: 0; margin: 15px 0; }
+.task-item {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 10px; padding: 12px;
+  margin-bottom: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 12px;
+}
+.task-item input[type="checkbox"] { width: 20px; min-width: 20px; height: 20px; accent-color: var(--primary); cursor: pointer; }
+.task-name { flex: 1; overflow-wrap: anywhere; }
+.task-item.done .task-name { text-decoration: line-through; opacity: .6; }
+.task-notes { flex-basis: 100%; color: var(--muted); font-size: 13px; white-space: pre-wrap; overflow-wrap: anywhere; padding-right: 30px; }
+.task-subject { display: inline-block; background: var(--soft); color: var(--primary); padding: 3px 8px; border-radius: 8px; font-size: 12px; }
+.delete-task { background: #fee9e7; color: #a92c25; padding: 7px 10px; }
+body.dark .delete-task { background: #492b2a; color: #ffb5ad; }
+.full-width { width: 100%; }
+.quran-card { text-align: center; background: var(--soft); }
+.quran-icon { font-size: 45px; }
+.quran-card p, .motivation p { color: var(--muted); line-height: 1.9; }
+.quran-link {
+  display: inline-block; text-decoration: none; color: white; background: var(--primary);
+  padding: 12px 22px; border-radius: 12px; font-weight: bold; margin-top: 10px;
+}
+.quran-link:hover { background: var(--primary-dark); }
+.motivation { text-align: center; }
+.prayer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 20px 0; }
+.prayer-item {
+  padding: 14px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg);
+  display: flex; justify-content: space-between; gap: 8px;
+}
+.prayer-item strong { color: var(--primary); }
+.prayer-item.next { border-color: var(--primary); background: var(--soft); }
+label { display: block; margin-top: 12px; color: var(--muted); }
+#skillName { margin: 8px 0 16px; }
+footer { text-align: center; padding: 15px; color: var(--muted); }
+@media (max-width: 520px) {
+  .container { width: 94%; margin-top: 15px; }
+  .card { padding: 18px; }
+  .stats { gap: 7px; }
+  .stat-box { padding: 12px 4px; }
+  .stat-box p { font-size: 11px; }
+  .stat-box h3 { font-size: 20px; }
+  .buttons button { padding: 9px 12px; }
+  .prayer-grid { grid-template-columns: 1fr; }
+  .task-form { grid-template-columns: 1fr; }
+  .task-form textarea, .task-form button { grid-column: auto; }
+}
