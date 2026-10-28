@@ -29,6 +29,22 @@
     @media(max-width:850px){.shell{grid-template-columns:1fr;max-width:600px;padding:14px}.story{display:none}.form-side{padding:10px 0}.card{box-shadow:0 12px 42px #1b352514}.mobile-brand{display:flex}}
     @media(max-width:420px){.shell{padding:8px}.form-side{padding:4px 0}.card{padding:25px 21px;border-radius:20px}.form-head h2{font-size:27px}}
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+  
+    .story{background:radial-gradient(circle at 16% 20%,#367e6240,transparent 35%),linear-gradient(145deg,#12372f,#164c3e 60%,#1b6049);animation:account-in .7s cubic-bezier(.2,.7,.25,1) both}
+    .story:before{animation:slow-drift 11s ease-in-out infinite alternate}
+    .story:after{animation:slow-drift 9s ease-in-out infinite alternate-reverse}
+    .brand-mark{box-shadow:0 8px 24px #0c241a35;transition:transform .25s,background .25s}
+    .brand:hover .brand-mark{transform:rotate(-7deg) scale(1.06);background:#ffffff28}
+    .eyebrow{display:inline-flex;padding:7px 11px;border:1px solid #ffffff21;border-radius:99px;background:#ffffff0b}
+    .card{animation:account-in .65s .08s cubic-bezier(.2,.7,.25,1) both}
+    .tab{transition:background .2s,color .2s,transform .2s}
+    .tab:hover{transform:translateY(-1px)}
+    .submit{background:linear-gradient(110deg,#16785e,#259774);transition:transform .2s,box-shadow .2s,filter .2s}
+    .submit:hover{filter:saturate(1.12);box-shadow:0 12px 24px #16785e35}
+    .message{animation:account-in .25s ease both}
+    @keyframes account-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes slow-drift{from{transform:translate3d(0,0,0)}to{transform:translate3d(12px,-10px,0)}}
+    @media(prefers-reduced-motion:reduce){.story,.story:before,.story:after,.card,.message{animation:none!important}.brand-mark,.tab,.submit{transition:none!important}}
   </style>
 </head>
 <body>
