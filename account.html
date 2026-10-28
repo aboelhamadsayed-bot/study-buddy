@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إنشاء حساب | قِمّة</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4ff;
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: white;
+      padding: 28px;
+      border-radius: 16px;
+      width: min(85%, 360px);
+      box-shadow: 0 5px 24px #0001;
+    }
+    h1, p { text-align: center; }
+    input, button {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 13px;
+      margin: 8px 0;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    input { border: 1px solid #ccc; }
+    button {
+      background: #3459db;
+      color: white;
+      border: 0;
+      cursor: pointer;
+    }
+    #message { overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>قِمّة 📚</h1>
+    <p>أنشئ حسابك وابدأ رحلة التفوق</p>
+
+    <form id="signup-form">
+      <input id="name" type="text" placeholder="اسمك" required>
+      <input id="email" type="email" placeholder="البريد الإلكتروني" required>
+      <input id="password" type="password"
+        placeholder="كلمة المرور (6 أحرف على الأقل)"
+        minlength="6" required>
+      <button id="signup" type="submit">إنشاء حساب</button>
+    </form>
+
+    <p id="message" role="status"></p>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // ضع بيانات مشروعك الحقيقية بين علامتي التنصيص
+    const SUPABASE_URL = "https://asfmnztojcdotxyqfpzd.supabase.co/rest/v1/";
+    const SUPABASE_KEY = "sb_publishable_irqLABJB7q61DtwmEtdtcw_Ujcip94i";
+
+    const message = document.getElementById("message");
+    const button = document.getElementById("signup");
+
+    if (
+      SUPABASE_URL.includes("ضع_") ||
+      SUPABASE_KEY.includes("ضع_")
+    ) {
+      message.textContent = "أضف رابط مشروع Supabase والمفتاح أولًا.";
+      button.disabled = true;
+    } else {
+      const db = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+      document.getElementById("signup-form")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+          button.disabled = true;
+          message.textContent = "جارٍ إنشاء الحساب...";
+
+          try {
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+
+            const { error } = await db.auth.signUp({
+              email,
+              password,
+              options: {
+                data: { display_name: name }
+              }
+            });
+
+            if (error) throw error;
+
+            message.textContent =
+              "تم إرسال طلب إنشاء الحساب. افحص بريدك الإلكتروني لتأكيده إذا طُلب منك ذلك.";
+          } catch (error) {
+            message.textContent = "تعذر إنشاء الحساب: " + error.message;
+          } finally {
+            button.disabled = false;
+          }
+        });
+    }
+  </script>
+</body>
+</html>
