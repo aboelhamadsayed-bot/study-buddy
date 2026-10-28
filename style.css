@@ -882,7 +882,6 @@ body.dark {
 .section-nav a span { color: var(--primary); }
 .section-nav a:hover,.section-nav a:focus-visible { color:var(--primary); background:var(--soft); }
 .container>.journey-steps { grid-column: 1/-1; }
-.container>.tool-launcher { grid-column: 1/-1; }
 .container>.card,.card,.stat-box,.step-card { border-color: var(--border); }
 .card { background: var(--card); box-shadow: 0 12px 30px #193a600d; }
 .welcome-dashboard {
@@ -1033,6 +1032,7 @@ body.dark {
   .scroll-top { left:18px; bottom:calc(91px + env(safe-area-inset-bottom)); width:46px; height:46px; }
   .more-sheet { max-height:calc(100dvh - 92px); }
 }
+@media (min-width:681px) { .container>.tool-launcher { grid-column: 1/-1; } }
 @media (prefers-reduced-motion:reduce) { .step-card,.assistant-float { transition:none; } }
 
 
