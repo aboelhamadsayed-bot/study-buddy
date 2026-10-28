@@ -682,10 +682,10 @@ body.dark {
   .dashboard-stats .stat-box h3 { font-size: 20px; }
   .dashboard-stats .stat-box p { font-size: 10px; line-height: 1.5; }
   .quick-access { padding: 17px; }
-  .quick-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; margin-top: 13px; }
-  .quick-tile { min-height: 116px; padding: 12px; border-radius: 15px; }
+  .quick-grid { grid-template-columns: minmax(0,1fr); gap: 8px; margin-top: 13px; }
+  .quick-tile { display: flex; align-items: center; gap: 11px; min-height: 72px; padding: 12px; border-radius: 15px; }
   .quick-tile strong { font-size: 12px; }
-  .quick-tile small { font-size: 10px; }
+  .quick-tile small { margin-inline-start: auto; max-width: 44%; font-size: 10px; text-align: end; }
   .quick-icon { width: 36px; height: 36px; border-radius: 12px; font-size: 20px; }
   .timer-card { padding: 18px 14px; }
   .timer { font-size: clamp(56px,17vw,76px); }
