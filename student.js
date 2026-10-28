@@ -56,6 +56,17 @@
     button.disabled=false;if(error)return say("community-status","لم تُنشر المشاركة. لا تكتب بريدًا أو رقم هاتف أو رابطًا، ثم جرّب مرة أخرى.",true);
     $("community-post").value="";say("community-status","وصلت مشاركتك إلى مجموعتك الدراسية.");await loadCommunity();
   });
+  const gradeData={prep:[["p1","أولى إعدادي"],["p2","تانية إعدادي"],["p3","تالتة إعدادي"]],secondary:[["s1","أولى ثانوي"],["s2","تانية ثانوي"],["s3","تالتة ثانوي"]]};
+  const prepSubjects=["اللغة العربية","اللغة الإنجليزية","الرياضيات","العلوم","الدراسات الاجتماعية","تكنولوجيا المعلومات"];
+  const generalSubjects=["اللغة العربية","اللغة الإنجليزية","الرياضيات","الفيزياء","الكيمياء","الأحياء","التاريخ","الجغرافيا","الفلسفة","اللغة الأجنبية الثانية","البرمجة والذكاء الاصطناعي"];
+  const bacCommon=["اللغة العربية","اللغة الأجنبية الأولى","التاريخ المصري"];
+  const bacTracks={medicine:["الرياضيات","الفيزياء"],engineering:["الكيمياء","البرمجة والذكاء الاصطناعي"],business:["المحاسبة","إدارة الأعمال"],arts:["علم النفس","اللغة الأجنبية الثانية"]};
+  const stageSelect=$("video-stage"),gradeSelect=$("video-grade"),systemSelect=$("video-system"),pathSelect=$("video-path"),subjectSelect=$("video-subject");
+  function setVideoOptions(select,values){select.replaceChildren(...values.map(([value,label])=>{const o=document.createElement("option");o.value=value;o.textContent=label;return o;}));}
+  function refreshVideoFinder(){const stage=stageSelect.value,grade=gradeSelect.value,system=systemSelect.value,path=pathSelect.value;const secondary=stage==="secondary",isBac2=secondary&&grade==="s2"&&system==="bac";$("video-system-wrap").classList.toggle("hidden",!secondary);$("video-path-wrap").classList.toggle("hidden",!isBac2);const subjects=stage==="prep"?prepSubjects:(isBac2?[...bacCommon,...(bacTracks[path]||[])]:generalSubjects);setVideoOptions(subjectSelect,subjects.map(s=>[s,s]));}
+  function refreshGrades(){setVideoOptions(gradeSelect,gradeData[stageSelect.value]);refreshVideoFinder();}
+  stageSelect.addEventListener("change",refreshGrades);gradeSelect.addEventListener("change",refreshVideoFinder);systemSelect.addEventListener("change",refreshVideoFinder);pathSelect.addEventListener("change",refreshVideoFinder);refreshGrades();
+  $("video-finder").addEventListener("submit",e=>{e.preventDefault();const stage=stageSelect.value,grade=gradeSelect.value,gradeLabel=gradeSelect.selectedOptions[0]?.textContent||"",system=systemSelect.value,path=pathSelect.selectedOptions[0]?.textContent||"",subject=subjectSelect.value;const systemLabel=stage==="secondary"?(system==="bac"?"البكالوريا المصرية":"الثانوية العامة"):"المرحلة الإعدادية";const search=[subject,gradeLabel,systemLabel,stage==="secondary"&&system==="bac"&&grade==="s2"?path:"","شرح منهج مصر"].filter(Boolean).join(" ");$("video-results-title").textContent="فيديوهات "+subject+" · "+gradeLabel+(stage==="secondary"?" · "+systemLabel:"");$("video-youtube").href="https://www.youtube.com/results?search_query="+encodeURIComponent(search);$("video-bac-books").classList.toggle("hidden",!(stage==="secondary"&&system==="bac"));$("video-results").hidden=false;});
   $("tutor-form").addEventListener("submit",async e=>{
     e.preventDefault();if(!db||!user||!session)return say("tutor-status","سجّل الدخول بحسابك عشان تستخدم المساعد.",true);
     if(!profile?.age_group)return say("tutor-status","حدد تاريخ ميلادك أولًا عشان نضبط الشرح على مرحلتك.",true);
