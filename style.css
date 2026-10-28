@@ -882,6 +882,7 @@ body.dark {
 .section-nav a span { color: var(--primary); }
 .section-nav a:hover,.section-nav a:focus-visible { color:var(--primary); background:var(--soft); }
 .container>.journey-steps { grid-column: 1/-1; }
+.container>.tool-launcher { grid-column: 1/-1; }
 .container>.card,.card,.stat-box,.step-card { border-color: var(--border); }
 .card { background: var(--card); box-shadow: 0 12px 30px #193a600d; }
 .welcome-dashboard {

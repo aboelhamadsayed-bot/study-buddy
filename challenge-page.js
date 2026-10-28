@@ -82,6 +82,8 @@
     const select = $("challenge-grade"), current = select.value;
     select.replaceChildren(...entries.map(([value, text]) => { const o = document.createElement("option"); o.value = value; o.textContent = text; return o; }));
     if (entries.some(([value]) => value === current)) select.value = current;
+    const showSystem = secondary && select.value === "s2";
+    $("challenge-system-wrap").classList.toggle("hidden", !showSystem);
   };
   $("challenge-stage").addEventListener("change", fillGrades); fillGrades(); showTotal();
   function showQuestion() {
@@ -109,7 +111,9 @@
   $("start-challenge").addEventListener("click", () => {
     const stage = $("challenge-stage").value, subject = $("challenge-subject").value, source = bank[stage][subject];
     questions = [...source].sort(() => Math.random() - 0.5).slice(0, 5); index = 0; roundPoints = 0; answeredCount = 0;
-    $("challenge-setup").hidden = true; $("challenge-summary").hidden = true; $("quiz-area").hidden = false; $("challenge-title").textContent = `${subjectNames[subject]} · ${$("challenge-grade").selectedOptions[0].textContent}`; showQuestion();
+    const secondYear = stage === "secondary" && $("challenge-grade").value === "s2";
+    const systemName = $("challenge-system").value === "bac" ? "البكالوريا المصرية" : "الثانوية العامة";
+    $("challenge-setup").hidden = true; $("challenge-summary").hidden = true; $("quiz-area").hidden = false; $("challenge-title").textContent = `${subjectNames[subject]} · ${$("challenge-grade").selectedOptions[0].textContent}${secondYear ? ` · ${systemName}` : ""}`; showQuestion();
   });
   $("next-question").addEventListener("click", () => { if (!locked) return; index++; showQuestion(); });
   $("end-challenge").addEventListener("click", () => { if (roundPoints || locked) finish(); else reset(); });
