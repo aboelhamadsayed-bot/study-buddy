@@ -73,7 +73,22 @@
       ]
     }
   };
-  let questions = [], index = 0, roundPoints = 0, answeredCount = 0, locked = false;
+  let questions = [], index = 0, roundPoints = 0, answeredCount = 0, locked = false, correctCount = 0;
+  const SUPABASE_URL = "https://asfmnztojcdotxyqfpzd.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_irqLABJB7q61DtwmEtdtcw_Ujcip94i";
+  let supabaseClient = null, signedInUser = null;
+  async function initAccount() {
+    try {
+      if (!window.supabase?.createClient) return;
+      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      const { data } = await supabaseClient.auth.getUser();
+      signedInUser = data?.user || null;
+      const scoreLabel = document.querySelector(".challenge-score small");
+      if (scoreLabel) scoreLabel.textContent = signedInUser ? "نقاطك على حسابك وجهازك" : "نقاطك على الجهاز ده";
+      if (signedInUser) $("challenge-status").textContent = "كل إجابة صحيحة = ١٠ نقاط. سجّل الدخول لحفظ نتائج الجولات على حسابك.";
+    } catch (_) {}
+  }
+  initAccount();
   const readPoints = () => { try { const n = Number(localStorage.getItem(STORE)); return Number.isFinite(n) && n > 0 ? Math.floor(n) : 0; } catch { return 0; } };
   const showTotal = () => { $("total-points").textContent = new Intl.NumberFormat("ar-EG").format(readPoints()); };
   const fillGrades = () => {
@@ -99,18 +114,31 @@
     [...$("answer-options").children].forEach((node, i) => { node.disabled = true; if (i === q[2]) node.classList.add("correct"); else if (i === choice) node.classList.add("incorrect"); });
     const feedback = $("answer-feedback"); feedback.hidden = false; const title = document.createElement("strong"), text = document.createElement("p");
     title.textContent = correct ? "إجابة مظبوطة! +١٠ نقاط" : "قريب! راجع الفكرة دي"; text.textContent = q[3]; feedback.classList.toggle("is-correct", correct); feedback.append(title, text);
-    if (correct) { roundPoints += 10; try { localStorage.setItem(STORE, String(readPoints() + 10)); } catch {} showTotal(); }
+    if (correct) { correctCount++; roundPoints += 10; try { localStorage.setItem(STORE, String(readPoints() + 10)); } catch {} showTotal(); }
     $("round-score").textContent = `${new Intl.NumberFormat("ar-EG").format(roundPoints)} نقطة`; $("next-question").disabled = false; $("next-question").textContent = index + 1 === questions.length ? "شوف نتيجتك ✦" : "السؤال التالي ←";
   }
   function finish() {
     $("quiz-area").hidden = true; $("challenge-summary").hidden = false; $("challenge-setup").hidden = true;
     const heading = document.createElement("h3"), score = document.createElement("strong"), detail = document.createElement("p"), restart = document.createElement("button");
-    heading.textContent = roundPoints >= 40 ? "جامد جدًا، راجعت وفهمت!" : roundPoints >= 20 ? "شغل حلو — كمّل تدريبك" : "كل محاولة بتعلمك حاجة جديدة"; score.textContent = `+${new Intl.NumberFormat("ar-EG").format(roundPoints)} نقطة`; detail.textContent = `جاوبت ${new Intl.NumberFormat("ar-EG").format(answeredCount)} من ${new Intl.NumberFormat("ar-EG").format(questions.length)} أسئلة في ${subjectNames[$("challenge-subject").value]}. راجع الأسئلة اللي وقفت معاك وجرب جولة تانية.`; restart.type = "button"; restart.className = "primary"; restart.textContent = "ابدأ جولة جديدة"; restart.addEventListener("click", reset); $("challenge-summary").replaceChildren(heading, score, detail, restart); $("challenge-title").textContent = "نتيجة الجولة"; $("challenge-status").textContent = "النقاط اتضافت لرصيدك المحفوظ على الجهاز.";
+    heading.textContent = roundPoints >= 40 ? "جامد جدًا، راجعت وفهمت!" : roundPoints >= 20 ? "شغل حلو — كمّل تدريبك" : "كل محاولة بتعلمك حاجة جديدة"; score.textContent = `+${new Intl.NumberFormat("ar-EG").format(roundPoints)} نقطة`; detail.textContent = `جاوبت ${new Intl.NumberFormat("ar-EG").format(answeredCount)} من ${new Intl.NumberFormat("ar-EG").format(questions.length)} أسئلة في ${subjectNames[$("challenge-subject").value]}. راجع الأسئلة اللي وقفت معاك وجرب جولة تانية.`; restart.type = "button"; restart.className = "primary"; restart.textContent = "ابدأ جولة جديدة"; restart.addEventListener("click", reset); $("challenge-summary").replaceChildren(heading, score, detail, restart); $("challenge-title").textContent = "نتيجة الجولة"; $("challenge-status").textContent = "النقاط محفوظة على هذا الجهاز." + (signedInUser ? " جارٍ حفظ نتيجة الجولة على حسابك…" : " سجّل الدخول لحفظ النتائج على حسابك.");
+    if (signedInUser && supabaseClient) {
+      try {
+        const stage = $("challenge-stage").value, grade = $("challenge-grade").value, subject = $("challenge-subject").value;
+        const { error } = await supabaseClient.from("student_challenge_attempts").insert({
+          user_id: signedInUser.id, stage, grade, subject,
+          score: roundPoints, correct_count: correctCount, question_count: answeredCount
+        });
+        if (error) throw error;
+        $("challenge-status").textContent = "تم حفظ نتيجة الجولة على حسابك بنجاح، بالإضافة إلى النقاط المحفوظة على الجهاز.";
+      } catch (_) {
+        $("challenge-status").textContent = "لم نتمكن من حفظ النتيجة على الحساب الآن؛ نقاط الجهاز ما زالت محفوظة. حاول تسجيل الدخول مجددًا.";
+      }
+    }
   }
   function reset() { $("challenge-summary").hidden = true; $("challenge-setup").hidden = false; $("challenge-title").textContent = "جهّز جولتك"; $("challenge-status").textContent = "كل إجابة صحيحة = ١٠ نقاط. النقاط محفوظة في متصفحك."; }
   $("start-challenge").addEventListener("click", () => {
     const stage = $("challenge-stage").value, subject = $("challenge-subject").value, source = bank[stage][subject];
-    questions = [...source].sort(() => Math.random() - 0.5).slice(0, 5); index = 0; roundPoints = 0; answeredCount = 0;
+    questions = [...source].sort(() => Math.random() - 0.5).slice(0, 5); index = 0; roundPoints = 0; answeredCount = 0; correctCount = 0;
     const secondYear = stage === "secondary" && $("challenge-grade").value === "s2";
     const systemName = $("challenge-system").value === "bac" ? "البكالوريا المصرية" : "الثانوية العامة";
     $("challenge-setup").hidden = true; $("challenge-summary").hidden = true; $("quiz-area").hidden = false; $("challenge-title").textContent = `${subjectNames[subject]} · ${$("challenge-grade").selectedOptions[0].textContent}${secondYear ? ` · ${systemName}` : ""}`; showQuestion();
