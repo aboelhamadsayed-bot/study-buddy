@@ -45,6 +45,7 @@
 </div>
 
 <div class="toast" id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const views=['home','challenges','exams','library','assistant','community','teacher','settings'];const titles={home:'الرئيسية',challenges:'التحديات',exams:'الامتحانات والنتائج',library:'مكتبة المذاكرة',assistant:'المساعد الذكي',community:'المجتمع الطلابي',teacher:'لوحة الأستاذ',settings:'إعدادات الحساب'};
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display='none',2600)}
