@@ -142,7 +142,7 @@
     if (correct) { correctCount++; roundPoints += 10; try { localStorage.setItem(STORE, String(readPoints() + 10)); } catch {} showTotal(); }
     $("round-score").textContent = `${new Intl.NumberFormat("ar-EG").format(roundPoints)} نقطة`; $("next-question").disabled = false; $("next-question").textContent = index + 1 === questions.length ? "شوف نتيجتك ✦" : "السؤال التالي ←";
   }
-  function finish() {
+  async function finish() {
     $("quiz-area").hidden = true; $("challenge-summary").hidden = false; $("challenge-setup").hidden = true;
     const heading = document.createElement("h3"), score = document.createElement("strong"), detail = document.createElement("p"), restart = document.createElement("button");
     heading.textContent = roundPoints >= 40 ? "جامد جدًا، راجعت وفهمت!" : roundPoints >= 20 ? "شغل حلو — كمّل تدريبك" : "كل محاولة بتعلمك حاجة جديدة"; score.textContent = `+${new Intl.NumberFormat("ar-EG").format(roundPoints)} نقطة`; detail.textContent = `جاوبت ${new Intl.NumberFormat("ar-EG").format(answeredCount)} من ${new Intl.NumberFormat("ar-EG").format(questions.length)} أسئلة في ${subjectNames[$("challenge-subject").value]}. راجع الأسئلة اللي وقفت معاك وجرب جولة تانية.`; restart.type = "button"; restart.className = "primary"; restart.textContent = "ابدأ جولة جديدة"; restart.addEventListener("click", reset); $("challenge-summary").replaceChildren(heading, score, detail, restart); $("challenge-title").textContent = "نتيجة الجولة"; $("challenge-status").textContent = "النقاط محفوظة على هذا الجهاز." + (signedInUser ? " جارٍ حفظ نتيجة الجولة على حسابك…" : " سجّل الدخول لحفظ النتائج على حسابك.");
