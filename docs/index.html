@@ -222,6 +222,46 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   .sidebar.open{transform:none!important}
   .mobile-menu{display:none!important}
 }
+
+/* QIMMA premium navy dashboard refresh */
+:root{--navy:#071d3b;--navy2:#0b2b55;--blue:#2387f5;--blue2:#176bd1;--ink:#edf5ff;--muted:#a9bfd9;--bg:#061a35;--line:#1b416e;--white:#0b2a50;--shadow:0 12px 28px #020d20aa}
+body{background:radial-gradient(ellipse at 45% 0%,#103765 0,#061a35 62%);color:#edf5ff}
+.shell{grid-template-columns:245px minmax(0,1fr);background:transparent}
+.sidebar{background:linear-gradient(180deg,#061a35,#04152c);border-left:1px solid #1a3d67;color:#edf5ff;padding:24px 16px}
+.brand{font-size:29px;color:#eaf5ff}.profile{background:#0b2a50;border-color:#204875}.avatar{background:linear-gradient(145deg,#c9e4ff,#fff)}
+.nav button{color:#b7cbe3}.nav button:hover,.nav button.active{background:linear-gradient(90deg,#176bd1,#258cf5);box-shadow:0 7px 20px #0874ed35}
+.main{padding:25px 30px 34px;max-width:1700px;width:100%;margin:auto}
+.topbar{padding:0 2px 17px;border-bottom:1px solid #1b416e}
+.welcome h1{color:#f4f8ff;font-size:27px}.welcome p{color:#9fb8d5}
+.icon-btn{background:#0c2b51;border-color:#214875;color:#e7f2ff}
+.hero{min-height:250px;padding:30px 34px;border:1px solid #1e4a7b;background:linear-gradient(105deg,#061b37f2 0%,#0a2e5bf0 55%,#123f76e8 100%);box-shadow:0 18px 40px #020d2066;justify-content:space-between;gap:25px}
+.hero:after{content:' ';left:0;bottom:0;width:48%;height:100%;opacity:.8;background:linear-gradient(90deg,#061b3722,#061b37aa),url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=80') center/cover;clip-path:polygon(0 42%,12% 32%,24% 48%,39% 20%,53% 47%,68% 12%,82% 45%,100% 30%,100% 100%,0 100%);font-size:0}
+.hero-content{max-width:600px}.eyebrow{color:#77c5ff}.hero h2{font-size:34px;color:#fff}.hero p{color:#c3d8ef}
+.hero-progress{position:relative;z-index:2;flex:0 0 230px;min-height:205px;border:1px solid #28609a;border-radius:18px;background:#061d3bd9;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:9px;text-align:center;padding:14px}
+.hero-progress>span{font-size:13px;font-weight:800;color:#d8eaff}.hero-progress small{font-size:12px;line-height:1.8;color:#c3d8ef}.hero-progress>strong{color:#5dbbff;font-size:20px}
+.progress-ring{width:104px;height:104px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(closest-side,#061d3b 82%,transparent 84% 99%),conic-gradient(#20b8f0 0 68%,#173c67 68% 100%);box-shadow:0 0 25px #168ce933}
+.progress-ring b{font-size:22px;color:#fff}
+.stat,.panel,.feature{background:linear-gradient(145deg,#0d2d55,#092448);border:1px solid #1b4778;box-shadow:var(--shadow);color:#eef6ff}
+.stat{padding:18px;border-radius:16px}.stat small,.panel-head small,.muted{color:#a9bfd9}.stat strong{color:#fff}.stat-icon{background:#174574;color:#fff}
+.progress{background:#16385f}.progress span{background:linear-gradient(90deg,#168ef4,#39c6f2)}
+.course,.challenge,.task,.challenge-card{background:#0c2a50;border-color:#204875;color:#edf5ff}
+.course-info strong,.challenge-info strong{color:#f3f8ff}.course-info small,.challenge-info small{color:#a9bfd9}
+.secondary{background:#153d69;color:#9bcaff}.feature:hover{box-shadow:0 14px 35px #0006}
+.section-title{color:#f1f7ff}.filters button{background:#0c2a50;border-color:#214875;color:#c4d8ef}.filters button.active{background:#176bd1}
+.qimma-shortcuts{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin:18px 0}
+.qimma-shortcuts button{min-width:0;min-height:130px;padding:16px 10px;border:1px solid #225183;border-radius:15px;background:linear-gradient(145deg,#123765,#0a284c);color:#f4f8ff;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;transition:.2s}
+.qimma-shortcuts button:hover{transform:translateY(-3px);border-color:#39a8ff;box-shadow:0 10px 25px #00142f88}
+.qimma-shortcuts i{font-style:normal;font-size:25px;width:48px;height:48px;border-radius:14px;background:#1d5a98;display:grid;place-items:center}
+.qimma-shortcuts b{font-size:13px}.qimma-shortcuts small{font-size:10px;color:#a9c5e4}
+.task input{accent-color:#2387f5}
+.chatbox{background:#0b2a50;border-color:#1d4776}.chat-head,.chat-form{border-color:#1d4776}.bubble{background:#143b68;color:#eef6ff}.bubble.me{background:#176bd1}
+.chat-form input,.field input,.field select,.field textarea{background:#071f3e;border-color:#244a74;color:#f2f7ff}
+.community-post{border-color:#204875}.post-user{color:#f2f7ff}
+.toast{background:#0b2a50;border:1px solid #2a5b8d}
+@media(max-width:1100px){.qimma-shortcuts{grid-template-columns:repeat(3,minmax(0,1fr))}.hero-progress{flex-basis:190px}}
+@media(max-width:700px){.main{padding:14px 12px 20px}.hero{padding:20px 16px;gap:12px}.hero-progress{flex-basis:112px;min-height:160px;padding:8px}.progress-ring{width:78px;height:78px}.hero-progress small{font-size:10px}.hero h2{font-size:23px}.hero:after{width:45%;opacity:.35}.qimma-shortcuts{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}.qimma-shortcuts button{min-height:112px;padding:12px 7px}.qimma-shortcuts b{font-size:12px}.stats{margin-top:12px}}
+@media(max-width:420px){.hero{display:block}.hero-progress{margin-top:14px;min-height:0;display:grid;grid-template-columns:auto auto;justify-content:space-around}.hero-progress>span,.hero-progress small{grid-column:1/-1}.progress-ring{grid-row:2;grid-column:1}.hero-progress>strong{display:none}}
+
 </style></head>
 <body>
 <section class="login-screen" id="loginScreen">
@@ -274,8 +314,16 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 </nav><button class="logout" id="logout">↪ تسجيل الخروج</button></aside>
 <main class="main"><header class="topbar"><div class="welcome"><div class="welcome-title-row"><h1 id="pageTitle">مرحبًا أحمد 👋</h1><span class="header-brand-mark"><span>⛰</span> قِمّة</span></div><p id="pageSubtitle">استعد لتحقيق إنجاز جديد اليوم</p></div><div class="top-actions"><button class="icon-btn mobile-menu" id="menuBtn" aria-label="فتح القائمة">☰</button><button class="icon-btn desktop-action" id="profileBtn">👤 حسابي</button><button class="primary" id="continueBtn">ابدأ المذاكرة ←</button></div></header>
 <section class="view active" id="view-home">
-<div class="hero"><div class="hero-content"><span class="eyebrow">طريقك نحو التفوق يبدأ هنا</span><h2>قِمّة — مستقبلُك يستحق الأفضل</h2><p>منصة تعليمية ذكية تساعدك على تنظيم وقتك، وفهم دروسك، والتدرّب على الامتحانات، وتحقيق أهدافك خطوة بخطوة.</p><button class="primary" data-go="library">ابدأ الآن</button> <button class="secondary" data-go="assistant">اسأل المساعد الذكي</button></div></div>
+<div class="hero"><div class="hero-content"><span class="eyebrow">طريقك نحو التفوق يبدأ هنا</span><h2>قِمّة — مستقبلُك يستحق الأفضل</h2><p>منصة تعليمية ذكية تساعدك على تنظيم وقتك، وفهم دروسك، والتدرّب على الامتحانات، وتحقيق أهدافك خطوة بخطوة.</p><button class="primary" data-go="library">ابدأ الآن</button> <button class="secondary" data-go="assistant">اسأل المساعد الذكي</button></div><aside class="hero-progress"><span>مستوى التقدم</span><div class="progress-ring"><b>68%</b></div><small>أنت في طريقك للنجاح<br>استمر في المذاكرة!</small><strong>⛰</strong></aside></div>
 <div class="stats"><div class="stat"><div class="stat-icon">💎</div><div><small>نقاط التفوق</small><strong id="points">2,350</strong></div></div><div class="stat"><div class="stat-icon">🏆</div><div><small>التحديات المكتملة</small><strong id="doneCount">12</strong></div></div><div class="stat"><div class="stat-icon">📚</div><div><small>موادك الدراسية</small><strong>6</strong></div></div><div class="stat"><div class="stat-icon">🎯</div><div><small>معدل الإنجاز</small><strong id="progressLabel">65%</strong></div></div></div>
+<div class="qimma-shortcuts">
+<button data-go="library"><i>📚</i><b>مكتبة المذاكرة</b><small>ملفات وملخصات</small></button>
+<button data-go="exams"><i>📝</i><b>الامتحانات والنتائج</b><small>اختبر مستواك</small></button>
+<button data-go="challenges"><i>🏆</i><b>التحديات</b><small>حقق المزيد</small></button>
+<button data-go="assistant"><i>✨</i><b>المساعد الذكي</b><small>اسأل أي سؤال</small></button>
+<button data-go="community"><i>👥</i><b>مجتمع الطلاب</b><small>تواصل مع زملائك</small></button>
+<button data-go="teacher"><i>🎓</i><b>لوحة الأستاذ</b><small>أدوات تعليمية</small></button>
+</div>
 <div class="columns"><div class="panel"><div class="panel-head"><h3>تقدّمك في الرحلة</h3><small>هدفك: التفوق الدراسي</small></div><strong>الصف الثاني الثانوي</strong><div class="progress"><span id="progressBar"></span></div><small class="muted">أنت على الطريق الصحيح — استمر كل يوم ولو بخطوة صغيرة.</small><div class="panel-head" style="margin-top:24px"><h3>أحدث التحديات</h3><button class="secondary" data-go="challenges">عرض الكل</button></div><div class="course-list" id="homeChallenges"></div></div>
 <div class="panel"><div class="panel-head"><h3>مهام اليوم</h3><small>خطوة صغيرة تصنع فرقًا</small></div><div class="task-list" id="tasks"><label class="task"><input type="checkbox"> مراجعة درس اليوم</label><label class="task"><input type="checkbox"> حل 10 أسئلة</label><label class="task"><input type="checkbox"> قراءة 5 صفحات</label><label class="task"><input type="checkbox"> مراجعة الأخطاء</label></div><p class="muted" style="font-size:12px">علّم على المهمة بعد إنجازها.</p></div></div></section>
 <section class="view" id="view-challenges"><h2 class="section-title">التحديات 🏆</h2><p class="muted">اختر تحديًا وابدأ في جمع نقاط التفوق.</p><div class="filters" id="challengeFilters"><button class="active" data-filter="all">كل التحديات</button><button data-filter="math">الرياضيات</button><button data-filter="science">العلوم</button><button data-filter="language">اللغات</button></div><div class="challenge-grid" id="challengeGrid"></div></section>
