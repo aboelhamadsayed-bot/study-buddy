@@ -264,6 +264,12 @@ body{background:radial-gradient(ellipse at 45% 0%,#103765 0,#061a35 62%);color:#
 @media(max-width:700px){.main{padding:14px 12px 20px}.hero{padding:20px 16px;gap:12px}.hero-progress{flex-basis:112px;min-height:160px;padding:8px}.progress-ring{width:78px;height:78px}.hero-progress small{font-size:10px}.hero h2{font-size:23px}.hero:after{width:45%;opacity:.35}.qimma-shortcuts{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}.qimma-shortcuts button{min-height:112px;padding:12px 7px}.qimma-shortcuts b{font-size:12px}.stats{margin-top:12px}}
 @media(max-width:420px){.hero{display:block}.hero-progress{margin-top:14px;min-height:0;display:grid;grid-template-columns:auto auto;justify-content:space-around}.hero-progress>span,.hero-progress small{grid-column:1/-1}.progress-ring{grid-row:2;grid-column:1}.hero-progress>strong{display:none}}
 
+
+/* Force the student identity to stay visible in the header */
+.welcome .welcome-title-row{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;gap:12px!important;min-height:42px!important;visibility:visible!important;opacity:1!important}
+.welcome .welcome-title-row .header-brand-mark{display:inline-flex!important;flex:0 0 auto!important;visibility:visible!important;opacity:1!important;color:#9fc7ff!important;font-size:15px!important;white-space:nowrap!important}
+.welcome .welcome-title-row #studentName{display:block!important;flex:0 1 auto!important;visibility:visible!important;opacity:1!important;color:#f4f8ff!important;font-family:'Cairo',Tahoma,sans-serif!important;font-size:clamp(19px,2.2vw,27px)!important;font-weight:900!important;line-height:1.5!important;margin:0!important;padding:0!important;white-space:normal!important}
+@media(max-width:700px){.welcome .welcome-title-row #studentName{font-size:18px!important}}
 </style></head>
 <body>
 <section class="login-screen" id="loginScreen">
