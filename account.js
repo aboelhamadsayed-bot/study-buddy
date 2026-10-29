@@ -12,6 +12,8 @@
       const recoveryPanel = $("recovery-panel"), recoveryForm = $("recovery-form");
       const loginTab = $("login-tab"), signupTab = $("signup-tab");
       const nameField = $("name-field"), confirmField = $("confirm-field"), birthField = $("birth-field"), birthDate = $("birth-date");
+      const schoolField = $("school-field"), schoolStage = $("school-stage"), schoolGrade = $("school-grade"), schoolSystem = $("school-system");
+      const gradeOptions = { primary: [["primary1","أولى ابتدائي"],["primary2","تانية ابتدائي"],["primary3","تالتة ابتدائي"],["primary4","رابعة ابتدائي"],["primary5","خامسة ابتدائي"],["primary6","سادسة ابتدائي"]], prep: [["prep1","أولى إعدادي"],["prep2","تانية إعدادي"],["prep3","تالتة إعدادي"]], secondary: [["secondary1","أولى ثانوي"],["secondary2","تانية ثانوي"],["secondary3","تالتة ثانوي"]] };
       const password = $("password"), email = $("email");
       let mode = "login", client = null, busy = false;
       let selectedAgeGroup = "";
@@ -26,6 +28,16 @@
         return age >= 6 && age <= 120 ? age : null;
       }
       function ageGroupFor(age) { return age <= 8 ? "6-8" : age <= 11 ? "9-11" : age <= 14 ? "12-14" : age <= 17 ? "15-17" : "18+"; }
+      function refreshSchool() {
+        const values = gradeOptions[schoolStage.value] || [], selected = schoolGrade.value;
+        schoolGrade.replaceChildren(new Option("اختار الصف", ""), ...values.map(([value,label]) => new Option(label,value)));
+        if (values.some(([value]) => value === selected)) schoolGrade.value = selected;
+        schoolGrade.disabled = !values.length;
+        const secondSecondary = schoolGrade.value === "secondary2";
+        $("school-system-wrap").classList.toggle("hidden", !secondSecondary);
+        $("school-track-wrap").classList.toggle("hidden", !secondSecondary || schoolSystem.value !== "bac");
+      }
+      schoolStage.addEventListener("change", refreshSchool); schoolGrade.addEventListener("change", refreshSchool); schoolSystem.addEventListener("change", refreshSchool);
       birthDate.addEventListener("input", () => { const age = ageFromBirthDate(birthDate.value); $("guardian-consent-wrap").classList.toggle("hidden", age === null || age >= 13); if (age === null || age >= 13) $("guardian-consent").checked = false; });
       const configured = /^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(SUPABASE_URL) &&
         SUPABASE_ANON_KEY.length > 20 && !SUPABASE_ANON_KEY.includes("YOUR_");
@@ -38,14 +50,14 @@
       function setMode(next) {
         mode = next; const isSignup = mode === "signup";
         loginTab.setAttribute("aria-selected", String(!isSignup)); signupTab.setAttribute("aria-selected", String(isSignup));
-        nameField.classList.toggle("hidden", !isSignup); birthField.classList.toggle("hidden", !isSignup); confirmField.classList.toggle("hidden", !isSignup);
+        nameField.classList.toggle("hidden", !isSignup); birthField.classList.toggle("hidden", !isSignup); schoolField.classList.toggle("hidden", !isSignup); confirmField.classList.toggle("hidden", !isSignup);
         $("password-hint").classList.toggle("hidden", !isSignup);
         $("form-title").textContent = isSignup ? "ابدأ رحلتك" : "أهلاً بعودتك";
         $("form-subtitle").textContent = isSignup ? "أنشئ حسابك وخلي كل خطوة تقرّبك من هدفك." : "سجّل دخولك لتكمل من حيث توقفت.";
         $("submit-button").textContent = isSignup ? "إنشاء حساب" : "تسجيل الدخول";
         $("forgot-button").classList.toggle("hidden", isSignup);
         password.autocomplete = isSignup ? "new-password" : "current-password";
-        $("name").required = isSignup; $("birth-date").required = isSignup; $("confirm-password").required = isSignup;
+        $("name").required = isSignup; $("birth-date").required = isSignup; schoolStage.required = isSignup; schoolGrade.required = isSignup; $("confirm-password").required = isSignup;
         clearMessage();
       }
       loginTab.addEventListener("click", () => setMode("login"));
@@ -76,14 +88,21 @@
         if (password.value.length < 6) { password.setAttribute("aria-invalid", "true"); password.focus(); return notify("كلمة المرور يجب ألا تقل عن 6 أحرف.", "error"); }
         if (mode === "signup" && !$("name").value.trim()) { $("name").focus(); return notify("اكتب الاسم الذي تحب أن نناديك به.", "error"); }
         if (mode === "signup" && password.value.length < 8) { password.focus(); return notify("اختر كلمة مرور من 8 أحرف على الأقل لحماية حسابك.", "error"); }
-        if (mode === "signup") { const age = ageFromBirthDate(birthDate.value); if (age === null) { birthDate.focus(); return notify("أدخل تاريخ ميلاد صحيحًا؛ يجب أن يكون العمر 6 سنوات أو أكثر.", "error"); } if (age < 13 && !$("guardian-consent").checked) { $("guardian-consent-wrap").classList.remove("hidden"); $("guardian-consent").focus(); return notify("لإكمال التسجيل لمن هم دون 13 سنة، يلزم تأكيد موافقة ولي الأمر.", "error"); } selectedAgeGroup = ageGroupFor(age); }
+        if (mode === "signup") {
+          const age = ageFromBirthDate(birthDate.value);
+          if (age === null) { birthDate.focus(); return notify("أدخل تاريخ ميلاد صحيحًا؛ يجب أن يكون العمر 6 سنوات أو أكثر.", "error"); }
+          if (age < 13 && !$("guardian-consent").checked) { $("guardian-consent-wrap").classList.remove("hidden"); $("guardian-consent").focus(); return notify("لإكمال التسجيل لمن هم دون 13 سنة، يلزم تأكيد موافقة ولي الأمر.", "error"); }
+          selectedAgeGroup = ageGroupFor(age);
+          if (!gradeOptions[schoolStage.value]?.some(([value]) => value === schoolGrade.value)) { schoolStage.focus(); return notify("اختار المرحلة والصف الدراسي عشان نضمك لمجموعتك.", "error"); }
+          if (schoolGrade.value === "secondary2" && schoolSystem.value === "bac" && !$("school-track").value) { $("school-track").focus(); return notify("اختار مسار البكالوريا.", "error"); }
+        }
         if (mode === "signup" && password.value !== $("confirm-password").value) { $("confirm-password").focus(); return notify("كلمتا المرور غير متطابقتين.", "error"); }
         if (!client) return notify("الصفحة جاهزة، لكن يلزم وضع رابط مشروع Supabase ومفتاحه العام في الإعدادات أعلى الكود.", "error");
         busy = true; submit.disabled = true; submit.textContent = mode === "signup" ? "جارٍ إنشاء الحساب…" : "جارٍ تسجيل الدخول…";
         try {
           if (mode === "signup") {
             const { data, error } = await client.auth.signUp({ email: email.value, password: password.value,
-              options: { data: { display_name: $("name").value.trim(), age_group: selectedAgeGroup }, emailRedirectTo: AUTH_RETURN_URL } });
+              options: { data: { display_name: $("name").value.trim(), age_group: selectedAgeGroup, school_stage: schoolStage.value, school_grade: schoolGrade.value, school_system: schoolGrade.value === "secondary2" ? schoolSystem.value : null, school_track: schoolGrade.value === "secondary2" && schoolSystem.value === "bac" ? $("school-track").value : null }, emailRedirectTo: AUTH_RETURN_URL } });
             if (error) throw error;
             if (data.session) { notify("تم إنشاء حسابك بنجاح. جارٍ فتح مساحة الدراسة…", "success"); window.location.assign(REDIRECT_AFTER_AUTH); return; }
             notify("تم إنشاء الحساب. افحص بريدك الإلكتروني واضغط رابط التأكيد قبل تسجيل الدخول.", "success");
@@ -128,6 +147,7 @@
       }
       if (!client) notify("لم يتم إعداد اتصال Supabase.", "info");
     })();
+
 
 
 

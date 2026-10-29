@@ -22,7 +22,7 @@
     .form-side{display:grid;place-items:center;padding:22px}.card{width:min(100%,465px);padding:clamp(26px,4vw,46px);background:var(--paper);border:1px solid #e9ece6;border-radius:26px;box-shadow:var(--shadow)}.mobile-brand{display:none;align-items:center;gap:9px;font-weight:700;margin-bottom:28px}.mobile-brand .brand-mark{background:var(--mint);color:var(--green)}
     .form-head h2{font-size:30px;margin:0 0 8px;letter-spacing:-.03em}.form-head p{margin:0;color:var(--muted);line-height:1.8;font-size:14px}
     .tabs{display:grid;grid-template-columns:1fr 1fr;padding:5px;background:#f3f5f1;border-radius:13px;margin:28px 0 24px;gap:4px}.tab{border:0;background:transparent;color:#65736b;padding:11px 8px;border-radius:9px;font-weight:600;font-size:14px}.tab[aria-selected="true"]{color:var(--ink);background:white;box-shadow:0 1px 5px #162e2017}
-    .field{margin:0 0 17px}.field label{display:block;font-size:13px;font-weight:600;margin-bottom:8px}.input-wrap{position:relative}.field input{width:100%;height:49px;padding:0 14px;border:1px solid #dfe5dd;border-radius:11px;background:#fff;color:var(--ink);outline:none;transition:border-color .18s,box-shadow .18s}.field input::placeholder{color:#a4aea7}.field input:focus{border-color:#49a182;box-shadow:0 0 0 3px #48a17f1b}.field input[aria-invalid="true"]{border-color:#c64b43}
+    .field{margin:0 0 17px}.field label{display:block;font-size:13px;font-weight:600;margin-bottom:8px}.input-wrap{position:relative}.field input,.field select{width:100%;height:49px;padding:0 14px;border:1px solid #dfe5dd;border-radius:11px;background:#fff;color:var(--ink);outline:none;transition:border-color .18s,box-shadow .18s}.field input::placeholder{color:#a4aea7}.field input:focus,.field select:focus{border-color:#49a182;box-shadow:0 0 0 3px #48a17f1b}.field input[aria-invalid="true"],.field select[aria-invalid="true"]{border-color:#c64b43}
     .password-input{padding-left:66px!important}.show-pass{position:absolute;left:10px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:#617168;font-size:12px;padding:6px}.forgot{border:0;background:none;padding:2px 0;color:var(--green);font-size:12px;font-weight:600}.field-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}.field-row label{margin:0}.hint{color:var(--muted);font-size:11px;margin:7px 2px 0;line-height:1.6}.submit{width:100%;height:50px;border:0;border-radius:11px;color:white;background:var(--green);font-weight:700;box-shadow:0 8px 18px #16785e26;transition:.2s}.submit:hover{background:var(--green-dark);transform:translateY(-1px)}.submit:disabled{opacity:.7;cursor:wait;transform:none}
     .message{display:none;margin:16px 0 0;padding:12px 14px;border-radius:11px;font-size:13px;line-height:1.7}.message[data-kind="success"]{display:block;background:#eaf5ed;color:#236346}.message[data-kind="error"]{display:block;background:#fff0ee;color:#9a3830}.message[data-kind="info"]{display:block;background:#edf4f2;color:#315b50}
     .fineprint{margin:20px 0 0;text-align:center;font-size:11px;color:#88938c;line-height:1.7}.fineprint a{color:var(--green);text-decoration:none}.hidden{display:none!important}:focus-visible{outline:3px solid #e9a14b!important;outline-offset:3px}
@@ -56,7 +56,7 @@
       .shell{min-height:100svh;padding:4px;gap:8px}
       .form-side{padding:4px 0}
       .card{width:100%;padding:24px 18px;border-radius:21px}
-      .field input{height:48px;font-size:16px}
+      .field input,.field select{height:48px;font-size:16px}
       .submit{height:49px}
     }
     @media(max-width:360px){
@@ -102,7 +102,7 @@
       body { padding: 8px; }
       .shell { width: 100%; padding: 0; }
       .card { padding: 23px 17px; border-radius: 20px; }
-      .field input { height: 49px; font-size: 16px; }
+      .field input, .field select { height: 49px; font-size: 16px; }
       .tabs { margin-top: 22px; }
       .submit { min-height: 49px; }
     }
@@ -153,6 +153,7 @@
           </form>
         </section>        <form id="auth-form" novalidate>
           <div class="field hidden" id="name-field"><label for="name">الاسم</label><input id="name" name="name" type="text" autocomplete="name" maxlength="80" placeholder="الاسم الذي تحب أن نناديك به"></div><div class="field hidden" id="birth-field"><label for="birth-date">تاريخ الميلاد</label><input id="birth-date" name="birth-date" type="date" autocomplete="bday"><p class="hint">هنستخدمه لحساب الفئة العمرية فقط، ومش هنحفظ التاريخ نفسه.</p><div class="hint hidden" id="guardian-consent-wrap"><label class="consent-label"><input id="guardian-consent" type="checkbox"> لدي موافقة ولي أمري على استخدام الحساب والمجتمع الطلابي.</label></div></div>
+          <div class="field hidden" id="school-field"><label for="school-stage">المرحلة الدراسية</label><select id="school-stage"><option value="">اختار المرحلة</option><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="secondary">ثانوي</option></select><label for="school-grade">الصف</label><select id="school-grade" disabled><option value="">اختار المرحلة أولًا</option></select><div class="field hidden" id="school-system-wrap"><label for="school-system">نظام تانية ثانوي</label><select id="school-system"><option value="general">الثانوية العامة</option><option value="bac">البكالوريا المصرية</option></select></div><div class="field hidden" id="school-track-wrap"><label for="school-track">مسار البكالوريا</label><select id="school-track"><option value="medicine">الطب وعلوم الحياة</option><option value="engineering">الهندسة وعلوم الحاسب</option><option value="business">الأعمال</option><option value="arts">الآداب والفنون</option></select></div><p class="hint">هنستخدم الصف والنظام عشان نعرض لك مجموعة وأسئلة مناسبة. مش هنعرض بريدك الإلكتروني للطلاب.</p></div>
           <div class="field"><label for="email">البريد الإلكتروني</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required placeholder="name@example.com" dir="ltr" aria-describedby="email-hint"><p class="hint" id="email-hint">استخدم البريد المرتبط بحسابك.</p></div>
           <div class="field" id="password-field"><div class="field-row"><label for="password">كلمة المرور</label><button class="forgot" id="forgot-button" type="button">نسيت كلمة المرور؟</button></div><div class="input-wrap"><input class="password-input" id="password" name="password" type="password" autocomplete="current-password" minlength="6" maxlength="128" required placeholder="أدخل كلمة المرور" dir="ltr"><button class="show-pass" type="button" data-toggle-password="password" aria-label="إظهار كلمة المرور">إظهار</button></div><p class="hint hidden" id="password-hint">استخدم 8 أحرف على الأقل، ويفضّل الجمع بين الحروف والأرقام.</p></div>
           <div class="field hidden" id="confirm-field"><label for="confirm-password">تأكيد كلمة المرور</label><div class="input-wrap"><input class="password-input" id="confirm-password" name="confirm-password" type="password" autocomplete="new-password" maxlength="128" placeholder="أعد كتابة كلمة المرور" dir="ltr"><button class="show-pass" type="button" data-toggle-password="confirm-password" aria-label="إظهار كلمة المرور">إظهار</button></div></div>
@@ -164,9 +165,10 @@
     </section>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="account.js" defer></script>
+  <script src="account.js?v=student-onboarding-20261029" defer></script>
 </body>
 </html>
+
 
 
 

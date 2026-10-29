@@ -67,10 +67,11 @@
     if (error) throw error;
     session = data.session;
     if (!session) { status("سجّل الدخول أولًا من حساب الطالب، وبعدها ارجع هنا."); return; }
-    const { data: row, error: profileError } = await client.from("student_profiles").select("age_group").eq("user_id", session.user.id).maybeSingle();
+    const { data: row, error: profileError } = await client.from("student_profiles").select("age_group,school_grade,school_system,school_track").eq("user_id", session.user.id).maybeSingle();
     if (profileError) throw profileError;
     profile = row;
     if (!validGroups.has(profile?.age_group)) { status("كمّل تحديد فئتك العمرية من حساب الطالب عشان الأستاذ يضبط الشرح على مرحلتك.", true); return; }
+    if (profile?.school_grade && $("tutor-grade").querySelector(`option[value="${profile.school_grade}"]`)) { $("tutor-grade").value = profile.school_grade; if (profile.school_grade === "secondary2") { $("tutor-system").value = profile.school_system || "general"; if (profile.school_system === "bac" && profile.school_track) $("tutor-track").value = profile.school_track; } refreshSystem(); }
     status("جاهز يا بطل — اسأل عن نقطة واحدة، ونمشي فيها خطوة خطوة.");
     if (communityDraft) {
       const draft = communityDraft; communityDraft = null; sessionStorage.removeItem("qimmaTutorDraft");

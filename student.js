@@ -5,14 +5,20 @@
   const $ = id => document.getElementById(id);
   const db = window.supabase?.createClient ? window.supabase.createClient(URL, KEY) : null;
   const groups = {"6-8":"6–8 سنوات","9-11":"9–11 سنة","12-14":"12–14 سنة","15-17":"15–17 سنة","18+":"18 سنة فأكثر"};
+  const schoolGradeOptions={primary:[["primary1","أولى ابتدائي"],["primary2","تانية ابتدائي"],["primary3","تالتة ابتدائي"],["primary4","رابعة ابتدائي"],["primary5","خامسة ابتدائي"],["primary6","سادسة ابتدائي"]],prep:[["prep1","أولى إعدادي"],["prep2","تانية إعدادي"],["prep3","تالتة إعدادي"]],secondary:[["secondary1","أولى ثانوي"],["secondary2","تانية ثانوي"],["secondary3","تالتة ثانوي"]]};
+  const schoolGradeLabels=Object.fromEntries(Object.values(schoolGradeOptions).flat());
+  const trackLabels={medicine:"الطب وعلوم الحياة",engineering:"الهندسة وعلوم الحاسب",business:"الأعمال",arts:"الآداب والفنون"};
   let user=null,profile=null,session=null;
   const say=(id,text,error=false)=>{const e=$(id);if(e){e.textContent=text;e.dataset.kind=error?"error":"success";}};
   const currentGroup=()=>profile?.age_group||localStorage.getItem("qimma-age-group")||"";
   function calcGroup(v){if(!v)return"";const b=new Date(v+"T00:00:00"),n=new Date();if(Number.isNaN(b.getTime())||b>n)return"";let a=n.getFullYear()-b.getFullYear();if(n.getMonth()<b.getMonth()||(n.getMonth()===b.getMonth()&&n.getDate()<b.getDate()))a--;return a<6||a>120?"":a<=8?"6-8":a<=11?"9-11":a<=14?"12-14":a<=17?"15-17":"18+";}
-  function renderGroup(){const g=currentGroup();$("student-age-label").textContent=g?"شرح مناسب لـ "+groups[g]:"حدد فئتك العمرية";$("community-group-label").textContent=g?"مجموعة "+groups[g]:"سجّل الدخول";}
+  function setProfileGrades(stage,selected=""){const select=$("profile-school-grade"),options=schoolGradeOptions[stage]||[];select.replaceChildren(new Option("اختار الصف",""),...options.map(([value,label])=>new Option(label,value)));select.disabled=!options.length;if(options.some(([value])=>value===selected))select.value=selected;refreshProfileSchool();}
+  function refreshProfileSchool(){const second=$("profile-school-grade").value==="secondary2",bac=second&&$("profile-school-system").value==="bac";$("profile-school-system-wrap").classList.toggle("hidden",!second);$("profile-school-track-wrap").classList.toggle("hidden",!bac);}
+  $("profile-school-stage").addEventListener("change",()=>setProfileGrades($("profile-school-stage").value));$("profile-school-grade").addEventListener("change",refreshProfileSchool);$("profile-school-system").addEventListener("change",refreshProfileSchool);
+  function renderGroup(){const g=currentGroup(),grade=profile?.school_grade,system=profile?.school_system,track=profile?.school_track;$("student-age-label").textContent=g?"شرح مناسب لـ "+groups[g]:"حدد فئتك العمرية";let label=grade?"مجموعة "+schoolGradeLabels[grade]+(g?" · "+groups[g]:""):g?"مجموعة "+groups[g]:"سجّل الدخول";if(grade==="secondary2")label+=" · "+(system==="bac"?"البكالوريا":"الثانوية العامة")+(system==="bac"&&track?" · "+trackLabels[track]:"");$("community-group-label").textContent=label;if(grade&&$("tutor-grade")){ $("tutor-grade").value=grade;if(grade==="secondary2")$("tutor-system").value=system||"general";if(grade==="secondary2"&&system==="bac")$("tutor-track").value=track||"medicine";refreshTutorTrack();}}
   async function loadCommunity(){
     const feed=$("community-feed");
-    if(!user||!profile?.age_group){feed.textContent="سجّل الدخول عشان تنضم لمجموعة الطلاب.";return;}
+    if(!user||!profile?.age_group||!profile?.school_grade){feed.textContent="سجّل الدخول وأكمل المرحلة والصف الدراسي عشان تنضم لمجموعتك.";return;}
     const {data,error}=await db.from("student_posts").select("id,display_name,body,created_at").order("created_at",{ascending:false}).limit(24);
     if(error){feed.textContent="تعذر تحميل المجموعة الآن. حاول بعد قليل.";return;}
     feed.replaceChildren();
@@ -23,36 +29,39 @@
     if(!db)return;
     const {data:{session:s}}=await db.auth.getSession();session=s;user=s?.user||null;
     if(!user){renderGroup();$("community-feed").textContent="سجّل الدخول عشان تنضم لمجموعة الطلاب.";return;}
-    const {data,error}=await db.from("student_profiles").select("user_id,display_name,age_group").eq("user_id",user.id).maybeSingle();
+    const {data,error}=await db.from("student_profiles").select("user_id,display_name,age_group,school_grade,school_system,school_track").eq("user_id",user.id).maybeSingle();
     if(error)throw error;profile=data;
-    if(!profile?.age_group){
-      const g=user.user_metadata?.age_group;
-      if(["6-8","9-11","12-14","15-17","18+"].includes(g)){
-        profile={user_id:user.id,display_name:String(user.user_metadata?.display_name||"طالب").slice(0,40),age_group:g};
-        const {error:saveError}=await db.from("student_profiles").insert(profile);if(saveError)throw saveError;
-      }else{
-        const d=$("profile-dob"),n=new Date();n.setMinutes(n.getMinutes()-n.getTimezoneOffset());d.max=n.toISOString().slice(0,10);
-        if(!$("age-onboarding").open)$("age-onboarding").showModal();
-      }
+    const meta=user.user_metadata||{},metaAge=meta.age_group,metaGrade=meta.school_grade,validAge=["6-8","9-11","12-14","15-17","18+"].includes(metaAge),validGrade=Boolean(schoolGradeLabels[metaGrade]),validSystem=metaGrade==="secondary2"?["general","bac"].includes(meta.school_system)&& (meta.school_system!=="bac"||Object.hasOwn(trackLabels,meta.school_track)):(meta.school_system==null&&meta.school_track==null);
+    if(!profile&&validAge&&validGrade&&validSystem){
+      const newProfile={user_id:user.id,display_name:String(meta.display_name||"طالب").slice(0,40),age_group:metaAge,school_grade:metaGrade,school_system:metaGrade==="secondary2"?(meta.school_system||"general"):null,school_track:metaGrade==="secondary2"&&meta.school_system==="bac"?(meta.school_track||"medicine"):null};
+      const {error:saveError}=await db.from("student_profiles").insert(newProfile);if(saveError)throw saveError;profile=newProfile;
     }
-    renderGroup();if(profile?.age_group)await loadCommunity();
+    if(!profile?.age_group||!profile?.school_grade){
+      const dateInput=$("profile-dob"),dateWrap=$("profile-dob-wrap"),n=new Date();n.setMinutes(n.getMinutes()-n.getTimezoneOffset());dateInput.max=n.toISOString().slice(0,10);dateInput.required=!profile?.age_group;dateWrap.classList.toggle("hidden",Boolean(profile?.age_group));
+      const currentGrade=profile?.school_grade||metaGrade||"",stage=currentGrade.startsWith("primary")?"primary":currentGrade.startsWith("prep")?"prep":currentGrade.startsWith("secondary")?"secondary":"";
+      $("profile-school-stage").value=stage;setProfileGrades(stage,currentGrade);$("profile-school-system").value=profile?.school_system||meta.school_system||"general";$("profile-school-track").value=profile?.school_track||meta.school_track||"medicine";refreshProfileSchool();
+      if(!$("age-onboarding").open)$("age-onboarding").showModal();
+    }
+    renderGroup();if(profile?.age_group&&profile?.school_grade){$("community-name").value=profile.display_name||"";await loadCommunity();}
   }
   $("age-form").addEventListener("submit",async e=>{
-    e.preventDefault();const g=calcGroup($("profile-dob").value);
+    e.preventDefault();const g=profile?.age_group||calcGroup($("profile-dob").value),schoolGrade=$("profile-school-grade").value,system=schoolGrade==="secondary2"?$("profile-school-system").value:null,track=schoolGrade==="secondary2"&&system==="bac"?$("profile-school-track").value:null;
     if(!g)return say("age-status","أدخل تاريخ ميلاد صحيحًا؛ العمر يجب أن يكون 6 سنوات على الأقل.",true);
-    if(!user){localStorage.setItem("qimma-age-group",g);$("age-onboarding").close();renderGroup();return;}
-    const row={user_id:user.id,display_name:String(user.user_metadata?.display_name||"طالب").slice(0,40),age_group:g};
-    const {error}=await db.from("student_profiles").insert(row);
-    if(error)return say("age-status","تعذر حفظ فئتك الآن. حاول مرة أخرى.",true);
-    profile=row;$("age-onboarding").close();renderGroup();await loadCommunity();say("community-status","اتحدد محتوى مرحلتك بنجاح.");
+    if(!schoolGradeLabels[schoolGrade])return say("age-status","اختار المرحلة والصف الدراسي.",true);
+    if(schoolGrade==="secondary2"&&!["general","bac"].includes(system))return say("age-status","اختار نظام تانية ثانوي.",true);
+    if(schoolGrade==="secondary2"&&system==="bac"&&!Object.hasOwn(trackLabels,track))return say("age-status","اختار مسار البكالوريا.",true);
+    if(!user)return say("age-status","سجّل الدخول أو أنشئ حسابًا عشان نحفظ ملفك الدراسي.",true);
+    const row={user_id:user.id,display_name:String(profile?.display_name||user.user_metadata?.display_name||"طالب").slice(0,40),age_group:g,school_grade:schoolGrade,school_system:system,school_track:track};
+    const result=profile?await db.from("student_profiles").update({display_name:row.display_name,school_grade:row.school_grade,school_system:row.school_system,school_track:row.school_track}).eq("user_id",user.id):await db.from("student_profiles").insert(row);if(result.error)return say("age-status","تعذر حفظ ملفك الآن. حاول مرة أخرى.",true);
+    profile=row;$("age-onboarding").close();renderGroup();await loadCommunity();say("community-status","ملفك اتظبط، وظهرتلك مجموعة صفك.");
   });
   $("community-form").addEventListener("submit",async e=>{
-    e.preventDefault();if(!user||!profile?.age_group)return say("community-status","سجّل الدخول وأكمل تحديد فئتك العمرية أولًا.",true);
+    e.preventDefault();if(!user||!profile?.age_group||!profile?.school_grade)return say("community-status","سجّل الدخول وأكمل بيانات المرحلة والصف أولًا.",true);
     const button=$("community-submit"),body=$("community-post").value.trim(),displayName=$("community-name").value.trim();
     if(body.length<3||displayName.length<1)return say("community-status","اكتب اسمًا ظاهرًا ومشاركة قصيرة.",true);
     if(/[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|https?:\/\/|www\.|(?:\+?\d[\s()-]*){8,}/i.test(body))return say("community-status","احذف البريد أو رقم الهاتف أو الرابط من المشاركة لحماية خصوصيتك.",true);
     button.disabled=true;
-    const {error}=await db.from("student_posts").insert({author_id:user.id,age_group:profile.age_group,display_name:displayName.slice(0,40),body:body.slice(0,450)});
+    const {error}=await db.from("student_posts").insert({author_id:user.id,age_group:profile.age_group,school_grade:profile.school_grade,school_system:profile.school_system,school_track:profile.school_track,display_name:displayName.slice(0,40),body:body.slice(0,450)});
     button.disabled=false;if(error)return say("community-status","لم تُنشر المشاركة. لا تكتب بريدًا أو رقم هاتف أو رابطًا، ثم جرّب مرة أخرى.",true);
     $("community-post").value="";say("community-status","وصلت مشاركتك إلى مجموعتك الدراسية.");await loadCommunity();
   });
