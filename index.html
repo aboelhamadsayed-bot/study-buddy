@@ -193,10 +193,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 /* Mobile navigation: five shortcuts plus a More menu */
 @media(max-width:700px){
  .sidebar .nav{grid-template-columns:repeat(6,minmax(0,1fr));align-items:stretch}
- .sidebar .nav>.more-nav-items{display:none;position:absolute;bottom:calc(100% + 9px);left:10px;right:10px;background:#102b4a;border:1px solid #ffffff25;border-radius:15px;padding:8px;box-shadow:0 -8px 28px #071a3030;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+ .sidebar .nav>.more-nav-items{display:none;position:fixed;bottom:calc(68px + env(safe-area-inset-bottom));left:10px;right:10px;background:#102b4a;border:1px solid #ffffff25;border-radius:15px;padding:8px;box-shadow:0 -8px 28px #071a3030;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
  .sidebar .nav>.more-nav-items.open{display:grid}
- .sidebar .nav>.more-nav-items[hidden]{display:none}
- .sidebar .nav>.more-nav-items button{min-height:58px;padding:7px 3px}
+  .sidebar .nav>.more-nav-items button{min-height:58px;padding:7px 3px}
  .sidebar .nav>.more-nav-toggle{min-height:51px;padding:7px 2px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;text-align:center;border-radius:10px;font-size:9px;line-height:1.25;white-space:normal}
  .sidebar .nav>.more-nav-toggle .ico{width:auto;font-size:19px;line-height:1.2}
 }
@@ -243,7 +242,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 <button data-view="exams"><span class="ico">▣</span> الامتحانات والنتائج</button>
 <button data-view="library"><span class="ico">▤</span> المكتبة</button>
 <button data-view="assistant"><span class="ico">✧</span> المساعد الذكي</button>
-<div class="more-nav-items" id="moreNavItems" hidden>
+<div class="more-nav-items" id="moreNavItems">
 <button data-view="community"><span class="ico">♧</span> مجتمع الطلاب</button>
 <button data-view="teacher"><span class="ico">▦</span> لوحة الأستاذ</button>
 <button data-view="settings"><span class="ico">⚙</span> الإعدادات</button>
@@ -281,7 +280,7 @@ function go(view){if(!titles[view])return;$$('.view').forEach(v=>v.classList.tog
 $('#nav').addEventListener('click',e=>{const b=e.target.closest('[data-view]');if(b)go(b.dataset.view)});
 const moreNavToggle=document.getElementById('moreNavToggle');
 const moreNavItems=document.getElementById('moreNavItems');
-if(moreNavToggle&&moreNavItems){moreNavToggle.addEventListener('click',()=>{const open=moreNavItems.hidden;moreNavItems.hidden=!open;moreNavItems.classList.toggle('open',open);moreNavToggle.setAttribute('aria-expanded',String(open));});moreNavItems.addEventListener('click',e=>{if(e.target.closest('[data-view]')){moreNavItems.hidden=true;moreNavItems.classList.remove('open');moreNavToggle.setAttribute('aria-expanded','false');}});}
+if(moreNavToggle&&moreNavItems){moreNavToggle.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();const open=moreNavItems.classList.toggle('open');moreNavToggle.setAttribute('aria-expanded',String(open));});moreNavItems.addEventListener('click',e=>{if(e.target.closest('[data-view]')){moreNavItems.classList.remove('open');moreNavToggle.setAttribute('aria-expanded','false');}});}
 
 document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)go(b.dataset.go)});
 $('#menuBtn').onclick=()=>$('#sidebar').classList.toggle('open');$('#profileBtn').onclick=()=>go('settings');$('#continueBtn').onclick=()=>go('library');$('#logout').onclick=()=>{try{localStorage.removeItem('qimmaStudentProfile')}catch{}$('#appShell').classList.add('locked');$('#loginScreen').style.display='grid';$('#loginForm').reset()};
