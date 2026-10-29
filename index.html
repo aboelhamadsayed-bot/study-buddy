@@ -220,3 +220,31 @@ $('#postForm').onsubmit=e=>{e.preventDefault();const text=$('#postText').value.t
 $('#grade').addEventListener('change',()=>{$('#settingsSystemWrap').style.display=($('#grade').value==='الصف الثاني الثانوي'||$('#grade').value==='الصف الثالث الثانوي')?'block':'none'});$('#settingsForm').onsubmit=e=>{e.preventDefault();const name=$('#fullName').value.trim()||'طالب قِمّة';const grade=$('#grade').value;let profile={};try{profile=JSON.parse(localStorage.getItem('qimmaStudentProfile')||'{}')}catch{}profile={...profile,name,grade,studySystem:$('#studySystemSettings').value};try{localStorage.setItem('qimmaStudentProfile',JSON.stringify(profile))}catch{}$('#sideName').textContent=name;$('#pageTitle').textContent='مرحبًا '+name+' 👋';$('#sideGrade').textContent=(profile.age?'السن '+profile.age+' سنة | ':'')+grade;toast('تم حفظ بياناتك على هذا الجهاز')};
 $('#tasks').addEventListener('change',()=>{const all=$$('#tasks input').length,checked=$$('#tasks input:checked').length;const pct=Math.round(checked/all*100);$('#progressLabel').textContent=pct+'%';$('#progressBar').style.width=pct+'%';toast('إنجاز مهام اليوم: '+pct+'%')});
 </script></body></html>
+
+/* Qimma auth visual polish */
+.auth-layout{border:1px solid #e8eef6;box-shadow:0 28px 90px #092b4e35}
+.auth-form-panel{background:linear-gradient(145deg,#fff 0%,#fbfdff 100%)}
+.login-card{max-width:460px}
+.login-card #authIntro{line-height:1.9;margin-bottom:25px}
+.auth-field{margin-bottom:16px}
+.login-card input:not([type=checkbox]),.login-card select{min-height:48px;font-size:14px}
+#loginForm .auth-field:has(#loginPassword)+#authOptions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 18px;padding:0;min-height:26px}
+#loginForm #authOptions .remember-label{display:flex;align-items:center;gap:8px;white-space:nowrap;font-size:12px;color:#526782}
+#loginForm #authOptions .remember-label input{flex:0 0 16px;margin:0}
+#loginForm #authOptions .forgot-button{display:inline-flex;align-items:center;justify-content:flex-start;width:auto!important;margin:0!important;padding:4px 0!important;white-space:nowrap;font-size:12px;color:#2468d8}
+#loginForm #authOptions[hidden]{display:none!important}
+.auth-submit{min-height:49px;box-shadow:0 8px 18px #2468ed24;transition:transform .18s,box-shadow .18s}
+.auth-submit:hover{transform:translateY(-1px);box-shadow:0 11px 22px #2468ed30}
+.auth-art{background:radial-gradient(ellipse at 50% 68%,#18558e 0,#0b315c 49%,#061d36 100%)}
+@media(max-width:760px){
+ .login-screen{padding:10px;align-items:start}
+ .auth-layout{grid-template-columns:1fr;min-height:0;width:min(520px,100%);margin:auto;border-radius:20px}
+ .auth-form-panel{padding:clamp(22px,6vw,34px)}
+ .login-card{max-height:none;overflow:visible}
+ .auth-art{display:none}
+}
+@media(max-width:380px){
+ .auth-form-panel{padding:20px 16px}
+ #loginForm .auth-field:has(#loginPassword)+#authOptions{gap:8px}
+ #loginForm #authOptions .remember-label,#loginForm #authOptions .forgot-button{font-size:11px}
+}
