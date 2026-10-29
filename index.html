@@ -297,6 +297,21 @@ body{background:radial-gradient(ellipse at 45% 0%,#103765 0,#061a35 62%);color:#
   .sidebar .nav .ico{width:23px!important;font-size:17px!important}
 }
 
+
+/* Desktop sidebar: visible scrollbar for dragging the menu up and down */
+@media(min-width:701px){
+  .sidebar{
+    position:sticky!important;top:0!important;align-self:start!important;
+    height:100vh!important;max-height:100vh!important;
+    overflow-y:auto!important;overflow-x:hidden!important;
+    scrollbar-width:thin!important;
+    scrollbar-color:rgba(255,255,255,.62) rgba(255,255,255,.14)!important;
+  }
+  .sidebar::-webkit-scrollbar{width:9px}
+  .sidebar::-webkit-scrollbar-track{background:rgba(255,255,255,.14);border-radius:12px}
+  .sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.62);border-radius:12px;border:2px solid transparent;background-clip:padding-box}
+  .sidebar::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.9);background-clip:padding-box}
+}
 </style></head>
 <body>
 <section class="login-screen" id="loginScreen">
