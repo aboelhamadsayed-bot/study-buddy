@@ -46,15 +46,10 @@
       });
 
       const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get("loggedout") === "1") {
-        history.replaceState(null, "", window.location.pathname);
-        // The account page is also used after sign-out; show a clear, non-sensitive confirmation.
-        window.addEventListener("DOMContentLoaded", () => {
-          const messageNode = $("message");
-          if (messageNode) { messageNode.textContent = "تم تسجيل الخروج. يمكنك تسجيل الدخول مرة أخرى بأمان."; messageNode.dataset.kind = "success"; }
-        }, { once: true });
-      }
+      const justLoggedOut = urlParams.get("loggedout") === "1";
+      if (justLoggedOut) history.replaceState(null, "", window.location.pathname);
       function notify(text, kind = "info") { message.textContent = text; message.dataset.kind = kind; }
+      if (justLoggedOut) notify("تم تسجيل الخروج. يمكنك تسجيل الدخول مرة أخرى بأمان.", "success");
       function clearMessage() { message.textContent = ""; message.removeAttribute("data-kind"); }
       function setMode(next) {
         mode = next; const isSignup = mode === "signup";
