@@ -154,7 +154,8 @@
           score: roundPoints, correct_count: correctCount, question_count: answeredCount
         });
         if (error) throw error;
-        $("challenge-status").textContent = "تم حفظ نتيجة الجولة على حسابك بنجاح، بالإضافة إلى النقاط المحفوظة على الجهاز.";\n        await loadHistory();
+        $("challenge-status").textContent = "تم حفظ نتيجة الجولة على حسابك بنجاح، بالإضافة إلى النقاط المحفوظة على الجهاز.";
+        await loadHistory();
       } catch (_) {
         $("challenge-status").textContent = "لم نتمكن من حفظ النتيجة على الحساب الآن؛ نقاط الجهاز ما زالت محفوظة. حاول تسجيل الدخول مجددًا.";
       }
