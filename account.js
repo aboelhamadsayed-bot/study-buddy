@@ -64,8 +64,8 @@
         $("name").required = isSignup; $("birth-date").required = isSignup; schoolStage.required = isSignup; schoolGrade.required = isSignup; $("confirm-password").required = isSignup;
         clearMessage();
       }
-      loginTab.addEventListener("click", () => setMode("login"));
-      signupTab.addEventListener("click", () => setMode("signup"));
+      loginTab.addEventListener("click", () => { setMode("login"); history.replaceState(null, "", window.location.pathname); });
+      signupTab.addEventListener("click", () => { setMode("signup"); history.replaceState(null, "", window.location.pathname + "?mode=signup"); });
       document.querySelectorAll("[data-toggle-password]").forEach(button => button.addEventListener("click", () => {
         const input = $(button.dataset.togglePassword), visible = input.type === "text";
         input.type = visible ? "password" : "text"; button.textContent = visible ? "إظهار" : "إخفاء";
@@ -149,6 +149,7 @@
           }
         });
       }
+      setMode(urlParams.get("mode") === "signup" ? "signup" : "login");
       if (!client) notify("لم يتم إعداد اتصال Supabase.", "info");
     })();
 
