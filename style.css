@@ -1172,3 +1172,69 @@ button,.welcome-cta,.feature-button { transition:transform .18s,box-shadow .18s,
   .dashboard-stats .stat-box { border-radius:18px; }
   .mobile-tabbar { border-color:#dce8f5; box-shadow:0 12px 34px #12375d20; }
 }
+
+
+/* QIMMA REFERENCE MATCH · mountain-blue student dashboard */
+:root{
+ --bg:#f2f6fc;--card:#fff;--text:#142d4d;--muted:#6e83a1;
+ --primary:#1768ee;--primary-dark:#104db7;--soft:#eaf2ff;--border:#dce7f6;
+}
+body{background:linear-gradient(180deg,#edf4fc 0%,#f7f9fd 45%,#edf4fc 100%);color:#142d4d}
+.navbar{position:sticky;top:0;z-index:50;margin:0 auto;padding:12px clamp(16px,4vw,64px);background:rgba(10,32,60,.97);color:#fff;border:0;box-shadow:0 8px 30px #0a24451c;backdrop-filter:blur(14px)}
+.nav-brand,.nav-brand-copy strong,.nav-brand-copy small,.nav-actions a{color:#fff}
+.nav-mark{background:linear-gradient(145deg,#3f91ff,#1553d6);box-shadow:0 6px 18px #1768ee55;border-radius:12px}
+.nav-actions .account-link,.theme-toggle,.search-toggle{border:1px solid #ffffff2b;background:#ffffff12;color:#fff}
+.section-nav{background:#102b4b;color:#e7f1ff;border:0;box-shadow:0 7px 22px #0c2a4b20;gap:8px;padding:10px clamp(12px,4vw,60px);scrollbar-width:thin}
+.section-nav a{color:#d6e6ff;border-radius:10px;padding:9px 13px;font-weight:700;white-space:nowrap;transition:background .2s,color .2s}
+.section-nav a:hover,.section-nav a:focus-visible{background:#1768ee;color:#fff}
+.container{max-width:1440px;padding-inline:clamp(14px,3vw,42px)}
+.welcome-dashboard{position:relative;overflow:hidden;isolation:isolate;border:1px solid #274d78;border-radius:24px;background:linear-gradient(112deg,#0a2444 0%,#10345b 54%,#1768a1 100%);box-shadow:0 18px 46px #0a2c5528;color:#fff}
+.welcome-dashboard:before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 80% 15%,#4e9ce34a,transparent 35%),linear-gradient(0deg,#071a33a8,transparent 65%);pointer-events:none}
+.welcome-dashboard .welcome-copy h1,.welcome-dashboard .welcome-copy p{color:#fff}
+.welcome-dashboard .welcome-copy h1{font-size:clamp(2rem,4vw,3.7rem);line-height:1.35;letter-spacing:-1px}
+.welcome-dashboard .welcome-copy h1 span{color:#7cbaff}
+.welcome-dashboard .small,.welcome-dashboard .dua{color:#d3e5ff}
+.welcome-visual{border:1px solid #ffffff24;border-radius:22px;background:linear-gradient(145deg,#0b2443,#174879);box-shadow:inset 0 1px #ffffff12}
+.visual-mark{color:#e8f3ff;text-shadow:0 0 45px #64aaff80}
+.visual-ring{border-color:#72b3ff30}
+.visual-session,.visual-note{border:1px solid #ffffff27;background:#ffffff12;color:#fff;backdrop-filter:blur(12px);border-radius:15px}
+.visual-session small,.visual-session span,.visual-note small,.visual-note b{color:#e0edff}
+.welcome-cta,.primary,.feature-button{background:linear-gradient(135deg,#287cff,#1558dd);box-shadow:0 7px 18px #1768ee38;color:#fff}
+.welcome-secondary-cta{border:1px solid #ffffff52;color:#fff;background:#ffffff0c}
+.card,.stat-box,.tool-launch-card,.step-card,.resource-tile{border-radius:18px}
+.card{border:1px solid #e0e9f6;background:#fff;box-shadow:0 8px 28px #173d6810}
+.section-heading h2,.card>h2{color:#16365d}
+.section-kicker{color:#1768ee}
+.section-icon,.age-pill{border:1px solid #d6e6ff;background:#edf5ff;color:#1768ee}
+.dashboard-stats .stat-box{border:1px solid #e0e9f6;background:#fff;box-shadow:0 7px 22px #173d680c}
+.stat-box>span{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:#edf5ff}
+.stat-box h3{color:#1768ee}
+.tool-launch-card{border:1px solid #e0e9f6;box-shadow:0 7px 20px #173d680b;background:#fff}
+.tool-launch-ai,.tool-launch-video,.tool-launch-challenge{background:linear-gradient(145deg,#f1f7ff,#fff)}
+.tool-launch-card>span{box-shadow:0 5px 14px #173c6412}
+.step-card{box-shadow:0 7px 20px #173d6810}
+.step-one{background:linear-gradient(145deg,#0c2c50,#1768c5)}
+.step-two{background:linear-gradient(145deg,#eaf3ff,#fff)}
+.step-three{background:linear-gradient(145deg,#edf8ff,#fff)}
+.timer-card{background:linear-gradient(160deg,#fff,#f0f6ff)}
+.timer{color:#1768ee}
+.progress{overflow:hidden;border-radius:999px;background:#e7eef8}
+.progress>div{border-radius:999px;background:linear-gradient(90deg,#1768ee,#52b9ff)}
+input,select,textarea{border-color:#dce7f6;border-radius:12px;background:#fbfdff}
+input:focus,select:focus,textarea:focus{outline:3px solid #1768ee1c;border-color:#77a9fa}
+.secondary{border:1px solid #dce7f6;background:#f6f9ff}
+.resource-tile{border:1px solid #e0e9f6;background:#fafdff}
+.resource-tile:hover{border-color:#b8d4ff;background:#eff6ff}
+.community-feed article,.community-post,.task-list li{border-color:#e0e9f6;border-radius:16px}
+.assistant-float,.scroll-top{background:linear-gradient(135deg,#287cff,#124fc0)}
+.site-footer{background:#0b2440;color:#e5efff;border-color:#254568}
+@media(min-width:681px){.container{margin-top:24px}.navbar{margin-top:0}}
+@media(max-width:680px){
+ body{background:#f0f5fc}
+ .navbar{background:#0b2440;border-radius:0}
+ .section-nav{background:#102b4b}
+ .welcome-dashboard{border-radius:20px}
+ .card{border-radius:18px}
+ .dashboard-stats .stat-box{border-radius:16px}
+ .mobile-tabbar{border-color:#dce7f6;box-shadow:0 12px 34px #12375d20}
+}
