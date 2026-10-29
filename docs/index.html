@@ -193,7 +193,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 /* Mobile navigation: five shortcuts plus a More menu */
 @media(max-width:700px){
  .sidebar .nav{grid-template-columns:repeat(6,minmax(0,1fr));align-items:stretch}
- .sidebar .nav>.more-nav-items{display:none!important;position:fixed;z-index:60;bottom:calc(68px + env(safe-area-inset-bottom));left:10px;right:10px;background:#102b4a;border:1px solid #ffffff25;border-radius:15px;padding:8px;box-shadow:0 -8px 28px #071a3030;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+ .sidebar .nav>.more-nav-items{display:none!important;position:fixed;z-index:60;bottom:calc(68px + env(safe-area-inset-bottom));left:10px;right:10px;background:#102b4a;border:1px solid #ffffff25;border-radius:15px;padding:8px;box-shadow:0 -8px 28px #071a3030;grid-template-columns:minmax(0,1fr);gap:5px;max-height:55dvh;overflow-y:auto}
  .sidebar .nav>.more-nav-items.open{display:grid!important}
   .sidebar .nav>.more-nav-items button{min-height:58px;padding:7px 3px}
  .sidebar .nav>.more-nav-toggle{min-height:51px;padding:7px 2px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;text-align:center;border-radius:10px;font-size:9px;line-height:1.25;white-space:normal}
