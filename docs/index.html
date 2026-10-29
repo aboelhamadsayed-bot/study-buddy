@@ -193,8 +193,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 /* Mobile navigation: five shortcuts plus a More menu */
 @media(max-width:700px){
  .sidebar .nav{grid-template-columns:repeat(6,minmax(0,1fr));align-items:stretch}
- .sidebar .nav>.more-nav-items{display:none;position:fixed;bottom:calc(68px + env(safe-area-inset-bottom));left:10px;right:10px;background:#102b4a;border:1px solid #ffffff25;border-radius:15px;padding:8px;box-shadow:0 -8px 28px #071a3030;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
- .sidebar .nav>.more-nav-items.open{display:grid}
+ .sidebar .nav>.more-nav-items{display:none!important;position:fixed;z-index:60;bottom:calc(68px + env(safe-area-inset-bottom));left:10px;right:10px;background:#102b4a;border:1px solid #ffffff25;border-radius:15px;padding:8px;box-shadow:0 -8px 28px #071a3030;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+ .sidebar .nav>.more-nav-items.open{display:grid!important}
   .sidebar .nav>.more-nav-items button{min-height:58px;padding:7px 3px}
  .sidebar .nav>.more-nav-toggle{min-height:51px;padding:7px 2px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;text-align:center;border-radius:10px;font-size:9px;line-height:1.25;white-space:normal}
  .sidebar .nav>.more-nav-toggle .ico{width:auto;font-size:19px;line-height:1.2}
@@ -277,10 +277,8 @@ async function hashDemoPassword(value){const bytes=new TextEncoder().encode(valu
 
 function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)}
 function go(view){if(!titles[view])return;$$('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+view));$$('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===view));$('#pageTitle').textContent=titles[view][0];$('#pageSubtitle').textContent=titles[view][1];$('#sidebar').classList.remove('open');window.scrollTo({top:0,behavior:'smooth'})}
-$('#nav').addEventListener('click',e=>{const b=e.target.closest('[data-view]');if(b)go(b.dataset.view)});
-const moreNavToggle=document.getElementById('moreNavToggle');
-const moreNavItems=document.getElementById('moreNavItems');
-if(moreNavToggle&&moreNavItems){moreNavToggle.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();const open=moreNavItems.classList.toggle('open');moreNavToggle.setAttribute('aria-expanded',String(open));});moreNavItems.addEventListener('click',e=>{if(e.target.closest('[data-view]')){moreNavItems.classList.remove('open');moreNavToggle.setAttribute('aria-expanded','false');}});}
+$('#nav').addEventListener('click',e=>{const toggle=e.target.closest('#moreNavToggle');const menu=$('#moreNavItems');const more=$('#moreNavToggle');if(toggle){e.preventDefault();const open=menu.classList.toggle('open');more.setAttribute('aria-expanded',String(open));return}const b=e.target.closest('[data-view]');if(b){menu.classList.remove('open');more.setAttribute('aria-expanded','false');go(b.dataset.view)}});
+
 
 document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)go(b.dataset.go)});
 $('#menuBtn').onclick=()=>$('#sidebar').classList.toggle('open');$('#profileBtn').onclick=()=>go('settings');$('#continueBtn').onclick=()=>go('library');$('#logout').onclick=()=>{try{localStorage.removeItem('qimmaStudentProfile')}catch{}$('#appShell').classList.add('locked');$('#loginScreen').style.display='grid';$('#loginForm').reset()};
