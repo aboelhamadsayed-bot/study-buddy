@@ -1,316 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#087de1">
-  <title>قِمّة | منصتك التعليمية</title>
-  <link rel="stylesheet" href="style.css?v=qimma-reference-blue-20261029">
-  <link rel="stylesheet" href="tool-pages.css?v=2">
-  <link rel="manifest" href="manifest.json">
-
-</head>
-<body>
-  <header class="navbar">
-    <button id="menuToggle" class="menu-toggle" type="button" aria-label="فتح قائمة أدوات قِمّة" aria-haspopup="dialog" aria-controls="more-menu"><span aria-hidden="true">☰</span></button>
-    <a class="nav-brand" href="index.html" aria-label="قِمّة، الصفحة الرئيسية">
-      <span class="nav-mark" aria-hidden="true">ق</span>
-      <span class="nav-brand-copy"><strong>قِمّة</strong><small>رفيق المذاكرة والإنجاز</small></span>
-    </a>
-    <div class="nav-actions">
-      <a href="account.html" class="account-link"><span aria-hidden="true">✦</span> حساب الطالب</a>
-      <button id="searchToggle" class="search-toggle" type="button" aria-label="ابحث عن شرح لصفك"><span aria-hidden="true">⌕</span></button>
-      <button id="themeBtn" class="theme-toggle" type="button" aria-label="تغيير المظهر">🌙</button>
-    </div>
-  </header>
-
-<nav class="section-nav" aria-label="أقسام المنصة">
-  <a href="#dashboard-home"><span aria-hidden="true">⌂</span> الرئيسية</a>
-  <a href="#focus-timer"><span aria-hidden="true">◷</span> جلسة التركيز</a>
-  <a href="tutor.html"><span aria-hidden="true">✦</span> الأستاذ الذكي</a>
-  <a href="videos.html"><span aria-hidden="true">▷</span> الفيديوهات</a>
-  <a href="challenge.html"><span aria-hidden="true">🏆</span> المسابقة</a>
-  <a href="prayer.html"><span aria-hidden="true">🕌</span> الأذان</a>
-  <a href="break.html"><span aria-hidden="true">☕</span> الاستراحة</a>
-  <a href="english.html"><span aria-hidden="true">En</span> الإنجليزية</a>
-  <a href="#book-library"><span aria-hidden="true">▤</span> مكتبة الكتب</a>
-  <a href="#student-community"><span aria-hidden="true">◎</span> مجتمع الطلاب</a>
-</nav>
-  <main class="container">
-    <section class="welcome welcome-dashboard" id="dashboard-home">
-      <div class="welcome-copy">
-        <p class="small"><span class="live-dot"></span> كل أدوات مذاكرتك في مكان واحد</p>
-        <h1>منصة متكاملة<br>عشان توصل للقِمّة <span>✦</span></h1>
-        <p>اختار صفك، اسأل الأستاذ الذكي، نظّم مهامك، وذاكر بالطريقة اللي تناسبك.</p>
-        <p class="dua">﴿ وَقُل رَّبِّ زِدْنِي عِلْمًا ﴾</p>
-        <div class="welcome-actions">
-          <a class="welcome-cta" href="#student-schedule">ابدأ رحلتك <span aria-hidden="true">←</span></a>
-          <a class="welcome-secondary-cta" href="videos.html">اكتشف الشروحات</a>
-        </div>
-      </div>
-      <div class="welcome-visual" aria-hidden="true">
-        <div class="visual-grid"></div>
-        <div class="visual-ring visual-ring-one"></div><div class="visual-ring visual-ring-two"></div>
-        <div class="visual-mark">ق</div>
-        <div class="visual-session"><span>خطة مذاكرتك</span><strong>خطوة ١</strong><small><i></i> اختار صفك ومادتك</small></div>
-        <div class="visual-note"><span>✓</span><div><b>شرح وتنظيم وإنجاز</b><small>كلها مع قِمّة</small></div></div>
-      </div>
-    </section>
-
-    <section class="stats dashboard-stats" aria-label="ملخص إنجازك">
-      <div class="stat-box"><span>🏆</span><h3 id="sessions">0</h3><p>جلسات مكتملة</p></div>
-      <div class="stat-box"><span>⭐</span><h3 id="points">0</h3><p>نقاط الإنجاز</p></div>
-      <div class="stat-box"><span>⏳</span><h3 id="minutes">0</h3><p>دقائق مذاكرة</p></div>
-    </section>
-
-    <section class="card tool-launcher" aria-labelledby="tools-title">
-      <div class="section-heading"><div><span class="section-kicker">كل أداة في مساحتها</span><h2 id="tools-title">تختار نبدأ بإيه؟</h2></div><span class="section-icon">✦</span></div>
-      <div class="tool-launch-grid">
-        <a class="tool-launch-card tool-launch-ai" href="tutor.html"><span>✦</span><strong>الأستاذ الذكي</strong><small>حل خطوة بخطوة، شرح، ملخص وخريطة ذهنية</small><b>افتح مساحة الأستاذ ←</b></a>
-        <a class="tool-launch-card tool-launch-video" href="videos.html"><span>▶</span><strong>فيديوهات الشرح</strong><small>اختار الصف والمادة وشغّل الفيديو داخل قِمّة</small><b>افتح مكتبة الفيديو ←</b></a>
-        <a class="tool-launch-card tool-launch-challenge" href="challenge.html"><span>🏆</span><strong>تحدّي قِمّة</strong><small>جاوب، راجع التفسير، واجمع نقاطك</small><b>ابدأ التحدي ←</b></a>
-      </div>
-    </section>
-
-    <section class="card journey-steps" aria-labelledby="journey-title">
-      <div class="section-heading"><div><span class="section-kicker">ابدأ بخطوات واضحة</span><h2 id="journey-title">رحلتك للمذاكرة في ٣ خطوات</h2></div><span class="age-pill">اختار وابدأ</span></div>
-      <div class="step-grid">
-        <a class="step-card step-one" href="videos.html"><span class="step-number">١</span><span class="step-icon">▤</span><h3>اختار صفك ومادتك</h3><p>حدد مرحلتك عشان توصل لشروحات أقرب لمنهجك.</p><span class="step-link">اختار الصف ←</span></a>
-        <a class="step-card step-two" href="tutor.html"><span class="step-number">٢</span><span class="step-icon">✦</span><h3>افهم بالطريقة اللي تناسبك</h3><p>اسأل الأستاذ الذكي، واطلب شرحًا أو ملخصًا أو تدريبًا.</p><span class="step-link">اسأل الأستاذ ←</span></a>
-        <a class="step-card step-three" href="#focus-timer"><span class="step-number">٣</span><span class="step-icon">⏱</span><h3>نظّم وقتك وكمّل</h3><p>ابدأ جلسة تركيز، رتّب مهامك، وتابع إنجازك.</p><span class="step-link">ابدأ جلسة ←</span></a>
-      </div>
-    </section>
-
-    <section class="card timer-card" id="focus-timer">
-      <p id="mode">🎯 وقت المذاكرة</p>
-      <div id="timer" class="timer">25:00</div>
-      <div class="progress"><div id="progressBar"></div></div>
-      <div class="buttons">
-        <button id="startBtn" class="primary">ابدأ المذاكرة</button>
-        <button id="pauseBtn" class="secondary">إيقاف مؤقت</button>
-        <button id="resetBtn" class="secondary">إعادة</button>
-      </div>
-      <div class="settings">
-        <label>مدة المذاكرة بالدقائق
-          <input id="studyMinutes" type="number" min="1" max="180" value="25">
-        </label>
-        <label>مدة الراحة بالدقائق
-          <input id="breakMinutes" type="number" min="1" max="60" value="5">
-        </label>
-      </div>
-      <p id="message" aria-live="polite">ابدأ بأول جلسة، وسيصبح الإنجاز عادة بإذن الله.</p>
-    </section>
-
-<section class="card learning-exchange" id="teacher-paths">
-<div class="section-heading"><div><span class="section-kicker">اختار طريق مذاكرتك</span><h2>مصادر وخطوات توصّلك للفهم</h2></div><span class="age-pill">اختار واضغط وابدأ</span></div>
-<p>جمعنالك مسارات واضحة ومصادر خارجية في مكان واحد. اختار اللي يناسب صفك وادخل مباشرة.</p>
-<div class="teacher-layout">
-<article class="teacher-feature physics-feature"><span class="provider-tag">مسار الفيزياء</span><h3>من الشرح للتدريب… خطوة بخطوة</h3><p>ابدأ بمحاضرة، طبّق على الأسئلة، وبعدها اختبر نفسك وراجع النقاط اللي محتاجة تركيز.</p>
-<div class="lesson-flow" aria-label="خطوات المذاكرة"><span><b>١</b> شرح</span><i aria-hidden="true">←</i><span><b>٢</b> تطبيق</span><i aria-hidden="true">←</i><span><b>٣</b> اختبار</span><i aria-hidden="true">←</i><span><b>٤</b> مراجعة</span></div>
-<a class="feature-button" href="https://abdelmaaboud.com/" target="_blank" rel="noopener noreferrer">افتح منصة أستاذ الفيزياء ↗</a><small>منصة خارج قِمّة؛ قد تحتاج حسابًا أو اشتراكًا.</small></article>
-<article class="teacher-feature english-feature"><span class="provider-tag">English · إنجليشاوي</span><h3>ذاكر، راجع، امتحن</h3><p>مسار جانبي للإنجليزي فيه محاضرات وكويزات ومراجعة تساعدك تتابع اللي ذاكرته.</p>
-<div class="english-units"><span>📺 محاضرات</span><span>✍️ كويزات</span><span>🔁 مراجعة</span></div>
-<a class="feature-button" href="https://www.mrenglishawy.com/" target="_blank" rel="noopener noreferrer">ادخل منصة إنجليشاوي ↗</a><small>الموقع الخارجي قد يطلب تسجيل الدخول أو الاشتراك.</small></article>
-</div>
-<div class="course-discovery"><div><span class="provider-tag">اكتشف حسب صفك</span><h3>بسطتهالك في البحث عن المنهج</h3><p>اختار صفك في قِمّة عشان توصل لنتائج شرح الفيديو المناسبة، أو افتح منصة الكورسات مباشرة.</p></div>
-<div class="course-actions"><a class="feature-button soft-button" href="videos.html">اختار الصف والمادة في قِمّة</a><a class="text-link" href="https://2026.bassthalk.com/home" target="_blank" rel="noopener noreferrer">تصفح منصة بسطتهالك ↗</a></div></div>
-<small class="provider-disclaimer">المنصات المذكورة مستقلة عن قِمّة؛ الروابط تفتح مواقعها الرسمية، وقد تختلف المواد أو تتطلب اشتراكًا.</small></section>
-<section class="card tutor-card" id="smart-tutor">
-<div class="section-heading"><div><span class="section-kicker">رفيقك وقت ما تتعطّل</span><h2>✨ المساعد الذكي</h2></div><span class="age-pill" id="student-age-label">اضبط فئتك العمرية</span></div>
-<p>اسأله عن درس أو سؤال، واختر شرحًا مبسطًا أو ملخصًا أو خريطة ذهنية أو تدريبًا.</p>
-<form id="tutor-form" class="tutor-form">
-<label for="tutor-mode">طريقة الأستاذ</label><select id="tutor-mode"><option value="solve">حل السؤال واشرحه خطوة بخطوة</option><option value="explain">اشرحلي الفكرة ببساطة</option><option value="summary">لخّص الدرس</option><option value="mindmap">اعمل خريطة ذهنية</option><option value="quiz">اختبر فهمي</option></select>
-<label for="tutor-grade">صفك الدراسي</label><select id="tutor-grade"><option value="">اختار صفك (اختياري)</option><optgroup label="المرحلة الابتدائية"><option value="primary1">أولى ابتدائي</option><option value="primary2">تانية ابتدائي</option><option value="primary3">تالتة ابتدائي</option><option value="primary4">رابعة ابتدائي</option><option value="primary5">خامسة ابتدائي</option><option value="primary6">سادسة ابتدائي</option></optgroup><optgroup label="المرحلة الإعدادية"><option value="prep1">أولى إعدادي</option><option value="prep2">تانية إعدادي</option><option value="prep3">تالتة إعدادي</option></optgroup><optgroup label="المرحلة الثانوية"><option value="secondary1">أولى ثانوي</option><option value="secondary2">تانية ثانوي</option><option value="secondary3">تالتة ثانوي</option></optgroup></select>
-<div id="tutor-system-wrap" class="hidden"><label for="tutor-system">نظام تانية ثانوي</label><select id="tutor-system"><option value="general">الثانوية العامة</option><option value="bac">البكالوريا المصرية</option></select></div>
-<div id="tutor-track-wrap" class="hidden"><label for="tutor-track">مسار البكالوريا</label><select id="tutor-track"><option value="medicine">الطب وعلوم الحياة</option><option value="engineering">الهندسة وعلوم الحاسب</option><option value="business">الأعمال</option><option value="arts">الآداب والفنون</option></select></div>
-<label for="tutor-subject">المادة</label><input id="tutor-subject" maxlength="80" placeholder="مثال: رياضيات، علوم، عربي" required>
-<label for="tutor-question">اكتب أي سؤال أو مسألة</label><textarea id="tutor-question" rows="4" maxlength="1800" placeholder="اكتب السؤال زي ما هو، والأستاذ يبدأ الحل فورًا…" required></textarea>
-<button id="tutor-submit" class="primary" type="submit">اسأل الأستاذ ✦</button></form>
-<p id="tutor-status" role="status" aria-live="polite"></p><div id="tutor-answer" class="tutor-answer tutor-chat" hidden aria-live="polite"></div>
-<form id="tutor-followup" class="tutor-followup hidden"><label for="tutor-followup-question">كمّل سؤالك مع الأستاذ</label><div><input id="tutor-followup-question" maxlength="1200" placeholder="مثلاً: ممكن تبسط الخطوة التانية؟" required><button class="primary" type="submit">اسأل</button></div></form>
-<a id="tutor-video-search" class="resource-link" href="#" target="_blank" rel="noopener noreferrer" hidden>▶ ابحث عن فيديو شرح للدرس</a><small class="privacy-note">المساعد أداة تعليمية؛ راجع المسائل المهمة مع مدرسك ولا تكتب بيانات شخصية.</small></section>
-<section class="card library-card" id="book-library"><div class="section-heading"><div><span class="section-kicker">مصادر تتراجع لها</span><h2>📚 مكتبة الكتب</h2></div><span class="section-icon">↗</span></div><p>روابط لمصادر تعليمية، اختار المرحلة وافتح الكتاب من المصدر.</p><div class="resource-grid">
-<a class="resource-tile" href="https://studentbooks.moe.gov.eg/" target="_blank" rel="noopener noreferrer"><span>🏫</span><strong>كتب وزارة التربية والتعليم</strong><small>الكتب المدرسية الرسمية</small></a>
-<a class="resource-tile" href="https://ellibrary.moe.gov.eg/" target="_blank" rel="noopener noreferrer"><span>🗂️</span><strong>المكتبة الإلكترونية</strong><small>محتوى تعليمي من الوزارة</small></a>
-<a class="resource-tile" href="https://nafham.com/" target="_blank" rel="noopener noreferrer"><span>📖</span><strong>نفهم</strong><small>شرح دروس ومراجعات بالعربية</small></a></div><p class="resource-footnote">قد تختلف المواد المتاحة حسب الصف الدراسي.</p></section>
-<section class="card video-card" id="learning-videos">
-<div class="section-heading"><div><span class="section-kicker">شرح مناسب لصفّك</span><h2>▶ فيديوهات تعليمية</h2></div><span class="section-icon">✦</span></div>
-<p>اختار المرحلة والصف والمادة عشان نجهز لك بحث فيديوهات أقرب لمنهجك.</p>
-<form id="video-finder" class="video-finder">
-<label for="video-stage">المرحلة</label><select id="video-stage"><option value="prep">المرحلة الإعدادية</option><option value="secondary">المرحلة الثانوية</option></select>
-<label for="video-grade">الصف الدراسي</label><select id="video-grade"></select>
-<div id="video-system-wrap" class="hidden"><label for="video-system">النظام الدراسي</label><select id="video-system"><option value="general">الثانوية العامة</option><option value="bac">البكالوريا المصرية</option></select></div>
-<div id="video-path-wrap" class="hidden"><label for="video-path">مسار البكالوريا</label><select id="video-path"><option value="medicine">الطب وعلوم الحياة</option><option value="engineering">الهندسة وعلوم الحاسب</option><option value="business">الأعمال</option><option value="arts">الآداب والفنون</option></select></div>
-<label for="video-subject">المادة</label><select id="video-subject"></select><button class="primary" type="submit">اعرض فيديوهات الشرح ↗</button></form>
-<div id="video-results" class="video-results" hidden><p id="video-results-title"></p><div><a id="video-youtube" class="resource-link" target="_blank" rel="noopener noreferrer">▶ نتائج فيديوهات الشرح</a><a id="video-nafham" class="resource-link" href="https://nafham.com/" target="_blank" rel="noopener noreferrer">📚 افتح نفهم</a><a id="video-bac-books" class="resource-link hidden" href="https://ellibrary.moe.gov.eg/EgyptianBaccalaureate/" target="_blank" rel="noopener noreferrer">📘 كتب البكالوريا الرسمية</a></div></div>
-<small class="privacy-note">روابط الفيديو تفتح نتائج بحث خارجية؛ راجع المدرس ومحتوى الفيديو، وتأكد من مطابقته لمنهجك.</small></section>
-<section class="card community-card" id="student-community"><div class="section-heading"><div><span class="section-kicker">نتعلم مع بعض</span><h2>👥 مجتمع الطلاب</h2></div><span class="age-pill" id="community-group-label">مجموعة صفك</span></div><p>شارك سؤالًا أو فكرة دراسية مع طلاب قريبين من عمرك وفي نفس صفك ونظامك. استخدم اسمًا مستعارًا لو تحب.</p><form id="community-form" class="community-form"><label for="community-name">الاسم الظاهر</label><input id="community-name" maxlength="40" placeholder="اسم أول أو اسم مستعار" required><label for="community-post">مشاركتك</label><textarea id="community-post" rows="3" maxlength="450" placeholder="سؤال دراسي من غير بيانات تواصل أو صور…" required></textarea><button class="primary" id="community-submit" type="submit">شارك في مجموعتي</button></form><p id="community-status" role="status" aria-live="polite"></p><div id="community-feed" class="community-feed" aria-live="polite"><p class="muted">سجّل الدخول لعرض المجموعة.</p></div><small class="privacy-note">المشاركات ظاهرة لطلاب مجموعتك. لا تنشر بيانات تواصل أو مكانك، واطلب مساعدة ولي أمرك إذا أزعجك محتوى.</small></section>
-<dialog id="age-onboarding" class="age-dialog" aria-labelledby="age-title"><form id="age-form"><span class="dialog-mark">ق</span><h2 id="age-title">كمّل ملفك الدراسي</h2><div id="profile-dob-wrap"><p>نحسب الفئة العمرية من تاريخ الميلاد فقط، ولا نحفظ التاريخ نفسه.</p><label for="profile-dob">تاريخ الميلاد</label><input id="profile-dob" type="date"></div><label for="profile-school-stage">المرحلة الدراسية</label><select id="profile-school-stage"><option value="">اختار المرحلة</option><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="secondary">ثانوي</option></select><label for="profile-school-grade">الصف</label><select id="profile-school-grade" disabled><option value="">اختار المرحلة أولًا</option></select><div id="profile-school-system-wrap" class="hidden"><label for="profile-school-system">نظام تانية ثانوي</label><select id="profile-school-system"><option value="general">الثانوية العامة</option><option value="bac">البكالوريا المصرية</option></select></div><div id="profile-school-track-wrap" class="hidden"><label for="profile-school-track">مسار البكالوريا</label><select id="profile-school-track"><option value="medicine">الطب وعلوم الحياة</option><option value="engineering">الهندسة وعلوم الحاسب</option><option value="business">الأعمال</option><option value="arts">الآداب والفنون</option></select></div><button class="primary" type="submit">احفظ ملفك الدراسي</button><p id="age-status" role="status" aria-live="polite"></p></form></dialog>
-    <section class="card goal-card">
-      <h2>🎯 هدفك اليوم</h2>
-      <p>حدد عدد جلسات المذاكرة التي تريد إنجازها.</p>
-      <div class="goal-controls">
-        <input id="dailyGoal" type="number" min="1" max="30" value="4" aria-label="عدد الجلسات المستهدف">
-        <span>جلسات</span>
-      </div>
-      <div class="progress"><div id="goalBar"></div></div>
-      <p id="goalText">أنجز أول جلسة لتحقيق هدفك!</p>
-    </section>
-
-    <section class="card tasks-card" id="student-tasks">
-      <h2>📝 مهامي اليومية</h2>
-      <p>أضف مهامك، وحدد المادة، واكتب ملاحظات تساعدك.</p>
-      <form id="taskForm" class="task-form">
-        <input type="text" id="taskInput" placeholder="اسم المهمة" maxlength="120" required>
-        <select id="taskSubject" required>
-          <option value="عام">عام</option>
-          <option value="الرياضيات">الرياضيات</option>
-          <option value="الإنجليزي">الإنجليزي</option>
-          <option value="اللغة العربية">اللغة العربية</option>
-          <option value="العلوم">العلوم</option>
-          <option value="الدراسات">الدراسات</option>
-          <option value="البرمجة">البرمجة</option>
-          <option value="مهارة أخرى">مهارة أخرى</option>
-        </select>
-        <textarea id="taskNotes" placeholder="ملاحظات المهمة (اختياري)" rows="2" maxlength="500"></textarea>
-        <button type="submit" class="primary">+ إضافة المهمة</button>
-      </form>
-      <div class="task-summary">
-        <span>المكتمل: <strong id="completedTasks">0</strong></span>
-        <span>المتبقي: <strong id="remainingTasks">0</strong></span>
-      </div>
-      <div class="progress"><div id="tasksProgress"></div></div>
-      <p id="tasksMessage">ابدأ بإضافة أول مهمة ليك 💚</p>
-      <ul id="taskList" class="task-list"></ul>
-      <button type="button" id="clearCompleted" class="secondary full-width">حذف المهام المكتملة</button>
-    </section>
-
-    <section class="card weekly-card" id="student-schedule">
-      <h2>📅 جدول المذاكرة الأسبوعي</h2>
-      <p>أضف المواد والأنشطة التي تريد تخصيص وقت لها.</p>
-      <form id="scheduleForm" class="task-form">
-        <select id="scheduleDay" required>
-          <option value="0">الأحد</option><option value="1">الاثنين</option>
-          <option value="2">الثلاثاء</option><option value="3">الأربعاء</option>
-          <option value="4">الخميس</option><option value="5">الجمعة</option>
-          <option value="6">السبت</option>
-        </select>
-        <input id="scheduleSubject" placeholder="المادة أو النشاط" required maxlength="100">
-        <input id="scheduleTime" type="time" required>
-        <button class="primary" type="submit">إضافة للجدول</button>
-      </form>
-      <h3 id="todayScheduleTitle">جدول اليوم</h3>
-      <ul id="scheduleList" class="task-list"></ul>
-    </section>
-
-    <section class="card quran-progress-card" id="daily-quran">
-      <h2>📖 ورد القرآن اليومي</h2>
-      <p>حدد هدفًا يوميًا للقراءة وسجّل ما أنجزته اليوم.</p>
-      <label for="quranTarget">هدفي اليومي بالصفحات</label>
-      <input id="quranTarget" type="number" min="1" max="604" value="5">
-      <label for="quranRead">الصفحات التي قرأتها اليوم</label>
-      <input id="quranRead" type="number" min="0" max="604" value="0">
-      <div class="progress"><div id="quranProgress"></div></div>
-      <p id="quranMessage">ابدأ وردك اليومي 🌿</p>
-      <button id="saveQuran" class="primary" type="button">حفظ الورد</button>
-      <a class="quran-link" href="https://quran.com/ar" target="_blank" rel="noopener noreferrer">📖 افتح المصحف</a>
-    </section>
-
-    <section class="card prayer-card" id="prayer-times">
-      <h2>🕌 مواقيت الصلاة</h2>
-      <p id="prayerLocation">الجيزة، مصر</p>
-      <p id="prayerDate">جارٍ تحميل مواقيت الصلاة...</p>
-      <div id="prayerTimes" class="prayer-grid"></div>
-      <p id="nextPrayer">جارٍ تحديد الصلاة القادمة...</p>
-      <button id="prayerNotify" type="button" class="primary">تفعيل تنبيهات الصلاة</button>
-      <p id="prayerMessage">تحتاج التنبيهات إلى إذن الإشعارات وبقاء الموقع مفتوحًا.</p>
-    </section>
-
-    <section class="card skill-card" id="skill-builder">
-      <h2>🚀 تعلّم مهارة</h2>
-      <p>اختر مهارة، وحدد وقت التدريب اليومي.</p>
-      <label for="skillName">المهارة</label>
-      <select id="skillName" class="field">
-        <option value="البرمجة">البرمجة</option><option value="الإنجليزي">الإنجليزي</option>
-        <option value="الألماني">الألماني</option><option value="المونتاج">المونتاج</option>
-        <option value="مهارة أخرى">مهارة أخرى</option>
-      </select>
-      <label for="skillMinutes">دقائق التدريب المستهدفة</label>
-      <input id="skillMinutes" type="number" min="5" max="300" value="30">
-      <label for="skillDone">دقائق أنجزتها اليوم</label>
-      <input id="skillDone" type="number" min="0" max="300" value="0">
-      <div class="progress"><div id="skillProgress"></div></div>
-      <p id="skillMessage">التقدم الصغير يوميًا يصنع فرقًا كبيرًا.</p>
-      <button id="saveSkill" type="button" class="primary">حفظ تقدم المهارة</button>
-    </section>
-
-    <section class="card rewards-card">
-      <h2>🔥 سلسلة الالتزام والجوائز</h2>
-      <p>تُحتسب سلسلة الالتزام عند إكمال جلسة مذاكرة أو إنجاز مهمة في اليوم.</p>
-      <div class="stats">
-        <div class="stat-box"><span>🔥</span><h3 id="streakCount">0</h3><p>أيام متتالية</p></div>
-        <div class="stat-box"><span>🏅</span><h3 id="levelName">مبتدئ</h3><p>مستواك</p></div>
-        <div class="stat-box"><span>🎁</span><h3 id="rewardPoints">0</h3><p>نقاطك</p></div>
-      </div>
-      <p id="rewardMessage">ابدأ أول جلسة وافتح طريقك للمستوى التالي!</p>
-    </section>
-
-    <section class="card quran-card">
-      <div class="quran-icon">🕌</div>
-      <h2>استراحة مع القرآن الكريم</h2>
-      <p>اجعل للقرآن نصيبًا من يومك، واقرأ أو استمع في وقت مناسب لك.</p>
-      <a href="https://quran.com/ar" target="_blank" rel="noopener noreferrer" class="quran-link">📖 افتح القرآن الكريم</a>
-    </section>
-
-    <section class="card motivation">
-      <h2>💚 رسالة لك</h2>
-      <p id="quote">كل صفحة تذاكرها تقرّبك من هدفك.</p>
-      <button id="quoteBtn" class="secondary">رسالة تحفيزية جديدة</button>
-    </section>
-  </main>
-
-
-  <nav class="mobile-tabbar" aria-label="تنقل سريع">
-    <a href="#dashboard-home" data-nav-section="dashboard-home" aria-label="الرئيسية"><span aria-hidden="true">⌂</span><small>الرئيسية</small></a>
-    <a href="tutor.html" aria-label="الأستاذ الذكي"><span aria-hidden="true">✦</span><small>الأستاذ</small></a>
-    <a href="videos.html" aria-label="الفيديوهات"><span aria-hidden="true">▷</span><small>الفيديو</small></a>
-    <a href="challenge.html" aria-label="المسابقة"><span aria-hidden="true">🏆</span><small>تحدّي</small></a>
-    <button id="moreTab" type="button" aria-label="المزيد" aria-haspopup="dialog" aria-controls="more-menu"><span aria-hidden="true">•••</span><small>المزيد</small></button>
-  </nav>
-
-  <dialog id="more-menu" class="more-sheet" aria-labelledby="more-title">
-    <div class="more-sheet-head">
-      <span class="sheet-handle" aria-hidden="true"></span>
-      <div class="more-heading"><span class="more-heading-icon" aria-hidden="true">✦</span><div><h2 id="more-title">مذاكرتك في مكان واحد</h2><p>اختار الأداة اللي تساعدك دلوقتي</p></div></div>
-      <button class="sheet-close" type="button" aria-label="إغلاق القائمة" data-close-more>×</button>
-    </div>
-    <nav class="more-list" aria-label="أدوات قِمّة">
-      <a class="more-row" href="account.html"><span class="more-icon blue">👤</span><span class="more-copy"><strong>حساب الطالب</strong><small>سجّل الدخول وتابع بياناتك</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
-      <a class="more-row" href="break.html"><span class="more-icon lilac">⏱️</span><span class="more-copy"><strong>جلسة تركيز واستراحة</strong><small>نظّم وقت المذاكرة وخد راحتك</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
-      <a class="more-row" href="#student-tasks"><span class="more-icon rose">📝</span><span class="more-copy"><strong>مهامي اليومية</strong><small>رتّب المطلوب منك وأنجزه</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
-      <a class="more-row" href="#student-schedule"><span class="more-icon blue">📅</span><span class="more-copy"><strong>جدول المذاكرة</strong><small>خطط لموادك على مدار الأسبوع</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
-      <a class="more-row" href="tutor.html"><span class="more-icon lilac">✦</span><span class="more-copy"><strong>الأستاذ الذكي</strong><small>شرح مبسط، تلخيص، وخريطة ذهنية</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
-      <a class="more-row" href="videos.html"><span class="more-icon orange">▶️</span><span class="more-copy"><strong>فيديوهات الشرح</strong><small>اختار صفك وشغّل الدرس داخل قِمّة</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
-      <a class="more-row" href="challenge.html"><span class="more-icon blue">🏆</span><span class="more-copy"><strong>تحدّي قِمّة</strong><small>أسئلة قصيرة ونقاط للمراجعة</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
-      <a class="more-row" href="#book-library"><span class="more-icon mint">📚</span><span class="more-copy"><strong>مكتبة الكتب</strong><small>مصادر وكتب تعليمية لمرحلتك</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
-      <a class="more-row" href="#student-community"><span class="more-icon mint">👥</span><span class="more-copy"><strong>مجتمع الطلاب</strong><small>شارك سؤالًا دراسيًا مع مجموعتك</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
-      <a class="more-row" href="#daily-quran"><span class="more-icon orange">📖</span><span class="more-copy"><strong>الورد القرآني</strong><small>حدد وردك وسجل قراءتك</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
-      <a class="more-row" href="prayer.html"><span class="more-icon blue">🕌</span><span class="more-copy"><strong>الأذان ومواقيت الصلاة</strong><small>تابع المواقيت وفعّل التنبيه</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
-      <a class="more-row" href="english.html"><span class="more-icon orange">En</span><span class="more-copy"><strong>الإنجليزية</strong><small>تدريب قصير وموارد للمراجعة</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
-      <a class="more-row" href="#skill-builder"><span class="more-icon rose">🚀</span><span class="more-copy"><strong>تعلّم مهارة</strong><small>تابع تدريبك اليومي خطوة بخطوة</small></span><span class="more-chevron" aria-hidden="true">‹</span></a>
-    </nav>
-  </dialog>
-  <button id="scrollTop" class="scroll-top" type="button" aria-label="العودة إلى أعلى الصفحة" hidden>⌃</button>
-  <a class="assistant-float" href="tutor.html" aria-label="تواصل مع الأستاذ الذكي"><span aria-hidden="true">✦</span><strong>اسأل الأستاذ</strong></a>
-
-  <footer class="site-footer">
-    <span class="footer-mark" aria-hidden="true">ق</span>
-    <p>خطوة صغيرة اليوم، قِمّة أكبر بكرة. <span>✦</span></p>
-    <small>قِمّة · رفيق المذاكرة والقرآن · © 2026</small>
-  </footer>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="script.js"></script>
-  <script src="student.js?v=student-onboarding-20261029" defer></script>
-</body>
-</html>
-
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#102b4b"><title>قِمّة | منصة التعليم الذكية</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
+:root{--navy:#102b4b;--navy2:#173e68;--blue:#2168ed;--sky:#eaf2ff;--ink:#173153;--muted:#7184a0;--line:#e0e9f6;--paper:#f3f7fd;--white:#fff;--green:#26b58a;--gold:#ffbd50;--shadow:0 12px 34px #173e6810}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);font-family:Cairo,Arial,sans-serif;color:var(--ink)}button,input,select,textarea{font:inherit}button,a{transition:.18s}button{cursor:pointer}a{text-decoration:none;color:inherit}.app{min-height:100vh;display:grid;grid-template-columns:245px minmax(0,1fr)}.sidebar{height:100vh;position:sticky;top:0;background:linear-gradient(180deg,#0d2542,#14385f);color:#e8f1ff;padding:22px 15px;display:flex;flex-direction:column;gap:20px}.brand{display:flex;align-items:center;gap:10px;padding:0 9px 18px;border-bottom:1px solid #ffffff20}.brand-mark{width:44px;height:44px;border-radius:14px;background:linear-gradient(140deg,#53a4ff,#1758de);display:grid;place-items:center;color:#fff;font-weight:900;font-size:25px}.brand strong{display:block;font-size:20px}.brand small{color:#b6cce9}.profile{display:flex;align-items:center;gap:10px;background:#ffffff0c;border:1px solid #ffffff18;border-radius:16px;padding:12px}.avatar{width:43px;height:43px;border-radius:50%;background:linear-gradient(140deg,#e8f2ff,#a8cfff);display:grid;place-items:center;font-size:23px;flex-shrink:0}.profile b{display:block;font-size:13px}.profile small{color:#b6cce9;font-size:11px}.nav-label{color:#91add0;font-size:11px;font-weight:800;padding:0 12px}.nav{display:grid;gap:5px}.nav button{border:0;color:#d6e6fc;background:transparent;text-align:right;padding:11px 13px;border-radius:12px;font-weight:700;display:flex;gap:12px;align-items:center}.nav button span{width:23px;text-align:center;font-size:17px}.nav button:hover,.nav button.active{background:linear-gradient(100deg,#2b79f5,#1958d4);color:white;box-shadow:0 7px 18px #0b1f4240}.sidebar-foot{margin-top:auto;color:#9db7d8;font-size:12px;padding:10px}.main{min-width:0}.topbar{height:76px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,3vw,40px);gap:15px;position:sticky;top:0;z-index:4}.crumb{color:var(--muted);font-size:13px}.topbar h2{font-size:19px;margin:2px 0 0}.top-actions{display:flex;gap:9px;align-items:center}.iconbtn{width:42px;height:42px;border-radius:13px;border:1px solid var(--line);background:#f8fbff;color:var(--navy);font-size:17px}.primary{background:linear-gradient(135deg,#287cff,#1757db);border:0;color:#fff;border-radius:12px;padding:11px 17px;font-weight:800;box-shadow:0 7px 16px #2168ed24}.secondary{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;color:var(--ink);font-weight:700}.content{max-width:1500px;margin:auto;padding:27px clamp(14px,3vw,36px) 55px}.view{display:none;animation:fade .2s}.view.active{display:block}@keyframes fade{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}.hero{position:relative;overflow:hidden;border-radius:25px;padding:clamp(25px,4vw,48px);display:grid;grid-template-columns:1.15fr .85fr;gap:25px;align-items:center;background:linear-gradient(115deg,#0b2341,#12416c 65%,#1766a2);color:#fff;box-shadow:0 18px 42px #0b2d5425}.hero:after{content:"";position:absolute;width:370px;height:370px;border:1px solid #ffffff24;border-radius:50%;left:-100px;top:-200px;box-shadow:0 0 0 35px #ffffff08,0 0 0 75px #ffffff06}.eyebrow{font-size:12px;color:#8fc4ff;font-weight:900;letter-spacing:.4px}.hero h1{font-size:clamp(27px,3.4vw,46px);line-height:1.4;margin:10px 0}.hero p{color:#d5e7fc;line-height:2;margin:0 0 19px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap}.hero .secondary{background:#ffffff12;border-color:#ffffff40;color:#fff}.mountain{height:260px;position:relative;display:grid;place-items:center}.mountain .peak{font-size:125px;color:#d7eaff;text-shadow:0 12px 45px #70b8ff60;z-index:1}.mountain .flag{position:absolute;top:35px;right:50%;font-size:27px}.floating{position:absolute;bottom:12px;right:5%;background:#ffffff17;border:1px solid #ffffff32;backdrop-filter:blur(10px);padding:12px 15px;border-radius:15px;font-size:12px}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:19px 0}.stat,.panel,.challenge,.book,.post,.exam,.task{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}.stat{padding:18px;display:flex;align-items:center;gap:13px}.stat-icon{width:45px;height:45px;border-radius:14px;display:grid;place-items:center;background:#eaf2ff;font-size:22px}.stat small{display:block;color:var(--muted);font-weight:700}.stat strong{font-size:24px;color:var(--blue)}.grid2{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}.panel{padding:21px;margin-bottom:18px;min-width:0}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.panel h3{margin:0;font-size:17px}.panel-head p{margin:3px 0 0;color:var(--muted);font-size:12px}.pill{display:inline-flex;border-radius:99px;padding:5px 10px;background:#eaf2ff;color:#2168ed;font-size:11px;font-weight:900}.progress{height:8px;background:#eaf0f8;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#2168ed,#60b8ff)}.task-list{display:grid;gap:9px}.task{box-shadow:none;padding:11px 12px;display:flex;align-items:center;gap:10px}.task input{accent-color:var(--blue);width:17px;height:17px}.task span{flex:1;font-size:13px;font-weight:700}.task small{color:var(--muted)}.quick-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.quick{border:1px solid var(--line);border-radius:16px;padding:16px;background:linear-gradient(145deg,#f1f7ff,#fff);text-align:right;display:flex;flex-direction:column;gap:7px;min-height:135px;cursor:pointer}.quick:hover{border-color:#a9caff;transform:translateY(-2px)}.quick em{font-style:normal;font-size:23px}.quick b{font-size:14px}.quick small{color:var(--muted);line-height:1.7}.view-title{display:flex;justify-content:space-between;align-items:center;gap:15px;margin:0 0 20px}.view-title h1{font-size:25px;margin:0}.view-title p{margin:4px 0 0;color:var(--muted);font-size:13px}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.challenge,.book,.exam{padding:18px}.challenge-icon,.book-icon,.exam-icon{width:49px;height:49px;border-radius:15px;background:#edf4ff;display:grid;place-items:center;font-size:24px;margin-bottom:12px}.challenge h3,.book h3,.exam h3{font-size:15px;margin:0 0 6px}.challenge p,.book p,.exam p{font-size:12px;color:var(--muted);line-height:1.8;margin:0 0 14px}.challenge .row,.book .row,.exam .row{display:flex;align-items:center;justify-content:space-between;gap:8px}.book-icon.green{background:#e4f9f1}.book-icon.gold{background:#fff4dd}.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.filters button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:8px 14px;font-size:12px;font-weight:800}.filters button.active{background:var(--blue);color:#fff;border-color:var(--blue)}.assistant{display:grid;grid-template-columns:minmax(0,1fr) 275px;gap:17px}.chat{min-height:510px;display:flex;flex-direction:column}.chat-body{flex:1;display:flex;flex-direction:column;gap:14px;padding:10px 0 20px}.bubble{max-width:85%;padding:13px 15px;border-radius:16px;background:#edf4ff;font-size:13px;line-height:1.9}.bubble.me{align-self:flex-start;background:#2168ed;color:white;border-bottom-left-radius:4px}.bubble.bot{align-self:flex-end;border-bottom-right-radius:4px}.suggestions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.suggestions button{border:1px solid #d8e6fa;background:#fff;border-radius:11px;padding:9px;font-size:12px;color:#23558d}.chat-form{display:flex;gap:8px;border:1px solid var(--line);padding:8px;border-radius:15px}.chat-form input{border:0;outline:0;min-width:0;flex:1;padding:7px}.field{display:grid;gap:6px;margin-bottom:13px}.field label{font-size:12px;font-weight:800}.field input,.field select,.field textarea,.search{width:100%;border:1px solid var(--line);border-radius:12px;background:#fbfdff;padding:11px 12px;color:var(--ink);outline-color:#8bb8ff}.field textarea{min-height:95px;resize:vertical}.community-form{display:flex;gap:8px;align-items:stretch;margin-bottom:18px}.community-form input{flex:1;min-width:0;border:1px solid var(--line);border-radius:12px;padding:12px}.post{padding:17px;margin-bottom:12px;box-shadow:none}.post-head{display:flex;gap:10px;align-items:center}.post-head div:nth-child(2){flex:1}.post-head b{font-size:13px}.post-head small{display:block;color:var(--muted);font-size:11px}.post p{font-size:13px;line-height:1.9}.post-actions{display:flex;gap:9px}.post-actions button{border:1px solid var(--line);background:white;border-radius:10px;padding:6px 11px;font-size:12px}.teacher-banner{background:linear-gradient(120deg,#102b4b,#2168ad);color:white;padding:24px;border-radius:18px;margin-bottom:18px}.teacher-banner p{color:#d7e8ff;font-size:13px}.profile-form{max-width:720px}.empty{padding:30px;text-align:center;color:var(--muted)}.toast{position:fixed;bottom:22px;left:22px;background:#102b4b;color:white;border-radius:13px;padding:13px 18px;box-shadow:0 12px 30px #071c3640;z-index:20;display:none}.footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+@media(max-width:1050px){.app{grid-template-columns:210px minmax(0,1fr)}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{grid-template-columns:1fr .6fr}.assistant{grid-template-columns:1fr}.assistant .panel:last-child{order:-1}}
+@media(max-width:740px){.app{display:block}.sidebar{height:auto;position:sticky;top:0;z-index:8;padding:10px 12px;display:block}.brand{padding:0 3px 8px;border:0}.brand-mark{width:35px;height:35px}.brand strong{font-size:17px}.brand small,.profile,.nav-label,.sidebar-foot{display:none}.nav{display:flex;overflow:auto;gap:5px;padding-top:5px}.nav button{white-space:nowrap;padding:8px 10px;font-size:12px}.nav button span{width:auto}.topbar{height:63px;padding:0 14px}.topbar h2{font-size:16px}.top-actions .primary{padding:9px 11px;font-size:12px}.content{padding:14px 12px 35px}.hero{grid-template-columns:1fr;padding:25px 21px;border-radius:19px}.mountain{height:115px;order:-1}.mountain .peak{font-size:75px}.mountain .flag{top:0}.floating{bottom:0}.hero h1{font-size:29px}.stats{gap:8px;margin:12px 0}.stat{padding:12px;gap:8px}.stat-icon{width:37px;height:37px;font-size:18px}.stat strong{font-size:20px}.stat small{font-size:10px}.grid2{grid-template-columns:1fr;gap:0}.quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cards{grid-template-columns:1fr}.panel{padding:15px;margin-bottom:12px}.view-title h1{font-size:21px}.assistant{grid-template-columns:1fr}.assistant .panel:last-child{order:0}.bubble{max-width:95%}.community-form{flex-wrap:wrap}.community-form input{flex-basis:100%}}
+</style></head>
+<body><div class="app">
+<aside class="sidebar"><a class="brand" href="#" data-view="home"><span class="brand-mark">ق</span><span><strong>قِمّة</strong><small>طريقك نحو التفوق</small></span></a>
+<div class="profile"><div class="avatar">👨🏻‍🎓</div><div><b id="sideName">أحمد محمد</b><small id="sideGrade">طالب · الصف الثاني الثانوي</small></div></div>
+<div class="nav-label">مساحة الطالب</div><nav class="nav" id="nav">
+<button class="active" data-view="home"><span>⌂</span> الرئيسية</button><button data-view="challenges"><span>🏆</span> التحديات</button><button data-view="exams"><span>▣</span> الامتحانات والنتائج</button><button data-view="library"><span>▤</span> المكتبة</button><button data-view="assistant"><span>✦</span> المساعد الذكي</button><button data-view="community"><span>◎</span> المجتمع الطلابي</button><button data-view="teacher"><span>♙</span> لوحة الأستاذ</button><button data-view="settings"><span>⚙</span> الإعدادات</button></nav><div class="sidebar-foot">﴿ وَقُل رَّبِّ زِدْنِي عِلْمًا ﴾<br><br>قِمّة · تعلّم، تقدّم، وارتقِ</div></aside>
+<div class="main"><header class="topbar"><div><div class="crumb">منصتك التعليمية المتكاملة</div><h2 id="pageHeading">الرئيسية</h2></div><div class="top-actions"><button class="iconbtn" id="theme" title="تبديل المظهر">☾</button><button class="primary" data-view="settings">⚙ الإعدادات</button></div></header>
+<main class="content">
+<section class="view active" id="view-home"><div class="hero"><div><div class="eyebrow">✦ كل أدوات مذاكرتك في مكان واحد</div><h1>منصة قِمّة التعليمية<br>مستقبلك يستحق الأفضل</h1><p>نظّم وقتك، افهم دروسك، اختبر مستواك، وشارك إنجازاتك في مساحة واحدة.</p><div class="hero-actions"><button class="primary" data-view="library">ابدأ المذاكرة ←</button><button class="secondary" data-view="assistant">اسأل المساعد الذكي</button></div></div><div class="mountain"><span class="flag">⚑</span><span class="peak">▲</span><div class="floating">⭐ خطوة صغيرة كل يوم تصنع فرقًا</div></div></div>
+<div class="stats"><div class="stat"><span class="stat-icon">🏆</span><div><strong id="pointsValue">2,350</strong><small>نقاط الإنجاز</small></div></div><div class="stat"><span class="stat-icon">📚</span><div><strong>12</strong><small>تحديًا مكتملًا</small></div></div><div class="stat"><span class="stat-icon">⏱</span><div><strong id="studyMinutes">85</strong><small>دقيقة مذاكرة اليوم</small></div></div><div class="stat"><span class="stat-icon">📈</span><div><strong>65%</strong><small>تقدمك في المرحلة</small></div></div></div>
+<div class="grid2"><div><div class="panel"><div class="panel-head"><div><h3>مهام اليوم</h3><p>أنجز مهامك خطوة بخطوة</p></div><span class="pill" id="taskCount">0/4 مكتملة</span></div><div class="task-list" id="tasks"><label class="task"><input type="checkbox"><span>مراجعة درس الرياضيات</span><small>25 دقيقة</small></label><label class="task"><input type="checkbox"><span>حل تدريبات اللغة الإنجليزية</span><small>20 دقيقة</small></label><label class="task"><input type="checkbox"><span>قراءة فصل من العلوم</span><small>20 دقيقة</small></label><label class="task"><input type="checkbox"><span>اختبار سريع قبل النوم</span><small>10 دقائق</small></label></div></div><div class="panel"><div class="panel-head"><div><h3>ابدأ من هنا</h3><p>أدواتك الأكثر استخدامًا</p></div></div><div class="quick-grid"><button class="quick" data-view="assistant"><em>✦</em><b>المساعد الذكي</b><small>شرح وحل خطوة بخطوة</small></button><button class="quick" data-view="exams"><em>📝</em><b>الامتحانات</b><small>اختبر معلوماتك</small></button><button class="quick" data-view="library"><em>📚</em><b>مكتبة المذاكرة</b><small>ابحث عن موضوع</small></button><button class="quick" data-view="challenges"><em>🏆</em><b>التحديات</b><small>اجمع نقاط الإنجاز</small></button><button class="quick" data-view="community"><em>👥</em><b>مجتمع الطلاب</b><small>تبادل المعرفة</small></button><button class="quick" data-view="teacher"><em>👨‍🏫</em><b>لوحة الأستاذ</b><small>إدارة المحتوى</small></button></div></div></div><div><div class="panel"><div class="panel-head"><div><h3>رحلتك نحو التفوق</h3><p>الصف الثاني الثانوي · الفصل الدراسي</p></div><span class="pill">65%</span></div><div class="progress"><i style="width:65%"></i></div><p style="font-size:12px;color:var(--muted);line-height:1.9">أنت تتقدم بشكل رائع. خصص وقتًا قصيرًا كل يوم للمراجعة حتى تصل إلى هدفك.</p><button class="secondary" data-view="settings">تحديث بياناتي</button></div><div class="panel"><div class="panel-head"><div><h3>جلسة تركيز سريعة</h3><p>ابدأ 25 دقيقة من الإنجاز</p></div><span class="pill">Pomodoro</span></div><div style="text-align:center;padding:10px"><div id="timer" style="font-size:48px;font-weight:900;color:var(--blue);font-variant-numeric:tabular-nums">25:00</div><div style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap"><button class="primary" id="timerStart">ابدأ</button><button class="secondary" id="timerReset">إعادة</button></div></div></div><div class="panel"><div class="panel-head"><div><h3>آية اليوم</h3><p>تذكير لطيف</p></div><span>🕌</span></div><p style="text-align:center;font-weight:800;line-height:2">﴿ وَقُل رَّبِّ زِدْنِي عِلْمًا ﴾</p></div></div></div></section>
+<section class="view" id="view-challenges"><div class="view-title"><div><h1>التحديات والمسابقات</h1><p>اختبر نفسك واجمع نقاط قِمّة.</p></div><span class="pill">رصيدك: <b id="challengePoints">2,350</b></span></div><div class="filters"><button class="active">كل التحديات</button><button>لم تبدأ</button><button>قيد التنفيذ</button><button>مكتملة</button></div><div class="cards"><article class="challenge"><div class="challenge-icon">🧮</div><h3>تحدي الرياضيات</h3><p>10 أسئلة متنوعة · المستوى المتوسط</p><div class="row"><span class="pill">+120 نقطة</span><button class="primary quiz-start" data-subject="الرياضيات">ابدأ</button></div></article><article class="challenge"><div class="challenge-icon" style="background:#f0eaff">⚛️</div><h3>تحدي الفيزياء</h3><p>8 أسئلة · المفاهيم الأساسية</p><div class="row"><span class="pill">+100 نقطة</span><button class="primary quiz-start" data-subject="الفيزياء">ابدأ</button></div></article><article class="challenge"><div class="challenge-icon" style="background:#e5faf1">🧪</div><h3>تحدي الكيمياء</h3><p>10 أسئلة · راجع معلوماتك</p><div class="row"><span class="pill">+110 نقطة</span><button class="primary quiz-start" data-subject="الكيمياء">ابدأ</button></div></article><article class="challenge"><div class="challenge-icon" style="background:#fff2db">📘</div><h3>تحدي اللغة الإنجليزية</h3><p>12 سؤالًا · مفردات وقواعد</p><div class="row"><span class="pill">+150 نقطة</span><button class="primary quiz-start" data-subject="اللغة الإنجليزية">ابدأ</button></div></article><article class="challenge"><div class="challenge-icon">📖</div><h3>تحدي اللغة العربية</h3><p>10 أسئلة · نحو وقراءة</p><div class="row"><span class="pill">+100 نقطة</span><button class="primary quiz-start" data-subject="اللغة العربية">ابدأ</button></div></article><article class="challenge"><div class="challenge-icon">🧠</div><h3>تحدي المعلومات العامة</h3><p>أسئلة لتنشيط التفكير</p><div class="row"><span class="pill">+80 نقطة</span><button class="primary quiz-start" data-subject="المعلومات العامة">ابدأ</button></div></article></div><div class="panel" id="quizPanel" style="display:none;margin-top:18px"><div class="panel-head"><h3 id="quizTitle">اختبار</h3><span class="pill" id="quizStep">السؤال 1</span></div><p id="quizQuestion"></p><div id="quizOptions" class="task-list"></div><button class="primary" id="quizNext" style="margin-top:14px">التالي</button></div></section>
+<section class="view" id="view-exams"><div class="view-title"><div><h1>الامتحانات والنتائج</h1><p>امتحانات تدريبية قصيرة مع تصحيح فوري.</p></div></div><div class="cards"><article class="exam"><div class="exam-icon">🧮</div><h3>اختبار الرياضيات</h3><p>5 أسئلة تدريبية · 10 دقائق</p><div class="row"><span class="pill">مبتدئ</span><button class="primary quiz-start" data-subject="الرياضيات">ابدأ الامتحان</button></div></article><article class="exam"><div class="exam-icon">📘</div><h3>اختبار الإنجليزية</h3><p>5 أسئلة تدريبية · 10 دقائق</p><div class="row"><span class="pill">متوسط</span><button class="primary quiz-start" data-subject="اللغة الإنجليزية">ابدأ الامتحان</button></div></article><article class="exam"><div class="exam-icon">⚛️</div><h3>اختبار العلوم</h3><p>5 أسئلة تدريبية · 10 دقائق</p><div class="row"><span class="pill">مبتدئ</span><button class="primary quiz-start" data-subject="العلوم">ابدأ الامتحان</button></div></article></div><div class="panel" style="margin-top:18px"><div class="panel-head"><div><h3>سجل النتائج</h3><p>النتائج التجريبية على هذا الجهاز</p></div></div><div id="results"><p class="empty">لسه مفيش نتائج. ابدأ امتحانًا تدريبيًا علشان يظهر هنا.</p></div></div></section>
+<section class="view" id="view-library"><div class="view-title"><div><h1>مكتبة المذاكرة</h1><p>ابحث في مواردك ورتّبها حسب المادة.</p></div></div><input class="search" id="bookSearch" placeholder="ابحث عن مادة أو درس..." style="margin-bottom:16px"><div class="filters" id="bookFilters"><button class="active" data-filter="all">الكل</button><button data-filter="math">الرياضيات</button><button data-filter="science">العلوم</button><button data-filter="english">الإنجليزية</button><button data-filter="arabic">العربية</button></div><div class="cards" id="bookCards"><article class="book" data-category="math"><div class="book-icon">🧮</div><h3>مراجعة أساسيات الرياضيات</h3><p>ملخص منظم للمفاهيم الأساسية مع أمثلة للتدريب.</p><div class="row"><span class="pill">رياضيات</span><button class="secondary resource-open" data-title="مراجعة أساسيات الرياضيات" data-text="ابدأ بمراجعة المفاهيم الأساسية، ثم حل مثالًا لكل قاعدة واكتب الأخطاء التي تحتاج إلى مراجعتها.">عرض المورد</button></div></article><article class="book" data-category="science"><div class="book-icon green">⚛️</div><h3>مفاهيم العلوم والفيزياء</h3><p>مراجعة قوانين أساسية وأسئلة تساعد على الفهم.</p><div class="row"><span class="pill">علوم</span><button class="secondary resource-open" data-title="مفاهيم العلوم والفيزياء" data-text="اكتب القانون، ومعنى كل رمز، ووحدة القياس، ثم جرّب تطبيقه في مسألة قصيرة.">عرض المورد</button></div></article><article class="book" data-category="english"><div class="book-icon gold">📘</div><h3>مفردات وقواعد الإنجليزية</h3><p>تدريب على المفردات وعائلات الكلمات والقواعد.</p><div class="row"><span class="pill">English</span><button class="secondary resource-open" data-title="مفردات وقواعد الإنجليزية" data-text="ذاكر الكلمة داخل جملة، وتعلم عائلتها: الاسم والفعل والصفة، ثم اكتب مثالًا من عندك.">عرض المورد</button></div></article><article class="book" data-category="arabic"><div class="book-icon">📖</div><h3>اللغة العربية: نحو وقراءة</h3><p>خطوات للمراجعة وأسئلة على القواعد والقراءة.</p><div class="row"><span class="pill">عربي</span><button class="secondary resource-open" data-title="اللغة العربية: نحو وقراءة" data-text="اقرأ القاعدة ثم حدد علاماتها في مثال، وبعدها حل أسئلة متنوعة مع ذكر السبب.">عرض المورد</button></div></article><article class="book" data-category="science"><div class="book-icon green">🧪</div><h3>الكيمياء: مراجعة سريعة</h3><p>مراجعة المفاهيم والرموز والمعادلات الأساسية.</p><div class="row"><span class="pill">كيمياء</span><button class="secondary resource-open" data-title="الكيمياء: مراجعة سريعة" data-text="راجع الرموز والتعريفات، ثم وازن المعادلات خطوة بخطوة وتحقق من عدد الذرات.">عرض المورد</button></div></article><article class="book" data-category="math"><div class="book-icon gold">📐</div><h3>تمارين هندسة</h3><p>تدريبات قصيرة على الأشكال والعلاقات الهندسية.</p><div class="row"><span class="pill">رياضيات</span><button class="secondary resource-open" data-title="تمارين هندسة" data-text="ارسم الشكل، واكتب المعطيات والمطلوب، ثم حدد النظرية المناسبة قبل بدء الحل.">عرض المورد</button></div></article></div></section>
+<section class="view" id="view-assistant"><div class="view-title"><div><h1>المساعد الذكي</h1><p>اكتب سؤالك أو اختر نوع المساعدة. الاتصال بخدمة الذكاء الاصطناعي يحتاج إعداد الخادم.</p></div></div><div class="assistant"><div class="panel chat"><div class="chat-body" id="chatBody"><div class="bubble bot">أهلًا بيك في قِمّة 👋 أنا مساعدك الدراسي. اكتب سؤالك وسأساعدك في تنظيمه وفهمه.</div></div><div class="chat-form"><input id="chatInput" placeholder="اكتب سؤالك الدراسي هنا..."><button class="primary" id="sendChat">إرسال</button></div></div><div class="panel"><div class="panel-head"><h3>ماذا تريد أن تفعل؟</h3></div><div class="suggestions"><button data-prompt="اشرح لي الدرس خطوة بخطوة">شرح درس</button><button data-prompt="لخص لي هذا الموضوع">تلخيص</button><button data-prompt="اختبرني في الدرس">اختبار قصير</button><button data-prompt="نظم لي خطة مذاكرة">خطة مذاكرة</button></div><p style="color:var(--muted);font-size:12px;line-height:1.8;margin-top:17px">ملاحظة: هذه الواجهة تعرض محادثة محلية تجريبية. لتفعيل إجابات نموذج ذكاء اصطناعي حقيقية، اربطها بوظيفة الخادم الآمنة الموجودة في المشروع.</p></div></div></section>
+<section class="view" id="view-community"><div class="view-title"><div><h1>المجتمع الطلابي</h1><p>شارك سؤالًا أو إنجازًا وتبادل المعرفة باحترام.</p></div></div><div class="panel"><form id="postForm" class="community-form"><input id="postInput" required maxlength="500" placeholder="اكتب منشورًا مفيدًا لزملائك..."><button class="primary">نشر المنشور</button></form><div id="feed"><article class="post"><div class="post-head"><div class="avatar">👨🏻‍🎓</div><div><b>أحمد محمد</b><small>منشور ترحيبي · مجتمع قِمّة</small></div><span class="pill">أهلًا بيكم</span></div><p>أهلًا بكل طلاب قِمّة! خلينا نشجع بعض ونشارك طرق المذاكرة والأسئلة اللي محتاجين نفهمها. 💙</p><div class="post-actions"><button class="like">♡ إعجاب <span>12</span></button><button class="reply">💬 تعليق</button></div></article></div></div></section>
+<section class="view" id="view-teacher"><div class="view-title"><div><h1>لوحة الأستاذ</h1><p>مساحة تجريبية لتنظيم المحتوى والمهام التعليمية.</p></div><span class="pill">وضع الأستاذ</span></div><div class="teacher-banner"><b>مرحبًا بك في مساحة الأستاذ</b><p>أضف موردًا أو مهمة تعليمية. هذه الأدوات محلية في هذه النسخة وليست مرتبطة بصلاحيات مستخدم حقيقية.</p></div><div class="stats"><div class="stat"><span class="stat-icon">👥</span><div><strong>45</strong><small>طلاب تجريبيون</small></div></div><div class="stat"><span class="stat-icon">📚</span><div><strong id="teacherResources">6</strong><small>موارد تعليمية</small></div></div><div class="stat"><span class="stat-icon">📝</span><div><strong id="teacherTasks">8</strong><small>مهام منشورة</small></div></div><div class="stat"><span class="stat-icon">🏆</span><div><strong>12</strong><small>تحديًا</small></div></div></div><div class="panel"><div class="panel-head"><h3>إضافة مورد تعليمي</h3></div><form id="resourceForm"><div class="field"><label>عنوان المورد</label><input id="resourceTitle" required placeholder="مثال: مراجعة الوحدة الأولى"></div><div class="field"><label>وصف مختصر</label><textarea id="resourceDescription" required placeholder="اكتب وصف المورد..."></textarea></div><button class="primary">إضافة للمكتبة</button></form></div></section>
+<section class="view" id="view-settings"><div class="view-title"><div><h1>إعدادات الحساب</h1><p>عدّل بيانات الملف الشخصي الظاهرة على هذه الصفحة.</p></div></div><div class="panel profile-form"><form id="settingsForm"><div class="field"><label>الاسم</label><input id="nameInput" value="أحمد محمد" required></div><div class="field"><label>المرحلة الدراسية</label><select id="gradeInput"><option>الصف الأول الثانوي</option><option selected>الصف الثاني الثانوي</option><option>الصف الثالث الثانوي</option><option>إعدادي</option><option>أخرى</option></select></div><div class="field"><label>الهدف الدراسي</label><input id="goalInput" placeholder="مثال: التفوق في الإنجليزية"></div><button class="primary">حفظ التغييرات</button></form><p style="color:var(--muted);font-size:12px;line-height:1.8">تنبيه: إعدادات هذه الواجهة تُحفظ على هذا الجهاز فقط. ربطها بحسابات الطلاب يتطلب تكامل المصادقة وقاعدة البيانات.</p></div></section>
+<div class="footer">قِمّة © 2026 · معًا نحو مستقبل أفضل</div>
+</main></div></div><div class="toast" id="toast"></div>
+<script>
+const views=['home','challenges','exams','library','assistant','community','teacher','settings'];const titles={home:'الرئيسية',challenges:'التحديات',exams:'الامتحانات والنتائج',library:'مكتبة المذاكرة',assistant:'المساعد الذكي',community:'المجتمع الطلابي',teacher:'لوحة الأستاذ',settings:'إعدادات الحساب'};
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display='none',2600)}
+function go(v){if(!views.includes(v))return;document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-'+v));document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x.dataset.view===v&&x.closest('#nav')));document.getElementById('pageHeading').textContent=titles[v];if(innerWidth<740)window.scrollTo({top:0,behavior:'smooth'})}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-view]');if(b){e.preventDefault();go(b.dataset.view)}});
+document.getElementById('tasks').addEventListener('change',()=>{const all=[...document.querySelectorAll('#tasks input')];const done=all.filter(x=>x.checked).length;document.getElementById('taskCount').textContent=done+'/'+all.length+' مكتملة';if(done===all.length)toast('عاش! أنهيت كل مهام اليوم ⭐')});
+let secs=1500,interval=null;function drawTimer(){document.getElementById('timer').textContent=String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0')}document.getElementById('timerStart').onclick=()=>{if(interval){clearInterval(interval);interval=null;document.getElementById('timerStart').textContent='استئناف';return}document.getElementById('timerStart').textContent='إيقاف مؤقت';interval=setInterval(()=>{secs--;drawTimer();if(secs<=0){clearInterval(interval);interval=null;secs=1500;drawTimer();document.getElementById('studyMinutes').textContent=Number(document.getElementById('studyMinutes').textContent)+25;toast('أحسنت! اكتملت جلسة التركيز 🎉')}},1000)};document.getElementById('timerReset').onclick=()=>{clearInterval(interval);interval=null;secs=1500;drawTimer();document.getElementById('timerStart').textContent='ابدأ'};
+const quizBank={'الرياضيات':[{q:'إذا كان 2x + 4 = 10، فما قيمة x؟',o:['2','3','4','7'],a:1},{q:'كم يساوي 5²؟',o:['10','15','20','25'],a:3}],'اللغة الإنجليزية':[{q:'Choose the correct form: She ___ to school every day.',o:['go','goes','going','gone'],a:1},{q:'What is the adjective in “a beautiful flower”?',o:['a','beautiful','flower','is'],a:1}],'الفيزياء':[{q:'ما وحدة قياس القوة؟',o:['الجول','النيوتن','الواط','المتر'],a:1}],'الكيمياء':[{q:'ما الرمز الكيميائي للماء؟',o:['CO₂','O₂','H₂O','NaCl'],a:2}],'اللغة العربية':[{q:'أي الكلمات التالية فعل؟',o:['مدرسة','يكتب','قلم','جميل'],a:1}],'العلوم':[{q:'ما الغاز الذي تحتاجه النباتات في البناء الضوئي؟',o:['الأكسجين','النيتروجين','ثاني أكسيد الكربون','الهيدروجين'],a:2}],'المعلومات العامة':[{q:'ما الكوكب المعروف بالكوكب الأحمر؟',o:['الزهرة','المريخ','المشتري','عطارد'],a:1}]};let currentQuiz=[],qi=0,score=0,chosen=null;function startQuiz(subject){currentQuiz=quizBank[subject]||quizBank['الرياضيات'];qi=0;score=0;chosen=null;document.getElementById('quizPanel').style.display='block';document.getElementById('quizTitle').textContent='اختبار '+subject;showQuestion();go('challenges');document.getElementById('quizPanel').scrollIntoView({behavior:'smooth',block:'center'})}function showQuestion(){let q=currentQuiz[qi];document.getElementById('quizStep').textContent='السؤال '+(qi+1)+' من '+currentQuiz.length;document.getElementById('quizQuestion').textContent=q.q;document.getElementById('quizOptions').innerHTML=q.o.map((o,i)=>'<label class="task"><input type="radio" name="answer" value="'+i+'"><span>'+o+'</span></label>').join('');document.getElementById('quizNext').textContent=qi===currentQuiz.length-1?'إنهاء الاختبار':'التالي';chosen=null;document.querySelectorAll('#quizOptions input').forEach(x=>x.onchange=()=>chosen=Number(x.value))}document.querySelectorAll('.quiz-start').forEach(b=>b.onclick=()=>startQuiz(b.dataset.subject));document.getElementById('quizNext').onclick=()=>{if(chosen===null){toast('اختار إجابة الأول');return}if(chosen===currentQuiz[qi].a)score++;if(qi<currentQuiz.length-1){qi++;showQuestion()}else{let pct=Math.round(score/currentQuiz.length*100);const row=document.createElement('p');row.className='task';row.textContent='اختبار تدريبي · '+pct+'% ('+score+'/'+currentQuiz.length+')';document.getElementById('results').innerHTML='';document.getElementById('results').append(row);if(pct>=50){let p=Number(document.getElementById('pointsValue').textContent.replace(',',''))+50;document.getElementById('pointsValue').textContent=p.toLocaleString('en-US');document.getElementById('challengePoints').textContent=p.toLocaleString('en-US')}document.getElementById('quizPanel').style.display='none';toast('خلصت الاختبار! نتيجتك '+pct+'%');go('exams')}};
+document.querySelectorAll('#bookFilters button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#bookFilters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');filterBooks()});function filterBooks(){let f=document.querySelector('#bookFilters .active').dataset.filter,s=document.getElementById('bookSearch').value.trim().toLowerCase();document.querySelectorAll('#bookCards .book').forEach(c=>c.style.display=(f==='all'||c.dataset.category===f)&&c.innerText.toLowerCase().includes(s)?'':'none')}document.getElementById('bookSearch').oninput=filterBooks;document.querySelectorAll('.resource-open').forEach(b=>b.onclick=()=>toast(b.dataset.title+': '+b.dataset.text));
+function sendChat(text){if(!text.trim())return;const body=document.getElementById('chatBody');const me=document.createElement('div');me.className='bubble me';me.textContent=text;body.append(me);const bot=document.createElement('div');bot.className='bubble bot';bot.textContent='وصل سؤالك. هذه الواجهة التجريبية لا تتصل حاليًا بنموذج ذكاء اصطناعي؛ فعّل خدمة qimma-tutor الآمنة في الخادم للحصول على إجابات حقيقية.';body.append(bot);document.getElementById('chatInput').value='';body.scrollTop=body.scrollHeight}document.getElementById('sendChat').onclick=()=>sendChat(document.getElementById('chatInput').value);document.getElementById('chatInput').addEventListener('keydown',e=>{if(e.key==='Enter')sendChat(e.target.value)});document.querySelectorAll('[data-prompt]').forEach(b=>b.onclick=()=>sendChat(b.dataset.prompt));
+document.getElementById('postForm').onsubmit=e=>{e.preventDefault();const val=document.getElementById('postInput').value.trim();if(!val)return;const a=document.createElement('article');a.className='post';const h=document.createElement('div');h.className='post-head';h.innerHTML='<div class="avatar">👨🏻‍🎓</div><div><b></b><small>الآن · منشور على هذا الجهاز</small></div>';h.querySelector('b').textContent=document.getElementById('nameInput').value||'طالب قِمّة';const p=document.createElement('p');p.textContent=val;const actions=document.createElement('div');actions.className='post-actions';actions.innerHTML='<button class="like">♡ إعجاب <span>0</span></button><button class="reply">💬 تعليق</button>';a.append(h,p,actions);document.getElementById('feed').prepend(a);document.getElementById('postInput').value='';toast('تمت إضافة المنشور محليًا')};document.getElementById('feed').addEventListener('click',e=>{if(e.target.closest('.like')){const s=e.target.closest('.like').querySelector('span');s.textContent=Number(s.textContent)+1}else if(e.target.closest('.reply'))toast('ميزة التعليقات تحتاج ربط قاعدة بيانات')});
+document.getElementById('resourceForm').onsubmit=e=>{e.preventDefault();const title=document.getElementById('resourceTitle').value,desc=document.getElementById('resourceDescription').value;const c=document.createElement('article');c.className='book';c.dataset.category='all';const icon=document.createElement('div');icon.className='book-icon';icon.textContent='📘';const h=document.createElement('h3');h.textContent=title;const p=document.createElement('p');p.textContent=desc;c.append(icon,h,p);document.getElementById('bookCards').prepend(c);document.getElementById('teacherResources').textContent=Number(document.getElementById('teacherResources').textContent)+1;e.target.reset();toast('أضيف المورد في المكتبة الحالية')};
+document.getElementById('settingsForm').onsubmit=e=>{e.preventDefault();const name=document.getElementById('nameInput').value.trim(),grade=document.getElementById('gradeInput').value;document.getElementById('sideName').textContent=name;document.getElementById('sideGrade').textContent='طالب · '+grade;toast('تم تحديث البيانات على هذه الصفحة')};document.getElementById('theme').onclick=()=>{document.body.classList.toggle('night');if(document.body.classList.contains('night')){document.body.style.setProperty('--paper','#0d1b2d');document.body.style.setProperty('--white','#172b43');document.body.style.setProperty('--ink','#e5efff');document.querySelectorAll('.panel,.stat,.challenge,.book,.exam,.post,.task').forEach(x=>{x.style.background='#142943';x.style.borderColor='#29415e';x.style.color='#e5efff'});toast('تم تفعيل المظهر الداكن')}else{document.body.style.removeProperty('--paper');document.body.style.removeProperty('--white');document.body.style.removeProperty('--ink');document.querySelectorAll('.panel,.stat,.challenge,.book,.exam,.post,.task').forEach(x=>{x.style.background='';x.style.borderColor='';x.style.color=''});toast('تم تفعيل المظهر الفاتح')}};
+</script></body></html>
