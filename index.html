@@ -303,7 +303,7 @@ const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 let authMode='login', currentProfile=null;
 const gradeToDb={'الصف الأول الإعدادي':'prep1','الصف الثاني الإعدادي':'prep2','الصف الثالث الإعدادي':'prep3','الصف الأول الثانوي':'secondary1','الصف الثاني الثانوي':'secondary2','الصف الثالث الثانوي':'secondary3'};
 const gradeFromDb={'prep1':'الصف الأول الإعدادي','prep2':'الصف الثاني الإعدادي','prep3':'الصف الثالث الإعدادي','secondary1':'الصف الأول الثانوي','secondary2':'الصف الثاني الثانوي','secondary3':'الصف الثالث الثانوي'};
-function ageGroup(age){return age<=8?'6-8':age<=11?'9-11':age<=17?'15-17':'18+'}
+function ageGroup(age){return age<=8?'6-8':age<=11?'9-11':age<=14?'12-14':age<=17?'15-17':'18+'}
 function setAuthMessage(msg){$('#authMessage').textContent=msg}
 function showStudent(p){currentProfile=p;$('#sideName').textContent=p.name;$('#sideGrade').textContent='السن '+(p.age||'—')+' سنة | '+(p.grade||'');$('#fullName').value=p.name||'';$('#grade').value=p.grade||'';$('#studySystemSettings').value=p.studySystem||'';$('#settingsSystemWrap').style.display=(p.grade==='الصف الثاني الثانوي'||p.grade==='الصف الثالث الثانوي')?'block':'none';$('#pageTitle').textContent='مرحبًا '+(p.name||'بك')+' 👋';$('#loginScreen').style.display='none';$('#appShell').classList.remove('locked');}
 async function loadCloudProfile(user){
@@ -333,7 +333,7 @@ document.querySelector('#loginForm').addEventListener('submit',async function(e)
   if(authMode==='register'){
    const name=$('#loginName').value.trim(),age=Number($('#loginAge').value),grade=$('#loginGrade').value,system=$('#studySystem').value;
    if(!name||age<5||age>100||!grade||password.length<8||((!$('#baccalaureateWrap').hidden)&&!system)){setAuthMessage('راجع البيانات، وكلمة السر لازم تكون 8 أحرف على الأقل.');return}
-   const {data,error}=await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo:location.origin+location.pathname,userMetadata:{display_name:name,age,grade_label:grade,school_grade:gradeToDb[grade]||null,school_system:system||null}}});
+   const {data,error}=await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo:location.origin+location.pathname,data:{display_name:name,age,grade_label:grade,school_grade:gradeToDb[grade]||null,school_system:system||null}}});
    if(error) throw error;
    if(data.session){await loadCloudProfile(data.user);setAuthMessage('تم إنشاء الحساب وتأكيد البريد بالفعل.');}
    else{setAuthMessage('تم إنشاء الحساب. أرسلنا رسالة تأكيد إلى '+email+'؛ افتح الرسالة واضغط رابط التأكيد، ثم ارجع وسجّل الدخول. افحص مجلد الرسائل غير المرغوب فيها إذا لم تجدها.');}
