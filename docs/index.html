@@ -107,7 +107,7 @@ html,body{width:100%;overflow-x:hidden}
 @media(max-height:720px) and (min-width:761px){.auth-art{min-height:0}.art-brand{margin-top:20px}.mountain-scene{height:62%}.auth-form-panel{padding-top:20px;padding-bottom:20px}.login-card #authIntro{margin-bottom:12px}.auth-field{margin-bottom:8px}}
 
 .auth-switch{display:none!important}
-.auth-create-line{text-align:center!important;margin:19px 0 0!important;color:#71819a!important;font-size:13px!important}
+.auth-create-line{display:block!important;text-align:center!important;margin:19px 0 0!important;color:#71819a!important;font-size:13px!important}
 .auth-create-line button{width:auto!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;color:#2468ed!important;font-weight:900!important;font-size:13px!important}
 .login-card #authIntro{margin-bottom:25px}
 .auth-options{margin-top:2px}
@@ -130,10 +130,11 @@ html,body{width:100%;overflow-x:hidden}
         
         <div class="auth-field" id="nameField"><label for="loginName">الاسم</label><input id="loginName" required maxlength="60" autocomplete="name" placeholder="اكتب اسمك"></div>
         <div class="auth-field"><label for="loginEmail">البريد الإلكتروني</label><input id="loginEmail" type="email" required autocomplete="email" placeholder="البريد الإلكتروني أو اسم المستخدم"></div>
-        <div class="auth-field"><label for="loginPassword">كلمة السر</label><div class="password-wrap"><input id="loginPassword" type="password" required minlength="8" autocomplete="new-password" placeholder="كلمة السر"><button type="button" class="password-toggle" id="togglePassword" aria-label="إظهار كلمة السر">◉</button></div></div>
+        
         <div class="auth-options"><label class="remember-label"><input type="checkbox" id="rememberMe"> تذكرني</label><button type="button" class="forgot-button" id="forgotPassword">نسيت كلمة السر؟</button></div>
         <div class="auth-field" id="ageField"><label for="loginAge">السن</label><input id="loginAge" type="number" min="5" max="100" required placeholder="مثال: 16"></div>
         <div class="auth-field" id="gradeField"><label for="loginGrade">الصف الدراسي</label><select id="loginGrade" required><option value="">اختر صفك الدراسي</option><option>الصف الأول الإعدادي</option><option>الصف الثاني الإعدادي</option><option>الصف الثالث الإعدادي</option><option>الصف الأول الثانوي</option><option>الصف الثاني الثانوي</option><option>الصف الثالث الثانوي</option><option>المرحلة الجامعية</option><option>غير ذلك</option></select></div>
+        <div class="auth-field"><label for="loginPassword">كلمة السر</label><div class="password-wrap"><input id="loginPassword" type="password" required minlength="8" autocomplete="new-password" placeholder="كلمة السر"><button type="button" class="password-toggle" id="togglePassword" aria-label="إظهار كلمة السر">◉</button></div></div>
         <div id="baccalaureateWrap" class="auth-field" hidden><label for="studySystem">نظام دراستك في الثانوية</label><select id="studySystem"><option value="">اختار النظام</option><option value="baccalaureate">البكالوريا المصرية</option><option value="general">الثانوية العامة</option></select></div>
         <button class="primary auth-submit" id="authSubmit">تسجيل الدخول</button>
         <p id="authMessage" role="status" class="auth-message"></p>
