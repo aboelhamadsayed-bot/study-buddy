@@ -118,6 +118,9 @@ html,body{width:100%;overflow-x:hidden}
 
 /* Keep registration-only fields completely out of the login screen. */
 #loginForm #nameField[hidden],#loginForm #ageField[hidden],#loginForm #gradeField[hidden],#loginForm #baccalaureateWrap[hidden]{display:none!important;}
+
+/* The auth options use flex display, so hidden must explicitly override it. */
+.auth-options[hidden]{display:none!important;}
 </style></head>
 <body>
 <section class="login-screen" id="loginScreen">
