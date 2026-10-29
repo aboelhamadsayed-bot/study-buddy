@@ -2,7 +2,7 @@
     // لا تضع أبداً service_role أو أي مفتاح سري في صفحة المتصفح.
     const SUPABASE_URL = "https://asfmnztojcdotxyqfpzd.supabase.co";
     const SUPABASE_ANON_KEY = "sb_publishable_irqLABJB7q61DtwmEtdtcw_Ujcip94i";
-    const REDIRECT_AFTER_AUTH = new URL("index.html", window.location.href).href;
+    const REDIRECT_AFTER_AUTH = new URL("qimma-platform.html", window.location.href).href;
     const AUTH_RETURN_URL = new URL("account.html?flow=confirm", window.location.href).href;
     const RECOVERY_RETURN_URL = new URL("account.html?flow=recovery", window.location.href).href;
 
