@@ -248,3 +248,63 @@ $('#tasks').addEventListener('change',()=>{const all=$$('#tasks input').length,c
  #loginForm .auth-field:has(#loginPassword)+#authOptions{gap:8px}
  #loginForm #authOptions .remember-label,#loginForm #authOptions .forgot-button{font-size:11px}
 }
+
+
+/* Qimma inner-platform visual refresh */
+:root{--bg:#f3f7fc;--line:#e4ebf5;--shadow:0 12px 32px rgba(16,43,74,.07)}
+body{background:#f3f7fc}
+.shell{grid-template-columns:248px minmax(0,1fr);gap:0}
+.sidebar{padding:24px 16px;background:linear-gradient(180deg,#102b4a 0%,#0b2340 100%);box-shadow:8px 0 30px #102b4a0a;z-index:5}
+.brand{font-size:27px;letter-spacing:-.5px}
+.profile{padding:18px 12px;border:1px solid #ffffff18;border-radius:18px;background:linear-gradient(135deg,#ffffff12,#ffffff06);text-align:center}
+.profile .avatar{width:58px;height:58px;margin:0 auto 10px;display:grid;place-items:center;border-radius:18px;background:#ffffff16;font-size:30px}
+.profile strong{display:block;font-size:14px}
+.profile small{display:block;margin-top:4px;line-height:1.8;color:#c1d2e6}
+.nav{gap:7px}
+.nav button{min-height:46px;border:1px solid transparent;border-radius:12px;padding:10px 12px;transition:background .18s,border-color .18s,transform .18s}
+.nav button:hover{background:#ffffff12;transform:translateX(-2px)}
+.nav button.active{background:linear-gradient(90deg,#2468ed35,#2468ed17);border-color:#78a9ff40;box-shadow:inset -3px 0 #69a0ff}
+.nav .ico{width:27px;height:27px;display:inline-grid;place-items:center;border-radius:8px;background:#ffffff10;margin-left:8px}
+.logout{border-radius:12px!important;border:1px solid #ffffff1c!important;background:#ffffff08!important;padding:11px!important}
+.main{padding:clamp(18px,3vw,34px);min-width:0}
+.topbar{gap:16px;margin-bottom:24px;padding:20px 22px;border:1px solid #e5edf7;border-radius:20px;background:#ffffff;box-shadow:0 6px 22px #173d6309}
+.welcome h1{font-size:clamp(21px,2.2vw,29px);font-weight:900;letter-spacing:-.4px}
+.welcome p{margin-top:4px;color:#8290a5}
+.top-actions{gap:10px}
+.top-actions button{border-radius:12px!important}
+.primary{box-shadow:0 7px 16px #2468ed20;transition:transform .18s,box-shadow .18s}
+.primary:hover{transform:translateY(-1px);box-shadow:0 10px 22px #2468ed30}
+.hero{position:relative;overflow:hidden;border-radius:24px;background:linear-gradient(120deg,#102b4a 0%,#174d7d 58%,#2468ed 125%);box-shadow:0 18px 40px #123d6822}
+.hero:after{content:"";position:absolute;left:-65px;bottom:-135px;width:300px;height:300px;border:1px solid #ffffff24;border-radius:50%;box-shadow:0 0 0 35px #ffffff08,0 0 0 75px #ffffff06;pointer-events:none}
+.hero-content{position:relative;z-index:1;max-width:760px;padding:clamp(25px,4vw,44px)}
+.hero .eyebrow{display:inline-flex;align-items:center;padding:6px 12px;border:1px solid #ffffff30;border-radius:999px;background:#ffffff12;color:#d7e8ff;font-size:12px;font-weight:800}
+.hero h2{font-size:clamp(24px,3vw,36px);line-height:1.5;margin:13px 0 8px;color:#fff}
+.hero p{max-width:650px;color:#d6e4f4;line-height:2}
+.hero .primary{background:#fff!important;color:#164578!important}
+.hero .secondary{border:1px solid #ffffff50!important;background:#ffffff10!important;color:#fff!important}
+.stats{gap:14px;margin:20px 0}
+.stat,.panel,.feature-card,.content-card,.challenge-card,.exam-card,.library-card{border:1px solid #e5edf6;border-radius:18px;background:#fff;box-shadow:0 7px 22px #173d6308;transition:transform .18s,box-shadow .18s}
+.stat:hover,.feature-card:hover,.content-card:hover,.challenge-card:hover,.exam-card:hover,.library-card:hover{transform:translateY(-2px);box-shadow:0 13px 28px #173d6312}
+.stat{padding:18px}
+.stat strong,.stat .number{font-size:25px;font-weight:900;color:#173d63}
+.view{animation:qimmaFadeIn .22s ease both}
+@keyframes qimmaFadeIn{from{opacity:.55;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.view h2,.view h3{letter-spacing:-.2px}
+input,textarea,select{border-radius:11px}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #78a9ff;outline-offset:2px}
+@media(max-width:900px){
+ .shell{grid-template-columns:1fr}
+ .sidebar{height:auto;position:relative}
+ .main{padding:16px}
+ .topbar{padding:16px;border-radius:16px}
+}
+@media(max-width:600px){
+ .main{padding:12px}
+ .topbar{align-items:flex-start;flex-direction:column;gap:12px;margin-bottom:16px}
+ .top-actions{width:100%;display:flex;flex-wrap:wrap}
+ .top-actions button{flex:1}
+ .hero{border-radius:18px}
+ .hero-content{padding:23px}
+ .stats{gap:9px}
+ .stat{padding:13px}
+}
