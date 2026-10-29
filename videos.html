@@ -20,6 +20,7 @@
         <button class="primary" type="submit">جهّز بحث الشرح ↗</button>
       </form>
       <div id="video-results" class="video-results" hidden><p id="video-results-title"></p><a id="video-youtube" class="primary-link" target="_blank" rel="noopener noreferrer">افتح نتائج يوتيوب في تبويب جديد ↗</a><p class="video-hint">بعد اختيار فيديو، استخدم زر المشاركة في يوتيوب وانسخ الرابط، ثم الصقه بالأسفل لتشغيله هنا.</p></div>
+      <section class="card video-history-panel"><div class="section-heading"><div><span class="section-kicker">رجوع سريع</span><h2>عمليات البحث الأخيرة</h2></div><button id="clear-video-history" class="secondary" type="button">مسح السجل</button></div><div id="video-history" class="video-history-list"></div><p class="video-hint">السجل محفوظ محليًا على الجهاز ده فقط، ومش بيظهر لطلاب تانيين.</p></section>
       <form id="video-player-form" class="video-player-form"><label for="video-url">رابط فيديو يوتيوب</label><div class="inline-form"><input id="video-url" type="url" inputmode="url" placeholder="https://youtu.be/..." required><button class="primary" type="submit">شغّله هنا</button></div><small>ندعم روابط الفيديو العادية وShorts. بعض الفيديوهات تمنع التضمين من إعدادات صاحبها.</small></form>
       <section id="video-player-panel" class="video-player-panel" hidden aria-label="مشغل الفيديو"><div class="player-heading"><strong id="player-title">فيديو الشرح</strong><button id="close-player" class="secondary" type="button">إغلاق الفيديو</button></div><div class="video-frame-wrap"><iframe id="video-player" title="فيديو شرح تعليمي من يوتيوب" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></section>
       <p id="video-status" class="tool-status" role="status" aria-live="polite"></p>
@@ -29,7 +30,7 @@
   <footer class="tool-footer"><a href="index.html">قِمّة</a><span>شرح مناسب لصفك، في مكان واحد ✦</span></footer>
   <nav class="tool-mobile-nav" aria-label="التنقل بين الأدوات"><a href="index.html"><span>⌂</span><small>الرئيسية</small></a><a href="tutor.html"><span>✦</span><small>الأستاذ</small></a><a aria-current="page" href="videos.html"><span>▷</span><small>الفيديو</small></a><a href="challenge.html"><span>🏆</span><small>التحدّي</small></a></nav>
   <script>if(localStorage.getItem('studyBuddyDark')==='true')document.body.classList.add('dark');const t=document.getElementById('themeBtn');t.textContent=document.body.classList.contains('dark')?'☀️':'🌙';t.addEventListener('click',()=>{document.body.classList.toggle('dark');const d=document.body.classList.contains('dark');localStorage.setItem('studyBuddyDark',String(d));t.textContent=d?'☀️':'🌙'});</script>
-  <script src="videos-page.js?v=1" defer></script>
+  <script src="videos-page.js?v=recent-search-history-20261029" defer></script>
 </body>
 </html>
 
