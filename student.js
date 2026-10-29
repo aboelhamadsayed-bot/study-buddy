@@ -19,7 +19,7 @@
   async function loadCommunity(){
     const feed=$("community-feed");
     if(!user||!profile?.age_group||!profile?.school_grade){feed.textContent="سجّل الدخول وأكمل المرحلة والصف الدراسي عشان تنضم لمجموعتك.";return;}
-    let postsQuery=db.from("student_posts").select("id,display_name,body,created_at").eq("age_group",profile.age_group).eq("school_grade",profile.school_grade);
+    let postsQuery=db.from("student_posts").select("id,author_id,display_name,body,created_at").eq("age_group",profile.age_group).eq("school_grade",profile.school_grade);
     if(profile.school_grade==="secondary2"){
       if(profile.school_system) postsQuery=postsQuery.eq("school_system",profile.school_system); else postsQuery=postsQuery.is("school_system",null);
       if(profile.school_system==="bac"&&profile.school_track) postsQuery=postsQuery.eq("school_track",profile.school_track);
@@ -28,7 +28,19 @@
     if(error){feed.textContent="تعذر تحميل المجموعة الآن. حاول بعد قليل.";return;}
     feed.replaceChildren();
     if(!data?.length){const p=document.createElement("p");p.className="muted";p.textContent="المجموعة لسه جديدة — شارك أول سؤال دراسي مفيد 🌱";feed.append(p);return;}
-    for(const row of data){const article=document.createElement("article");article.className="community-post";const head=document.createElement("header"),name=document.createElement("strong"),time=document.createElement("time"),body=document.createElement("p"),actions=document.createElement("div"),explain=document.createElement("button");name.textContent=row.display_name;const date=new Date(row.created_at);time.dateTime=date.toISOString();time.textContent=new Intl.DateTimeFormat("ar-EG",{dateStyle:"medium"}).format(date);body.textContent=row.body;head.append(name,time);actions.className="community-post-actions";explain.type="button";explain.className="community-explain-button";explain.textContent="✦ اشرح السؤال بالأستاذ الذكي";explain.setAttribute("aria-label","اطلب شرح هذه المشاركة من الأستاذ الذكي");explain.addEventListener("click",()=>{try{sessionStorage.setItem("qimmaTutorDraft",JSON.stringify({question:String(row.body||"").slice(0,450),subject:"سؤال من مجتمع الطلاب",mode:"explain"}));window.location.href="tutor.html?from=community";}catch{say("community-status","تعذر تجهيز السؤال. انسخه وافتح الأستاذ الذكي يدويًا.",true);}});actions.append(explain);article.append(head,body,actions);feed.append(article);}
+    for(const row of data){const article=document.createElement("article");article.className="community-post";const head=document.createElement("header"),name=document.createElement("strong"),time=document.createElement("time"),body=document.createElement("p"),actions=document.createElement("div"),explain=document.createElement("button");name.textContent=row.display_name;const date=new Date(row.created_at);time.dateTime=date.toISOString();time.textContent=new Intl.DateTimeFormat("ar-EG",{dateStyle:"medium"}).format(date);body.textContent=row.body;head.append(name,time);actions.className="community-post-actions";explain.type="button";explain.className="community-explain-button";explain.textContent="✦ اشرح السؤال بالأستاذ الذكي";explain.setAttribute("aria-label","اطلب شرح هذه المشاركة من الأستاذ الذكي");explain.addEventListener("click",()=>{try{sessionStorage.setItem("qimmaTutorDraft",JSON.stringify({question:String(row.body||"").slice(0,450),subject:"سؤال من مجتمع الطلاب",mode:"explain"}));window.location.href="tutor.html?from=community";}catch{say("community-status","تعذر تجهيز السؤال. انسخه وافتح الأستاذ الذكي يدويًا.",true);}});actions.append(explain);
+      if(row.author_id===user.id){
+        const remove=document.createElement("button");remove.type="button";remove.className="community-delete-button";remove.textContent="حذف مشاركتي";
+        remove.addEventListener("click",async()=>{
+          if(!window.confirm("متأكد إنك عايز تحذف المشاركة دي؟"))return;
+          remove.disabled=true;
+          const {error:deleteError}=await db.from("student_posts").delete().eq("id",row.id).eq("author_id",user.id);
+          if(deleteError){remove.disabled=false;say("community-status","تعذر حذف المشاركة. حاول مرة أخرى.",true);return;}
+          say("community-status","تم حذف مشاركتك.");await loadCommunity();
+        });
+        actions.append(remove);
+      }
+      article.append(head,body,actions);feed.append(article);}
   }
   async function ensureProfile(){
     if(!db)return;
