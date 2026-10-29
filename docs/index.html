@@ -200,6 +200,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
  .sidebar .nav>.more-nav-toggle .ico{width:auto;font-size:19px;line-height:1.2}
 }
 
+/* Qimma logo beside the student name */
+.welcome-title-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.header-brand-mark{display:inline-flex;align-items:center;gap:4px;color:#173d63;font-size:14px;font-weight:900;white-space:nowrap}
+.header-brand-mark span{font-size:20px}
 /* Mobile navigation flows at the bottom of the page (not fixed to viewport) */
 @media(max-width:700px){
   .shell{display:flex!important;flex-direction:column!important;min-height:100dvh!important;padding-bottom:0!important}
@@ -268,7 +272,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 </div>
 <button type="button" class="more-nav-toggle" id="moreNavToggle" aria-expanded="false"><span class="ico">•••</span> المزيد</button>
 </nav><button class="logout" id="logout">↪ تسجيل الخروج</button></aside>
-<main class="main"><header class="topbar"><div class="welcome"><h1 id="pageTitle">مرحبًا أحمد 👋</h1><p id="pageSubtitle">استعد لتحقيق إنجاز جديد اليوم</p></div><div class="top-actions"><button class="icon-btn mobile-menu" id="menuBtn" aria-label="فتح القائمة">☰</button><button class="icon-btn desktop-action" id="profileBtn">👤 حسابي</button><button class="primary" id="continueBtn">ابدأ المذاكرة ←</button></div></header>
+<main class="main"><header class="topbar"><div class="welcome"><div class="welcome-title-row"><h1 id="pageTitle">مرحبًا أحمد 👋</h1><span class="header-brand-mark"><span>⛰</span> قِمّة</span></div><p id="pageSubtitle">استعد لتحقيق إنجاز جديد اليوم</p></div><div class="top-actions"><button class="icon-btn mobile-menu" id="menuBtn" aria-label="فتح القائمة">☰</button><button class="icon-btn desktop-action" id="profileBtn">👤 حسابي</button><button class="primary" id="continueBtn">ابدأ المذاكرة ←</button></div></header>
 <section class="view active" id="view-home">
 <div class="hero"><div class="hero-content"><span class="eyebrow">طريقك نحو التفوق يبدأ هنا</span><h2>قِمّة — مستقبلُك يستحق الأفضل</h2><p>منصة تعليمية ذكية تساعدك على تنظيم وقتك، وفهم دروسك، والتدرّب على الامتحانات، وتحقيق أهدافك خطوة بخطوة.</p><button class="primary" data-go="library">ابدأ الآن</button> <button class="secondary" data-go="assistant">اسأل المساعد الذكي</button></div></div>
 <div class="stats"><div class="stat"><div class="stat-icon">💎</div><div><small>نقاط التفوق</small><strong id="points">2,350</strong></div></div><div class="stat"><div class="stat-icon">🏆</div><div><small>التحديات المكتملة</small><strong id="doneCount">12</strong></div></div><div class="stat"><div class="stat-icon">📚</div><div><small>موادك الدراسية</small><strong>6</strong></div></div><div class="stat"><div class="stat-icon">🎯</div><div><small>معدل الإنجاز</small><strong id="progressLabel">65%</strong></div></div></div>
