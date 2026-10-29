@@ -2,6 +2,21 @@
   "use strict";
   const $ = id => document.getElementById(id);
   const stage = $("video-stage"), grade = $("video-grade"), system = $("video-system"), path = $("video-path"), subject = $("video-subject");
+  const HISTORY_KEY = "qimmaVideoSearchHistoryV1";
+  function readHistory() { try { const value = JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]"); return Array.isArray(value) ? value.filter(x => x && typeof x.terms === "string" && typeof x.label === "string").slice(0,8) : []; } catch { return []; } }
+  function renderHistory() {
+    const host = $("video-history"); if (!host) return;
+    const items = readHistory(); host.replaceChildren();
+    if (!items.length) { const p = document.createElement("p"); p.textContent = "عمليات البحث اللي تعملها هتظهر هنا عشان ترجع لها بسرعة."; host.append(p); return; }
+    items.forEach(item => {
+      const row = document.createElement("div"); row.className = "video-history-item";
+      const label = document.createElement("span"); label.textContent = item.label;
+      const link = document.createElement("a"); link.href = "https://www.youtube.com/results?search_query=" + encodeURIComponent(item.terms); link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = "افتح البحث ↗";
+      row.append(label, link); host.append(row);
+    });
+  }
+  renderHistory();
+  $("clear-video-history")?.addEventListener("click", () => { try { localStorage.removeItem(HISTORY_KEY); } catch {} renderHistory(); });
   const grades = { prep: [["p1", "أولى إعدادي"], ["p2", "تانية إعدادي"], ["p3", "تالتة إعدادي"]], secondary: [["s1", "أولى ثانوي"], ["s2", "تانية ثانوي"], ["s3", "تالتة ثانوي"]] };
   const prepSubjects = ["اللغة العربية", "اللغة الإنجليزية", "الرياضيات", "العلوم", "الدراسات الاجتماعية", "تكنولوجيا المعلومات"];
   const generalSubjects = ["اللغة العربية", "اللغة الإنجليزية", "الرياضيات", "الفيزياء", "الكيمياء", "الأحياء", "التاريخ", "الجغرافيا", "الفلسفة", "اللغة الأجنبية الثانية", "البرمجة والذكاء الاصطناعي"];
@@ -22,6 +37,13 @@
     const terms = [subject.value, gradeLabel, second ? systemLabel : "", isBac ? path.selectedOptions[0]?.textContent : "", $("video-lesson").value.trim(), "شرح منهج مصر"].filter(Boolean).join(" ");
     $("video-results-title").textContent = `بحث: ${subject.value} · ${gradeLabel}${second ? ` · ${systemLabel}` : ""}`;
     $("video-youtube").href = `https://www.youtube.com/results?search_query=${encodeURIComponent(terms)}`;
+    try {
+      const history = readHistory();
+      const lesson = $("video-lesson").value.trim();
+      const entry = { terms, label: subject.value + " · " + gradeLabel + (lesson ? " · " + lesson : "") };
+      localStorage.setItem(HISTORY_KEY, JSON.stringify([entry, ...history.filter(item => item.terms !== terms)].slice(0,8)));
+    } catch {}
+    renderHistory();
     $("video-results").hidden = false; $("video-results").scrollIntoView({ behavior: "smooth", block: "nearest" });
   });
   function extractVideoId(raw) {
