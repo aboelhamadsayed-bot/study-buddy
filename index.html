@@ -126,6 +126,8 @@ html,body{width:100%;overflow-x:hidden}
 #loginForm #authOptions .remember-label{display:flex;align-items:center;gap:7px;white-space:nowrap}
 #loginForm #authOptions .forgot-button{display:inline-flex;align-items:center;justify-content:flex-start;width:auto!important;margin:0!important;padding:4px 0!important;white-space:nowrap}
 #loginForm #authOptions[hidden]{display:none!important}
+/* Registration-only fields stay hidden on the login screen, including before JavaScript runs. */
+#loginForm[data-auth-mode="login"] #nameField,#loginForm[data-auth-mode="login"] #ageField,#loginForm[data-auth-mode="login"] #gradeField,#loginForm[data-auth-mode="login"] #baccalaureateWrap{display:none!important;}
 
 /* Qimma auth visual polish */
 .auth-layout{border:1px solid #e8eef6;box-shadow:0 28px 90px rgba(9,43,78,.21)}
@@ -267,7 +269,7 @@ body{background:radial-gradient(ellipse at 45% 0%,#103765 0,#061a35 62%);color:#
 <section class="login-screen" id="loginScreen">
   <div class="auth-layout">
     <div class="auth-form-panel">
-      <form class="login-card" id="loginForm">
+      <form class="login-card" id="loginForm" data-auth-mode="login">
         <div class="auth-mobile-brand">⛰ قِمّة</div>
         <h1 id="authHeading">مرحبًا بك في قِمّة 👋</h1>
         <p id="authIntro">سجّل دخولك للمتابعة والتعلّم</p>
@@ -378,6 +380,7 @@ async function handleAuthState(session){
 function updateAuthMode(mode){
  authMode=mode;
  const login=mode==='login';
+ $('#loginForm').setAttribute('data-auth-mode',login?'login':'register');
  const registrationFields=['nameField','ageField','gradeField','baccalaureateWrap'];
  $('#authOptions').hidden=!login;
  $('#authSwitchText').textContent=login?'ليس لديك حساب؟':'لديك حساب بالفعل؟';
