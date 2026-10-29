@@ -199,6 +199,25 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
  .sidebar .nav>.more-nav-toggle{min-height:51px;padding:7px 2px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;text-align:center;border-radius:10px;font-size:9px;line-height:1.25;white-space:normal}
  .sidebar .nav>.more-nav-toggle .ico{width:auto;font-size:19px;line-height:1.2}
 }
+
+/* Final mobile bottom navigation override */
+@media(max-width:700px){
+  .shell{display:block!important;min-height:100dvh!important;padding-bottom:82px!important}
+  .sidebar{
+    position:fixed!important;top:auto!important;bottom:0!important;right:0!important;left:0!important;
+    width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;
+    display:flex!important;flex-direction:column!important;transform:none!important;
+    padding:7px 5px calc(7px + env(safe-area-inset-bottom))!important;gap:0!important;
+    border-radius:18px 18px 0 0!important;z-index:100!important;
+  }
+  .sidebar .brand,.sidebar .profile,.sidebar .logout{display:none!important}
+  .sidebar .nav{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;width:100%!important;gap:2px!important}
+  .sidebar .nav>button{min-width:0!important}
+  .sidebar.open{transform:none!important}
+  .mobile-menu{display:none!important}
+  .main{padding-bottom:20px!important}
+}
+
 </style></head>
 <body>
 <section class="login-screen" id="loginScreen">
