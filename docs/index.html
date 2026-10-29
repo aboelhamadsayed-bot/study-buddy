@@ -383,15 +383,18 @@ document.querySelector('#loginForm').addEventListener('submit',async function(e)
    if(!name||age<5||age>100||!grade||password.length<8||((!$('#baccalaureateWrap').hidden)&&!system)){setAuthMessage('راجع البيانات، وكلمة السر لازم تكون 8 أحرف على الأقل.');return}
    const {data,error}=await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo:location.origin+location.pathname,data:{display_name:name,age,grade_label:grade,school_grade:gradeToDb[grade]||null,school_system:system||null}}});
    if(error) throw error;
-   if(data.session){await loadCloudProfile(data.user);setAuthMessage('تم إنشاء الحساب وتأكيد البريد بالفعل.');}
-   else{setAuthMessage('تم إنشاء الحساب. أرسلنا رسالة تأكيد إلى '+email+'؛ افتح الرسالة واضغط رابط التأكيد، ثم ارجع وسجّل الدخول. افحص مجلد الرسائل غير المرغوب فيها إذا لم تجدها.');}
+   if(data.session) await supabaseClient.auth.signOut();
+   updateAuthMode('login');
+   setAuthMessage(data.session
+    ? 'تم إنشاء حسابك بنجاح. سجّل الدخول الآن باستخدام بريدك وكلمة السر.'
+    : 'تم إنشاء الحساب. أرسلنا رسالة تأكيد إلى '+email+'؛ افتح الرسالة واضغط رابط التأكيد، ثم سجّل الدخول من هنا. افحص مجلد الرسائل غير المرغوب فيها إذا لم تجدها.');
   }else{
    const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error){if(/Email not confirmed/i.test(error.message))throw new Error('لازم تؤكد بريدك من الرسالة اللي وصلتك قبل تسجيل الدخول.');throw error;}await loadCloudProfile(data.user);
   }
  }catch(err){setAuthMessage(err.message||'حدث خطأ، حاول مرة أخرى.');}
  finally{$('#authSubmit').disabled=false;}
 });
-supabaseClient.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_IN'&&session){setTimeout(()=>handleAuthState(session),0)}});
+supabaseClient.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_IN'&&session&&authMode!=='register'){setTimeout(()=>handleAuthState(session),0)}});
 (async()=>{const {data,error}=await supabaseClient.auth.getSession();if(error){setAuthMessage('تعذر استعادة الجلسة.');return}if(data.session)await handleAuthState(data.session);else{$('#appShell').classList.add('locked');$('#loginScreen').style.display='grid';}})();
 
 
