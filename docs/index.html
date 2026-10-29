@@ -126,6 +126,69 @@ html,body{width:100%;overflow-x:hidden}
 #loginForm #authOptions .remember-label{display:flex;align-items:center;gap:7px;white-space:nowrap}
 #loginForm #authOptions .forgot-button{display:inline-flex;align-items:center;justify-content:flex-start;width:auto!important;margin:0!important;padding:4px 0!important;white-space:nowrap}
 #loginForm #authOptions[hidden]{display:none!important}
+
+/* Qimma auth visual polish */
+.auth-layout{border:1px solid #e8eef6;box-shadow:0 28px 90px rgba(9,43,78,.21)}
+.auth-form-panel{background:linear-gradient(145deg,#fff 0%,#fbfdff 100%)}
+.login-card{max-width:460px}
+.login-card #authIntro{line-height:1.9;margin-bottom:25px}
+.login-card .auth-field{margin-bottom:16px}
+.login-card input:not([type=checkbox]),.login-card select{min-height:48px;font-size:14px}
+#loginForm .auth-field:has(#loginPassword)+#authOptions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 18px;padding:0;min-height:26px}
+#loginForm #authOptions .remember-label{display:flex;align-items:center;gap:8px;white-space:nowrap;font-size:12px;color:#526782}
+#loginForm #authOptions .remember-label input{flex:0 0 16px;margin:0}
+#loginForm #authOptions .forgot-button{display:inline-flex;align-items:center;justify-content:flex-start;width:auto!important;margin:0!important;padding:4px 0!important;white-space:nowrap;font-size:12px;color:#2468d8}
+#loginForm #authOptions[hidden]{display:none!important}
+.auth-submit{min-height:49px;box-shadow:0 8px 18px #2468ed24;transition:transform .18s,box-shadow .18s}
+.auth-submit:hover{transform:translateY(-1px);box-shadow:0 11px 22px #2468ed30}
+@media(max-width:760px){.login-screen{padding:10px;align-items:start}.auth-layout{grid-template-columns:1fr;min-height:0;width:min(520px,100%);margin:auto;border-radius:20px}.auth-form-panel{padding:clamp(22px,6vw,34px)}.login-card{max-height:none;overflow:visible}.auth-art{display:none}}
+@media(max-width:380px){.auth-form-panel{padding:20px 16px}#loginForm .auth-field:has(#loginPassword)+#authOptions{gap:8px}#loginForm #authOptions .remember-label,#loginForm #authOptions .forgot-button{font-size:11px}}
+
+/* Qimma inner-platform visual refresh */
+:root{--bg:#f3f7fc;--line:#e4ebf5;--shadow:0 12px 32px rgba(16,43,74,.07)}
+body{background:#f3f7fc}
+.shell{grid-template-columns:248px minmax(0,1fr);gap:0}
+.sidebar{padding:24px 16px;background:linear-gradient(180deg,#102b4a 0%,#0b2340 100%);box-shadow:8px 0 30px #102b4a0a;z-index:5}
+.brand{font-size:27px;letter-spacing:-.5px}
+.profile{padding:18px 12px;border:1px solid #ffffff18;border-radius:18px;background:linear-gradient(135deg,#ffffff12,#ffffff06);text-align:center}
+.profile .avatar{width:58px;height:58px;margin:0 auto 10px;display:grid;place-items:center;border-radius:18px;background:#ffffff16;font-size:30px}
+.profile strong{display:block;font-size:14px}
+.profile small{display:block;margin-top:4px;line-height:1.8;color:#c1d2e6}
+.nav{gap:7px}
+.nav button{min-height:46px;border:1px solid transparent;border-radius:12px;padding:10px 12px;transition:background .18s,border-color .18s,transform .18s}
+.nav button:hover{background:#ffffff12;transform:translateX(-2px)}
+.nav button.active{background:linear-gradient(90deg,#2468ed35,#2468ed17);border-color:#78a9ff40;box-shadow:inset -3px 0 #69a0ff}
+.nav .ico{width:27px;height:27px;display:inline-grid;place-items:center;border-radius:8px;background:#ffffff10;margin-left:8px}
+.logout{border-radius:12px!important;border:1px solid #ffffff1c!important;background:#ffffff08!important;padding:11px!important}
+.main{padding:clamp(18px,3vw,34px);min-width:0}
+.topbar{gap:16px;margin-bottom:24px;padding:20px 22px;border:1px solid #e5edf7;border-radius:20px;background:#fff;box-shadow:0 6px 22px #173d6309}
+.welcome h1{font-size:clamp(21px,2.2vw,29px);font-weight:900;letter-spacing:-.4px}
+.welcome p{margin-top:4px;color:#8290a5}
+.top-actions{gap:10px}
+.top-actions button{border-radius:12px!important}
+.primary{box-shadow:0 7px 16px #2468ed20;transition:transform .18s,box-shadow .18s}
+.primary:hover{transform:translateY(-1px);box-shadow:0 10px 22px #2468ed30}
+.hero{position:relative;overflow:hidden;border-radius:24px;background:linear-gradient(120deg,#102b4a 0%,#174d7d 58%,#2468ed 125%);box-shadow:0 18px 40px #123d6822}
+.hero:after{content:"";position:absolute;left:-65px;bottom:-135px;width:300px;height:300px;border:1px solid #ffffff24;border-radius:50%;box-shadow:0 0 0 35px #ffffff08,0 0 0 75px #ffffff06;pointer-events:none}
+.hero-content{position:relative;z-index:1;max-width:760px;padding:clamp(25px,4vw,44px)}
+.hero .eyebrow{display:inline-flex;align-items:center;padding:6px 12px;border:1px solid #ffffff30;border-radius:999px;background:#ffffff12;color:#d7e8ff;font-size:12px;font-weight:800}
+.hero h2{font-size:clamp(24px,3vw,36px);line-height:1.5;margin:13px 0 8px;color:#fff}
+.hero p{max-width:650px;color:#d6e4f4;line-height:2}
+.hero .primary{background:#fff!important;color:#164578!important}
+.hero .secondary{border:1px solid #ffffff50!important;background:#ffffff10!important;color:#fff!important}
+.stats{gap:14px;margin:20px 0}
+.stat,.panel,.feature-card,.content-card,.challenge-card,.exam-card,.library-card{border:1px solid #e5edf6;border-radius:18px;background:#fff;box-shadow:0 7px 22px #173d6308;transition:transform .18s,box-shadow .18s}
+.stat:hover,.feature-card:hover,.content-card:hover,.challenge-card:hover,.exam-card:hover,.library-card:hover{transform:translateY(-2px);box-shadow:0 13px 28px #173d6312}
+.stat{padding:18px}
+.stat strong,.stat .number{font-size:25px;font-weight:900;color:#173d63}
+.view{animation:qimmaFadeIn .22s ease both}
+@keyframes qimmaFadeIn{from{opacity:.55;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.view h2,.view h3{letter-spacing:-.2px}
+input,textarea,select{border-radius:11px}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #78a9ff;outline-offset:2px}
+@media(max-width:900px){.shell{grid-template-columns:1fr}.sidebar{height:auto;position:relative}.main{padding:16px}.topbar{padding:16px;border-radius:16px}}
+@media(max-width:600px){.main{padding:12px}.topbar{align-items:flex-start;flex-direction:column;gap:12px;margin-bottom:16px}.top-actions{width:100%;display:flex;flex-wrap:wrap}.top-actions button{flex:1}.hero{border-radius:18px}.hero-content{padding:23px}.stats{gap:9px}.stat{padding:13px}}
+
 </style></head>
 <body>
 <section class="login-screen" id="loginScreen">
@@ -219,92 +282,5 @@ $('#chatBody').addEventListener('click',e=>{const b=e.target.closest('.suggestio
 $('#postForm').onsubmit=e=>{e.preventDefault();const text=$('#postText').value.trim();if(!text)return;const article=document.createElement('div');article.className='community-post';const user=document.createElement('div');user.className='post-user';user.textContent=$('#sideName').textContent+' · الآن';const p=document.createElement('p');p.textContent=text;const acts=document.createElement('div');acts.className='post-actions';acts.textContent='♡ 0 إعجاب';article.append(user,p,acts);$('#posts').prepend(article);$('#postText').value='';toast('تم نشر المنشور في النموذج التجريبي')};
 $('#grade').addEventListener('change',()=>{$('#settingsSystemWrap').style.display=($('#grade').value==='الصف الثاني الثانوي'||$('#grade').value==='الصف الثالث الثانوي')?'block':'none'});$('#settingsForm').onsubmit=e=>{e.preventDefault();const name=$('#fullName').value.trim()||'طالب قِمّة';const grade=$('#grade').value;let profile={};try{profile=JSON.parse(localStorage.getItem('qimmaStudentProfile')||'{}')}catch{}profile={...profile,name,grade,studySystem:$('#studySystemSettings').value};try{localStorage.setItem('qimmaStudentProfile',JSON.stringify(profile))}catch{}$('#sideName').textContent=name;$('#pageTitle').textContent='مرحبًا '+name+' 👋';$('#sideGrade').textContent=(profile.age?'السن '+profile.age+' سنة | ':'')+grade;toast('تم حفظ بياناتك على هذا الجهاز')};
 $('#tasks').addEventListener('change',()=>{const all=$$('#tasks input').length,checked=$$('#tasks input:checked').length;const pct=Math.round(checked/all*100);$('#progressLabel').textContent=pct+'%';$('#progressBar').style.width=pct+'%';toast('إنجاز مهام اليوم: '+pct+'%')});
-</script></body></html>
-
-/* Qimma auth visual polish */
-.auth-layout{border:1px solid #e8eef6;box-shadow:0 28px 90px #092b4e35}
-.auth-form-panel{background:linear-gradient(145deg,#fff 0%,#fbfdff 100%)}
-.login-card{max-width:460px}
-.login-card #authIntro{line-height:1.9;margin-bottom:25px}
-.auth-field{margin-bottom:16px}
-.login-card input:not([type=checkbox]),.login-card select{min-height:48px;font-size:14px}
-#loginForm .auth-field:has(#loginPassword)+#authOptions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 18px;padding:0;min-height:26px}
-#loginForm #authOptions .remember-label{display:flex;align-items:center;gap:8px;white-space:nowrap;font-size:12px;color:#526782}
-#loginForm #authOptions .remember-label input{flex:0 0 16px;margin:0}
-#loginForm #authOptions .forgot-button{display:inline-flex;align-items:center;justify-content:flex-start;width:auto!important;margin:0!important;padding:4px 0!important;white-space:nowrap;font-size:12px;color:#2468d8}
-#loginForm #authOptions[hidden]{display:none!important}
-.auth-submit{min-height:49px;box-shadow:0 8px 18px #2468ed24;transition:transform .18s,box-shadow .18s}
-.auth-submit:hover{transform:translateY(-1px);box-shadow:0 11px 22px #2468ed30}
-.auth-art{background:radial-gradient(ellipse at 50% 68%,#18558e 0,#0b315c 49%,#061d36 100%)}
-@media(max-width:760px){
- .login-screen{padding:10px;align-items:start}
- .auth-layout{grid-template-columns:1fr;min-height:0;width:min(520px,100%);margin:auto;border-radius:20px}
- .auth-form-panel{padding:clamp(22px,6vw,34px)}
- .login-card{max-height:none;overflow:visible}
- .auth-art{display:none}
-}
-@media(max-width:380px){
- .auth-form-panel{padding:20px 16px}
- #loginForm .auth-field:has(#loginPassword)+#authOptions{gap:8px}
- #loginForm #authOptions .remember-label,#loginForm #authOptions .forgot-button{font-size:11px}
-}
-
-
-/* Qimma inner-platform visual refresh */
-:root{--bg:#f3f7fc;--line:#e4ebf5;--shadow:0 12px 32px rgba(16,43,74,.07)}
-body{background:#f3f7fc}
-.shell{grid-template-columns:248px minmax(0,1fr);gap:0}
-.sidebar{padding:24px 16px;background:linear-gradient(180deg,#102b4a 0%,#0b2340 100%);box-shadow:8px 0 30px #102b4a0a;z-index:5}
-.brand{font-size:27px;letter-spacing:-.5px}
-.profile{padding:18px 12px;border:1px solid #ffffff18;border-radius:18px;background:linear-gradient(135deg,#ffffff12,#ffffff06);text-align:center}
-.profile .avatar{width:58px;height:58px;margin:0 auto 10px;display:grid;place-items:center;border-radius:18px;background:#ffffff16;font-size:30px}
-.profile strong{display:block;font-size:14px}
-.profile small{display:block;margin-top:4px;line-height:1.8;color:#c1d2e6}
-.nav{gap:7px}
-.nav button{min-height:46px;border:1px solid transparent;border-radius:12px;padding:10px 12px;transition:background .18s,border-color .18s,transform .18s}
-.nav button:hover{background:#ffffff12;transform:translateX(-2px)}
-.nav button.active{background:linear-gradient(90deg,#2468ed35,#2468ed17);border-color:#78a9ff40;box-shadow:inset -3px 0 #69a0ff}
-.nav .ico{width:27px;height:27px;display:inline-grid;place-items:center;border-radius:8px;background:#ffffff10;margin-left:8px}
-.logout{border-radius:12px!important;border:1px solid #ffffff1c!important;background:#ffffff08!important;padding:11px!important}
-.main{padding:clamp(18px,3vw,34px);min-width:0}
-.topbar{gap:16px;margin-bottom:24px;padding:20px 22px;border:1px solid #e5edf7;border-radius:20px;background:#ffffff;box-shadow:0 6px 22px #173d6309}
-.welcome h1{font-size:clamp(21px,2.2vw,29px);font-weight:900;letter-spacing:-.4px}
-.welcome p{margin-top:4px;color:#8290a5}
-.top-actions{gap:10px}
-.top-actions button{border-radius:12px!important}
-.primary{box-shadow:0 7px 16px #2468ed20;transition:transform .18s,box-shadow .18s}
-.primary:hover{transform:translateY(-1px);box-shadow:0 10px 22px #2468ed30}
-.hero{position:relative;overflow:hidden;border-radius:24px;background:linear-gradient(120deg,#102b4a 0%,#174d7d 58%,#2468ed 125%);box-shadow:0 18px 40px #123d6822}
-.hero:after{content:"";position:absolute;left:-65px;bottom:-135px;width:300px;height:300px;border:1px solid #ffffff24;border-radius:50%;box-shadow:0 0 0 35px #ffffff08,0 0 0 75px #ffffff06;pointer-events:none}
-.hero-content{position:relative;z-index:1;max-width:760px;padding:clamp(25px,4vw,44px)}
-.hero .eyebrow{display:inline-flex;align-items:center;padding:6px 12px;border:1px solid #ffffff30;border-radius:999px;background:#ffffff12;color:#d7e8ff;font-size:12px;font-weight:800}
-.hero h2{font-size:clamp(24px,3vw,36px);line-height:1.5;margin:13px 0 8px;color:#fff}
-.hero p{max-width:650px;color:#d6e4f4;line-height:2}
-.hero .primary{background:#fff!important;color:#164578!important}
-.hero .secondary{border:1px solid #ffffff50!important;background:#ffffff10!important;color:#fff!important}
-.stats{gap:14px;margin:20px 0}
-.stat,.panel,.feature-card,.content-card,.challenge-card,.exam-card,.library-card{border:1px solid #e5edf6;border-radius:18px;background:#fff;box-shadow:0 7px 22px #173d6308;transition:transform .18s,box-shadow .18s}
-.stat:hover,.feature-card:hover,.content-card:hover,.challenge-card:hover,.exam-card:hover,.library-card:hover{transform:translateY(-2px);box-shadow:0 13px 28px #173d6312}
-.stat{padding:18px}
-.stat strong,.stat .number{font-size:25px;font-weight:900;color:#173d63}
-.view{animation:qimmaFadeIn .22s ease both}
-@keyframes qimmaFadeIn{from{opacity:.55;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-.view h2,.view h3{letter-spacing:-.2px}
-input,textarea,select{border-radius:11px}
-button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #78a9ff;outline-offset:2px}
-@media(max-width:900px){
- .shell{grid-template-columns:1fr}
- .sidebar{height:auto;position:relative}
- .main{padding:16px}
- .topbar{padding:16px;border-radius:16px}
-}
-@media(max-width:600px){
- .main{padding:12px}
- .topbar{align-items:flex-start;flex-direction:column;gap:12px;margin-bottom:16px}
- .top-actions{width:100%;display:flex;flex-wrap:wrap}
- .top-actions button{flex:1}
- .hero{border-radius:18px}
- .hero-content{padding:23px}
- .stats{gap:9px}
- .stat{padding:13px}
-}
+</script></body>
+</html>
