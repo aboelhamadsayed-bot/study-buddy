@@ -19,7 +19,12 @@
   async function loadCommunity(){
     const feed=$("community-feed");
     if(!user||!profile?.age_group||!profile?.school_grade){feed.textContent="سجّل الدخول وأكمل المرحلة والصف الدراسي عشان تنضم لمجموعتك.";return;}
-    const {data,error}=await db.from("student_posts").select("id,display_name,body,created_at").order("created_at",{ascending:false}).limit(24);
+    let postsQuery=db.from("student_posts").select("id,display_name,body,created_at").eq("age_group",profile.age_group).eq("school_grade",profile.school_grade);
+    if(profile.school_grade==="secondary2"){
+      if(profile.school_system) postsQuery=postsQuery.eq("school_system",profile.school_system); else postsQuery=postsQuery.is("school_system",null);
+      if(profile.school_system==="bac"&&profile.school_track) postsQuery=postsQuery.eq("school_track",profile.school_track);
+    }
+    const {data,error}=await postsQuery.order("created_at",{ascending:false}).limit(24);
     if(error){feed.textContent="تعذر تحميل المجموعة الآن. حاول بعد قليل.";return;}
     feed.replaceChildren();
     if(!data?.length){const p=document.createElement("p");p.className="muted";p.textContent="المجموعة لسه جديدة — شارك أول سؤال دراسي مفيد 🌱";feed.append(p);return;}
