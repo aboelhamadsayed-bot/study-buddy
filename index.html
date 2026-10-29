@@ -281,7 +281,7 @@ function go(view){if(!titles[view])return;$$('.view').forEach(v=>v.classList.tog
 $('#nav').addEventListener('click',e=>{const b=e.target.closest('[data-view]');if(b)go(b.dataset.view)});
 const moreNavToggle=document.getElementById('moreNavToggle');
 const moreNavItems=document.getElementById('moreNavItems');
-if(moreNavToggle&&moreNavItems){moreNavToggle.addEventListener('click',()=>{const open=moreNavItems.classList.toggle('open');moreNavToggle.setAttribute('aria-expanded',String(open));});moreNavItems.addEventListener('click',e=>{if(e.target.closest('[data-view]')){moreNavItems.classList.remove('open');moreNavToggle.setAttribute('aria-expanded','false');}});}
+if(moreNavToggle&&moreNavItems){moreNavToggle.addEventListener('click',()=>{const open=moreNavItems.hidden;moreNavItems.hidden=!open;moreNavItems.classList.toggle('open',open);moreNavToggle.setAttribute('aria-expanded',String(open));});moreNavItems.addEventListener('click',e=>{if(e.target.closest('[data-view]')){moreNavItems.hidden=true;moreNavItems.classList.remove('open');moreNavToggle.setAttribute('aria-expanded','false');}});}
 
 document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)go(b.dataset.go)});
 $('#menuBtn').onclick=()=>$('#sidebar').classList.toggle('open');$('#profileBtn').onclick=()=>go('settings');$('#continueBtn').onclick=()=>go('library');$('#logout').onclick=()=>{try{localStorage.removeItem('qimmaStudentProfile')}catch{}$('#appShell').classList.add('locked');$('#loginScreen').style.display='grid';$('#loginForm').reset()};
