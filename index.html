@@ -375,7 +375,31 @@ async function handleAuthState(session){
  if(!session){currentProfile=null;$('#appShell').classList.add('locked');$('#loginScreen').style.display='grid';return}
  try{await loadCloudProfile(session.user)}catch(err){console.error('Qimma profile load failed:',err);setAuthMessage('تم تسجيل الدخول، لكن تعذر تحميل ملف الطالب: '+(err.message||err.code||'خطأ غير معروف'));}
 }
-function updateAuthMode(mode){authMode=mode;const login=mode==='login';$('#authOptions').hidden=!login;$('#authSwitchText').textContent=login?'ليس لديك حساب؟':'لديك حساب بالفعل؟';$('#registerMode').textContent=login?'إنشاء حساب':'تسجيل دخول';$('#registerMode').setAttribute('href',login?'#create-account':'#login');$('#authHeading').textContent=login?'تسجيل الدخول إلى قِمّة':'إنشاء حساب في قِمّة';$('#authIntro').textContent=login?'ادخل ببريدك وكلمة السر من أي جهاز.':'أنشئ حسابك وسيصلك رابط تأكيد على بريدك الإلكتروني.';$('#authSubmit').textContent=login?'دخول إلى منصتي ←':'إنشاء حساب ←';$('#nameField').hidden=login;$('#ageField').hidden=login;$('#gradeField').hidden=login;$('#loginName').required=!login;$('#loginAge').required=!login;$('#loginGrade').required=!login;$('#nameField').style.display=login?'none':'block';$('#ageField').style.display=login?'none':'block';$('#gradeField').style.display=login?'none':'block';$('#baccalaureateWrap').hidden=login||!(['الصف الثاني الثانوي','الصف الثالث الثانوي'].includes($('#loginGrade').value));$('#studySystem').required=!login&&!$('#baccalaureateWrap').hidden;$('#loginPassword').autocomplete=login?'current-password':'new-password';setAuthMessage('');}
+function updateAuthMode(mode){
+ authMode=mode;
+ const login=mode==='login';
+ const registrationFields=['nameField','ageField','gradeField','baccalaureateWrap'];
+ $('#authOptions').hidden=!login;
+ $('#authSwitchText').textContent=login?'ليس لديك حساب؟':'لديك حساب بالفعل؟';
+ $('#registerMode').textContent=login?'إنشاء حساب':'تسجيل دخول';
+ $('#registerMode').setAttribute('href',login?'#create-account':'#login');
+ $('#authHeading').textContent=login?'تسجيل الدخول إلى قِمّة':'إنشاء حساب في قِمّة';
+ $('#authIntro').textContent=login?'ادخل ببريدك وكلمة السر من أي جهاز.':'أنشئ حسابك وسيصلك رابط تأكيد على بريدك الإلكتروني.';
+ $('#authSubmit').textContent=login?'دخول إلى منصتي ←':'إنشاء حساب ←';
+ // Login: show email and password only. Registration details appear only on sign-up.
+ registrationFields.forEach(id=>{
+  const field=$('#'+id);
+  field.hidden=login || (id==='baccalaureateWrap'&&!['الصف الثاني الثانوي','الصف الثالث الثانوي'].includes($('#loginGrade').value));
+  field.style.display=field.hidden?'none':'block';
+ });
+ $('#loginName').required=!login;
+ $('#loginAge').required=!login;
+ $('#loginGrade').required=!login;
+ $('#studySystem').required=!login&&!$('#baccalaureateWrap').hidden;
+ $('#loginPassword').autocomplete=login?'current-password':'new-password';
+ $('#loginEmail').autocomplete='email';
+ setAuthMessage('');
+}
 document.addEventListener('click',e=>{const register=e.target.closest('#registerMode');if(register){e.preventDefault();updateAuthMode(authMode==='login'?'register':'login');$('#loginScreen').scrollTop=0;}});
 function updateStudySystem(){const show=['الصف الثاني الثانوي','الصف الثالث الثانوي'].includes($('#loginGrade').value);$('#baccalaureateWrap').hidden=!show;$('#studySystem').required=show;if(!show)$('#studySystem').value='';}
 $('#loginGrade').addEventListener('change',updateStudySystem);updateAuthMode('login');
