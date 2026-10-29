@@ -85,8 +85,33 @@
       signedInUser = data?.user || null;
       const scoreLabel = document.querySelector(".challenge-score small");
       if (scoreLabel) scoreLabel.textContent = signedInUser ? "نقاطك على حسابك وجهازك" : "نقاطك على الجهاز ده";
-      if (signedInUser) $("challenge-status").textContent = "كل إجابة صحيحة = ١٠ نقاط. سجّل الدخول لحفظ نتائج الجولات على حسابك.";
+      if (signedInUser) {
+        $("challenge-status").textContent = "كل إجابة صحيحة = ١٠ نقاط. نتائج الجولات محفوظة على حسابك.";
+        await loadHistory();
+      }
     } catch (_) {}
+  }
+  async function loadHistory() {
+    const host = $("challenge-history-list");
+    if (!host || !supabaseClient || !signedInUser) return;
+    const { data, error } = await supabaseClient.from("student_challenge_attempts")
+      .select("stage,grade,subject,score,correct_count,question_count,created_at")
+      .order("created_at", { ascending: false }).limit(8);
+    if (error || !data) return;
+    host.replaceChildren();
+    if (!data.length) { host.textContent = "لسه مفيش نتائج محفوظة. ابدأ أول جولة!"; return; }
+    const gradeLabels = {p1:"أولى إعدادي",p2:"تانية إعدادي",p3:"تالتة إعدادي",s1:"أولى ثانوي",s2:"تانية ثانوي",s3:"تالتة ثانوي"};
+    data.forEach(item => {
+      const row = document.createElement("article");
+      row.className = "challenge-history-item";
+      const title = document.createElement("strong");
+      title.textContent = (subjectNames[item.subject] || item.subject) + " · " + (gradeLabels[item.grade] || item.grade);
+      const score = document.createElement("span");
+      score.textContent = item.score + " نقطة · " + item.correct_count + "/" + item.question_count + " صح";
+      const date = document.createElement("small");
+      date.textContent = new Date(item.created_at).toLocaleDateString("ar-EG");
+      row.append(title, score, date); host.append(row);
+    });
   }
   initAccount();
   const readPoints = () => { try { const n = Number(localStorage.getItem(STORE)); return Number.isFinite(n) && n > 0 ? Math.floor(n) : 0; } catch { return 0; } };
@@ -129,7 +154,7 @@
           score: roundPoints, correct_count: correctCount, question_count: answeredCount
         });
         if (error) throw error;
-        $("challenge-status").textContent = "تم حفظ نتيجة الجولة على حسابك بنجاح، بالإضافة إلى النقاط المحفوظة على الجهاز.";
+        $("challenge-status").textContent = "تم حفظ نتيجة الجولة على حسابك بنجاح، بالإضافة إلى النقاط المحفوظة على الجهاز.";\n        await loadHistory();
       } catch (_) {
         $("challenge-status").textContent = "لم نتمكن من حفظ النتيجة على الحساب الآن؛ نقاط الجهاز ما زالت محفوظة. حاول تسجيل الدخول مجددًا.";
       }
