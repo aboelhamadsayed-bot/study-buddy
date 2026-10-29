@@ -114,7 +114,7 @@ html,body{width:100%;overflow-x:hidden}
 .login-card .auth-footnote{margin-top:16px}
 
 .auth-create-line{position:relative;z-index:5;display:block;text-align:center!important;margin:19px 0 0!important;color:#71819a!important;font-size:13px!important}
-.auth-create-line a{display:inline-block!important;position:relative;z-index:6;cursor:pointer;text-decoration:none!important;color:#2468ed!important;font-weight:900!important;font-size:13px!important;padding:4px 2px!important;pointer-events:auto!important}
+.auth-create-line #registerMode{display:inline-block!important;position:relative;z-index:6;cursor:pointer;text-decoration:none!important;color:#2468ed!important;font-weight:900!important;font-size:13px!important;padding:4px 2px!important;pointer-events:auto!important;background:transparent!important;border:0!important;font-family:inherit!important;line-height:inherit!important}
 
 /* Keep registration-only fields completely out of the login screen. */
 #loginForm #nameField[hidden],#loginForm #ageField[hidden],#loginForm #gradeField[hidden],#loginForm #baccalaureateWrap[hidden]{display:none!important;}
@@ -285,7 +285,7 @@ body{background:radial-gradient(ellipse at 45% 0%,#103765 0,#061a35 62%);color:#
         <div id="baccalaureateWrap" class="auth-field" hidden><label for="studySystem">نظام دراستك في الثانوية</label><select id="studySystem"><option value="">اختار النظام</option><option value="baccalaureate">البكالوريا المصرية</option><option value="general">الثانوية العامة</option></select></div>
         <button class="primary auth-submit" id="authSubmit">تسجيل الدخول</button>
         <p id="authMessage" role="status" class="auth-message"></p>
-        <div class="auth-create-line" id="createLine"><span id="authSwitchText">ليس لديك حساب؟</span> <a href="#create-account" id="registerMode" role="button">إنشاء حساب</a></div>
+        <div class="auth-create-line" id="createLine"><span id="authSwitchText">ليس لديك حساب؟</span> <button type="button" id="registerMode">إنشاء حساب</button></div>
         <p class="auth-footnote">تحتاج إلى تأكيد بريدك الإلكتروني عند إنشاء الحساب. يمكنك الدخول من أي جهاز.</p>
       </form>
     </div>
@@ -403,7 +403,7 @@ function updateAuthMode(mode){
  $('#loginEmail').autocomplete='email';
  setAuthMessage('');
 }
-document.addEventListener('click',e=>{const register=e.target.closest('#registerMode');if(register){e.preventDefault();updateAuthMode(authMode==='login'?'register':'login');$('#loginScreen').scrollTop=0;}});
+$('#registerMode').addEventListener('click',()=>{const nextMode=authMode==='login'?'register':'login';updateAuthMode(nextMode);$('#authMessage').textContent='';if(nextMode==='register'){setTimeout(()=>$('#loginName').focus(),0);}else{setTimeout(()=>$('#loginEmail').focus(),0);}$('#loginScreen').scrollTo({top:0,behavior:'smooth'});});
 function updateStudySystem(){const show=['الصف الثاني الثانوي','الصف الثالث الثانوي'].includes($('#loginGrade').value);$('#baccalaureateWrap').hidden=!show;$('#studySystem').required=show;if(!show)$('#studySystem').value='';}
 $('#loginGrade').addEventListener('change',updateStudySystem);updateAuthMode('login');
 $('#togglePassword').onclick=()=>{const p=$('#loginPassword');p.type=p.type==='password'?'text':'password';$('#togglePassword').textContent=p.type==='password'?'◉':'◎'};
