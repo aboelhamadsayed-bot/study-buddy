@@ -279,7 +279,7 @@ body{background:radial-gradient(ellipse at 45% 0%,#103765 0,#061a35 62%);color:#
         <div class="auth-field" id="ageField"><label for="loginAge">السن</label><input id="loginAge" type="number" min="5" max="100" required placeholder="مثال: 16"></div>
         <div class="auth-field" id="gradeField"><label for="loginGrade">الصف الدراسي</label><select id="loginGrade" required><option value="">اختر صفك الدراسي</option><option>الصف الأول الإعدادي</option><option>الصف الثاني الإعدادي</option><option>الصف الثالث الإعدادي</option><option>الصف الأول الثانوي</option><option>الصف الثاني الثانوي</option><option>الصف الثالث الثانوي</option><option>المرحلة الجامعية</option><option>غير ذلك</option></select></div>
         <div class="auth-field"><label for="loginPassword">كلمة السر</label><div class="password-wrap"><input id="loginPassword" type="password" required minlength="8" autocomplete="new-password" placeholder="كلمة السر"><button type="button" class="password-toggle" id="togglePassword" aria-label="إظهار كلمة السر">◉</button></div></div>
-        <div class="auth-options" id="authOptions"><label class="remember-label" id="rememberLine"><input type="checkbox" id="rememberMe"> تذكرني</label><button type="button" class="forgot-button" id="forgotPassword">نسيت كلمة السر؟</button></div>
+        <div class="auth-options" id="authOptions"><label class="remember-label" id="rememberLine"><input type="checkbox" id="rememberMe" checked> تذكرني</label><button type="button" class="forgot-button" id="forgotPassword">نسيت كلمة السر؟</button></div>
         <div id="baccalaureateWrap" class="auth-field" hidden><label for="studySystem">نظام دراستك في الثانوية</label><select id="studySystem"><option value="">اختار النظام</option><option value="baccalaureate">البكالوريا المصرية</option><option value="general">الثانوية العامة</option></select></div>
         <button class="primary auth-submit" id="authSubmit">تسجيل الدخول</button>
         <p id="authMessage" role="status" class="auth-message"></p>
@@ -347,7 +347,13 @@ function showStudent(p){document.querySelector('#sideName').textContent=p.name;d
 try{const saved=JSON.parse(localStorage.getItem(profileKey)||'null');if(saved)showStudent(saved);}catch{}
 const SUPABASE_URL='https://asfmnztojcdotxyqfpzd.supabase.co';
 const SUPABASE_KEY='sb_publishable_irqLABJB7q61DtwmEtdtcw_Ujcip94i';
-const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const rememberBox=document.getElementById('rememberMe');
+const authStorage={
+ getItem(key){try{return localStorage.getItem(key)??sessionStorage.getItem(key)}catch{return null}},
+ setItem(key,value){try{const keep=!!rememberBox?.checked;const target=keep?localStorage:sessionStorage;const other=keep?sessionStorage:localStorage;target.setItem(key,value);other.removeItem(key)}catch(err){try{sessionStorage.setItem(key,value)}catch{}}},
+ removeItem(key){try{localStorage.removeItem(key);sessionStorage.removeItem(key)}catch{}}
+};
+const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{storage:authStorage,persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
 let authMode='login', currentProfile=null;
 const gradeToDb={'الصف الأول الإعدادي':'prep1','الصف الثاني الإعدادي':'prep2','الصف الثالث الإعدادي':'prep3','الصف الأول الثانوي':'secondary1','الصف الثاني الثانوي':'secondary2','الصف الثالث الثانوي':'secondary3'};
 const gradeFromDb={'prep1':'الصف الأول الإعدادي','prep2':'الصف الثاني الإعدادي','prep3':'الصف الثالث الإعدادي','secondary1':'الصف الأول الثانوي','secondary2':'الصف الثاني الثانوي','secondary3':'الصف الثالث الثانوي'};
