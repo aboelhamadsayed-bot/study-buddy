@@ -45,6 +45,15 @@
         auth: { autoRefreshToken: true, persistSession: true, detectSessionInUrl: true }
       });
 
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get("loggedout") === "1") {
+        history.replaceState(null, "", window.location.pathname);
+        // The account page is also used after sign-out; show a clear, non-sensitive confirmation.
+        window.addEventListener("DOMContentLoaded", () => {
+          const messageNode = $("message");
+          if (messageNode) { messageNode.textContent = "تم تسجيل الخروج. يمكنك تسجيل الدخول مرة أخرى بأمان."; messageNode.dataset.kind = "success"; }
+        }, { once: true });
+      }
       function notify(text, kind = "info") { message.textContent = text; message.dataset.kind = kind; }
       function clearMessage() { message.textContent = ""; message.removeAttribute("data-kind"); }
       function setMode(next) {
