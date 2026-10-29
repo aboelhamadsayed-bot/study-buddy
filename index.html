@@ -311,7 +311,13 @@ async function loadCloudProfile(user){
  if(error) throw error;
  const meta=user.user_metadata||{};
  const p={name:data?.display_name||meta.display_name||user.email?.split('@')[0]||'طالب قِمّة',email:user.email,age:Number(meta.age||16),grade:gradeFromDb[data?.school_grade||meta.school_grade]||meta.grade_label||'غير ذلك',studySystem:data?.school_system||meta.school_system||'',studyGoal:data?.study_goal||''};
- const row={user_id:user.id,display_name:p.name,age_group:data?.age_group||ageGroup(p.age),school_grade:gradeToDb[p.grade]||null,school_system:p.studySystem||null,study_goal:p.studyGoal||null};
+ const mappedGrade=gradeToDb[p.grade]||null;
+ const normalizedSystem=p.studySystem==='baccalaureate'?'bac':p.studySystem;
+ // The current schema requires a track for the baccalaureate system, which this form does not collect.
+ // Keep the grade label in auth metadata, but avoid sending an invalid school_grade/system pair.
+ const validGrade=mappedGrade==='secondary2'&&normalizedSystem==='bac'?null:mappedGrade;
+ const validSystem=validGrade==='secondary2'&&normalizedSystem==='general'?'general':null;
+ const row={user_id:user.id,display_name:p.name,age_group:data?.age_group||ageGroup(p.age),school_grade:validGrade,school_system:validSystem,study_goal:p.studyGoal||null};
  const {error:upsertError}=await supabaseClient.from('student_profiles').upsert(row,{onConflict:'user_id'});
  if(upsertError) throw upsertError;
  try{localStorage.setItem(profileKey,JSON.stringify(p))}catch{}
