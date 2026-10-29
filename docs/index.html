@@ -310,15 +310,10 @@ async function loadCloudProfile(user){
  const {data,error}=await supabaseClient.from('student_profiles').select('*').eq('user_id',user.id).maybeSingle();
  if(error) throw error;
  const meta=user.user_metadata||{};
- const rawAge=Number(meta.age||16);
- const p={name:(data?.display_name||meta.display_name||user.email?.split('@')[0]||'طالب قِمّة').trim().slice(0,40),email:user.email,age:Number.isFinite(rawAge)&&rawAge>=5&&rawAge<=100?rawAge:16,grade:gradeFromDb[data?.school_grade||meta.school_grade]||meta.grade_label||'غير ذلك',studySystem:data?.school_system||meta.school_system||'',studyGoal:data?.study_goal||''};
- // Existing profiles are read-only during login; do not rewrite them on every sign-in.
- // Create a minimal valid profile only for accounts that do not have one yet.
- if(!data){
-  const row={user_id:user.id,display_name:p.name||'طالب قِمّة',age_group:ageGroup(p.age),school_grade:null,school_system:null,school_track:null,study_goal:null};
-  const {error:insertError}=await supabaseClient.from('student_profiles').insert(row);
-  if(insertError&&insertError.code!=='23505') throw insertError;
- }
+ const p={name:data?.display_name||meta.display_name||user.email?.split('@')[0]||'طالب قِمّة',email:user.email,age:Number(meta.age||16),grade:gradeFromDb[data?.school_grade||meta.school_grade]||meta.grade_label||'غير ذلك',studySystem:data?.school_system||meta.school_system||'',studyGoal:data?.study_goal||''};
+ // Auth metadata is the reliable fallback for a newly registered student.
+ // Do not upsert on every login: school-system CHECK constraints may reject
+ // legacy or incomplete academic metadata and block access to the dashboard.
  try{localStorage.setItem(profileKey,JSON.stringify(p))}catch{}
  showStudent(p);
 }
