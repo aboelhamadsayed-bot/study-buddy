@@ -189,6 +189,17 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 @media(max-width:900px){.shell{grid-template-columns:1fr}.sidebar{height:auto;position:relative}.main{padding:16px}.topbar{padding:16px;border-radius:16px}}
 @media(max-width:600px){.main{padding:12px}.topbar{align-items:flex-start;flex-direction:column;gap:12px;margin-bottom:16px}.top-actions{width:100%;display:flex;flex-wrap:wrap}.top-actions button{flex:1}.hero{border-radius:18px}.hero-content{padding:23px}.stats{gap:9px}.stat{padding:13px}}
 
+
+/* Mobile navigation: five shortcuts plus a More menu */
+@media(max-width:700px){
+ .sidebar .nav{grid-template-columns:repeat(6,minmax(0,1fr));align-items:stretch}
+ .sidebar .nav>.more-nav-items{display:none;position:absolute;bottom:calc(100% + 9px);left:10px;right:10px;background:#102b4a;border:1px solid #ffffff25;border-radius:15px;padding:8px;box-shadow:0 -8px 28px #071a3030;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+ .sidebar .nav>.more-nav-items.open{display:grid}
+ .sidebar .nav>.more-nav-items[hidden]{display:none}
+ .sidebar .nav>.more-nav-items button{min-height:58px;padding:7px 3px}
+ .sidebar .nav>.more-nav-toggle{min-height:51px;padding:7px 2px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;text-align:center;border-radius:10px;font-size:9px;line-height:1.25;white-space:normal}
+ .sidebar .nav>.more-nav-toggle .ico{width:auto;font-size:19px;line-height:1.2}
+}
 </style></head>
 <body>
 <section class="login-screen" id="loginScreen">
@@ -232,9 +243,12 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 <button data-view="exams"><span class="ico">▣</span> الامتحانات والنتائج</button>
 <button data-view="library"><span class="ico">▤</span> المكتبة</button>
 <button data-view="assistant"><span class="ico">✧</span> المساعد الذكي</button>
+<div class="more-nav-items" id="moreNavItems" hidden>
 <button data-view="community"><span class="ico">♧</span> مجتمع الطلاب</button>
 <button data-view="teacher"><span class="ico">▦</span> لوحة الأستاذ</button>
 <button data-view="settings"><span class="ico">⚙</span> الإعدادات</button>
+</div>
+<button type="button" class="more-nav-toggle" id="moreNavToggle" aria-expanded="false"><span class="ico">•••</span> المزيد</button>
 </nav><button class="logout" id="logout">↪ تسجيل الخروج</button></aside>
 <main class="main"><header class="topbar"><div class="welcome"><h1 id="pageTitle">مرحبًا أحمد 👋</h1><p id="pageSubtitle">استعد لتحقيق إنجاز جديد اليوم</p></div><div class="top-actions"><button class="icon-btn mobile-menu" id="menuBtn" aria-label="فتح القائمة">☰</button><button class="icon-btn desktop-action" id="profileBtn">👤 حسابي</button><button class="primary" id="continueBtn">ابدأ المذاكرة ←</button></div></header>
 <section class="view active" id="view-home">
@@ -265,6 +279,10 @@ async function hashDemoPassword(value){const bytes=new TextEncoder().encode(valu
 function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)}
 function go(view){if(!titles[view])return;$$('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+view));$$('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===view));$('#pageTitle').textContent=titles[view][0];$('#pageSubtitle').textContent=titles[view][1];$('#sidebar').classList.remove('open');window.scrollTo({top:0,behavior:'smooth'})}
 $('#nav').addEventListener('click',e=>{const b=e.target.closest('[data-view]');if(b)go(b.dataset.view)});
+const moreNavToggle=document.getElementById('moreNavToggle');
+const moreNavItems=document.getElementById('moreNavItems');
+if(moreNavToggle&&moreNavItems){moreNavToggle.addEventListener('click',()=>{const open=moreNavItems.classList.toggle('open');moreNavToggle.setAttribute('aria-expanded',String(open));});moreNavItems.addEventListener('click',e=>{if(e.target.closest('[data-view]')){moreNavItems.classList.remove('open');moreNavToggle.setAttribute('aria-expanded','false');}});}
+
 document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)go(b.dataset.go)});
 $('#menuBtn').onclick=()=>$('#sidebar').classList.toggle('open');$('#profileBtn').onclick=()=>go('settings');$('#continueBtn').onclick=()=>go('library');$('#logout').onclick=()=>{try{localStorage.removeItem('qimmaStudentProfile')}catch{}$('#appShell').classList.add('locked');$('#loginScreen').style.display='grid';$('#loginForm').reset()};
 function renderChallenges(filter='all'){const items=challenges.filter(c=>filter==='all'||c.cat===filter);$('#challengeGrid').innerHTML=items.map((c,i)=>'<article class="challenge-card"><div class="challenge-icon">'+c.icon+'</div><div class="challenge-info"><h3>'+c.name+'</h3><p>'+c.desc+'</p><span class="challenge-status">متاح الآن</span></div><button class="primary start-challenge" data-name="'+c.name+'" data-points="'+c.points+'">ابدأ</button></article>').join('');}
