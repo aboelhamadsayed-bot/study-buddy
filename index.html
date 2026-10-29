@@ -115,6 +115,9 @@ html,body{width:100%;overflow-x:hidden}
 
 .auth-create-line{position:relative;z-index:5;display:block;text-align:center!important;margin:19px 0 0!important;color:#71819a!important;font-size:13px!important}
 .auth-create-line a{display:inline-block!important;position:relative;z-index:6;cursor:pointer;text-decoration:none!important;color:#2468ed!important;font-weight:900!important;font-size:13px!important;padding:4px 2px!important;pointer-events:auto!important}
+
+/* Keep registration-only fields completely out of the login screen. */
+#loginForm #nameField[hidden],#loginForm #ageField[hidden],#loginForm #gradeField[hidden],#loginForm #baccalaureateWrap[hidden]{display:none!important;}
 </style></head>
 <body>
 <section class="login-screen" id="loginScreen">
