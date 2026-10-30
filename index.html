@@ -280,6 +280,7 @@ body{background:radial-gradient(ellipse at 45% 0%,#103765 0,#061a35 62%);color:#
         
         <div class="auth-field" id="nameField" hidden><label for="loginName">الاسم</label><input id="loginName" maxlength="60" autocomplete="name" placeholder="اكتب اسمك"></div>
         <div class="auth-field"><label for="loginEmail">البريد الإلكتروني</label><input id="loginEmail" type="email" required autocomplete="email" placeholder="اكتب بريدك الإلكتروني"></div>
+        <div class="auth-field" id="phoneField" hidden><label for="loginPhone">رقم الهاتف</label><input id="loginPhone" type="tel" inputmode="tel" autocomplete="tel" maxlength="16" placeholder="01xxxxxxxxx" pattern="(?:\\+20|0020|0)?1[0125][0-9]{8}" title="اكتب رقم هاتف مصري صحيحًا مثل 01012345678"></div>
         
         
         <div class="auth-field" id="ageField" hidden><label for="loginAge">السن</label><input id="loginAge" type="number" min="5" max="100" placeholder="مثال: 16"></div>
@@ -424,7 +425,7 @@ async function loadCloudProfile(user){
  const {data,error}=await supabaseClient.from('student_profiles').select('*').eq('user_id',user.id).maybeSingle();
  if(error) throw error;
  const meta=user.user_metadata||{};
- const p={id:user.id,name:data?.display_name||meta.display_name||user.email?.split('@')[0]||'طالب قِمّة',email:user.email,age:Number(meta.age||16),grade:gradeFromDb[data?.school_grade||meta.school_grade]||meta.grade_label||'غير ذلك',studySystem:data?.school_system||meta.school_system||'',studyGoal:data?.study_goal||''};
+ const p={id:user.id,name:data?.display_name||meta.display_name||user.email?.split('@')[0]||'طالب قِمّة',email:user.email,phone:meta.phone||'',age:Number(meta.age||16),grade:gradeFromDb[data?.school_grade||meta.school_grade]||meta.grade_label||'غير ذلك',studySystem:data?.school_system||meta.school_system||'',studyGoal:data?.study_goal||''};
  // Auth metadata is the reliable fallback for a newly registered student.
  // Do not upsert on every login: school-system CHECK constraints may reject
  // legacy or incomplete academic metadata and block access to the dashboard.
@@ -435,7 +436,7 @@ async function handleAuthState(session){
  if(!session){currentProfile=null;$('#appShell').classList.add('locked');$('#loginScreen').style.display='grid';return}
  try{await loadCloudProfile(session.user)}catch(err){console.error('Qimma profile load failed:',err);setAuthMessage('تم تسجيل الدخول، لكن تعذر تحميل ملف الطالب: '+(err.message||err.code||'خطأ غير معروف'));}
 }
-function updateAuthMode(mode){authMode=mode;const login=mode==='login';$('#authOptions').hidden=!login;$('#authSwitchText').textContent=login?'ليس لديك حساب؟':'لديك حساب بالفعل؟';$('#registerMode').textContent=login?'إنشاء حساب':'تسجيل دخول';$('#registerMode').setAttribute('href',login?'#create-account':'#login');$('#authHeading').textContent=login?'تسجيل الدخول إلى قِمّة':'إنشاء حساب في قِمّة';$('#authIntro').textContent=login?'ادخل ببريدك الإلكتروني وكلمة السر.':'أنشئ حسابك وسيصلك رابط تأكيد على بريدك الإلكتروني.';$('#authFootnote').hidden=login;$('#authSubmit').textContent=login?'تسجيل الدخول':'إنشاء الحساب';$('#nameField').hidden=login;$('#ageField').hidden=login;$('#gradeField').hidden=login;$('#loginName').required=!login;$('#loginAge').required=!login;$('#loginGrade').required=!login;$('#nameField').style.display=login?'none':'block';$('#ageField').style.display=login?'none':'block';$('#gradeField').style.display=login?'none':'block';$('#baccalaureateWrap').hidden=login||!(['الصف الثاني الثانوي','الصف الثالث الثانوي'].includes($('#loginGrade').value));$('#studySystem').required=!login&&!$('#baccalaureateWrap').hidden;$('#loginPassword').autocomplete=login?'current-password':'new-password';setAuthMessage('');}
+function updateAuthMode(mode){authMode=mode;const login=mode==='login';$('#authOptions').hidden=!login;$('#authSwitchText').textContent=login?'ليس لديك حساب؟':'لديك حساب بالفعل؟';$('#registerMode').textContent=login?'إنشاء حساب':'تسجيل دخول';$('#registerMode').setAttribute('href',login?'#create-account':'#login');$('#authHeading').textContent=login?'تسجيل الدخول إلى قِمّة':'إنشاء حساب في قِمّة';$('#authIntro').textContent=login?'ادخل ببريدك الإلكتروني وكلمة السر.':'أنشئ حسابك وسيصلك رابط تأكيد على بريدك الإلكتروني.';$('#authFootnote').hidden=login;$('#authSubmit').textContent=login?'تسجيل الدخول':'إنشاء الحساب';$('#nameField').hidden=login;$('#phoneField').hidden=login;$('#ageField').hidden=login;$('#gradeField').hidden=login;$('#loginName').required=!login;$('#loginPhone').required=!login;$('#loginAge').required=!login;$('#loginGrade').required=!login;$('#nameField').style.display=login?'none':'block';$('#phoneField').style.display=login?'none':'block';$('#ageField').style.display=login?'none':'block';$('#gradeField').style.display=login?'none':'block';$('#baccalaureateWrap').hidden=login||!(['الصف الثاني الثانوي','الصف الثالث الثانوي'].includes($('#loginGrade').value));$('#studySystem').required=!login&&!$('#baccalaureateWrap').hidden;$('#loginPassword').autocomplete=login?'current-password':'new-password';setAuthMessage('');}
 document.addEventListener('click',e=>{const register=e.target.closest('#registerMode');if(register){e.preventDefault();updateAuthMode(authMode==='login'?'register':'login');$('#loginScreen').scrollTop=0;}});
 function updateStudySystem(){const show=$('#loginGrade').value==='الصف الثاني الثانوي';$('#baccalaureateWrap').hidden=!show;$('#studySystem').required=show;if(!show)$('#studySystem').value='';}
 $('#loginGrade').addEventListener('change',updateStudySystem);updateAuthMode('login');
@@ -445,9 +446,10 @@ document.querySelector('#loginForm').addEventListener('submit',async function(e)
  e.preventDefault();const email=$('#loginEmail').value.trim().toLowerCase(),password=$('#loginPassword').value;$('#authSubmit').disabled=true;setAuthMessage(authMode==='register'?'جارٍ إنشاء الحساب وإرسال رسالة التأكيد…':'جارٍ تسجيل الدخول…');
  try{
   if(authMode==='register'){
-   const name=$('#loginName').value.trim(),age=Number($('#loginAge').value),grade=$('#loginGrade').value,system=$('#studySystem').value;
-   if(!name||age<5||age>100||!grade||password.length<8||((!$('#baccalaureateWrap').hidden)&&!system)){setAuthMessage('راجع البيانات، وكلمة السر لازم تكون 8 أحرف على الأقل.');return}
-   const {data,error}=await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo:location.origin+location.pathname,data:{display_name:name,age,grade_label:grade,school_grade:gradeToDb[grade]||null,school_system:system||null}}});
+   const name=$('#loginName').value.trim(),phone=$('#loginPhone').value.replace(/[\s()-]/g,''),age=Number($('#loginAge').value),grade=$('#loginGrade').value,system=$('#studySystem').value;
+   const validEgyptianPhone=/^(?:\+20|0020|0)?1[0125][0-9]{8}$/.test(phone);
+   if(!name||!validEgyptianPhone||age<5||age>100||!grade||password.length<8||((!$('#baccalaureateWrap').hidden)&&!system)){setAuthMessage('راجع البيانات: اكتب رقم هاتف مصري صحيحًا، وكلمة السر 8 أحرف على الأقل.');return}
+   const {data,error}=await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo:location.origin+location.pathname,data:{display_name:name,phone,age,grade_label:grade,school_grade:gradeToDb[grade]||null,school_system:system||null}}});
    if(error) throw error;
    if(data.session) await supabaseClient.auth.signOut();
    updateAuthMode('login');
