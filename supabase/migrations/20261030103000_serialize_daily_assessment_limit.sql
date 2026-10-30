@@ -22,16 +22,25 @@ declare
   v_attempt_id uuid;
   v_daily_count integer;
 begin
-  if p_score <> p_correct_count * 10
+  if p_user_id is null
+     or p_score is null
+     or p_correct_count is null
+     or p_question_count is null
+     or p_points is null
+     or p_subject not in ('math','science','arabic','english')
      or p_correct_count < 0 or p_correct_count > 5
+     or p_score <> p_correct_count * 10
      or p_question_count <> 5
      or p_points < 0 or p_points > 150
-     or p_subject not in ('math','science','arabic','english')
      or p_stage not in ('primary','prep','secondary','university')
      or p_grade not in (
        'primary1','primary2','primary3','primary4','primary5','primary6',
        'prep1','prep2','prep3','secondary1','secondary2','secondary3','university'
-     ) then
+     )
+     or (p_grade like 'primary%' and p_stage <> 'primary')
+     or (p_grade like 'prep%' and p_stage <> 'prep')
+     or (p_grade like 'secondary%' and p_stage <> 'secondary')
+     or (p_grade = 'university' and p_stage <> 'university') then
     raise exception 'Invalid assessment result';
   end if;
 
@@ -42,7 +51,10 @@ begin
   select count(*) into v_daily_count
   from public.student_challenge_attempts
   where user_id = p_user_id
-    and created_at >= date_trunc('day', now());
+    and created_at >= (
+      date_trunc('day', now() at time zone 'Africa/Cairo')
+      at time zone 'Africa/Cairo'
+    );
 
   if v_daily_count >= 20 then
     raise exception 'Daily assessment limit reached';
