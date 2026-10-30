@@ -2,8 +2,14 @@ name: Gemini PR Review
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
-    # Review-only: this workflow never edits source files, merges, or deploys.
+    types: [opened, reopened, ready_for_review]
+    # Avoid spending free-tier Gemini quota on every small commit.
+  workflow_dispatch:
+    inputs:
+      pull_request_number:
+        description: Pull request number to review
+        required: true
+        type: number
 
 permissions:
   contents: read
@@ -31,7 +37,13 @@ jobs:
             }
 
             const { owner, repo } = context.repo;
-            const pull_number = context.payload.pull_request.number;
+            const pull_number = context.eventName === "workflow_dispatch"
+              ? Number(context.payload.inputs?.pull_request_number)
+              : Number(context.payload.pull_request?.number);
+            if (!Number.isInteger(pull_number) || pull_number < 1) {
+              core.setFailed("A valid pull request number is required.");
+              return;
+            }
 
             const changedFiles = await github.paginate(github.rest.pulls.listFiles, {
               owner,
@@ -130,12 +142,25 @@ jobs:
               payload = await response.json().catch(() => ({}));
               if (response.ok) break;
 
-              const retryable = [429, 500, 502, 503, 504].includes(response.status);
+              const errorStatus = payload?.error?.status || "";
+              const errorMessage = String(payload?.error?.message || "");
+              if (response.status === 429) {
+                const detail = errorStatus === "RESOURCE_EXHAUSTED" || /quota exceeded|per day/i.test(errorMessage)
+                  ? "Gemini's daily free-tier quota is exhausted."
+                  : "Gemini rate-limited this review request.";
+                core.warning(detail + " The code-quality workflow remains independent and continues to run.");
+                await core.summary
+                  .addHeading("Gemini review skipped")
+                  .addRaw(detail + " Run this review manually after the quota resets or billing is available.")
+                  .write();
+                return;
+              }
+              const retryable = [500, 502, 503, 504].includes(response.status);
               if (!retryable || attempt === 3) {
                 core.setFailed("Gemini API request failed (" + response.status + "): " + JSON.stringify(payload).slice(0, 1200));
                 return;
               }
-              // Retry temporary Gemini overload responses with bounded backoff.
+              // Retry only transient server overloads, not exhausted quota.
               await new Promise(resolve => setTimeout(resolve, 1000 * (2 ** attempt)));
             }
 
