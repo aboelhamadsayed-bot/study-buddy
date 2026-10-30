@@ -3,7 +3,7 @@ name: Gemini PR Review
 on:
   pull_request:
     types: [opened, synchronize, reopened]
-    # This workflow reviews proposed changes only. It never edits or merges code.
+    # Review-only: this workflow never edits source files, merges, or deploys.
 
 permissions:
   contents: read
@@ -115,10 +115,35 @@ jobs:
               ? "\n\n> Note: Gemini's response reached the output-token limit and may be incomplete."
               : "";
 
-            await github.rest.issues.createComment({
+            const body = "## Gemini AI code review\n\n" + review + truncationNote +
+              "\n\n---\n_AI-generated review only. Please run tests and review findings yourself before merging._";
+
+            // Keep one current review comment instead of adding a new comment on every run.
+            const comments = await github.paginate(github.rest.issues.listComments, {
               owner,
               repo,
               issue_number: pull_number,
-              body: "## Gemini AI code review\n\n" + review + truncationNote +
-                "\n\n---\n_AI-generated review only. Please run tests and review findings yourself before merging._"
+              per_page: 100
             });
+            const previousReview = comments
+              .filter(comment =>
+                comment.user?.type === "Bot" &&
+                comment.body?.includes("## Gemini AI code review")
+              )
+              .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0];
+
+            if (previousReview) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: previousReview.id,
+                body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: pull_number,
+                body
+              });
+            }
