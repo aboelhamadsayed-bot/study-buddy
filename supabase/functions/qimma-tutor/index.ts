@@ -36,7 +36,7 @@ Deno.serve(async(req:Request)=>{
   const parts:any[]=[{text:"المادة: "+subject+"\\nسؤال الطالب أو الدرس:\\n"+question}];
   if(image){const match=image.match(/^data:image\\/(jpeg|png|webp|gif);base64,([A-Za-z0-9+/]+={0,2})$/);if(!match)return reply(400,{error:"صيغة الصورة غير مدعومة."});parts.push({inlineData:{mimeType:"image/"+match[1],data:match[2]}})}
   const contents:any[]=[...history.map((item:any)=>({role:item.role==="assistant"||item.role==="model"?"model":"user",parts:[{text:String(item.content||"")}]})),{role:"user",parts}];
-  const model=Deno.env.get("GEMINI_MODEL")||"gemini-2.5-flash";
+  const model=Deno.env.get("GEMINI_MODEL")||"gemini-3.5-flash-lite";
   const result=await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+model+":generateContent?key="+encodeURIComponent(apiKey),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({systemInstruction:{parts:[{text:instructions}]},contents,generationConfig:{maxOutputTokens:1800,temperature:0.2}})});
   const data=await result.json().catch(()=>({}));if(!result.ok){console.error("Gemini API error",result.status,data?.error?.status||"unknown");return reply(502,{error:result.status===429?"مساعد قِمّة وصل للحد المجاني مؤقتًا. جرّب بعد تجدد الحصة.":"تعذر الحصول على شرح من Gemini الآن. حاول بعد قليل."})}
   const answer=String((data.candidates?.[0]?.content?.parts||[]).filter((x:any)=>typeof x.text==="string").map((x:any)=>x.text).join("\\n")||"").slice(0,9000);
