@@ -95,6 +95,12 @@ jobs:
           for marker in ["auth/v1/user", "consume_tutor_request", "GEMINI_API_KEY", "generativelanguage.googleapis.com/v1beta/models/", "gemini-3.5-flash-lite"]:
               if marker not in tutor_source:
                   raise SystemExit(f"Missing secure Gemini tutor behavior: {marker}")
+          # Image upload validation and extraction must use the same supported MIME types.
+          for marker in [r"data:image\/(jpeg|png|webp|gif);base64,", r"image.match(/^data:image\/(jpeg|png|webp|gif);base64,"]:
+              if marker not in tutor_source:
+                  raise SystemExit(f"Missing tutor image validation: {marker}")
+          if r"image\\/" in tutor_source:
+              raise SystemExit("Tutor image regex contains an invalid doubled escape")
           video_source = video_fn.read_text(encoding="utf-8")
           for marker in ["safeSearch: \"strict\"", "videoEmbeddable: \"true\"", "^[A-Za-z0-9_-]{11}$", "YOUTUBE_API_KEY"]:
               if marker not in video_source:
