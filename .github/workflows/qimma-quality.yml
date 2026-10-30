@@ -66,6 +66,9 @@ jobs:
                   raise SystemExit(f"Missing supported-grade validation: {marker}")
           if "<option>غير ذلك</option>" in source:
               raise SystemExit("Unsupported grade option is still exposed to students")
+          for marker in ["new URL(b.file_url)", "fileUrl.protocol!=='https:'", "ellibrary.moe.gov.eg", "elearnningcontent.blob.core.windows.net"]:
+              if marker not in source:
+                  raise SystemExit(f"Missing safe PDF source validation: {marker}")
 
           migration_dir = Path("supabase/migrations")
           migration_files = sorted(migration_dir.glob("20261030*.sql"))
