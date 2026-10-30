@@ -268,6 +268,147 @@ body{background:radial-gradient(ellipse at 45% 0%,#103765 0,#061a35 62%);color:#
 
 .book-reader{position:fixed;inset:3vh 3vw;z-index:10000;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 20px 80px #07152b55;display:flex;flex-direction:column;overflow:hidden}.book-reader[hidden]{display:none}.book-reader-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line)}.book-reader-head strong,.book-reader-head small{display:block}.book-reader-head small{font-size:11px;color:var(--muted);margin-top:3px}.book-reader iframe{width:100%;height:100%;border:0;background:#f4f6fa}.book-card .book-open{border:0;cursor:pointer;font:inherit;font-size:12px;font-weight:800;color:#fff;background:var(--blue);padding:9px 13px;border-radius:9px}.book-card .book-open:disabled{opacity:.55;cursor:not-allowed}.book-empty{grid-column:1/-1;padding:22px;border:1px dashed var(--line);border-radius:14px;color:var(--muted);text-align:center;line-height:1.9}
 @media(max-width:600px){.book-reader{inset:1vh 1vw;border-radius:12px}.book-reader-head{padding:9px}}
+
+/* QIMMA 2026 — refined premium visual system (presentation-only overrides) */
+:root{
+ --q-surface:#0b2444;--q-surface-raised:#102f55;--q-stroke:rgba(153,193,235,.17);
+ --q-cyan:#58c7f4;--q-lilac:#9bafff;--q-radius:22px;
+}
+body{font-feature-settings:"kern";-webkit-font-smoothing:antialiased}
+button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+ outline:3px solid #69c8ff!important;outline-offset:3px
+}
+.shell{gap:0}
+.sidebar{
+ background:linear-gradient(165deg,#071b35 0%,#06162c 58%,#0a2442 100%);
+ border-left:1px solid rgba(126,180,232,.2);
+ box-shadow:-18px 0 50px rgba(0,8,22,.15)
+}
+.brand{letter-spacing:-.8px}
+.profile{border-radius:20px;background:linear-gradient(145deg,rgba(30,76,124,.55),rgba(10,35,66,.75));border-color:var(--q-stroke)}
+.profile .avatar{box-shadow:0 8px 24px #020d2080}
+.nav{gap:7px}
+.nav button{min-height:45px;border:1px solid transparent;transition:background .18s,border-color .18s,transform .18s}
+.nav button:hover{transform:translateX(-2px);border-color:#3d78b344}
+.nav button.active{background:linear-gradient(100deg,#176bd1,#258cf5);box-shadow:0 8px 22px #0874ed2b}
+.main{max-width:1600px;padding:30px clamp(18px,3vw,46px) 42px}
+.topbar{margin-bottom:24px;padding-bottom:20px;border-color:rgba(153,193,235,.14)}
+.welcome h1{font-size:clamp(22px,2vw,30px);letter-spacing:-.5px}
+.welcome p{font-size:13px}
+.header-brand-mark{border:1px solid var(--q-stroke);border-radius:999px;padding:5px 11px;background:#0c2b50}
+.hero{
+ min-height:270px;border-radius:26px;padding:clamp(22px,3vw,40px);
+ border:1px solid rgba(115,181,239,.27);
+ background:radial-gradient(ellipse at 12% 12%,rgba(48,133,203,.26),transparent 38%),linear-gradient(112deg,#071a34 0%,#0b2b50 57%,#123f70 100%);
+ box-shadow:0 24px 60px rgba(0,8,22,.28)
+}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 35%,rgba(1,14,31,.22));pointer-events:none}
+.hero:after{opacity:.42;filter:saturate(.75)}
+.hero h2{font-size:clamp(27px,3vw,39px);line-height:1.45;letter-spacing:-.8px}
+.hero p{font-size:14px;max-width:560px}
+.hero .primary,.hero .secondary{min-height:45px;padding-inline:20px}
+.hero-progress{border-radius:22px;background:rgba(4,23,46,.78);backdrop-filter:blur(12px);border-color:rgba(114,190,255,.26)}
+.stats{gap:15px;margin:20px 0}
+.stat,.panel,.feature{
+ border-radius:20px;border-color:var(--q-stroke);
+ background:linear-gradient(145deg,rgba(15,47,83,.96),rgba(8,33,63,.98));
+ box-shadow:0 12px 32px rgba(0,8,22,.17)
+}
+.stat{min-height:92px;padding:18px}
+.stat-icon{border:1px solid rgba(126,191,246,.13);background:linear-gradient(145deg,#1a568a,#123c69)}
+.stat strong{font-size:25px;font-variant-numeric:tabular-nums}
+.panel{padding:22px}
+.panel h3,.section-title{letter-spacing:-.3px}
+.panel-head{margin-bottom:18px}
+.progress{height:10px;background:#18395f}
+.progress span{background:linear-gradient(90deg,#2387f5,#58c7f4)}
+.course,.challenge,.task,.challenge-card{
+ border-radius:16px;border-color:rgba(153,193,235,.14);
+ background:rgba(5,27,53,.52);transition:border-color .18s,transform .18s
+}
+.course:hover,.challenge:hover,.challenge-card:hover{border-color:#3d8dd0;transform:translateY(-2px)}
+.course-icon,.challenge-icon{background:linear-gradient(145deg,#1a5488,#123b67)}
+.qimma-shortcuts{gap:14px;margin:20px 0}
+.qimma-shortcuts button{
+ min-height:142px;border-radius:19px;border-color:rgba(125,186,239,.2);
+ background:linear-gradient(145deg,#123b68,#0a2547);
+ box-shadow:0 10px 25px rgba(0,8,22,.13)
+}
+.qimma-shortcuts button:hover{transform:translateY(-4px);box-shadow:0 16px 32px #00142f80}
+.qimma-shortcuts i{background:linear-gradient(145deg,#236eaa,#174775);border:1px solid #70b9ee25}
+.feature{padding:22px;transition:transform .2s,border-color .2s,box-shadow .2s}
+.feature:hover{transform:translateY(-4px);border-color:#3988c5}
+.feature .big{background:linear-gradient(145deg,#1b578d,#123b67);border:1px solid #75b9e52a}
+.primary{background:linear-gradient(110deg,#176bd1,#258cf5);box-shadow:0 7px 20px #0b68d338}
+.primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.secondary{border:1px solid rgba(109,174,235,.18)}
+.chatbox{border-radius:22px;box-shadow:0 16px 42px rgba(0,8,22,.2)}
+.chat-head{background:linear-gradient(110deg,#0c2e55,#0b2545)}
+.chat-form{background:#091f3b}
+.chat-form input,.field input,.field select,.field textarea{border-radius:13px}
+.video-result,.book-card{background:linear-gradient(145deg,#102f55,#0b2444);border-color:var(--q-stroke);color:#edf5ff}
+.video-result p,.book-card p,.book-card .book-meta{color:#a9bfd9}
+.video-loading,.video-error,.book-empty{background:#0c2a4c;border-color:#234b75;color:#b8cce3}
+.toast{border-radius:14px;backdrop-filter:blur(12px)}
+/* Authentication experience */
+.login-screen{
+ background:radial-gradient(ellipse at 78% 16%,#8fc4eb 0%,transparent 34%),linear-gradient(135deg,#153e68 0%,#3979ad 48%,#a7cce8 100%);
+}
+.auth-layout{
+ width:min(1160px,100%);min-height:min(720px,calc(100dvh - 48px));
+ border:1px solid rgba(255,255,255,.5);border-radius:30px;
+ box-shadow:0 32px 90px rgba(4,28,55,.34)
+}
+.auth-form-panel{background:linear-gradient(145deg,#fff 0%,#f7faff 100%)}
+.login-card #authIntro{font-size:13px;line-height:1.9}
+.login-card input:not([type=checkbox]),.login-card select{
+ min-height:49px;background:#fff;border-color:#dbe6f2;border-radius:13px
+}
+.auth-submit{min-height:51px!important;font-weight:900!important;letter-spacing:.1px}
+.auth-switch button{min-height:43px;border-radius:12px}
+.auth-art{background:radial-gradient(ellipse at 50% 74%,#1d5d98 0%,#0c315a 48%,#061d38 100%)}
+.art-brand{letter-spacing:-2px;text-shadow:0 8px 35px #0004}
+.art-tagline{letter-spacing:.2px}
+.auth-art:after{content:"";position:absolute;inset:auto 0 0;height:38%;background:linear-gradient(transparent,rgba(1,15,32,.28));pointer-events:none}
+.auth-message{line-height:1.8}
+@media(max-width:900px){
+ .auth-layout{grid-template-columns:1fr;max-width:560px;min-height:0}
+ .auth-art{display:none}
+ .auth-form-panel{padding:clamp(22px,6vw,42px)}
+ .auth-mobile-brand{display:block;text-align:center;font-size:27px;font-weight:900;color:#12385f;margin-bottom:20px}
+ .main{padding:22px 20px 34px}
+}
+@media(max-width:700px){
+ .main{padding:14px 12px 22px}
+ .topbar{padding-bottom:14px;margin-bottom:16px}
+ .welcome h1{font-size:18px}
+ .hero{min-height:0;padding:22px 18px;border-radius:21px;display:block}
+ .hero h2{font-size:25px}
+ .hero p{font-size:12px}
+ .hero-progress{display:grid;grid-template-columns:auto auto;gap:8px;margin-top:17px;min-height:0;flex-basis:auto;padding:12px}
+ .hero-progress>span,.hero-progress small{grid-column:1/-1}
+ .progress-ring{width:76px;height:76px;grid-column:1;grid-row:2}
+ .hero-progress>strong{grid-column:2;grid-row:2;align-self:center}
+ .stats{gap:9px;margin:13px 0}
+ .stat{min-height:76px;padding:12px;border-radius:16px}
+ .stat strong{font-size:20px}
+ .panel{padding:15px;border-radius:17px}
+ .qimma-shortcuts{gap:9px}
+ .qimma-shortcuts button{min-height:112px;border-radius:15px}
+ .qimma-shortcuts i{width:42px;height:42px;font-size:22px}
+ .feature{padding:17px;border-radius:17px}
+ .sidebar .nav button{min-height:55px}
+ .auth-layout{min-height:0;border-radius:22px}
+ .auth-form-panel{padding:23px 18px}
+ .login-card{max-height:calc(100dvh - 36px)}
+ .login-card h1{font-size:23px}
+ .auth-field{margin-bottom:11px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
 </style></head>
 <body>
 <section class="login-screen" id="loginScreen">
