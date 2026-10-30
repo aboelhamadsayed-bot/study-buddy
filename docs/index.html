@@ -428,7 +428,7 @@ function renderVideoResults(videos){
  });root.append(grid);
 }
 $('#videoSearchForm').addEventListener('submit',async e=>{
- e.preventDefault();const query=$('#videoQuery').value.trim();if(query.length<2){toast('اكتب اسم المدرس أو درس الإنجليزي أولًا.');return}
+ e.preventDefault();const query=$('#videoQuery').value.trim();if(query.length<2){toast('اكتب اسم المدرس أو المادة أو الدرس أولًا.');return}
  const btn=$('#videoSearchBtn'),root=$('#videoResults');btn.disabled=true;btn.textContent='جاري البحث...';root.innerHTML='<div class="video-loading">بنبحث عن أفضل الشروحات على يوتيوب…</div>';
  try{const {data,error}=await supabaseClient.functions.invoke('qimma-videos',{body:{query}});if(error)throw error;if(data?.error)throw new Error(data.error);renderVideoResults(Array.isArray(data?.videos)?data.videos:[])}
  catch(err){const msg=String(err?.message||'حدث خطأ أثناء البحث.');root.replaceChildren();const box=document.createElement('div');box.className='video-error';box.textContent=msg.includes('JWT')||msg.includes('401')?'سجّل الدخول إلى حسابك أولًا ثم أعد البحث.':msg;root.append(box)}
