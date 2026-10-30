@@ -43,7 +43,6 @@ jobs:
         run: |
           mkdir -p .gemini/commands
           cp .github/commands/qimma-plan.toml .gemini/commands/qimma-plan.toml
-          cp .github/commands/gemini-plan-execute.toml .gemini/commands/gemini-plan-execute.toml
       - name: Run Gemini CLI (plan only)
         uses: google-github-actions/run-gemini-cli@v0
         env:
