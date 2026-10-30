@@ -29,10 +29,14 @@ jobs:
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
         env:
           REQUEST: ${{ github.event.comment.body || github.event.review.body }}
+          AUTHOR_ASSOCIATION: ${{ github.event.comment.author_association || github.event.review.author_association }}
         with:
           script: |
             const request = process.env.REQUEST || "";
-            const command = request.startsWith("@gemini-cli /approve") ? "approve"
+            const association = process.env.AUTHOR_ASSOCIATION || "";
+            const approval = /^@gemini-cli \/approve(?:\\s|$)/.test(request.trim());
+            const command = approval
+              ? (association === "OWNER" ? "approve" : "unauthorized")
               : request.startsWith("@gemini-cli") ? "invoke" : "ignore";
             core.setOutput("command", command);
             core.setOutput("context", request.replace(/^@gemini-cli(?: \/approve)?/, "").trim());
@@ -44,11 +48,17 @@ jobs:
           REPOSITORY: ${{ github.repository }}
           COMMAND: ${{ steps.parse.outputs.command }}
         run: |
-          if [ "$COMMAND" = "approve" ]; then
-            MESSAGE="Gemini received the approval request and is starting the approved plan."
-          else
-            MESSAGE="Gemini received your request. It will inspect the project and post a plan; no code changes will be made until you approve it with @gemini-cli /approve."
-          fi
+          case "$COMMAND" in
+            approve)
+              MESSAGE="Gemini is checking the approved plan before making any changes."
+              ;;
+            unauthorized)
+              MESSAGE="Only the repository owner can approve Gemini execution. No code changes were made."
+              ;;
+            *)
+              MESSAGE="Gemini received your request. It will inspect the project and post a plan; no code changes will be made until the repository owner approves it with @gemini-cli /approve."
+              ;;
+          esac
           gh issue comment "$ISSUE_NUMBER" --repo "$REPOSITORY" --body "$MESSAGE"
   invoke:
     needs: dispatch
