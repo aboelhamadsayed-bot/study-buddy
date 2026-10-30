@@ -7,6 +7,7 @@ on:
       - "docs/index.html"
       - ".github/workflows/qimma-quality.yml"
       - "supabase/migrations/**"
+      - "supabase/functions/**"
 
 permissions:
   contents: read
@@ -57,6 +58,14 @@ jobs:
           for marker in ["student_progress", "record_qimma_assessment", "student_profiles_school_grade_check"]:
               if marker not in migration_text:
                   raise SystemExit(f"Missing migration content: {marker}")
+
+          assessment_fn = Path("supabase/functions/qimma-assessments/index.ts")
+          if not assessment_fn.exists():
+              raise SystemExit("The assessment Edge Function source is missing")
+          function_source = assessment_fn.read_text(encoding="utf-8")
+          for marker in ["auth/v1/user", "record_qimma_assessment", "questions:banks[quiz.bank||quiz.subject].map"]:
+              if marker not in function_source:
+                  raise SystemExit(f"Missing secure assessment behavior: {marker}")
 
           if "Math.random()" in source or "نقطة تجريبية" in source:
               raise SystemExit("Demo/random assessment scoring is not allowed")
