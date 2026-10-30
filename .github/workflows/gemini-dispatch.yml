@@ -3,10 +3,6 @@ name: Gemini CLI Dispatch
 on:
   issue_comment:
     types: [created]
-  pull_request_review_comment:
-    types: [created]
-  pull_request_review:
-    types: [submitted]
 
 permissions:
   contents: read
@@ -17,9 +13,9 @@ jobs:
   dispatch:
     if: >-
       ${{ github.event.sender.type == 'User' &&
-      startsWith(github.event.comment.body || github.event.review.body || '', '@gemini-cli') &&
+      startsWith(github.event.comment.body || '', '@gemini-cli') &&
       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'),
-      github.event.comment.author_association || github.event.review.author_association || '') }}
+      github.event.comment.author_association || '') }}
     runs-on: ubuntu-latest
     outputs:
       command: ${{ steps.parse.outputs.command }}
@@ -28,8 +24,8 @@ jobs:
       - id: parse
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
         env:
-          REQUEST: ${{ github.event.comment.body || github.event.review.body }}
-          AUTHOR_ASSOCIATION: ${{ github.event.comment.author_association || github.event.review.author_association }}
+          REQUEST: ${{ github.event.comment.body }}
+          AUTHOR_ASSOCIATION: ${{ github.event.comment.author_association }}
         with:
           script: |
             const request = process.env.REQUEST || "";
@@ -38,25 +34,46 @@ jobs:
             const approval = trimmed === "@gemini-cli /approve" ||
               trimmed.startsWith("@gemini-cli /approve ") ||
               trimmed.startsWith("@gemini-cli /approve\n");
-            const command = approval
+            let command = approval
               ? (association === "OWNER" ? "approve" : "unauthorized")
               : request.startsWith("@gemini-cli") ? "invoke" : "ignore";
+
+            if (command === "approve") {
+              const comments = await github.paginate(github.rest.issues.listComments, {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                per_page: 100
+              });
+              const currentComment = context.payload.comment;
+              const hasEarlierPlan = comments.some(comment =>
+                comment.id !== currentComment.id &&
+                comment.user?.type === "Bot" &&
+                (comment.body || "").includes("AI Assistant: Plan of Action") &&
+                Date.parse(comment.created_at) < Date.parse(currentComment.created_at)
+              );
+              if (!hasEarlierPlan) command = "no_plan";
+            }
+
             core.setOutput("command", command);
             core.setOutput("context", request.replace(/^@gemini-cli(?: \/approve)?/, "").trim());
       - name: Acknowledge
         if: steps.parse.outputs.command != 'ignore'
         env:
           GH_TOKEN: ${{ github.token }}
-          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.pull_request.number }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
           REPOSITORY: ${{ github.repository }}
           COMMAND: ${{ steps.parse.outputs.command }}
         run: |
           case "$COMMAND" in
             approve)
-              MESSAGE="Gemini is checking the approved plan before making any changes."
+              MESSAGE="Gemini verified a prior AI plan and is starting the approved implementation."
               ;;
             unauthorized)
               MESSAGE="Only the repository owner can approve Gemini execution. No code changes were made."
+              ;;
+            no_plan)
+              MESSAGE="No earlier Gemini plan was found. Ask Gemini for a plan with @gemini-cli first; no code changes were made."
               ;;
             *)
               MESSAGE="Gemini received your request. It will inspect the project and post a plan; no code changes will be made until the repository owner approves it with @gemini-cli /approve."
