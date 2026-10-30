@@ -55,7 +55,7 @@ jobs:
             const sections = [];
             for (const file of reviewFiles) {
               const patch = String(file.patch || "");
-              const header = "\\n\\n### FILE: " + file.filename + " (" + file.status + ")\\n";
+              const header = String.fromCharCode(10, 10) + "### FILE: " + file.filename + " (" + file.status + ")" + String.fromCharCode(10);
               if (!patch) {
                 sections.push(header + "[Patch unavailable; do not infer defects in this file.]");
                 continue;
@@ -65,7 +65,7 @@ jobs:
               sections.push(header + excerpt);
               remaining -= excerpt.length;
             }
-            const diff = sections.join("\\n");
+            const diff = sections.join(String.fromCharCode(10));
             if (!diff.trim()) {
               core.setFailed("The pull request has no reviewable file patches.");
               return;
