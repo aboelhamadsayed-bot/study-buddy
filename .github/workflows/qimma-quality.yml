@@ -37,8 +37,21 @@ jobs:
           source = docs.decode("utf-8")
           if "نسخة واجهة تجريبية" in source or "وصلني سؤالك!" in source:
               raise SystemExit("A placeholder assistant response is still present")
-          if "functions.invoke('qimma-tutor'" not in source:
-              raise SystemExit("The page is not connected to the qimma-tutor function")
+          required_integrations = [
+              "functions.invoke('qimma-tutor'",
+              "functions.invoke('qimma-assessments'",
+              "from('student_progress').select",
+              "from('student_posts').insert(payload)",
+              "student_profiles').upsert(payload,"
+          ]
+          for marker in required_integrations:
+              if marker not in source:
+                  raise SystemExit(f"Missing required integration: {marker}")
+
+          if "Math.random()" in source or "نقطة تجريبية" in source:
+              raise SystemExit("Demo/random assessment scoring is not allowed")
+          if any(secret in source for secret in ["OPENAI_API_KEY", "SUPABASE_SERVICE_ROLE_KEY", "GEMINI_API_KEY"]):
+              raise SystemExit("A server-side secret appears in browser source")
 
           class InlineScripts(HTMLParser):
               def __init__(self):
