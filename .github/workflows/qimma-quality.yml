@@ -92,9 +92,9 @@ jobs:
           if not tutor_fn.exists() or not video_fn.exists():
               raise SystemExit("All deployed Qimma Edge Function sources must be version-controlled")
           tutor_source = tutor_fn.read_text(encoding="utf-8")
-          for marker in ["auth/v1/user", "consume_tutor_request", "ANTHROPIC_API_KEY", "api.anthropic.com/v1/messages", "claude-sonnet-5-5"]:
+          for marker in ["auth/v1/user", "consume_tutor_request", "ANTHROPIC_API_KEY", "api.anthropic.com/v1/messages", "claude-sonnet-5-5", "anthropic-version", "data:image\\\\/"]:
               if marker not in tutor_source:
-                  raise SystemExit(f"Missing secure tutor behavior: {marker}")
+                  raise SystemExit(f"Missing secure Claude tutor behavior: {marker}")
           video_source = video_fn.read_text(encoding="utf-8")
           for marker in ["safeSearch: \"strict\"", "videoEmbeddable: \"true\"", "^[A-Za-z0-9_-]{11}$", "YOUTUBE_API_KEY"]:
               if marker not in video_source:
