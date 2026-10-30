@@ -84,7 +84,7 @@ jobs:
             }
             const body = plan.includes("AI Assistant: Plan of Action")
               ? plan
-              : "## AI Assistant: Plan of Action\\n\\n" + plan;
+              : "## AI Assistant: Plan of Action\n\n" + plan;
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
