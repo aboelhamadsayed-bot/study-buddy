@@ -16,7 +16,7 @@ permissions:
   pull-requests: write
 
 concurrency:
-  group: gemini-pr-review-${{ github.event.pull_request.number }}
+  group: gemini-pr-review-${{ github.event.pull_request.number || github.event.inputs.pull_request_number }}
   cancel-in-progress: true
 
 jobs:
