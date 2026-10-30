@@ -26,13 +26,18 @@ jobs:
         env:
           TITLE: ${{ github.event.issue.title || github.event.pull_request.title }}
           DESCRIPTION: ${{ github.event.issue.body || github.event.pull_request.body }}
-          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.pull_request.number }}
+          ISSUE_NUMBER: ${{ !github.event.issue.pull_request && github.event.issue.number }}
+          PR_NUMBER: ${{ github.event.pull_request.number || (github.event.issue.pull_request && github.event.issue.number) }}
+          IS_PULL_REQUEST: ${{ !!github.event.pull_request || !!github.event.issue.pull_request }}
+          EVENT_NAME: ${{ github.event_name }}
           ADDITIONAL_CONTEXT: ${{ inputs.additional_context }}
         run: |
           mkdir -p .gemini
           jq -n --arg title "$TITLE" --arg description "$DESCRIPTION" \
-            --arg number "$ISSUE_NUMBER" --arg context "$ADDITIONAL_CONTEXT" \
-            '{title:$title, description:$description, issue_number:$number, additional_context:$context}' \
+            --arg issue "$ISSUE_NUMBER" --arg pr "$PR_NUMBER" \
+            --arg is_pr "$IS_PULL_REQUEST" --arg event "$EVENT_NAME" \
+            --arg context "$ADDITIONAL_CONTEXT" \
+            '{title:$title, description:$description, issue_number:$issue, pull_request_number:$pr, is_pull_request:$is_pr, event_name:$event, additional_context:$context}' \
             > .gemini/context.json
       - name: Run Gemini CLI (approved plan only)
         uses: google-github-actions/run-gemini-cli@v0
@@ -42,8 +47,8 @@ jobs:
         with:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
           prompt: /gemini-plan-execute
-          github_issue_number: ${{ github.event.issue.number }}
-          github_pr_number: ${{ github.event.pull_request.number }}
+          github_issue_number: ${{ !github.event.issue.pull_request && github.event.issue.number }}
+          github_pr_number: ${{ github.event.pull_request.number || (github.event.issue.pull_request && github.event.issue.number) }}
           settings: |
             {
               "model": { "maxSessionTurns": 25 },
