@@ -27,6 +27,9 @@ begin
      or p_correct_count is null
      or p_question_count is null
      or p_points is null
+     or p_subject is null
+     or p_stage is null
+     or p_grade is null
      or p_subject not in ('math','science','arabic','english')
      or p_correct_count < 0 or p_correct_count > 5
      or p_score <> p_correct_count * 10
