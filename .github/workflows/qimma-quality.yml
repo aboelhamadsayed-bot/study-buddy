@@ -87,6 +87,21 @@ jobs:
               if marker not in function_source:
                   raise SystemExit(f"Missing secure assessment behavior: {marker}")
 
+          tutor_fn = Path("supabase/functions/qimma-tutor/index.ts")
+          video_fn = Path("supabase/functions/qimma-videos/index.ts")
+          if not tutor_fn.exists() or not video_fn.exists():
+              raise SystemExit("All deployed Qimma Edge Function sources must be version-controlled")
+          tutor_source = tutor_fn.read_text(encoding="utf-8")
+          for marker in ["auth/v1/user", "consume_tutor_request", "OPENAI_API_KEY", "api.openai.com/v1/responses"]:
+              if marker not in tutor_source:
+                  raise SystemExit(f"Missing secure tutor behavior: {marker}")
+          video_source = video_fn.read_text(encoding="utf-8")
+          for marker in ["safeSearch: \"strict\"", "videoEmbeddable: \"true\"", "^[A-Za-z0-9_-]{11}$", "YOUTUBE_API_KEY"]:
+              if marker not in video_source:
+                  raise SystemExit(f"Missing safe video-search behavior: {marker}")
+          if "Africa/Cairo" not in migration_text:
+              raise SystemExit("Tutor and assessment daily limits must reset on Cairo local midnight")
+
           if "Math.random()" in source or "نقطة تجريبية" in source:
               raise SystemExit("Demo/random assessment scoring is not allowed")
           if any(secret in source for secret in ["OPENAI_API_KEY", "SUPABASE_SERVICE_ROLE_KEY", "GEMINI_API_KEY"]):
