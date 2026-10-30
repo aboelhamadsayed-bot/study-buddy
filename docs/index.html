@@ -275,16 +275,16 @@ body{background:radial-gradient(ellipse at 45% 0%,#103765 0,#061a35 62%);color:#
     <div class="auth-form-panel">
       <form class="login-card" id="loginForm">
         <div class="auth-mobile-brand">⛰ قِمّة</div>
-        <h1 id="authHeading">مرحبًا بك في قِمّة 👋</h1>
-        <p id="authIntro">سجّل دخولك للمتابعة والتعلّم</p>
+        <h1 id="authHeading">تسجيل الدخول إلى قِمّة</h1>
+        <p id="authIntro">ادخل ببريدك الإلكتروني وكلمة السر.</p>
         
-        <div class="auth-field" id="nameField"><label for="loginName">الاسم</label><input id="loginName" required maxlength="60" autocomplete="name" placeholder="اكتب اسمك"></div>
+        <div class="auth-field" id="nameField" hidden><label for="loginName">الاسم</label><input id="loginName" maxlength="60" autocomplete="name" placeholder="اكتب اسمك"></div>
         <div class="auth-field"><label for="loginEmail">البريد الإلكتروني</label><input id="loginEmail" type="email" required autocomplete="email" placeholder="اكتب بريدك الإلكتروني"></div>
         
         
-        <div class="auth-field" id="ageField"><label for="loginAge">السن</label><input id="loginAge" type="number" min="5" max="100" required placeholder="مثال: 16"></div>
-        <div class="auth-field" id="gradeField"><label for="loginGrade">الصف الدراسي</label><select id="loginGrade" required><option value="">اختر صفك الدراسي</option><option>الصف الأول الابتدائي</option><option>الصف الثاني الابتدائي</option><option>الصف الثالث الابتدائي</option><option>الصف الرابع الابتدائي</option><option>الصف الخامس الابتدائي</option><option>الصف السادس الابتدائي</option><option>الصف الأول الإعدادي</option><option>الصف الثاني الإعدادي</option><option>الصف الثالث الإعدادي</option><option value="الصف الأول الثانوي">أولى بكالوريا</option><option>الصف الثاني الثانوي</option><option>الصف الثالث الثانوي</option><option>المرحلة الجامعية</option><option>غير ذلك</option></select></div>
-        <div class="auth-field"><label for="loginPassword">كلمة السر</label><div class="password-wrap"><input id="loginPassword" type="password" required minlength="8" autocomplete="new-password" placeholder="كلمة السر"><button type="button" class="password-toggle" id="togglePassword" aria-label="إظهار كلمة السر">◉</button></div></div>
+        <div class="auth-field" id="ageField" hidden><label for="loginAge">السن</label><input id="loginAge" type="number" min="5" max="100" placeholder="مثال: 16"></div>
+        <div class="auth-field" id="gradeField" hidden><label for="loginGrade">الصف الدراسي</label><select id="loginGrade"><option value="">اختر صفك الدراسي</option><option>الصف الأول الابتدائي</option><option>الصف الثاني الابتدائي</option><option>الصف الثالث الابتدائي</option><option>الصف الرابع الابتدائي</option><option>الصف الخامس الابتدائي</option><option>الصف السادس الابتدائي</option><option>الصف الأول الإعدادي</option><option>الصف الثاني الإعدادي</option><option>الصف الثالث الإعدادي</option><option value="الصف الأول الثانوي">أولى بكالوريا</option><option>الصف الثاني الثانوي</option><option>الصف الثالث الثانوي</option><option>المرحلة الجامعية</option><option>غير ذلك</option></select></div>
+        <div class="auth-field"><label for="loginPassword">كلمة السر</label><div class="password-wrap"><input id="loginPassword" type="password" required minlength="8" autocomplete="current-password" placeholder="كلمة السر"><button type="button" class="password-toggle" id="togglePassword" aria-label="إظهار كلمة السر">◉</button></div></div>
         <div class="auth-options" id="authOptions"><label class="remember-label" id="rememberLine"><input type="checkbox" id="rememberMe"> تذكرني</label><button type="button" class="forgot-button" id="forgotPassword">نسيت كلمة السر؟</button></div>
         <div id="baccalaureateWrap" class="auth-field" hidden><label for="studySystem">نظام دراستك في الثانوية</label><select id="studySystem"><option value="">اختار النظام</option><option value="baccalaureate">البكالوريا المصرية</option><option value="general">الثانوية العامة</option></select></div>
         <button class="primary auth-submit" id="authSubmit">تسجيل الدخول</button>
