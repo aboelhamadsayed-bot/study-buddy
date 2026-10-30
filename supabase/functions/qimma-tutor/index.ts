@@ -10,8 +10,8 @@ const reply=(status:number,body:Record<string,unknown>)=>new Response(JSON.strin
 Deno.serve(async(req:Request)=>{
  if(req.method==="OPTIONS")return new Response("ok",{headers:cors});
  if(req.method!=="POST")return reply(405,{error:"Method not allowed"});
- const apiKey=Deno.env.get("OPENAI_API_KEY"),url=Deno.env.get("SUPABASE_URL"),anon=Deno.env.get("SUPABASE_ANON_KEY"),service=Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
- if(!apiKey)return reply(503,{error:"OPENAI_API_KEY is missing"});
+ const apiKey=Deno.env.get("ANTHROPIC_API_KEY"),url=Deno.env.get("SUPABASE_URL"),anon=Deno.env.get("SUPABASE_ANON_KEY"),service=Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+ if(!apiKey)return reply(503,{error:"مفتاح Claude غير مضبوط بعد. أضف ANTHROPIC_API_KEY إلى أسرار Supabase."});
  const auth=req.headers.get("Authorization")||"",token=auth.startsWith("Bearer ")?auth.slice(7):"";
  if(!token||!url||!anon||!service)return reply(401,{error:"Authentication required"});
  try{
@@ -33,12 +33,12 @@ Deno.serve(async(req:Request)=>{
   const path=grade==="secondary2"&&system==="bac"?" — البكالوريا المصرية، مسار "+tracks[track]:grade==="secondary2"?" — الثانوية العامة":"";
   const gradeContext=grade?gradeNames[grade]+path:"غير محدد؛ اعتمد على الفئة العمرية";
   const instructions="أنت أستاذ عربي خاص، صبور ومشجع. مستوى العمر: "+age[group]+". الصف: "+gradeContext+". المطلوب: "+modes[mode]+" افهم السؤال بنفسك وحدد إن كان مقاليًا أو مفاهيميًا أو مسألة، واختر طريقة الشرح المناسبة بدل تقديم رد عام. في السؤال المقالي: وضح الفكرة والمطلوب، رتّب عناصر الإجابة، ثم اكتب نموذجًا كاملًا بلغة مناسبة للصف مع مقدمة وعرض وخاتمة عند الحاجة، واشرح سبب ترتيب العناصر. في الأسئلة الذاتية أو المنشورات اشرح السؤال الذي أرسله الطالب تحديدًا ولا تكتفِ بإعادة صياغته أو إعطاء إجابة من سطر واحد. إذا أرسل الطالب صورة، اقرأ النص والرموز والمعادلات والرسوم الظاهرة فيها، ثم أجب عن السؤال الموجود. لو الصورة غير واضحة أو ناقصة، اطلب صورة أوضح ولا تخمّن. ابدأ بالإجابة مباشرة ولا تطلب إعادة السؤال إذا كان مفهومًا. في المسائل اكتب المعطيات ثم خطوات الحل والنتيجة وتحققًا سريعًا. عرّف المصطلحات الصعبة حسب صف الطالب. في المتابعة اقرأ الحوار السابق وأجب عن آخر نقطة فقط مع مراجعة الصورة المرفقة، دون تكرار الشرح كله. استخدم العربية الواضحة ولا تخترع حقائق، وقل إذا نقص سياق السؤال. لا تطلب بيانات شخصية.";
-  const userContent:any[]=[{type:"input_text",text:"المادة: "+subject+"\nسؤال الطالب أو الدرس:\n"+question}];
-  if(image)userContent.push({type:"input_image",image_url:image});
-  const input=[...history.map((item:any)=>({role:item.role,content:item.content})),{role:"user",content:userContent}];
-  const result=await fetch("https://api.openai.com/v1/responses",{method:"POST",headers:{"Authorization":"Bearer "+apiKey,"Content-Type":"application/json"},body:JSON.stringify({model:"gpt-6-luna",instructions,input,max_output_tokens:1400})});
-  const data=await result.json().catch(()=>({}));if(!result.ok)return reply(502,{error:"تعذر الحصول على شرح الآن. حاول بعد قليل."});
-  const answer=String(data.output_text||((data.output||[]).flatMap((x:any)=>x.content||[]).find((x:any)=>x.type==="output_text")?.text)||"").slice(0,9000);
+  const userContent:any[]=[{type:"text",text:"المادة: "+subject+"\\nسؤال الطالب أو الدرس:\\n"+question}];
+  if(image){const match=image.match(/^data:image\\/(jpeg|png|webp|gif);base64,([A-Za-z0-9+/]+={0,2})$/);if(!match)return reply(400,{error:"صيغة الصورة غير مدعومة."});userContent.push({type:"image",source:{type:"base64",media_type:"image/"+match[1],data:match[2]}})}
+  const messages:any[]=[...history.map((item:any)=>({role:item.role,content:item.content})),{role:"user",content:userContent}];
+  const result=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"x-api-key":apiKey,"anthropic-version":"2023-06-01","content-type":"application/json"},body:JSON.stringify({model:Deno.env.get("CLAUDE_MODEL")||"claude-sonnet-5-5",system:instructions,messages,max_tokens:1800,temperature:0.2})});
+  const data=await result.json().catch(()=>({}));if(!result.ok){console.error("Claude API error",result.status,data?.error?.type||"unknown");return reply(502,{error:result.status===429?"مساعد قِمّة مشغول حاليًا أو وصل لحد الاستخدام. حاول بعد قليل.":"تعذر الحصول على شرح من Claude الآن. حاول بعد قليل."})}
+  const answer=String((data.content||[]).filter((x:any)=>x.type==="text").map((x:any)=>x.text).join("\\n")||"").slice(0,9000);
   return answer?reply(200,{answer}):reply(502,{error:"لم يصل شرح واضح. جرّب صياغة أخرى."});
  }catch(_){return reply(500,{error:"حدث خطأ غير متوقع. حاول مرة أخرى."});}
 });
