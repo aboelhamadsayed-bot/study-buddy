@@ -113,7 +113,7 @@ Deno.serve(async (req:Request) => {
     const points=correct*quiz.pointsPerCorrect;
     const saved=await fetch(url+"/rest/v1/rpc/record_qimma_assessment",{method:"POST",headers:{apikey:service,Authorization:"Bearer "+service,"Content-Type":"application/json"},body:JSON.stringify({p_user_id:userId,p_stage:stage,p_grade:grade,p_subject:quiz.subject,p_score:correct*10,p_correct_count:correct,p_question_count:5,p_points:points})});
     const result=await saved.json().catch(()=>null);
-    if(!saved.ok) return respond(503,{error:"تعذر حفظ نتيجتك الآن. لم نحتسب نقاطًا؛ حاول مرة أخرى."});
+    if(!saved.ok){if(String(result?.message||"").includes("Daily assessment limit"))return respond(429,{error:"وصلت للحد اليومي للاختبارات (20 محاولة). ارجع بكرة وكمّل تدريبك."});return respond(503,{error:"تعذر حفظ نتيجتك الآن. لم نحتسب نقاطًا؛ حاول مرة أخرى."});}
     return respond(200,{score:correct*20,correct_count:correct,question_count:5,points_awarded:points,total_points:Number(result?.points||0),completed_count:Number(result?.completed_count||0),review:questions.map(q=>({id:q.id,correct_choice:q.answer,explanation:q.explanation}))});
   } catch (_) {
     return respond(500,{error:"حدث خطأ غير متوقع. حاول مرة أخرى."});
