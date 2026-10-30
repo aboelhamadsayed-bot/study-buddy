@@ -36,7 +36,7 @@ Deno.serve(async(req:Request)=>{
   const userContent:any[]=[{type:"text",text:"المادة: "+subject+"\nسؤال الطالب أو الدرس:\n"+question}];
   if(image){const match=image.match(/^data:image\/(jpeg|png|webp|gif);base64,([A-Za-z0-9+/]+={0,2})$/);if(!match)return reply(400,{error:"صيغة الصورة غير مدعومة."});userContent.push({type:"image",source:{type:"base64",media_type:"image/"+match[1],data:match[2]}})}
   const messages:any[]=[...history.map((item:any)=>({role:item.role,content:item.content})),{role:"user",content:userContent}];
-  const result=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"x-api-key":apiKey,"anthropic-version":"2023-06-01","content-type":"application/json"},body:JSON.stringify({model:Deno.env.get("CLAUDE_MODEL")||"claude-sonnet-5-5",system:instructions,messages,max_tokens:1800,temperature:0.2})});
+  const result=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"x-api-key":apiKey,"anthropic-version":"2023-06-01","content-type":"application/json"},body:JSON.stringify({model:Deno.env.get("CLAUDE_MODEL")||"claude-sonnet-5",system:instructions,messages,max_tokens:1800})});
   const data=await result.json().catch(()=>({}));if(!result.ok){console.error("Claude API error",result.status,data?.error?.type||"unknown");return reply(502,{error:result.status===429?"مساعد قِمّة مشغول حاليًا أو وصل لحد الاستخدام. حاول بعد قليل.":"تعذر الحصول على شرح من Claude الآن. حاول بعد قليل."})}
   const answer=String((data.content||[]).filter((x:any)=>x.type==="text").map((x:any)=>x.text).join("\n")||"").slice(0,9000);
   return answer?reply(200,{answer}):reply(502,{error:"لم يصل شرح واضح. جرّب صياغة أخرى."});
