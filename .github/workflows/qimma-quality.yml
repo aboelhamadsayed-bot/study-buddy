@@ -63,7 +63,7 @@ jobs:
           if not assessment_fn.exists():
               raise SystemExit("The assessment Edge Function source is missing")
           function_source = assessment_fn.read_text(encoding="utf-8")
-          for marker in ["auth/v1/user", "record_qimma_assessment", "questions:banks[quiz.bank||quiz.subject].map"]:
+          for marker in ["auth/v1/user", "record_qimma_assessment", "questions:banks[quiz.bank||quiz.subject].map", "Daily assessment limit reached"]:
               if marker not in function_source:
                   raise SystemExit(f"Missing secure assessment behavior: {marker}")
 
