@@ -1,0 +1,69 @@
+name: Gemini CLI Approved Execution
+
+on:
+  workflow_call:
+    inputs:
+      additional_context:
+        type: string
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  id-token: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Prepare request context
+        env:
+          TITLE: ${{ github.event.issue.title || github.event.pull_request.title }}
+          DESCRIPTION: ${{ github.event.issue.body || github.event.pull_request.body }}
+          ISSUE_NUMBER: ${{ !github.event.issue.pull_request && github.event.issue.number }}
+          PR_NUMBER: ${{ github.event.pull_request.number || (github.event.issue.pull_request && github.event.issue.number) }}
+          IS_PULL_REQUEST: ${{ !!github.event.pull_request || !!github.event.issue.pull_request }}
+          EVENT_NAME: ${{ github.event_name }}
+          ADDITIONAL_CONTEXT: ${{ inputs.additional_context }}
+        run: |
+          mkdir -p .gemini
+          jq -n --arg title "$TITLE" --arg description "$DESCRIPTION" \
+            --arg issue "$ISSUE_NUMBER" --arg pr "$PR_NUMBER" \
+            --arg is_pr "$IS_PULL_REQUEST" --arg event "$EVENT_NAME" \
+            --arg context "$ADDITIONAL_CONTEXT" \
+            '{title:$title, description:$description, issue_number:$issue, pull_request_number:$pr, is_pull_request:$is_pr, event_name:$event, additional_context:$context}' \
+            > .gemini/context.json
+      - name: Install Qimma Gemini commands
+        run: |
+          mkdir -p .gemini/commands
+          cp .github/commands/gemini-invoke.toml .gemini/commands/gemini-invoke.toml
+          cp .github/commands/gemini-plan-execute.toml .gemini/commands/gemini-plan-execute.toml
+      - name: Run Gemini CLI (approved plan only)
+        uses: google-github-actions/run-gemini-cli@v0
+        env:
+          GEMINI_CLI_TRUST_WORKSPACE: "true"
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          prompt: /gemini-plan-execute
+          github_issue_number: ${{ !github.event.issue.pull_request && github.event.issue.number }}
+          github_pr_number: ${{ github.event.pull_request.number || (github.event.issue.pull_request && github.event.issue.number) }}
+          settings: |
+            {
+              "model": { "maxSessionTurns": 25 },
+              "mcpServers": {
+                "github": {
+                  "command": "docker",
+                  "args": ["run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN", "ghcr.io/github/github-mcp-server:v0.27.0"],
+                  "includeTools": ["add_issue_comment", "issue_read", "list_issues", "pull_request_read", "list_pull_requests", "create_pull_request", "create_branch", "create_or_update_file", "get_commit", "get_file_contents", "list_commits", "push_files", "search_code"],
+                  "env": { "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}" }
+                }
+              },
+              "tools": { "core": [] }
+            }
