@@ -8,7 +8,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
 :root{--navy:#102b4a;--navy2:#173d63;--blue:#2468ed;--blue2:#1455d9;--ink:#172c49;--muted:#74839b;--bg:#eef4fb;--line:#e3eaf4;--white:#fff;--green:#21b99a;--shadow:0 10px 30px #183b6410}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);font-family:'Cairo',Tahoma,sans-serif;color:var(--ink);min-height:100vh}button,input,textarea,select{font:inherit}button{cursor:pointer}.shell{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100vh}.sidebar{background:linear-gradient(180deg,#102b4a,#0a2039);color:#fff;padding:22px 15px;display:flex;flex-direction:column;gap:20px;position:sticky;top:0;height:100vh}.brand{font-size:25px;font-weight:900;display:flex;align-items:center;justify-content:center;gap:8px}.mountain{font-size:27px}.profile{text-align:center;padding:16px 8px;border-radius:18px;background:#ffffff0b;border:1px solid #ffffff12}.avatar{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;margin:0 auto 8px;background:linear-gradient(145deg,#d9e9ff,#fff);font-size:34px;border:3px solid #ffffff50}.profile strong{display:block;font-size:14px}.profile small{display:block;color:#b7c7da;font-size:11px}.tag{display:inline-block;background:#2368ed;color:#fff;border-radius:20px;padding:3px 15px;font-size:11px;margin-top:7px}.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;color:#c9d7e8;text-align:right;padding:11px 12px;border-radius:11px;display:flex;align-items:center;gap:10px;font-weight:700;font-size:13px}.nav button:hover,.nav button.active{background:#2468ed;color:white}.nav .ico{width:23px;text-align:center;font-size:17px}.logout{margin-top:auto;border:1px solid #ffffff25;background:#ffffff0a;color:#e1ebf7;padding:11px;border-radius:12px}.main{min-width:0;padding:24px 28px 30px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:22px}.welcome h1{font-size:25px;margin:0 0 3px}.welcome p{color:var(--muted);margin:0;font-size:13px}.top-actions{display:flex;gap:9px;align-items:center}.icon-btn{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px;color:var(--ink)}.primary,.secondary{border:0;border-radius:11px;padding:11px 17px;font-weight:800}.primary{background:var(--blue);color:white;box-shadow:0 5px 12px #2468ed25}.primary:hover{background:var(--blue2)}.secondary{background:#edf4ff;color:var(--blue)}.view{display:none}.view.active{display:block;animation:appear .2s ease}@keyframes appear{from{opacity:.5;transform:translateY(4px)}to{opacity:1;transform:none}}.hero{border-radius:22px;overflow:hidden;padding:32px;min-height:220px;color:white;background:linear-gradient(100deg,#0b2746eF,#0d2e50b5),radial-gradient(ellipse at 85% 20%,#507ba6,transparent 42%),linear-gradient(135deg,#193b5b,#081b31);position:relative;display:flex;align-items:center}.hero:after{content:'🏔️';position:absolute;font-size:120px;left:7%;bottom:-24px;opacity:.25}.hero-content{position:relative;z-index:1;max-width:570px}.eyebrow{color:#a8c9ff;font-size:13px;font-weight:800}.hero h2{font-size:36px;line-height:1.4;margin:7px 0}.hero p{color:#d6e4f4;line-height:1.9;font-size:14px;max-width:510px}.hero .primary{margin-left:7px}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:18px 0}.stat,.panel,.feature{background:#fff;border:1px solid #e5edf7;border-radius:17px;box-shadow:var(--shadow)}.stat{padding:17px;display:flex;gap:12px;align-items:center}.stat-icon{width:46px;height:46px;display:grid;place-items:center;border-radius:14px;background:#eaf2ff;font-size:22px}.stat small{color:var(--muted);display:block;font-size:12px}.stat strong{font-size:23px}.columns{display:grid;grid-template-columns:1.3fr .9fr;gap:16px}.panel{padding:20px;min-width:0}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px}.panel h3{margin:0;font-size:17px}.panel-head small{color:var(--muted)}.progress{height:9px;background:#e8eff8;border-radius:20px;overflow:hidden;margin:12px 0}.progress span{display:block;height:100%;background:linear-gradient(90deg,#2468ed,#61a2ff);border-radius:20%;width:65%}.course-list,.challenge-list,.task-list{display:grid;gap:11px}.course,.challenge,.task{display:flex;align-items:center;gap:12px;padding:13px;border:1px solid var(--line);border-radius:13px;background:#fff}.course-icon,.challenge-icon{width:43px;height:43px;flex-shrink:0;display:grid;place-items:center;border-radius:13px;background:#eef4ff;font-size:22px}.course-info,.challenge-info{min-width:0;flex:1}.course-info strong,.challenge-info strong{display:block;font-size:13px}.course-info small,.challenge-info small{display:block;color:var(--muted);font-size:11px;margin-top:3px}.course .primary,.challenge .primary{padding:8px 13px;font-size:12px}.challenge-status{font-size:11px;color:#099e82;background:#e3faf3;padding:5px 9px;border-radius:20px;white-space:nowrap}.section-title{margin:5px 0 16px;font-size:24px}.muted{color:var(--muted)}.feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.feature{padding:20px;transition:.2s}.feature:hover{transform:translateY(-3px);box-shadow:0 14px 35px #183b6417}.feature .big{font-size:28px;width:52px;height:52px;border-radius:15px;background:#eef4ff;display:grid;place-items:center;margin-bottom:13px}.feature h3{margin:0 0 7px;font-size:16px}.feature p{font-size:12px;color:var(--muted);line-height:1.8;min-height:42px}.feature button{width:100%;margin-top:7px}.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}.filters button{background:#fff;border:1px solid var(--line);color:var(--muted);border-radius:20px;padding:8px 15px;font-size:12px}.filters button.active{background:var(--blue);color:white;border-color:var(--blue)}.challenge-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.challenge-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px;display:flex;gap:12px;align-items:center}.challenge-card .challenge-icon{width:52px;height:52px;font-size:25px}.challenge-card .challenge-info{flex:1}.challenge-card h3{margin:0;font-size:14px}.challenge-card p{font-size:11px;color:var(--muted);margin:4px 0}.chatbox{max-width:850px;margin:auto;min-height:470px;display:flex;flex-direction:column;background:white;border:1px solid var(--line);border-radius:20px;overflow:hidden}.chat-head{padding:17px 20px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center}.chat-head .avatar{width:43px;height:43px;font-size:24px;margin:0}.chat-body{padding:22px;flex:1;display:flex;flex-direction:column;gap:14px}.bubble{max-width:80%;background:#edf4ff;border-radius:15px 15px 4px 15px;padding:13px 15px;font-size:13px;line-height:1.9}.bubble.me{background:#2468ed;color:white;align-self:flex-start;border-radius:15px 15px 15px 4px}.suggestions{display:flex;gap:8px;flex-wrap:wrap}.suggestions button{border:1px solid var(--line);background:white;border-radius:10px;padding:9px 12px;font-size:12px;color:#385574}.chat-form{display:flex;gap:9px;padding:14px;border-top:1px solid var(--line)}.chat-form input{min-width:0;flex:1;border:1px solid var(--line);border-radius:12px;padding:12px;outline-color:#2468ed}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.field label{display:block;font-size:12px;font-weight:800;margin-bottom:7px}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:11px;padding:12px;background:#fbfdff;color:var(--ink);outline-color:var(--blue)}.field textarea{min-height:100px;resize:vertical}.field.full{grid-column:1/-1}.exam-row{display:flex;align-items:center;gap:12px}.exam-row .course-icon{font-size:24px}.exam-row .course-info{flex:1}.community-post{padding:16px 0;border-bottom:1px solid var(--line)}.community-post:last-child{border:0}.post-user{display:flex;align-items:center;gap:10px;font-weight:800;font-size:13px}.post-user .avatar{width:38px;height:38px;font-size:21px;margin:0}.community-post p{font-size:13px;line-height:1.9}.post-actions{color:var(--muted);font-size:12px}.empty-note{padding:35px;text-align:center;color:var(--muted)}.footer{padding:24px 0 5px;color:var(--muted);font-size:11px;text-align:center}.toast{position:fixed;bottom:20px;left:20px;background:#102b4a;color:white;padding:13px 18px;border-radius:12px;box-shadow:var(--shadow);z-index:20;opacity:0;pointer-events:none;transform:translateY(8px);transition:.2s}.toast.show{opacity:1;transform:none}.mobile-menu{display:none}
-.video-search-panel{margin:18px 0 20px}.video-search-form{display:flex;gap:10px;align-items:stretch}.video-search-form input{flex:1;min-width:0;border:1px solid var(--line);border-radius:12px;padding:12px;background:#fbfdff;outline-color:var(--blue)}.video-results{margin-top:16px}.video-results-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.video-result{min-width:0;border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff}.video-result h4{font-size:13px;line-height:1.7;margin:0 0 5px}.video-result .video-channel{font-size:11px;color:var(--muted);margin:0 0 8px}.video-result p{font-size:11px;line-height:1.7;color:var(--muted);margin:8px 0 0}.video-frame{position:relative;aspect-ratio:16/9;background:#0b1e32;border-radius:10px;overflow:hidden}.video-frame iframe{width:100%;height:100%;border:0;position:absolute;inset:0}.video-loading,.video-error{padding:16px;border-radius:12px;background:#f3f7fc;color:var(--muted);font-size:13px}.video-error{color:#a33;background:#fff1f1}@media(max-width:700px){.video-search-form{flex-direction:column}.video-search-form button{width:100%}.video-results-grid{grid-template-columns:1fr}}\n@media(max-width:1050px){.shell{grid-template-columns:200px minmax(0,1fr)}.main{padding:20px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.columns{grid-template-columns:1fr}}
+@media(max-width:1050px){.shell{grid-template-columns:200px minmax(0,1fr)}.main{padding:20px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.columns{grid-template-columns:1fr}}
 @media(max-width:700px){.shell{display:block}.sidebar{position:fixed;z-index:10;top:0;right:0;width:250px;height:100dvh;transform:translateX(105%);transition:transform .25s;box-shadow:-10px 0 30px #0002}.sidebar.open{transform:translateX(0)}.mobile-menu{display:inline-flex}.main{padding:15px}.topbar{align-items:flex-start}.welcome h1{font-size:20px}.welcome p{font-size:11px}.top-actions .desktop-action{display:none}.hero{padding:23px 20px;min-height:230px}.hero h2{font-size:27px}.hero p{font-size:12px}.hero:after{font-size:80px}.stats{gap:9px}.stat{padding:12px;gap:9px}.stat-icon{width:38px;height:38px;font-size:19px}.stat strong{font-size:20px}.panel{padding:15px}.feature-grid,.challenge-grid{grid-template-columns:1fr}.feature{padding:16px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.section-title{font-size:21px}.chatbox{min-height:65vh}.bubble{max-width:94%}}
 
 @media(max-width:390px){.stats{grid-template-columns:1fr 1fr}.stat{padding:10px}.stat-icon{display:none}.top-actions{gap:5px}.icon-btn{padding:8px}.hero .primary,.hero .secondary{padding:9px 12px;font-size:12px}}
@@ -114,7 +114,7 @@ html,body{width:100%;overflow-x:hidden}
 .login-card .auth-footnote{margin-top:16px}
 
 .auth-create-line{position:relative;z-index:5;display:block;text-align:center!important;margin:19px 0 0!important;color:#71819a!important;font-size:13px!important}
-.auth-create-line #registerMode{display:inline-block!important;position:relative;z-index:6;cursor:pointer;text-decoration:none!important;color:#2468ed!important;font-weight:900!important;font-size:13px!important;padding:4px 2px!important;pointer-events:auto!important;background:transparent!important;border:0!important;font-family:inherit!important;line-height:inherit!important}
+.auth-create-line a{display:inline-block!important;position:relative;z-index:6;cursor:pointer;text-decoration:none!important;color:#2468ed!important;font-weight:900!important;font-size:13px!important;padding:4px 2px!important;pointer-events:auto!important}
 
 /* Keep registration-only fields completely out of the login screen. */
 #loginForm #nameField[hidden],#loginForm #ageField[hidden],#loginForm #gradeField[hidden],#loginForm #baccalaureateWrap[hidden]{display:none!important;}
@@ -126,8 +126,6 @@ html,body{width:100%;overflow-x:hidden}
 #loginForm #authOptions .remember-label{display:flex;align-items:center;gap:7px;white-space:nowrap}
 #loginForm #authOptions .forgot-button{display:inline-flex;align-items:center;justify-content:flex-start;width:auto!important;margin:0!important;padding:4px 0!important;white-space:nowrap}
 #loginForm #authOptions[hidden]{display:none!important}
-/* Registration-only fields stay hidden on the login screen, including before JavaScript runs. */
-#loginForm[data-auth-mode="login"] #nameField,#loginForm[data-auth-mode="login"] #ageField,#loginForm[data-auth-mode="login"] #gradeField,#loginForm[data-auth-mode="login"] #baccalaureateWrap{display:none!important;}
 
 /* Qimma auth visual polish */
 .auth-layout{border:1px solid #e8eef6;box-shadow:0 28px 90px rgba(9,43,78,.21)}
@@ -203,7 +201,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 }
 
 /* Qimma logo beside the student name */
-.welcome-title-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.current-page-title{margin:2px 0 3px;font-size:15px;font-weight:800;color:#315b91}.current-page-title:not([hidden]){display:block}
+.welcome-title-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .header-brand-mark{display:inline-flex;align-items:center;gap:4px;color:#173d63;font-size:14px;font-weight:900;white-space:nowrap}
 .header-brand-mark span{font-size:20px}
 /* Mobile navigation flows at the bottom of the page (not fixed to viewport) */
@@ -264,83 +262,18 @@ body{background:radial-gradient(ellipse at 45% 0%,#103765 0,#061a35 62%);color:#
 @media(max-width:700px){.main{padding:14px 12px 20px}.hero{padding:20px 16px;gap:12px}.hero-progress{flex-basis:112px;min-height:160px;padding:8px}.progress-ring{width:78px;height:78px}.hero-progress small{font-size:10px}.hero h2{font-size:23px}.hero:after{width:45%;opacity:.35}.qimma-shortcuts{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}.qimma-shortcuts button{min-height:112px;padding:12px 7px}.qimma-shortcuts b{font-size:12px}.stats{margin-top:12px}}
 @media(max-width:420px){.hero{display:block}.hero-progress{margin-top:14px;min-height:0;display:grid;grid-template-columns:auto auto;justify-content:space-around}.hero-progress>span,.hero-progress small{grid-column:1/-1}.progress-ring{grid-row:2;grid-column:1}.hero-progress>strong{display:none}}
 
+.video-search-panel{margin:18px 0 20px}.video-search-form{display:flex;gap:10px;align-items:stretch}.video-search-form input{flex:1;min-width:0;border:1px solid var(--line);border-radius:12px;padding:12px;background:#fbfdff;outline-color:var(--blue)}.video-results{margin-top:16px}.video-results-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.video-result{min-width:0;border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff}.video-result h4{font-size:13px;line-height:1.7;margin:0 0 5px}.video-result .video-channel{font-size:11px;color:var(--muted);margin:0 0 8px}.video-result p{font-size:11px;line-height:1.7;color:var(--muted);margin:8px 0 0}.video-frame{position:relative;aspect-ratio:16/9;background:#0b1e32;border-radius:10px;overflow:hidden}.video-frame iframe{width:100%;height:100%;border:0;position:absolute;inset:0}.video-loading,.video-error{padding:16px;border-radius:12px;background:#f3f7fc;color:var(--muted);font-size:13px}.video-error{color:#a33;background:#fff1f1}@media(max-width:700px){.video-search-form{flex-direction:column}.video-search-form button{width:100%}.video-results-grid{grid-template-columns:1fr}}
+/* Qimma digital books library */
+.library-controls{margin-bottom:18px}.library-controls-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.library-search{margin-top:12px}.library-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:13px}.library-subhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:18px 2px 12px}.library-subhead h3{margin:0;font-size:17px}.library-note{margin-top:16px;font-size:12px;line-height:1.9}.library-note p{margin:6px 0 0;color:var(--muted)}.book-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px;min-width:0;box-shadow:var(--shadow)}.book-card .book-mark{width:46px;height:46px;border-radius:13px;background:#eef4ff;display:grid;place-items:center;font-size:23px;margin-bottom:11px}.book-card h3{font-size:15px;margin:0 0 6px}.book-card p{font-size:12px;color:var(--muted);line-height:1.8;min-height:42px;margin:0 0 12px}.book-card .book-meta{font-size:11px;color:#63758e;margin-bottom:12px}.book-links{display:flex;gap:8px;flex-wrap:wrap}.book-links a{font-size:11px;font-weight:800;color:var(--blue);text-decoration:none;background:#edf4ff;padding:8px 10px;border-radius:9px}.book-links a:hover{text-decoration:underline}.book-status{display:inline-block;font-size:10px;color:#8a5a10;background:#fff5df;border-radius:20px;padding:4px 9px;margin-bottom:9px}@media(max-width:800px){.library-controls-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:430px){.library-controls-grid{grid-template-columns:1fr}.library-subhead{align-items:flex-start;flex-direction:column}}
 
-/* Force the student identity to stay visible in the header */
-.welcome .welcome-title-row{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;gap:12px!important;min-height:42px!important;visibility:visible!important;opacity:1!important}
-.welcome .welcome-title-row .header-brand-mark{display:inline-flex!important;flex:0 0 auto!important;visibility:visible!important;opacity:1!important;color:#9fc7ff!important;font-size:15px!important;white-space:nowrap!important}
-.welcome .welcome-title-row #studentName{display:block!important;flex:0 1 auto!important;visibility:visible!important;opacity:1!important;color:#f4f8ff!important;font-family:'Cairo',Tahoma,sans-serif!important;font-size:clamp(19px,2.2vw,27px)!important;font-weight:900!important;line-height:1.5!important;margin:0!important;padding:0!important;white-space:normal!important}
-@media(max-width:700px){.welcome .welcome-title-row #studentName{font-size:18px!important}}
-.welcome .welcome-title-row .header-brand-mark{appearance:none!important;-webkit-appearance:none!important;border:0!important;background:transparent!important;padding:4px 2px!important;margin:0!important;cursor:pointer!important;color:#70d6ff!important;font-family:inherit!important;font-weight:950!important;transition:color .2s ease,transform .2s ease!important}.welcome .welcome-title-row .header-brand-mark:hover{color:#ffd166!important;transform:translateY(-1px)!important}.welcome .welcome-title-row .header-brand-mark:focus-visible{outline:2px solid #70d6ff!important;outline-offset:4px!important;border-radius:6px!important}.welcome .welcome-title-row #studentName{color:#000000!important;text-shadow:0 0 2px rgba(255,255,255,.85),0 0 7px rgba(255,255,255,.42)!important}.welcome .welcome-title-row .header-brand-mark{color:#000000!important;text-shadow:0 0 2px rgba(255,255,255,.9),0 0 7px rgba(255,255,255,.48)!important}.welcome .welcome-title-row .header-brand-mark:hover{color:#000000!important}
-
-/* Keep the navigation in the document flow so it scrolls with the page */
-@media(min-width:701px){
-  .sidebar{position:relative!important;top:auto!important;height:auto!important;align-self:stretch!important}
-}
-@media(max-width:700px){
-  .shell{display:flex!important;flex-direction:column!important;min-height:100dvh!important;padding-bottom:0!important}
-  .main{order:1!important}
-  .sidebar{
-    order:2!important;position:relative!important;top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;
-    width:100%!important;height:auto!important;min-height:0!important;transform:none!important;
-    border-radius:18px 18px 0 0!important;box-shadow:none!important;z-index:1!important;
-    padding:16px 12px!important;gap:12px!important
-  }
-  .sidebar .brand,.sidebar .profile{display:flex!important}
-  .sidebar .profile{display:block!important}
-  .sidebar .logout{display:block!important;margin-top:8px!important}
-  .sidebar .nav{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important;width:100%!important}
-  .sidebar .nav button{
-    min-height:44px!important;padding:10px!important;display:flex!important;flex-direction:row!important;
-    justify-content:flex-start!important;align-items:center!important;gap:9px!important;text-align:right!important;
-    font-size:12px!important;white-space:normal!important
-  }
-  .sidebar .nav .ico{width:23px!important;font-size:17px!important}
-}
-
-
-/* Desktop sidebar: visible scrollbar for dragging the menu up and down */
-@media(min-width:701px){
-  .sidebar{
-    position:sticky!important;top:0!important;align-self:start!important;
-    height:100vh!important;max-height:100vh!important;
-    overflow-y:auto!important;overflow-x:hidden!important;
-    scrollbar-width:thin!important;
-    scrollbar-color:rgba(255,255,255,.62) rgba(255,255,255,.14)!important;
-  }
-  .sidebar::-webkit-scrollbar{width:9px}
-  .sidebar::-webkit-scrollbar-track{background:rgba(255,255,255,.14);border-radius:12px}
-  .sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.62);border-radius:12px;border:2px solid transparent;background-clip:padding-box}
-  .sidebar::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.9);background-clip:padding-box}
-}
-
-/* Mobile: hide the bottom navigation while scrolling down, reveal on scroll up */
-@media(max-width:700px){
-  .shell{display:block!important;min-height:100dvh!important;padding-bottom:78px!important}
-  .main{order:initial!important;padding-bottom:24px!important}
-  .sidebar{
-    position:fixed!important;display:flex!important;top:auto!important;right:0!important;bottom:0!important;left:0!important;
-    order:initial!important;width:100%!important;height:auto!important;min-height:0!important;
-    padding:7px 5px calc(7px + env(safe-area-inset-bottom))!important;gap:0!important;
-    transform:translateY(0)!important;transition:transform .22s ease!important;
-    border-radius:18px 18px 0 0!important;box-shadow:0 -8px 28px #071a3030!important;z-index:50!important;
-  }
-  .sidebar.nav-hidden{transform:translateY(110%)!important}
-  .sidebar .brand,.sidebar .profile,.sidebar .logout{display:none!important}
-  .sidebar .nav{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:2px!important;width:100%!important}
-  .sidebar .nav button{
-    min-width:0!important;min-height:51px!important;padding:7px 2px!important;display:flex!important;
-    flex-direction:column!important;justify-content:center!important;align-items:center!important;gap:2px!important;
-    text-align:center!important;border-radius:10px!important;font-size:9px!important;line-height:1.25!important;white-space:normal!important
-  }
-  .sidebar .nav .ico{width:auto!important;font-size:19px!important;line-height:1.2!important}
-  .sidebar.open{transform:translateY(0)!important}
-}
+.book-reader{position:fixed;inset:3vh 3vw;z-index:10000;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 20px 80px #07152b55;display:flex;flex-direction:column;overflow:hidden}.book-reader[hidden]{display:none}.book-reader-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line)}.book-reader-head strong,.book-reader-head small{display:block}.book-reader-head small{font-size:11px;color:var(--muted);margin-top:3px}.book-reader iframe{width:100%;height:100%;border:0;background:#f4f6fa}.book-card .book-open{border:0;cursor:pointer;font:inherit;font-size:12px;font-weight:800;color:#fff;background:var(--blue);padding:9px 13px;border-radius:9px}.book-card .book-open:disabled{opacity:.55;cursor:not-allowed}.book-empty{grid-column:1/-1;padding:22px;border:1px dashed var(--line);border-radius:14px;color:var(--muted);text-align:center;line-height:1.9}
+@media(max-width:600px){.book-reader{inset:1vh 1vw;border-radius:12px}.book-reader-head{padding:9px}}
 </style></head>
 <body>
 <section class="login-screen" id="loginScreen">
   <div class="auth-layout">
     <div class="auth-form-panel">
-      <form class="login-card" id="loginForm" data-auth-mode="login">
+      <form class="login-card" id="loginForm">
         <div class="auth-mobile-brand">⛰ قِمّة</div>
         <h1 id="authHeading">مرحبًا بك في قِمّة 👋</h1>
         <p id="authIntro">سجّل دخولك للمتابعة والتعلّم</p>
@@ -350,13 +283,13 @@ body{background:radial-gradient(ellipse at 45% 0%,#103765 0,#061a35 62%);color:#
         
         
         <div class="auth-field" id="ageField"><label for="loginAge">السن</label><input id="loginAge" type="number" min="5" max="100" required placeholder="مثال: 16"></div>
-        <div class="auth-field" id="gradeField"><label for="loginGrade">الصف الدراسي</label><select id="loginGrade" required><option value="">اختر صفك الدراسي</option><option>الصف الأول الإعدادي</option><option>الصف الثاني الإعدادي</option><option>الصف الثالث الإعدادي</option><option>الصف الأول الثانوي</option><option>الصف الثاني الثانوي</option><option>الصف الثالث الثانوي</option><option>المرحلة الجامعية</option><option>غير ذلك</option></select></div>
+        <div class="auth-field" id="gradeField"><label for="loginGrade">الصف الدراسي</label><select id="loginGrade" required><option value="">اختر صفك الدراسي</option><option>الصف الأول الابتدائي</option><option>الصف الثاني الابتدائي</option><option>الصف الثالث الابتدائي</option><option>الصف الرابع الابتدائي</option><option>الصف الخامس الابتدائي</option><option>الصف السادس الابتدائي</option><option>الصف الأول الإعدادي</option><option>الصف الثاني الإعدادي</option><option>الصف الثالث الإعدادي</option><option value="الصف الأول الثانوي">أولى بكالوريا</option><option>الصف الثاني الثانوي</option><option>الصف الثالث الثانوي</option><option>المرحلة الجامعية</option><option>غير ذلك</option></select></div>
         <div class="auth-field"><label for="loginPassword">كلمة السر</label><div class="password-wrap"><input id="loginPassword" type="password" required minlength="8" autocomplete="new-password" placeholder="كلمة السر"><button type="button" class="password-toggle" id="togglePassword" aria-label="إظهار كلمة السر">◉</button></div></div>
-        <div class="auth-options" id="authOptions"><label class="remember-label" id="rememberLine"><input type="checkbox" id="rememberMe" checked> تذكرني</label><button type="button" class="forgot-button" id="forgotPassword">نسيت كلمة السر؟</button></div>
+        <div class="auth-options" id="authOptions"><label class="remember-label" id="rememberLine"><input type="checkbox" id="rememberMe"> تذكرني</label><button type="button" class="forgot-button" id="forgotPassword">نسيت كلمة السر؟</button></div>
         <div id="baccalaureateWrap" class="auth-field" hidden><label for="studySystem">نظام دراستك في الثانوية</label><select id="studySystem"><option value="">اختار النظام</option><option value="baccalaureate">البكالوريا المصرية</option><option value="general">الثانوية العامة</option></select></div>
         <button class="primary auth-submit" id="authSubmit">تسجيل الدخول</button>
         <p id="authMessage" role="status" class="auth-message"></p>
-        <div class="auth-create-line" id="createLine"><span id="authSwitchText">ليس لديك حساب؟</span> <button type="button" id="registerMode">إنشاء حساب</button></div>
+        <div class="auth-create-line" id="createLine"><span id="authSwitchText">ليس لديك حساب؟</span> <a href="#create-account" id="registerMode" role="button">إنشاء حساب</a></div>
         <p class="auth-footnote">تحتاج إلى تأكيد بريدك الإلكتروني عند إنشاء الحساب. يمكنك الدخول من أي جهاز.</p>
       </form>
     </div>
@@ -376,7 +309,8 @@ body{background:radial-gradient(ellipse at 45% 0%,#103765 0,#061a35 62%);color:#
 <button class="active" data-view="home"><span class="ico">⌂</span> الرئيسية</button>
 <button data-view="challenges"><span class="ico">♧</span> التحديات</button>
 <button data-view="exams"><span class="ico">▣</span> الامتحانات والنتائج</button>
-<button data-view="library"><span class="ico">▤</span> المكتبة</button>
+<button data-view="library"><span class="ico">▤</span> مكتبة الكتب</button>
+<button data-view="teachers"><span class="ico">🎓</span> المدرسين</button>
 <button data-view="assistant"><span class="ico">✧</span> المساعد الذكي</button>
 <div class="more-nav-items" id="moreNavItems">
 <button data-view="community"><span class="ico">♧</span> مجتمع الطلاب</button>
@@ -385,7 +319,7 @@ body{background:radial-gradient(ellipse at 45% 0%,#103765 0,#061a35 62%);color:#
 </div>
 <button type="button" class="more-nav-toggle" id="moreNavToggle" aria-expanded="false"><span class="ico">•••</span> المزيد</button>
 </nav><button class="logout" id="logout">↪ تسجيل الخروج</button></aside>
-<main class="main"><header class="topbar"><div class="welcome"><div class="welcome-title-row"><button type="button" class="header-brand-mark" onclick="go(\'home\')" aria-label="العودة إلى الصفحة الرئيسية" title="العودة للرئيسية"><span>⛰</span> قِمّة</button><h1 id="studentName">مرحبًا أحمد 👋</h1></div><h2 id="pageTitle" class="current-page-title" hidden>الرئيسية</h2><p id="pageSubtitle">استعد لتحقيق إنجاز جديد اليوم</p></div><div class="top-actions"><button class="icon-btn mobile-menu" id="menuBtn" aria-label="فتح القائمة">☰</button><button class="icon-btn desktop-action" id="profileBtn">👤 حسابي</button><button class="primary" id="continueBtn">ابدأ المذاكرة ←</button></div></header>
+<main class="main"><header class="topbar"><div class="welcome"><div class="welcome-title-row"><h1 id="pageTitle">مرحبًا أحمد 👋</h1><span class="header-brand-mark"><span>⛰</span> قِمّة</span></div><p id="pageSubtitle">استعد لتحقيق إنجاز جديد اليوم</p></div><div class="top-actions"><button class="icon-btn mobile-menu" id="menuBtn" aria-label="فتح القائمة">☰</button><button class="icon-btn desktop-action" id="profileBtn">👤 حسابي</button><button class="primary" id="continueBtn">ابدأ المذاكرة ←</button></div></header>
 <section class="view active" id="view-home">
 <div class="hero"><div class="hero-content"><span class="eyebrow">طريقك نحو التفوق يبدأ هنا</span><h2>قِمّة — مستقبلُك يستحق الأفضل</h2><p>منصة تعليمية ذكية تساعدك على تنظيم وقتك، وفهم دروسك، والتدرّب على الامتحانات، وتحقيق أهدافك خطوة بخطوة.</p><button class="primary" data-go="library">ابدأ الآن</button> <button class="secondary" data-go="assistant">اسأل المساعد الذكي</button></div><aside class="hero-progress"><span>مستوى التقدم</span><div class="progress-ring"><b id="heroProgress">0%</b></div><small>أنت في طريقك للنجاح<br>استمر في المذاكرة!</small><strong>⛰</strong></aside></div>
 <div class="stats"><div class="stat"><div class="stat-icon">💎</div><div><small>نقاط التفوق</small><strong id="points">0</strong></div></div><div class="stat"><div class="stat-icon">🏆</div><div><small>التحديات المكتملة</small><strong id="doneCount">0</strong></div></div><div class="stat"><div class="stat-icon">📚</div><div><small>موادك الدراسية</small><strong>6</strong></div></div><div class="stat"><div class="stat-icon">🎯</div><div><small>معدل الإنجاز</small><strong id="progressLabel">0%</strong></div></div></div>
@@ -401,43 +335,73 @@ body{background:radial-gradient(ellipse at 45% 0%,#103765 0,#061a35 62%);color:#
 <div class="panel"><div class="panel-head"><h3>مهام اليوم</h3><small>خطوة صغيرة تصنع فرقًا</small></div><div class="task-list" id="tasks"><label class="task"><input type="checkbox"> مراجعة درس اليوم</label><label class="task"><input type="checkbox"> حل 10 أسئلة</label><label class="task"><input type="checkbox"> قراءة 5 صفحات</label><label class="task"><input type="checkbox"> مراجعة الأخطاء</label></div><p class="muted" style="font-size:12px">علّم على المهمة بعد إنجازها.</p></div></div></section>
 <section class="view" id="view-challenges"><h2 class="section-title">التحديات 🏆</h2><p class="muted">اختر تحديًا وابدأ في جمع نقاط التفوق.</p><div class="filters" id="challengeFilters"><button class="active" data-filter="all">كل التحديات</button><button data-filter="math">الرياضيات</button><button data-filter="science">العلوم</button><button data-filter="language">اللغات</button></div><div class="challenge-grid" id="challengeGrid"></div></section>
 <section class="view" id="view-exams"><h2 class="section-title">الامتحانات والنتائج</h2><p class="muted">اختبر فهمك، واعرف نتيجتك فور الانتهاء.</p><div class="panel"><div class="panel-head"><h3>اختبارات متاحة</h3><span class="tag">تدريب</span></div><div class="course-list" id="examList"></div></div><div class="panel" style="margin-top:16px"><h3>نتائجك الأخيرة</h3><div id="results"><p class="muted">لم تُجرِ أي اختبار بعد. ابدأ اختبارًا لتظهر نتيجتك هنا.</p></div></div></section>
-<section class="view" id="view-library"><h2 class="section-title">مكتبة المذاكرة 📚</h2><p class="muted">مواد ومراجعات تساعدك على التقدم.</p><div class="field" style="margin-bottom:15px"><input id="searchLibrary" placeholder="ابحث عن مادة أو درس..." aria-label="بحث في المكتبة"></div><div class="panel video-search-panel"><div class="panel-head"><h3>🎬 ابحث عن شرح بالفيديو</h3><small>فيديوهات تعليمية من YouTube</small></div><p class="muted" style="font-size:12px;margin:0 0 12px">اكتب اسم المادة والدرس، ويمكنك إضافة الصف الدراسي لتحصل على نتائج أدق.</p><form id="videoSearchForm" class="video-search-form"><input id="videoQuery" type="search" placeholder="مثال: رياضيات — درس الدوال — الصف الثاني الثانوي" aria-label="ابحث عن فيديو تعليمي" required maxlength="160"><button class="primary" id="videoSearchBtn" type="submit">ابحث عن فيديوهات</button></form><div id="videoResults" class="video-results" aria-live="polite"><p class="empty-note">اكتب اسم الدرس واضغط على «ابحث عن فيديوهات» لعرض الشروحات.</p></div></div><div class="feature-grid" id="libraryGrid"></div></section>
+<section class="view" id="view-library">
+<h2 class="section-title">مكتبة الكتب الإلكترونية 📚</h2>
+<p class="muted">اختار مرحلتك وصفك ومادتك، واعرض كتب الوزارة والسلاسل الخارجية ومصادرها.</p>
+<div class="panel library-controls">
+ <div class="library-controls-grid">
+  <div class="field"><label for="libraryStage">المرحلة التعليمية</label><select id="libraryStage"><option value="primary">المرحلة الابتدائية</option><option value="prep">المرحلة الإعدادية</option><option value="secondary">المرحلة الثانوية</option><option value="university">المرحلة الجامعية</option></select></div>
+  <div class="field"><label for="libraryGrade">الصف الدراسي</label><select id="libraryGrade"></select></div>
+  <div class="field"><label for="libraryTerm">الفصل الدراسي</label><select id="libraryTerm"><option value="all">الترمان</option><option value="1">الترم الأول</option><option value="2">الترم الثاني</option></select></div><div class="field"><label for="libraryType">نوع الملف</label><select id="libraryType"><option value="all">الكل</option><option value="book">كتب المنهج</option><option value="exam">امتحانات ونماذج</option><option value="answer_key">نماذج الإجابة</option></select></div>
+  <div class="field"><label for="librarySubject">المادة</label><select id="librarySubject"><option value="all">كل المواد</option><option>اللغة العربية</option><option>اللغة الإنجليزية</option><option>الرياضيات</option><option>الرياضيات التطبيقية</option><option>العلوم</option><option>الدراسات الاجتماعية</option><option>الفيزياء</option><option>الكيمياء</option><option>الأحياء</option><option>التاريخ</option><option>الجغرافيا</option><option>الفلسفة والمنطق</option><option>اللغة الفرنسية</option><option>اللغة الألمانية</option><option>الحاسب الآلي</option><option>مواد جامعية</option></select></div>
+ </div>
+ <div class="field library-search"><label for="searchLibrary">ابحث عن كتاب أو سلسلة أو مادة</label><input id="searchLibrary" placeholder="مثال: نيوتن، الخبير، البرهان، الامتحان..." aria-label="بحث في المكتبة"></div>
+ <div class="library-actions"><span class="muted">ملفات PDF المتاحة تُقرأ داخل قِمّة، والمصادر الرسمية الخارجية موضحة بشكل منفصل.</span></div>
+</div>
+<div class="panel" style="margin-top:16px;padding:18px">
+ <div class="panel-head"><h3>مصادر المناهج الرسمية 📚</h3><small>العام الدراسي 2026/2027</small></div>
+ <p class="muted">روابط وزارة التربية والتعليم للوصول إلى الكتب والمناهج لجميع الصفوف، ومناهج البكالوريا، والمواد التعليمية الرقمية.</p>
+ <div class="feature-grid">
+  <a class="feature-card" href="https://studentbooks.moe.gov.eg/Books" target="_blank" rel="noopener noreferrer"><strong>📘 مكتبة الكتب المدرسية</strong><span>كتب الوزارة للابتدائي والإعدادي والثانوي</span></a>
+  <a class="feature-card" href="https://ellibrary.moe.gov.eg/EgyptianBaccalaureate/" target="_blank" rel="noopener noreferrer"><strong>🎓 مناهج البكالوريا المصرية</strong><span>المناهج والمواد الخاصة بنظام البكالوريا</span></a>
+  <a class="feature-card" href="https://moe.gov.eg/ar/elearningenterypage/e-learning" target="_blank" rel="noopener noreferrer"><strong>💻 بوابة التعليم الإلكتروني</strong><span>المواد التعليمية والمصادر الرقمية التابعة للوزارة</span></a>
+  <a class="feature-card" href="https://moe.gov.eg/ar/general-administration-of-computer/textbooks" target="_blank" rel="noopener noreferrer"><strong>📚 صفحة الكتب الرسمية</strong><span>صفحة الوزارة الخاصة بالكتب والمناهج الدراسية</span></a>
+ </div>
+</div>
+<div class="panel" style="margin-top:16px;padding:18px">
+ <div class="panel-head"><h3>مصادر الشرح والتعلّم المجانية 🎥</h3><small>مصادر خارجية</small></div>
+ <p class="muted">مصادر إضافية للمراجعة ومشاهدة الشروحات. قد تتطلب بعض المنصات تسجيل الدخول، وهي ليست ملفات PDF مضافة إلى مكتبة قِمّة.</p>
+ <div class="feature-grid">
+  <a class="feature-card" href="https://stream.moe.gov.eg/" target="_blank" rel="noopener noreferrer"><strong>📡 منصة البث المباشر</strong><span>حصص ومراجعات تعليمية من وزارة التربية والتعليم</span></a>
+  <a class="feature-card" href="https://www.hesas.eg/" target="_blank" rel="noopener noreferrer"><strong>🧑‍🏫 منصة حصص مصر</strong><span>محتوى تعليمي ومراجعات للطلاب</span></a>
+  <a class="feature-card" href="https://www.ekb.eg/ar/home" target="_blank" rel="noopener noreferrer"><strong>📚 بنك المعرفة المصري</strong><span>مكتبة رقمية ومصادر معرفية وتعليمية متنوعة</span></a>
+  <a class="feature-card" href="https://moe.gov.eg/ar/" target="_blank" rel="noopener noreferrer"><strong>🏫 منصات الوزارة التعليمية</strong><span>مدرستنا ومنصات الوزارة وروابط الخدمات التعليمية الرسمية</span></a>
+ </div>
+</div>
+<div class="library-subhead"><h3>ملفات PDF المتاحة داخل قِمّة</h3><span class="muted" id="libraryCount">جارٍ حساب الملفات…</span></div>
+<div class="feature-grid" id="libraryGrid"></div>
+<div class="book-reader" id="bookReader" hidden role="dialog" aria-modal="true" aria-label="قارئ الكتب PDF">
+ <div class="book-reader-head"><div><strong id="readerTitle">قراءة الكتاب</strong><small id="readerMeta"></small></div><button type="button" class="secondary" id="closeBookReader">إغلاق ✕</button></div>
+ <iframe id="bookPdfFrame" title="قارئ PDF داخل قمة" loading="lazy"></iframe>
+</div>
+<div class="panel library-note"><strong>مكتبة قِمّة الداخلية</strong><p>سيظهر ملف PDF داخل المنصة عند توفر نسخة رقمية مسموح بعرضها. لن نضع روابط متاجر أو نحول الطالب إلى مواقع أخرى. الكتب التي لم تتوفر ملفاتها بعد ستظل معلّمة بوضوح بأنها قيد الإضافة.</p></div>
+</section>
+<section class="view" id="view-teachers"><h2 class="section-title">المدرسين 🎓</h2><p class="muted">ابحث عن مدرسين وشروحات تعليمية في جميع المواد الدراسية.</p><div class="panel video-search-panel"><div class="panel-head"><h3>🎬 ابحث عن مدرس أو شرح</h3><small>جميع المواد الدراسية</small></div><p class="muted" style="font-size:12px;margin:0 0 12px">اكتب اسم المدرس أو المادة أو الدرس، مثل رياضيات أو فيزياء أو إنجليزي.</p><form id="videoSearchForm" class="video-search-form"><input id="videoQuery" type="search" placeholder="ابحث عن مدرس أو مادة أو درس..." aria-label="ابحث عن مدرس أو مادة أو درس" required maxlength="160"><button class="primary" id="videoSearchBtn" type="submit">ابحث عن مدرسين</button></form><div id="videoResults" class="video-results" aria-live="polite"><p class="empty-note">اكتب اسم المدرس أو الدرس واضغط على «ابحث عن مدرسين».</p></div></div></section>
 <section class="view" id="view-assistant"><h2 class="section-title">المساعد الذكي ✨</h2><p class="muted">اسأل عن درس أو اطلب خطة مذاكرة. هذه نسخة واجهة تجريبية.</p><div class="chatbox"><div class="chat-head"><div class="avatar">🤖</div><div><strong>مساعد قِمّة</strong><div class="muted" style="font-size:11px">رفيقك في رحلة التعلم</div></div></div><div class="chat-body" id="chatBody"><div class="bubble">أهلًا بك! 👋 أنا مساعد قِمّة. أقدر أساعدك ترتّب مذاكرتك أو تفهم سؤالًا. اكتب سؤالك أو اختر اقتراحًا.</div><div class="suggestions"><button>اعمل لي خطة مذاكرة</button><button>اشرح لي درسًا</button><button>اختبرني في الرياضيات</button></div></div><form class="chat-form" id="chatForm"><input id="chatInput" placeholder="اكتب سؤالك هنا..." autocomplete="off" required><button class="primary">إرسال</button></form></div></section>
 <section class="view" id="view-community"><h2 class="section-title">مجتمع الطلاب 👥</h2><p class="muted">شارك إنجازك وتبادل الأفكار مع زملائك.</p><div class="panel"><form id="postForm" class="field"><label for="postText">اكتب منشورًا جديدًا</label><textarea id="postText" placeholder="إيه اللي أنجزته في مذاكرتك النهارده؟" required></textarea><button class="primary" style="margin-top:9px">نشر المنشور</button></form><div id="posts"><div class="community-post"><div class="post-user"><div class="avatar">👨🏻‍🎓</div> أحمد محمد <small class="muted">· الآن</small></div><p>بداية جديدة، وخطوة كل يوم تقربني من هدفي 💪</p><div class="post-actions">♡ 24 إعجابًا · تعليقان</div></div></div></div></section>
 <section class="view" id="view-teacher"><h2 class="section-title">لوحة الأستاذ</h2><p class="muted">نظرة سريعة على أدوات إعداد المحتوى والأنشطة التعليمية.</p><div class="feature-grid"><article class="feature"><div class="big">📝</div><h3>إنشاء اختبار</h3><p>جهّز اختبارًا تدريبيًا قصيرًا لطلابك.</p><button class="primary" data-go="exams">إدارة الاختبارات</button></article><article class="feature"><div class="big">📚</div><h3>إضافة مادة</h3><p>استعرض مكتبة المواد والدروس المتاحة.</p><button class="secondary" data-go="library">فتح المكتبة</button></article><article class="feature"><div class="big">👥</div><h3>مجتمع الطلاب</h3><p>تابع المشاركات التعليمية والتفاعل.</p><button class="secondary" data-go="community">فتح المجتمع</button></article></div></section>
-<section class="view" id="view-settings"><h2 class="section-title">إعدادات الحساب ⚙️</h2><div class="panel"><form id="settingsForm" class="form-grid"><div class="field"><label for="fullName">الاسم</label><input id="fullName" value="أحمد محمد" required></div><div class="field"><label for="grade">الصف الدراسي</label><select id="grade" required><option>الصف الأول الإعدادي</option><option>الصف الثاني الإعدادي</option><option>الصف الثالث الإعدادي</option><option>الصف الأول الثانوي</option><option>الصف الثاني الثانوي</option><option>الصف الثالث الثانوي</option><option>المرحلة الجامعية</option><option>غير ذلك</option></select></div><div class="field" id="settingsSystemWrap"><label for="studySystemSettings">نظام الثانوية</label><select id="studySystemSettings"><option value="">اختار النظام</option><option value="baccalaureate">البكالوريا المصرية</option><option value="general">الثانوية العامة</option></select></div></div><div class="field"><label for="email">البريد الإلكتروني</label><input id="email" type="email" value="ahmed@example.com"></div><div class="field"><label for="studyGoal">هدفك اليومي (بالدقائق)</label><input id="studyGoal" type="number" min="10" max="600" value="120"></div><div class="field full"><button class="primary">حفظ التغييرات</button></div></form></div></section>
+<section class="view" id="view-settings"><h2 class="section-title">إعدادات الحساب ⚙️</h2><div class="panel"><form id="settingsForm" class="form-grid"><div class="field"><label for="fullName">الاسم</label><input id="fullName" value="أحمد محمد" required></div><div class="field"><label for="grade">الصف الدراسي</label><select id="grade" required><option>الصف الأول الابتدائي</option><option>الصف الثاني الابتدائي</option><option>الصف الثالث الابتدائي</option><option>الصف الرابع الابتدائي</option><option>الصف الخامس الابتدائي</option><option>الصف السادس الابتدائي</option><option>الصف الأول الإعدادي</option><option>الصف الثاني الإعدادي</option><option>الصف الثالث الإعدادي</option><option value="الصف الأول الثانوي">أولى بكالوريا</option><option>الصف الثاني الثانوي</option><option>الصف الثالث الثانوي</option><option>المرحلة الجامعية</option><option>غير ذلك</option></select></div><div class="field" id="settingsSystemWrap" hidden><label for="studySystemSettings">نظام الثانوية</label><select id="studySystemSettings"><option value="">اختار النظام</option><option value="baccalaureate">البكالوريا المصرية</option><option value="general">الثانوية العامة</option></select></div></div><div class="field"><label for="email">البريد الإلكتروني</label><input id="email" type="email" value="ahmed@example.com"></div><div class="field"><label for="studyGoal">هدفك اليومي (بالدقائق)</label><input id="studyGoal" type="number" min="10" max="600" value="120"></div><div class="field full"><button class="primary">حفظ التغييرات</button></div></form></div></section>
 <footer class="footer">قِمّة — معًا نحو مستقبل أفضل · نموذج أولي قابل للتطوير</footer></main></div><div class="toast" id="toast"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const $=s=>document.querySelector(s);const $$=s=>document.querySelectorAll(s);
 
-const titles={home:['مرحبًا أحمد 👋','استعد لتحقيق إنجاز جديد اليوم'],challenges:['التحديات 🏆','كل خطوة تقربك من هدفك'],exams:['الامتحانات والنتائج','تدرّب، قيّم مستواك، وتقدّم'],library:['مكتبة المذاكرة 📚','معرفتك هي أقوى أدواتك'],assistant:['المساعد الذكي ✨','اسأل، افهم، وتعلّم'],community:['مجتمع الطلاب 👥','نتعلم معًا وننجح معًا'],teacher:['لوحة الأستاذ','أدوات تعليمية في مكان واحد'],settings:['إعدادات الحساب','حدّث بياناتك وتفضيلاتك']};
+const titles={home:['مرحبًا أحمد 👋','استعد لتحقيق إنجاز جديد اليوم'],challenges:['التحديات 🏆','كل خطوة تقربك من هدفك'],exams:['الامتحانات والنتائج','تدرّب، قيّم مستواك، وتقدّم'],library:['مكتبة المذاكرة 📚','معرفتك هي أقوى أدواتك'], teachers:['المدرسين 🎓','مدرسون وشروحات لجميع المواد الدراسية'],assistant:['المساعد الذكي ✨','اسأل، افهم، وتعلّم'],community:['مجتمع الطلاب 👥','نتعلم معًا وننجح معًا'],teacher:['لوحة الأستاذ','أدوات تعليمية في مكان واحد'],settings:['إعدادات الحساب','حدّث بياناتك وتفضيلاتك']};
 const challenges=[{name:'تحدي الرياضيات',desc:'احصل على 120 نقطة',icon:'🧮',cat:'math',points:120},{name:'تحدي الفيزياء',desc:'احصل على 100 نقطة',icon:'⚛️',cat:'science',points:100},{name:'تحدي اللغة الإنجليزية',desc:'احصل على 150 نقطة',icon:'📖',cat:'language',points:150},{name:'تحدي الكيمياء',desc:'احصل على 110 نقطة',icon:'🧪',cat:'science',points:110},{name:'تحدي المراجعة اليومية',desc:'احصل على 80 نقطة',icon:'🎯',cat:'math',points:80},{name:'تحدي الكلمات الجديدة',desc:'احصل على 90 نقطة',icon:'🔤',cat:'language',points:90}];
 const subjects=[{name:'الرياضيات',desc:'تمارين ومراجعات في الرياضيات',icon:'🧮'},{name:'الفيزياء',desc:'افهم القوانين بالتدريب',icon:'⚛️'},{name:'الكيمياء',desc:'ملخصات وتجارب تعليمية',icon:'🧪'},{name:'اللغة العربية',desc:'نحو وبلاغة وقراءة',icon:'📚'},{name:'اللغة الإنجليزية',desc:'قواعد ومفردات وقراءة',icon:'🔤'},{name:'الأحياء',desc:'مفاهيم ورسوم توضيحية',icon:'🧬'}];
-let points=0,done=0,results=[];
-let statsStorageKey='qimmaStats_guest';
-function saveStats(){try{localStorage.setItem(statsStorageKey,JSON.stringify({points,done}))}catch{}}
-function loadStats(userId){statsStorageKey='qimmaStats_'+(userId||'guest');let saved=null;try{saved=JSON.parse(localStorage.getItem(statsStorageKey)||'null')}catch{}points=Number(saved?.points)||0;done=Number(saved?.done)||0;updateStatsUI()}
-function updateStatsUI(){const pct=Math.min(100,Math.round((done/10)*100));$('#points').textContent=points.toLocaleString('en-US');$('#doneCount').textContent=done;$('#progressLabel').textContent=pct+'%';$('#heroProgress').textContent=pct+'%';$('#progressBar').style.width=pct+'%';const ring=$('.progress-ring');if(ring)ring.style.setProperty('--progress',pct+'%')}
-
+let points=0,done=0,results=[];\nlet statsStorageKey='qimmaStats_guest';\nfunction saveStats(){try{localStorage.setItem(statsStorageKey,JSON.stringify({points,done}))}catch{}}\nfunction loadStats(userId){statsStorageKey='qimmaStats_'+(userId||'guest');let saved=null;try{saved=JSON.parse(localStorage.getItem(statsStorageKey)||'null')}catch{}points=Number(saved?.points)||0;done=Number(saved?.done)||0;updateStatsUI()}\nfunction updateStatsUI(){const pct=Math.min(100,Math.round((done/10)*100));$('#points').textContent=points.toLocaleString('en-US');$('#doneCount').textContent=done;$('#progressLabel').textContent=pct+'%';$('#heroProgress').textContent=pct+'%';$('#progressBar').style.width=pct+'%';const ring=$('.progress-ring');if(ring)ring.style.setProperty('--progress',pct+'%')}\n
 const profileKey='qimmaStudentProfile';
-function showStudent(p){document.querySelector('#sideName').textContent=p.name;document.querySelector('#sideGrade').textContent='السن '+p.age+' سنة | '+p.grade;document.querySelector('#fullName').value=p.name;document.querySelector('#grade').value=p.grade;document.querySelector('#studySystemSettings').value=p.studySystem||'';document.querySelector('#settingsSystemWrap').style.display=(p.grade==='الصف الثاني الثانوي'||p.grade==='الصف الثالث الثانوي')?'block':'none';document.querySelector('#studentName').textContent='مرحبًا '+p.name+' 👋';document.querySelector('#loginScreen').style.display='none';document.querySelector('#appShell').classList.remove('locked');}
+function showStudent(p){document.querySelector('#sideName').textContent=p.name;document.querySelector('#sideGrade').textContent='السن '+p.age+' سنة | '+p.grade;document.querySelector('#fullName').value=p.name;document.querySelector('#grade').value=p.grade;document.querySelector('#studySystemSettings').value=p.studySystem||'';document.querySelector('#settingsSystemWrap').style.display=p.grade==='الصف الثاني الثانوي'?'block':'none';document.querySelector('#pageTitle').textContent='مرحبًا '+p.name+' 👋';document.querySelector('#loginScreen').style.display='none';document.querySelector('#appShell').classList.remove('locked');}
 try{const saved=JSON.parse(localStorage.getItem(profileKey)||'null');if(saved)showStudent(saved);}catch{}
 const SUPABASE_URL='https://asfmnztojcdotxyqfpzd.supabase.co';
 const SUPABASE_KEY='sb_publishable_irqLABJB7q61DtwmEtdtcw_Ujcip94i';
-const rememberBox=document.getElementById('rememberMe');
-const authStorage={
- getItem(key){try{return localStorage.getItem(key)??sessionStorage.getItem(key)}catch{return null}},
- setItem(key,value){try{const keep=!!rememberBox?.checked;const target=keep?localStorage:sessionStorage;const other=keep?sessionStorage:localStorage;target.setItem(key,value);other.removeItem(key)}catch(err){try{sessionStorage.setItem(key,value)}catch{}}},
- removeItem(key){try{localStorage.removeItem(key);sessionStorage.removeItem(key)}catch{}}
-};
-const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{storage:authStorage,persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 let authMode='login', currentProfile=null;
 const gradeToDb={'الصف الأول الإعدادي':'prep1','الصف الثاني الإعدادي':'prep2','الصف الثالث الإعدادي':'prep3','الصف الأول الثانوي':'secondary1','الصف الثاني الثانوي':'secondary2','الصف الثالث الثانوي':'secondary3'};
 const gradeFromDb={'prep1':'الصف الأول الإعدادي','prep2':'الصف الثاني الإعدادي','prep3':'الصف الثالث الإعدادي','secondary1':'الصف الأول الثانوي','secondary2':'الصف الثاني الثانوي','secondary3':'الصف الثالث الثانوي'};
 function ageGroup(age){return age<=8?'6-8':age<=11?'9-11':age<=14?'12-14':age<=17?'15-17':'18+'}
 function setAuthMessage(msg){$('#authMessage').textContent=msg}
-function showStudent(p){currentProfile=p;loadStats(p.id);$('#sideName').textContent=p.name;$('#sideGrade').textContent='السن '+(p.age||'—')+' سنة | '+(p.grade||'');$('#fullName').value=p.name||'';$('#grade').value=p.grade||'';$('#studySystemSettings').value=p.studySystem||'';$('#settingsSystemWrap').style.display=(p.grade==='الصف الثاني الثانوي'||p.grade==='الصف الثالث الثانوي')?'block':'none';$('#studentName').textContent='مرحبًا '+(p.name||'بك')+' 👋';$('#loginScreen').style.display='none';$('#appShell').classList.remove('locked');}
+function showStudent(p){currentProfile=p;loadStats(p.id);$('#sideName').textContent=p.name;$('#sideGrade').textContent='السن '+(p.age||'—')+' سنة | '+(p.grade||'');$('#fullName').value=p.name||'';$('#grade').value=p.grade||'';$('#studySystemSettings').value=p.studySystem||'';$('#settingsSystemWrap').style.display=(p.grade==='الصف الثاني الثانوي'||p.grade==='الصف الثالث الثانوي')?'block':'none';$('#pageTitle').textContent='مرحبًا '+(p.name||'بك')+' 👋';$('#loginScreen').style.display='none';$('#appShell').classList.remove('locked');}
 async function loadCloudProfile(user){
  const {data,error}=await supabaseClient.from('student_profiles').select('*').eq('user_id',user.id).maybeSingle();
  if(error) throw error;
@@ -453,34 +417,9 @@ async function handleAuthState(session){
  if(!session){currentProfile=null;$('#appShell').classList.add('locked');$('#loginScreen').style.display='grid';return}
  try{await loadCloudProfile(session.user)}catch(err){console.error('Qimma profile load failed:',err);setAuthMessage('تم تسجيل الدخول، لكن تعذر تحميل ملف الطالب: '+(err.message||err.code||'خطأ غير معروف'));}
 }
-function updateAuthMode(mode){
- authMode=mode;
- const login=mode==='login';
- $('#loginForm').setAttribute('data-auth-mode',login?'login':'register');
- const registrationFields=['nameField','ageField','gradeField','baccalaureateWrap'];
- $('#authOptions').hidden=!login;
- $('#authSwitchText').textContent=login?'ليس لديك حساب؟':'لديك حساب بالفعل؟';
- $('#registerMode').textContent=login?'إنشاء حساب':'تسجيل دخول';
- $('#registerMode').setAttribute('href',login?'#create-account':'#login');
- $('#authHeading').textContent=login?'تسجيل الدخول إلى قِمّة':'إنشاء حساب في قِمّة';
- $('#authIntro').textContent=login?'ادخل ببريدك وكلمة السر من أي جهاز.':'أنشئ حسابك وسيصلك رابط تأكيد على بريدك الإلكتروني.';
- $('#authSubmit').textContent=login?'دخول إلى منصتي ←':'إنشاء حساب ←';
- // Login: show email and password only. Registration details appear only on sign-up.
- registrationFields.forEach(id=>{
-  const field=$('#'+id);
-  field.hidden=login || (id==='baccalaureateWrap'&&!['الصف الثاني الثانوي','الصف الثالث الثانوي'].includes($('#loginGrade').value));
-  field.style.display=field.hidden?'none':'block';
- });
- $('#loginName').required=!login;
- $('#loginAge').required=!login;
- $('#loginGrade').required=!login;
- $('#studySystem').required=!login&&!$('#baccalaureateWrap').hidden;
- $('#loginPassword').autocomplete=login?'current-password':'new-password';
- $('#loginEmail').autocomplete='email';
- setAuthMessage('');
-}
-$('#registerMode').addEventListener('click',()=>{const nextMode=authMode==='login'?'register':'login';updateAuthMode(nextMode);$('#authMessage').textContent='';if(nextMode==='register'){setTimeout(()=>$('#loginName').focus(),0);}else{setTimeout(()=>$('#loginEmail').focus(),0);}$('#loginScreen').scrollTo({top:0,behavior:'smooth'});});
-function updateStudySystem(){const show=['الصف الثاني الثانوي','الصف الثالث الثانوي'].includes($('#loginGrade').value);$('#baccalaureateWrap').hidden=!show;$('#studySystem').required=show;if(!show)$('#studySystem').value='';}
+function updateAuthMode(mode){authMode=mode;const login=mode==='login';$('#authOptions').hidden=!login;$('#authSwitchText').textContent=login?'ليس لديك حساب؟':'لديك حساب بالفعل؟';$('#registerMode').textContent=login?'إنشاء حساب':'تسجيل دخول';$('#registerMode').setAttribute('href',login?'#create-account':'#login');$('#authHeading').textContent=login?'تسجيل الدخول إلى قِمّة':'إنشاء حساب في قِمّة';$('#authIntro').textContent=login?'ادخل ببريدك وكلمة السر من أي جهاز.':'أنشئ حسابك وسيصلك رابط تأكيد على بريدك الإلكتروني.';$('#authSubmit').textContent=login?'دخول إلى منصتي ←':'إنشاء حساب ←';$('#nameField').hidden=login;$('#ageField').hidden=login;$('#gradeField').hidden=login;$('#loginName').required=!login;$('#loginAge').required=!login;$('#loginGrade').required=!login;$('#nameField').style.display=login?'none':'block';$('#ageField').style.display=login?'none':'block';$('#gradeField').style.display=login?'none':'block';$('#baccalaureateWrap').hidden=login||!(['الصف الثاني الثانوي','الصف الثالث الثانوي'].includes($('#loginGrade').value));$('#studySystem').required=!login&&!$('#baccalaureateWrap').hidden;$('#loginPassword').autocomplete=login?'current-password':'new-password';setAuthMessage('');}
+document.addEventListener('click',e=>{const register=e.target.closest('#registerMode');if(register){e.preventDefault();updateAuthMode(authMode==='login'?'register':'login');$('#loginScreen').scrollTop=0;}});
+function updateStudySystem(){const show=$('#loginGrade').value==='الصف الثاني الثانوي';$('#baccalaureateWrap').hidden=!show;$('#studySystem').required=show;if(!show)$('#studySystem').value='';}
 $('#loginGrade').addEventListener('change',updateStudySystem);updateAuthMode('login');
 $('#togglePassword').onclick=()=>{const p=$('#loginPassword');p.type=p.type==='password'?'text':'password';$('#togglePassword').textContent=p.type==='password'?'◉':'◎'};
 $('#forgotPassword').onclick=async()=>{const email=$('#loginEmail').value.trim().toLowerCase();if(!email){setAuthMessage('اكتب بريدك الإلكتروني أولًا لإرسال رابط استعادة كلمة السر.');return}const {error}=await supabaseClient.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});setAuthMessage(error?'تعذر إرسال رابط الاستعادة: '+error.message:'لو البريد مسجل، هيوصلك رابط استعادة كلمة السر.');};
@@ -508,7 +447,7 @@ supabaseClient.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_IN'&&
 
 
 function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)}
-function go(view){if(!titles[view])return;$$('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+view));$$('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===view));$('#pageTitle').textContent=titles[view][0];$('#pageTitle').hidden=false;$('#pageSubtitle').textContent=titles[view][1];$('#sidebar').classList.remove('open');window.scrollTo({top:0,behavior:'smooth'})}
+function go(view){if(!titles[view])return;$$('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+view));$$('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===view));$('#pageTitle').textContent=titles[view][0];$('#pageSubtitle').textContent=titles[view][1];$('#sidebar').classList.remove('open');window.scrollTo({top:0,behavior:'smooth'})}
 $('#nav').addEventListener('click',e=>{const toggle=e.target.closest('#moreNavToggle');const menu=$('#moreNavItems');const more=$('#moreNavToggle');if(toggle){e.preventDefault();const open=menu.classList.toggle('open');more.setAttribute('aria-expanded',String(open));return}const b=e.target.closest('[data-view]');if(b){menu.classList.remove('open');more.setAttribute('aria-expanded','false');go(b.dataset.view)}});
 
 
@@ -520,9 +459,33 @@ document.addEventListener('click',e=>{const b=e.target.closest('.start-challenge
 $('#homeChallenges').innerHTML=challenges.slice(0,3).map(c=>'<div class="course"><div class="course-icon">'+c.icon+'</div><div class="course-info"><strong>'+c.name+'</strong><small>'+c.desc+'</small></div><button class="primary" data-go="challenges">ابدأ</button></div>').join('');
 $('#examList').innerHTML=subjects.slice(0,4).map((s,i)=>'<div class="course"><div class="course-icon">'+s.icon+'</div><div class="course-info"><strong>اختبار '+s.name+'</strong><small>5 أسئلة تدريبية · نتيجة فورية</small></div><button class="primary take-exam" data-subject="'+s.name+'" data-index="'+i+'">ابدأ الاختبار</button></div>').join('');
 document.addEventListener('click',e=>{const b=e.target.closest('.take-exam');if(!b)return;const subject=b.dataset.subject;const score= Math.floor(60+Math.random()*41);results.unshift({subject,score});$('#results').innerHTML=results.map(r=>'<div class="course"><div class="course-icon">📝</div><div class="course-info"><strong>'+r.subject+'</strong><small>نتيجتك: '+r.score+'%</small></div><span class="challenge-status">'+(r.score>=80?'ممتاز':'واصل التدريب')+'</span></div>').join('');toast('انتهى الاختبار التجريبي: '+score+'%');});
-function renderLibrary(q=''){const list=subjects.filter(s=>(s.name+' '+s.desc).includes(q));$('#libraryGrid').innerHTML=list.map(s=>'<article class="feature"><div class="big">'+s.icon+'</div><h3>'+s.name+'</h3><p>'+s.desc+'</p><button class="primary open-subject" data-subject="'+s.name+'">ابحث عن شروحات</button></article>').join('')||'<div class="empty-note">لا توجد نتائج مطابقة.</div>'}
-renderChallenges();renderLibrary();$('#searchLibrary').addEventListener('input',e=>renderLibrary(e.target.value.trim()));
-
+const libraryGrades={primary:['الصف الأول الابتدائي','الصف الثاني الابتدائي','الصف الثالث الابتدائي','الصف الرابع الابتدائي','الصف الخامس الابتدائي','الصف السادس الابتدائي'],prep:['الصف الأول الإعدادي','الصف الثاني الإعدادي','الصف الثالث الإعدادي'],secondary:['أولى بكالوريا','الصف الثاني الثانوي','الصف الثالث الثانوي'],university:['المرحلة الجامعية']};
+const externalSeries=[
+{name:'نيوتن',subjects:'الفيزياء والعلوم',icon:'⚛️',search:'نيوتن'},
+{name:'الخبير',subjects:'سلاسل ومراجع خارجية — تحقق من المادة والصف',icon:'🎓',search:'الخبير'},
+{name:'البرهان',subjects:'اللغة العربية ومواد أخرى حسب الإصدار',icon:'📘',search:'البرهان'},
+{name:'الامتحان',subjects:'سلاسل متعددة للمواد والمراحل',icon:'📝',search:'الامتحان'},
+{name:'المعاصر',subjects:'الرياضيات واللغات والعلوم',icon:'📐',search:'المعاصر'},
+{name:'الأضواء',subjects:'سلاسل متعددة للابتدائي والإعدادي والثانوي',icon:'💡',search:'الأضواء'},
+{name:'جيم',subjects:'اللغة الإنجليزية',icon:'🔤',search:'جيم'},
+{name:'سلاح التلميذ',subjects:'مواد ومراحل التعليم الأساسي',icon:'🛡️',search:'سلاح التلميذ'},
+{name:'الشاطر',subjects:'مواد ومراحل التعليم الأساسي',icon:'⭐',search:'الشاطر'},
+{name:'بت باي بت',subjects:'اللغة الإنجليزية',icon:'🔠',search:'بت باي بت'},
+{name:'مندليف',subjects:'الكيمياء',icon:'🧪',search:'مندليف'},
+{name:'الوافي',subjects:'الفيزياء ومواد علمية',icon:'📗',search:'الوافي'},
+{name:'كيان',subjects:'اللغة العربية ومواد أخرى حسب الإصدار',icon:'📚',search:'كيان'},
+{name:'التفوق',subjects:'العلوم والمواد العلمية',icon:'🏆',search:'التفوق'}
+];
+function libraryCurrentGrade(){const p=currentProfile?.grade||$('#grade')?.value||'';return p}
+function fillLibraryGrades(){const stage=$('#libraryStage').value,select=$('#libraryGrade'),grades=libraryGrades[stage]||[];select.innerHTML=grades.map(g=>'<option value="'+g+'">'+g+'</option>').join('');const current=libraryCurrentGrade()==='الصف الأول الثانوي'?'أولى بكالوريا':libraryCurrentGrade();if(grades.includes(current))select.value=current;}
+let qimmaLibraryBooks=[];
+function initLibrary(){const p=libraryCurrentGrade();const stage=p.includes('الابتدائي')?'primary':p.includes('الإعدادي')?'prep':p.includes('الثانوي')?'secondary':p.includes('الجامعية')?'university':'secondary';$('#libraryStage').value=stage;fillLibraryGrades();$('#libraryStage').addEventListener('change',()=>{fillLibraryGrades();renderLibrary()});['libraryGrade','libraryTerm','librarySubject','libraryType'].forEach(id=>$('#'+id).addEventListener('change',()=>renderLibrary()));$('#searchLibrary').addEventListener('input',e=>renderLibrary(e.target.value.trim()));$('#closeBookReader').addEventListener('click',closeBookReader);$('#bookReader').addEventListener('click',e=>{if(e.target.id==='bookReader')closeBookReader()});loadLibraryBooks();}
+async function loadLibraryBooks(){const grid=$('#libraryGrid');grid.innerHTML='<div class="book-empty">جارٍ تحميل فهرس الكتب…</div>';const {data,error}=await supabaseClient.from('library_books').select('id,title,series,stage,grade,subject,term,publisher,publication_year,exam_year,resource_type,file_url,source_type,license_note').eq('is_published',true).order('title');if(error){console.error('Library load error',error);grid.innerHTML='<div class="book-empty">تعذر تحميل فهرس الكتب الآن. حاول تحديث الصفحة.</div>';return}qimmaLibraryBooks=data||[];renderLibrary();}
+function openBookReader(bookId){const b=qimmaLibraryBooks.find(x=>x.id===bookId);if(!b)return;$('#readerTitle').textContent=b.title;$('#readerMeta').textContent=[b.grade,b.subject,b.term==='1'?'الترم الأول':b.term==='2'?'الترم الثاني':'الترمان',b.publication_year,b.exam_year].filter(Boolean).join(' • ');$('#bookPdfFrame').src=b.file_url;$('#bookReader').hidden=false;document.body.style.overflow='hidden';}
+function closeBookReader(){$('#bookReader').hidden=true;$('#bookPdfFrame').src='about:blank';document.body.style.overflow='';}
+function renderLibrary(q=''){const stage=$('#libraryStage')?.value||'secondary',grade=$('#libraryGrade')?.value||'الصف الأول الثانوي',term=$('#libraryTerm')?.value||'all',subject=$('#librarySubject')?.value||'all',query=(q||'').trim().toLocaleLowerCase('ar');const rows=qimmaLibraryBooks.filter(b=>(!b.stage||b.stage===stage)&&(!b.grade||b.grade===grade||(grade==='أولى بكالوريا'&&b.grade==='الصف الأول الثانوي'))&&(term==='all'||b.term==='all'||b.term===term)&&(subject==='all'||b.subject===subject)&&($('#libraryType').value==='all'||(b.resource_type||'book')===$('#libraryType').value)&&(!query||[b.title,b.series,b.subject,b.publisher,b.grade,b.publication_year].filter(Boolean).join(' ').toLocaleLowerCase('ar').includes(query)));const grid=$('#libraryGrid');const count=$('#libraryCount');if(count)count.textContent='المتاح الآن: '+qimmaLibraryBooks.length+' ملفات PDF رسمية';if(!rows.length){const hasAvailable=qimmaLibraryBooks.length>0;grid.innerHTML='<div class="book-empty"><strong>لسه مفيش ملفات PDF للصف والاختيارات دي.</strong><br>قِمّة فيها '+qimmaLibraryBooks.length+' ملفات منشورة حاليًا لصفوف ومواد مختلفة. '+(hasAvailable?'<br><button class="primary" type="button" id="showAvailableLibrary" style="margin-top:12px">اعرض كل الملفات المتاحة</button>':'')+'<br><a href="https://studentbooks.moe.gov.eg/" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:12px">افتح مكتبة الكتب الرسمية لوزارة التعليم ↗</a></div>';return}grid.innerHTML=rows.map(b=>'<article class="book-card"><div class="book-mark">📕</div><span class="book-status">'+(b.resource_type==='exam'?'امتحان '+(b.exam_year||b.publication_year||'') : b.resource_type==='answer_key'?'نموذج إجابة':'كتاب '+(b.publication_year||''))+'</span><h3>'+escapeLibraryText(b.title)+'</h3><p>'+escapeLibraryText(b.license_note||'ملف PDF متاح للقراءة داخل قِمّة.')+'</p><div class="book-meta">'+[b.grade,b.subject,b.term==='1'?'الترم الأول':b.term==='2'?'الترم الثاني':'الترمان',b.publisher].filter(Boolean).map(escapeLibraryText).join(' · ')+'</div><button class="book-open" type="button" data-open-book="'+b.id+'">📖 افتح PDF داخل قِمّة</button></article>').join('');}
+function escapeLibraryText(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+document.addEventListener('click',e=>{const jump=e.target.closest('#showAvailableLibrary');if(jump){$('#libraryStage').value='all';fillLibraryGrades();$('#libraryGrade').value='all';$('#libraryTerm').value='all';$('#librarySubject').value='all';$('#libraryType').value='all';$('#searchLibrary').value='';renderLibrary();return}const b=e.target.closest('[data-open-book]');if(b)openBookReader(b.dataset.openBook)});
 function renderVideoResults(videos){
  const root=$('#videoResults');root.replaceChildren();
  if(!videos.length){const empty=document.createElement('p');empty.className='empty-note';empty.textContent='ملقيناش فيديوهات مناسبة. جرّب تكتب اسم الدرس بطريقة مختلفة.';root.append(empty);return}
@@ -533,56 +496,24 @@ function renderVideoResults(videos){
   const channel=document.createElement('p');channel.className='video-channel';channel.textContent=video.channelTitle||'قناة تعليمية';
   const frame=document.createElement('div');frame.className='video-frame';
   const iframe=document.createElement('iframe');iframe.src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(video.videoId);iframe.title=video.title;iframe.loading='lazy';iframe.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';iframe.referrerPolicy='strict-origin-when-cross-origin';iframe.allowFullscreen=true;frame.append(iframe);
-  card.append(title,channel,frame);
-  if(video.description){const desc=document.createElement('p');desc.textContent=video.description;card.append(desc)}
-  grid.append(card);
- });
- root.append(grid);
+  card.append(title,channel,frame);if(video.description){const desc=document.createElement('p');desc.textContent=video.description;card.append(desc)}grid.append(card);
+ });root.append(grid);
 }
 $('#videoSearchForm').addEventListener('submit',async e=>{
- e.preventDefault();
- const query=$('#videoQuery').value.trim();if(query.length<2){toast('اكتب اسم المادة أو الدرس أولًا.');return}
+ e.preventDefault();const query=$('#videoQuery').value.trim();if(query.length<2){toast('اكتب اسم المدرس أو المادة أو الدرس أولًا.');return}
  const btn=$('#videoSearchBtn'),root=$('#videoResults');btn.disabled=true;btn.textContent='جاري البحث...';root.innerHTML='<div class="video-loading">بنبحث عن أفضل الشروحات على يوتيوب…</div>';
- try{
-  const {data,error}=await supabaseClient.functions.invoke('qimma-videos',{body:{query}});
-  if(error)throw error;
-  if(data?.error)throw new Error(data.error);
-  renderVideoResults(Array.isArray(data?.videos)?data.videos:[]);
- }catch(err){
-  const msg=String(err?.message||'حدث خطأ أثناء البحث.');
-  root.replaceChildren();const box=document.createElement('div');box.className='video-error';box.textContent=msg.includes('JWT')||msg.includes('401')?'سجّل الدخول إلى حسابك أولًا ثم أعد البحث.':msg;root.append(box);
- }finally{btn.disabled=false;btn.textContent='ابحث عن فيديوهات'}
+ try{const {data,error}=await supabaseClient.functions.invoke('qimma-videos',{body:{query}});if(error)throw error;if(data?.error)throw new Error(data.error);renderVideoResults(Array.isArray(data?.videos)?data.videos:[])}
+ catch(err){const msg=String(err?.message||'حدث خطأ أثناء البحث.');root.replaceChildren();const box=document.createElement('div');box.className='video-error';box.textContent=msg.includes('JWT')||msg.includes('401')?'سجّل الدخول إلى حسابك أولًا ثم أعد البحث.':msg;root.append(box)}
+ finally{btn.disabled=false;btn.textContent='ابحث عن فيديوهات'}
 });
 document.addEventListener('click',e=>{const b=e.target.closest('.open-subject');if(!b)return;$('#videoQuery').value=b.dataset.subject+' شرح دروس';$('#videoSearchForm').scrollIntoView({behavior:'smooth',block:'center'});$('#videoQuery').focus();toast('اكتب اسم الدرس بالتحديد ثم اضغط ابحث عن فيديوهات.')});
+renderChallenges();initLibrary();
+document.addEventListener('click',e=>{const b=e.target.closest('.open-subject');if(b)toast('تم فتح قسم '+b.dataset.subject+' — ستُضاف الدروس عند تجهيز المحتوى.')});
 function addBubble(text,me=false){const el=document.createElement('div');el.className='bubble'+(me?' me':'');el.textContent=text;$('#chatBody').appendChild(el);$('#chatBody').scrollTop=$('#chatBody').scrollHeight}
 $('#chatForm').onsubmit=e=>{e.preventDefault();const input=$('#chatInput');const text=input.value.trim();if(!text)return;addBubble(text,true);input.value='';setTimeout(()=>addBubble('وصلني سؤالك! هذه نسخة تجريبية من واجهة المساعد. يمكن ربطها لاحقًا بخدمة ذكاء اصطناعي حقيقية لشرح الدروس وإنشاء خطط المذاكرة.'),300)};
 $('#chatBody').addEventListener('click',e=>{const b=e.target.closest('.suggestions button');if(!b)return;$('#chatInput').value=b.textContent;$('#chatForm').requestSubmit()});
 $('#postForm').onsubmit=e=>{e.preventDefault();const text=$('#postText').value.trim();if(!text)return;const article=document.createElement('div');article.className='community-post';const user=document.createElement('div');user.className='post-user';user.textContent=$('#sideName').textContent+' · الآن';const p=document.createElement('p');p.textContent=text;const acts=document.createElement('div');acts.className='post-actions';acts.textContent='♡ 0 إعجاب';article.append(user,p,acts);$('#posts').prepend(article);$('#postText').value='';toast('تم نشر المنشور في النموذج التجريبي')};
-$('#grade').addEventListener('change',()=>{$('#settingsSystemWrap').style.display=($('#grade').value==='الصف الثاني الثانوي'||$('#grade').value==='الصف الثالث الثانوي')?'block':'none'});$('#settingsForm').onsubmit=e=>{e.preventDefault();const name=$('#fullName').value.trim()||'طالب قِمّة';const grade=$('#grade').value;let profile={};try{profile=JSON.parse(localStorage.getItem('qimmaStudentProfile')||'{}')}catch{}profile={...profile,name,grade,studySystem:$('#studySystemSettings').value};try{localStorage.setItem('qimmaStudentProfile',JSON.stringify(profile))}catch{}$('#sideName').textContent=name;$('#studentName').textContent='مرحبًا '+name+' 👋';$('#sideGrade').textContent=(profile.age?'السن '+profile.age+' سنة | ':'')+grade;toast('تم حفظ بياناتك على هذا الجهاز')};
+$('#grade').addEventListener('change',()=>{$('#settingsSystemWrap').style.display=$('#grade').value==='الصف الثاني الثانوي'?'block':'none'});$('#settingsForm').onsubmit=e=>{e.preventDefault();const name=$('#fullName').value.trim()||'طالب قِمّة';const grade=$('#grade').value;let profile={};try{profile=JSON.parse(localStorage.getItem('qimmaStudentProfile')||'{}')}catch{}profile={...profile,name,grade,studySystem:$('#studySystemSettings').value};try{localStorage.setItem('qimmaStudentProfile',JSON.stringify(profile))}catch{}$('#sideName').textContent=name;$('#pageTitle').textContent='مرحبًا '+name+' 👋';$('#sideGrade').textContent=(profile.age?'السن '+profile.age+' سنة | ':'')+grade;toast('تم حفظ بياناتك على هذا الجهاز')};
 $('#tasks').addEventListener('change',()=>{const all=$$('#tasks input').length,checked=$$('#tasks input:checked').length;const pct=Math.round(checked/all*100);$('#progressLabel').textContent=pct+'%';$('#progressBar').style.width=pct+'%';toast('إنجاز مهام اليوم: '+pct+'%')});
-
-/* Mobile navigation follows scroll direction and stays visible at page end */
-(()=>{
-  const sidebar=document.querySelector('.sidebar');
-  if(!sidebar)return;
-  let lastY=window.scrollY||0;
-  let ticking=false;
-  const update=()=>{
-    const y=window.scrollY||0;
-    const atBottom=window.innerHeight+y>=document.documentElement.scrollHeight-40;
-    if(y<35||atBottom||y<lastY-5){
-      sidebar.classList.remove('nav-hidden');
-    }else if(y>lastY+5){
-      sidebar.classList.add('nav-hidden');
-    }
-    lastY=y;
-    ticking=false;
-  };
-  window.addEventListener('scroll',()=>{
-    if(!ticking){ticking=true;window.requestAnimationFrame(update)}
-  },{passive:true});
-  window.addEventListener('resize',update);
-  update();
-})();
 </script></body>
 </html>
