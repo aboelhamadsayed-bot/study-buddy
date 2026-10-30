@@ -50,7 +50,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
-          gemini_model: gemini-2.5-flash
+          gemini_model: gemini-3.5-flash-lite
           prompt: /qimma-plan
           github_issue_number: ${{ !github.event.issue.pull_request && github.event.issue.number }}
           github_pr_number: ${{ github.event.pull_request.number || (github.event.issue.pull_request && github.event.issue.number) }}
