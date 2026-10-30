@@ -83,7 +83,7 @@ jobs:
               return;
             }
 
-            const model = "gemini-3.8-flash";
+            const model = "gemini-3.5-flash-lite";
 
             // Verify this exact model is available to this API key and supports generateContent.
             const modelCheck = await fetch(
