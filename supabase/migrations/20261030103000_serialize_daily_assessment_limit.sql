@@ -1,5 +1,8 @@
 -- Serialize assessment submissions per student so concurrent requests cannot
 -- pass the daily limit check at the same time.
+-- Keep the original equivalent index and remove the duplicate added by the limit migration.
+drop index if exists public.student_challenge_attempts_user_created_at_idx;
+
 create or replace function public.record_qimma_assessment(
   p_user_id uuid,
   p_stage text,
