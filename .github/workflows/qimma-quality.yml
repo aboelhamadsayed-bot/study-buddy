@@ -104,6 +104,10 @@ jobs:
 
           if source.count("e.target.closest('.open-subject')") != 1:
               raise SystemExit("Subject cards must have exactly one click handler")
+          if "form.reportValidity()" not in source or "selected===null?null:Number(selected)" not in source:
+              raise SystemExit("Assessment submission must reject unanswered questions")
+          if "Qimma assessment submission failed:" not in source or "saved.data.question_count||data.questions.length" not in source:
+              raise SystemExit("Assessment submission must recover from network errors and display the actual question count")
           if "Math.random()" in source or "نقطة تجريبية" in source:
               raise SystemExit("Demo/random assessment scoring is not allowed")
           if any(secret in source for secret in ["OPENAI_API_KEY", "SUPABASE_SERVICE_ROLE_KEY", "GEMINI_API_KEY"]):
