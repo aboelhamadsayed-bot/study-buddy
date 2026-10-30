@@ -39,6 +39,11 @@ jobs:
             --arg context "$ADDITIONAL_CONTEXT" \
             '{title:$title, description:$description, issue_number:$issue, pull_request_number:$pr, is_pull_request:$is_pr, event_name:$event, additional_context:$context}' \
             > .gemini/context.json
+      - name: Install Qimma Gemini commands
+        run: |
+          mkdir -p .gemini/commands
+          cp .github/commands/gemini-invoke.toml .gemini/commands/gemini-invoke.toml
+          cp .github/commands/gemini-plan-execute.toml .gemini/commands/gemini-plan-execute.toml
       - name: Run Gemini CLI (approved plan only)
         uses: google-github-actions/run-gemini-cli@v0
         env:
