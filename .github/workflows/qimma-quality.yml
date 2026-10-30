@@ -75,7 +75,7 @@ jobs:
           if len(migration_files) < 3:
               raise SystemExit("Expected assessment security and profile migrations are missing")
           migration_text = "\\n".join(path.read_text(encoding="utf-8") for path in migration_files)
-          for marker in ["student_progress", "record_qimma_assessment", "student_profiles_school_grade_check", "pg_advisory_xact_lock"]:
+          for marker in ["student_progress", "record_qimma_assessment", "student_profiles_school_grade_check", "student_posts_school_grade_check", "pg_advisory_xact_lock"]:
               if marker not in migration_text:
                   raise SystemExit(f"Missing migration content: {marker}")
 
