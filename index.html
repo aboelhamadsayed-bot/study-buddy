@@ -279,7 +279,7 @@ body{background:radial-gradient(ellipse at 45% 0%,#103765 0,#061a35 62%);color:#
         <p id="authIntro">سجّل دخولك للمتابعة والتعلّم</p>
         
         <div class="auth-field" id="nameField"><label for="loginName">الاسم</label><input id="loginName" required maxlength="60" autocomplete="name" placeholder="اكتب اسمك"></div>
-        <div class="auth-field"><label for="loginEmail">البريد الإلكتروني</label><input id="loginEmail" type="email" required autocomplete="email" placeholder="البريد الإلكتروني أو اسم المستخدم"></div>
+        <div class="auth-field"><label for="loginEmail">البريد الإلكتروني</label><input id="loginEmail" type="email" required autocomplete="email" placeholder="اكتب بريدك الإلكتروني"></div>
         
         
         <div class="auth-field" id="ageField"><label for="loginAge">السن</label><input id="loginAge" type="number" min="5" max="100" required placeholder="مثال: 16"></div>
@@ -290,7 +290,7 @@ body{background:radial-gradient(ellipse at 45% 0%,#103765 0,#061a35 62%);color:#
         <button class="primary auth-submit" id="authSubmit">تسجيل الدخول</button>
         <p id="authMessage" role="status" class="auth-message"></p>
         <div class="auth-create-line" id="createLine"><span id="authSwitchText">ليس لديك حساب؟</span> <a href="#create-account" id="registerMode" role="button">إنشاء حساب</a></div>
-        <p class="auth-footnote">تحتاج إلى تأكيد بريدك الإلكتروني عند إنشاء الحساب. يمكنك الدخول من أي جهاز.</p>
+        <p class="auth-footnote" id="authFootnote" hidden>تحتاج إلى تأكيد بريدك الإلكتروني عند إنشاء الحساب. يمكنك الدخول من أي جهاز.</p>
       </form>
     </div>
     <aside class="auth-art" aria-label="قمة جبلية وسماء ليلية">
@@ -395,7 +395,25 @@ function showStudent(p){document.querySelector('#sideName').textContent=p.name;d
 try{const saved=JSON.parse(localStorage.getItem(profileKey)||'null');if(saved)showStudent(saved);}catch{}
 const SUPABASE_URL='https://asfmnztojcdotxyqfpzd.supabase.co';
 const SUPABASE_KEY='sb_publishable_irqLABJB7q61DtwmEtdtcw_Ujcip94i';
-const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const rememberKey='qimmaRememberMe';
+const wasRemembered=localStorage.getItem(rememberKey)==='true';
+$('#rememberMe').checked=wasRemembered;
+const authStorage={
+ getItem(key){
+  const preferred=localStorage.getItem(rememberKey)==='true'?localStorage:sessionStorage;
+  const fallback=preferred===localStorage?sessionStorage:localStorage;
+  let value=preferred.getItem(key);
+  if(value===null){value=fallback.getItem(key);if(value!==null){preferred.setItem(key,value);fallback.removeItem(key)}}
+  return value;
+ },
+ setItem(key,value){
+  const preferred=localStorage.getItem(rememberKey)==='true'?localStorage:sessionStorage;
+  const fallback=preferred===localStorage?sessionStorage:localStorage;
+  preferred.setItem(key,value);fallback.removeItem(key);
+ },
+ removeItem(key){localStorage.removeItem(key);sessionStorage.removeItem(key)}
+};
+const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{storage:authStorage,persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
 let authMode='login', currentProfile=null;
 const gradeToDb={'الصف الأول الإعدادي':'prep1','الصف الثاني الإعدادي':'prep2','الصف الثالث الإعدادي':'prep3','الصف الأول الثانوي':'secondary1','الصف الثاني الثانوي':'secondary2','الصف الثالث الثانوي':'secondary3'};
 const gradeFromDb={'prep1':'الصف الأول الإعدادي','prep2':'الصف الثاني الإعدادي','prep3':'الصف الثالث الإعدادي','secondary1':'الصف الأول الثانوي','secondary2':'الصف الثاني الثانوي','secondary3':'الصف الثالث الثانوي'};
@@ -417,7 +435,7 @@ async function handleAuthState(session){
  if(!session){currentProfile=null;$('#appShell').classList.add('locked');$('#loginScreen').style.display='grid';return}
  try{await loadCloudProfile(session.user)}catch(err){console.error('Qimma profile load failed:',err);setAuthMessage('تم تسجيل الدخول، لكن تعذر تحميل ملف الطالب: '+(err.message||err.code||'خطأ غير معروف'));}
 }
-function updateAuthMode(mode){authMode=mode;const login=mode==='login';$('#authOptions').hidden=!login;$('#authSwitchText').textContent=login?'ليس لديك حساب؟':'لديك حساب بالفعل؟';$('#registerMode').textContent=login?'إنشاء حساب':'تسجيل دخول';$('#registerMode').setAttribute('href',login?'#create-account':'#login');$('#authHeading').textContent=login?'تسجيل الدخول إلى قِمّة':'إنشاء حساب في قِمّة';$('#authIntro').textContent=login?'ادخل ببريدك وكلمة السر من أي جهاز.':'أنشئ حسابك وسيصلك رابط تأكيد على بريدك الإلكتروني.';$('#authSubmit').textContent=login?'دخول إلى منصتي ←':'إنشاء حساب ←';$('#nameField').hidden=login;$('#ageField').hidden=login;$('#gradeField').hidden=login;$('#loginName').required=!login;$('#loginAge').required=!login;$('#loginGrade').required=!login;$('#nameField').style.display=login?'none':'block';$('#ageField').style.display=login?'none':'block';$('#gradeField').style.display=login?'none':'block';$('#baccalaureateWrap').hidden=login||!(['الصف الثاني الثانوي','الصف الثالث الثانوي'].includes($('#loginGrade').value));$('#studySystem').required=!login&&!$('#baccalaureateWrap').hidden;$('#loginPassword').autocomplete=login?'current-password':'new-password';setAuthMessage('');}
+function updateAuthMode(mode){authMode=mode;const login=mode==='login';$('#authOptions').hidden=!login;$('#authSwitchText').textContent=login?'ليس لديك حساب؟':'لديك حساب بالفعل؟';$('#registerMode').textContent=login?'إنشاء حساب':'تسجيل دخول';$('#registerMode').setAttribute('href',login?'#create-account':'#login');$('#authHeading').textContent=login?'تسجيل الدخول إلى قِمّة':'إنشاء حساب في قِمّة';$('#authIntro').textContent=login?'ادخل ببريدك الإلكتروني وكلمة السر.':'أنشئ حسابك وسيصلك رابط تأكيد على بريدك الإلكتروني.';$('#authFootnote').hidden=login;$('#authSubmit').textContent=login?'دخول إلى منصتي ←':'إنشاء حساب ←';$('#nameField').hidden=login;$('#ageField').hidden=login;$('#gradeField').hidden=login;$('#loginName').required=!login;$('#loginAge').required=!login;$('#loginGrade').required=!login;$('#nameField').style.display=login?'none':'block';$('#ageField').style.display=login?'none':'block';$('#gradeField').style.display=login?'none':'block';$('#baccalaureateWrap').hidden=login||!(['الصف الثاني الثانوي','الصف الثالث الثانوي'].includes($('#loginGrade').value));$('#studySystem').required=!login&&!$('#baccalaureateWrap').hidden;$('#loginPassword').autocomplete=login?'current-password':'new-password';setAuthMessage('');}
 document.addEventListener('click',e=>{const register=e.target.closest('#registerMode');if(register){e.preventDefault();updateAuthMode(authMode==='login'?'register':'login');$('#loginScreen').scrollTop=0;}});
 function updateStudySystem(){const show=$('#loginGrade').value==='الصف الثاني الثانوي';$('#baccalaureateWrap').hidden=!show;$('#studySystem').required=show;if(!show)$('#studySystem').value='';}
 $('#loginGrade').addEventListener('change',updateStudySystem);updateAuthMode('login');
@@ -437,7 +455,7 @@ document.querySelector('#loginForm').addEventListener('submit',async function(e)
     ? 'تم إنشاء حسابك بنجاح. سجّل الدخول الآن باستخدام بريدك وكلمة السر.'
     : 'تم إنشاء الحساب. أرسلنا رسالة تأكيد إلى '+email+'؛ افتح الرسالة واضغط رابط التأكيد، ثم سجّل الدخول من هنا. افحص مجلد الرسائل غير المرغوب فيها إذا لم تجدها.');
   }else{
-   const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error){if(/Email not confirmed/i.test(error.message))throw new Error('لازم تؤكد بريدك من الرسالة اللي وصلتك قبل تسجيل الدخول.');throw error;}await loadCloudProfile(data.user);
+   localStorage.setItem(rememberKey,$('#rememberMe').checked?'true':'false');const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error){if(/Email not confirmed/i.test(error.message))throw new Error('لازم تؤكد بريدك من الرسالة اللي وصلتك قبل تسجيل الدخول.');throw error;}await loadCloudProfile(data.user);
   }
  }catch(err){setAuthMessage(err.message||'حدث خطأ، حاول مرة أخرى.');}
  finally{$('#authSubmit').disabled=false;}
