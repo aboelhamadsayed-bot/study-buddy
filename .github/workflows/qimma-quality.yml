@@ -1,0 +1,69 @@
+name: Qimma quality checks
+
+on:
+  pull_request:
+    paths:
+      - "index.html"
+      - "docs/index.html"
+      - ".github/workflows/qimma-quality.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate Qimma HTML and JavaScript
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify synchronized pages and tutor integration
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          import subprocess
+
+          docs = Path("docs/index.html").read_bytes()
+          root = Path("index.html").read_bytes()
+          if docs != root:
+              raise SystemExit("index.html and docs/index.html are not identical")
+
+          source = docs.decode("utf-8")
+          if "نسخة واجهة تجريبية" in source or "وصلني سؤالك!" in source:
+              raise SystemExit("A placeholder assistant response is still present")
+          if "functions.invoke('qimma-tutor'" not in source:
+              raise SystemExit("The page is not connected to the qimma-tutor function")
+
+          class InlineScripts(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.current = None
+                  self.scripts = []
+              def handle_starttag(self, tag, attrs):
+                  if tag == "script":
+                      attrs = dict(attrs)
+                      self.current = [] if not attrs.get("src") else None
+              def handle_data(self, data):
+                  if self.current is not None:
+                      self.current.append(data)
+              def handle_endtag(self, tag):
+                  if tag == "script" and self.current is not None:
+                      self.scripts.append("".join(self.current))
+                      self.current = None
+
+          parser = InlineScripts()
+          parser.feed(source)
+          if not parser.scripts:
+              raise SystemExit("No inline JavaScript blocks were found")
+          for index, script in enumerate(parser.scripts):
+              path = Path(f"/tmp/qimma-inline-{index}.js")
+              path.write_text(script, encoding="utf-8")
+              subprocess.run(["node", "--check", str(path)], check=True)
+          print(f"Passed: synchronized pages and {len(parser.scripts)} JavaScript block(s).")
+          PY
