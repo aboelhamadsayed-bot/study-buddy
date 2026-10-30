@@ -16,25 +16,28 @@ permissions:
 jobs:
   dispatch:
     if: >-
-      ${{ github.event.sender.type == 'User' &&
+      \${{ github.event.sender.type == 'User' &&
       startsWith(github.event.comment.body || github.event.review.body || '', '@gemini-cli') &&
       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'),
       github.event.comment.author_association || github.event.review.author_association || '') }}
     runs-on: ubuntu-latest
     outputs:
-      command: ${{ steps.parse.outputs.command }}
-      context: ${{ steps.parse.outputs.context }}
+      command: \${{ steps.parse.outputs.command }}
+      context: \${{ steps.parse.outputs.context }}
     steps:
       - id: parse
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
         env:
-          REQUEST: ${{ github.event.comment.body || github.event.review.body }}
-          AUTHOR_ASSOCIATION: ${{ github.event.comment.author_association || github.event.review.author_association }}
+          REQUEST: \${{ github.event.comment.body || github.event.review.body }}
+          AUTHOR_ASSOCIATION: \${{ github.event.comment.author_association || github.event.review.author_association }}
         with:
           script: |
             const request = process.env.REQUEST || "";
             const association = process.env.AUTHOR_ASSOCIATION || "";
-            const approval = /^@gemini-cli \/approve(?:\\s|$)/.test(request.trim());
+            const trimmed = request.trim();
+            const approval = trimmed === "@gemini-cli /approve" ||
+              trimmed.startsWith("@gemini-cli /approve ") ||
+              trimmed.startsWith("@gemini-cli /approve\n");
             const command = approval
               ? (association === "OWNER" ? "approve" : "unauthorized")
               : request.startsWith("@gemini-cli") ? "invoke" : "ignore";
@@ -43,10 +46,10 @@ jobs:
       - name: Acknowledge
         if: steps.parse.outputs.command != 'ignore'
         env:
-          GH_TOKEN: ${{ github.token }}
-          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.pull_request.number }}
-          REPOSITORY: ${{ github.repository }}
-          COMMAND: ${{ steps.parse.outputs.command }}
+          GH_TOKEN: \${{ github.token }}
+          ISSUE_NUMBER: \${{ github.event.issue.number || github.event.pull_request.number }}
+          REPOSITORY: \${{ github.repository }}
+          COMMAND: \${{ steps.parse.outputs.command }}
         run: |
           case "$COMMAND" in
             approve)
@@ -65,7 +68,7 @@ jobs:
     if: needs.dispatch.outputs.command == 'invoke'
     uses: ./.github/workflows/gemini-invoke.yml
     with:
-      additional_context: ${{ needs.dispatch.outputs.context }}
+      additional_context: \${{ needs.dispatch.outputs.context }}
     secrets: inherit
     permissions:
       contents: read
@@ -77,7 +80,7 @@ jobs:
     if: needs.dispatch.outputs.command == 'approve'
     uses: ./.github/workflows/gemini-plan-execute.yml
     with:
-      additional_context: ${{ needs.dispatch.outputs.context }}
+      additional_context: \${{ needs.dispatch.outputs.context }}
     secrets: inherit
     permissions:
       contents: write
