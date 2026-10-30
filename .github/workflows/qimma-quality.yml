@@ -50,6 +50,13 @@ jobs:
               if marker not in source:
                   raise SystemExit(f"Missing required integration: {marker}")
 
+          # Prevent obsolete demo handlers from overriding cloud-backed form handlers.
+          if "$('#postForm').onsubmit=" in source or "$('#settingsForm').onsubmit=" in source:
+              raise SystemExit("An obsolete local-only form handler is overriding a cloud integration")
+          for marker in ["$('#postForm').addEventListener('submit'", "$('#settingsForm').addEventListener('submit'"]:
+              if marker not in source:
+                  raise SystemExit(f"Missing cloud-backed form handler: {marker}")
+
           migration_dir = Path("supabase/migrations")
           migration_files = sorted(migration_dir.glob("20261030*.sql"))
           if len(migration_files) < 3:
