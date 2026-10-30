@@ -6,6 +6,7 @@ on:
       - "index.html"
       - "docs/index.html"
       - ".github/workflows/qimma-quality.yml"
+      - "supabase/migrations/**"
 
 permissions:
   contents: read
@@ -47,6 +48,15 @@ jobs:
           for marker in required_integrations:
               if marker not in source:
                   raise SystemExit(f"Missing required integration: {marker}")
+
+          migration_dir = Path("supabase/migrations")
+          migration_files = sorted(migration_dir.glob("20261030*.sql"))
+          if len(migration_files) < 3:
+              raise SystemExit("Expected assessment security and profile migrations are missing")
+          migration_text = "\\n".join(path.read_text(encoding="utf-8") for path in migration_files)
+          for marker in ["student_progress", "record_qimma_assessment", "student_profiles_school_grade_check"]:
+              if marker not in migration_text:
+                  raise SystemExit(f"Missing migration content: {marker}")
 
           if "Math.random()" in source or "نقطة تجريبية" in source:
               raise SystemExit("Demo/random assessment scoring is not allowed")
