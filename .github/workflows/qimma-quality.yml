@@ -102,6 +102,8 @@ jobs:
           if "Africa/Cairo" not in migration_text:
               raise SystemExit("Tutor and assessment daily limits must reset on Cairo local midnight")
 
+          if source.count(".open-subject") != 1:
+              raise SystemExit("Subject cards must have exactly one click handler")
           if "Math.random()" in source or "نقطة تجريبية" in source:
               raise SystemExit("Demo/random assessment scoring is not allowed")
           if any(secret in source for secret in ["OPENAI_API_KEY", "SUPABASE_SERVICE_ROLE_KEY", "GEMINI_API_KEY"]):
