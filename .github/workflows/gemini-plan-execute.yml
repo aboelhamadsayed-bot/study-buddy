@@ -42,8 +42,8 @@ jobs:
       - name: Install Qimma Gemini commands
         run: |
           mkdir -p .gemini/commands
-          cp .github/commands/gemini-invoke.toml .gemini/commands/gemini-invoke.toml
-          cp .github/commands/gemini-plan-execute.toml .gemini/commands/gemini-plan-execute.toml
+          cp .github/commands/qimma-plan.toml .gemini/commands/qimma-plan.toml
+          cp .github/commands/qimma-execute.toml .gemini/commands/qimma-execute.toml
       - name: Run Gemini CLI (approved plan only)
         uses: google-github-actions/run-gemini-cli@v0
         env:
@@ -51,7 +51,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
-          prompt: /gemini-plan-execute
+          prompt: /qimma-execute
           github_issue_number: ${{ !github.event.issue.pull_request && github.event.issue.number }}
           github_pr_number: ${{ github.event.pull_request.number || (github.event.issue.pull_request && github.event.issue.number) }}
           settings: |
