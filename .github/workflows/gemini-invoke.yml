@@ -24,20 +24,20 @@ jobs:
           persist-credentials: false
       - name: Prepare request context
         env:
-          TITLE: ${{ github.event.issue.title || github.event.pull_request.title }}
-          DESCRIPTION: ${{ github.event.issue.body || github.event.pull_request.body }}
-          ISSUE_NUMBER: ${{ !github.event.issue.pull_request && github.event.issue.number }}
-          PR_NUMBER: ${{ github.event.pull_request.number || (github.event.issue.pull_request && github.event.issue.number) }}
-          IS_PULL_REQUEST: ${{ !!github.event.pull_request || !!github.event.issue.pull_request }}
-          EVENT_NAME: ${{ github.event_name }}
-          ADDITIONAL_CONTEXT: ${{ inputs.additional_context }}
+          TITLE: ${ github.event.issue.title || github.event.pull_request.title }}
+          DESCRIPTION: ${ github.event.issue.body || github.event.pull_request.body }}
+          ISSUE_NUMBER: ${ !github.event.issue.pull_request && github.event.issue.number }}
+          PR_NUMBER: ${ github.event.pull_request.number || (github.event.issue.pull_request && github.event.issue.number) }}
+          IS_PULL_REQUEST: ${ !!github.event.pull_request || !!github.event.issue.pull_request }}
+          EVENT_NAME: ${ github.event_name }}
+          ADDITIONAL_CONTEXT: ${ inputs.additional_context }}
         run: |
           mkdir -p .gemini
-          jq -n --arg title "$TITLE" --arg description "$DESCRIPTION" \\
-            --arg issue "$ISSUE_NUMBER" --arg pr "$PR_NUMBER" \\
-            --arg is_pr "$IS_PULL_REQUEST" --arg event "$EVENT_NAME" \\
-            --arg context "$ADDITIONAL_CONTEXT" \\
-            '{title:$title, description:$description, issue_number:$issue, pull_request_number:$pr, is_pull_request:$is_pr, event_name:$event, additional_context:$context}' \\
+          jq -n --arg title "$TITLE" --arg description "$DESCRIPTION" \
+            --arg issue "$ISSUE_NUMBER" --arg pr "$PR_NUMBER" \
+            --arg is_pr "$IS_PULL_REQUEST" --arg event "$EVENT_NAME" \
+            --arg context "$ADDITIONAL_CONTEXT" \
+            '{title:$title, description:$description, issue_number:$issue, pull_request_number:$pr, is_pull_request:$is_pr, event_name:$event, additional_context:$context}' \
             > .gemini/context.json
       - name: Install Qimma Gemini commands
         run: |
@@ -48,13 +48,13 @@ jobs:
         uses: google-github-actions/run-gemini-cli@v0
         env:
           GEMINI_CLI_TRUST_WORKSPACE: "true"
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${ github.token }}
         with:
-          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          gemini_api_key: ${ secrets.GEMINI_API_KEY }}
           gemini_model: gemini-3.8-flash
           prompt: /qimma-plan
-          github_issue_number: ${{ !github.event.issue.pull_request && github.event.issue.number }}
-          github_pr_number: ${{ github.event.pull_request.number || (github.event.issue.pull_request && github.event.issue.number) }}
+          github_issue_number: ${ !github.event.issue.pull_request && github.event.issue.number }}
+          github_pr_number: ${ github.event.pull_request.number || (github.event.issue.pull_request && github.event.issue.number) }}
           settings: |
             {
               "model": { "maxSessionTurns": 12 },
@@ -63,7 +63,7 @@ jobs:
                   "command": "docker",
                   "args": ["run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN", "ghcr.io/github/github-mcp-server:v0.27.0"],
                   "includeTools": ["issue_read", "list_issues", "search_issues", "pull_request_read", "list_pull_requests", "search_pull_requests", "get_commit", "get_file_contents", "list_commits", "search_code"],
-                  "env": { "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}" }
+                  "env": { "GITHUB_PERSONAL_ACCESS_TOKEN": "\${GITHUB_TOKEN}" }
                 }
               },
               "tools": { "core": [] }
@@ -72,27 +72,27 @@ jobs:
         if: steps.gemini.outcome == 'success'
         uses: actions/github-script@v7
         env:
-          GEMINI_PLAN: ${{ steps.gemini.outputs.summary }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          GEMINI_PLAN: ${ steps.gemini.outputs.summary }}
+          ISSUE_NUMBER: ${ github.event.issue.number }}
         with:
           script: |
-            const raw = (process.env.GEMINI_PLAN || "").replace(/\\r/g, "").trim();
+            const raw = (process.env.GEMINI_PLAN || "").replace(/\r/g, "").trim();
             const issue_number = Number(process.env.ISSUE_NUMBER);
 
             // A successful CLI process is not proof that the model returned a plan.
             // Reject the exact failure modes previously published as fake plans.
             const invalidMarkers = [
-              /"response"\\s*:\\s*""/i,
-              /"error"\\s*:/i,
+              /"response"\s*:\s*""/i,
+              /"error"\s*:/i,
               /INVALID_STREAM/i,
               /MALFORMED_FUNCTION_CALL/i,
-              /gemini_errors\\s*<<EOF/i,
-              /"stats"\\s*:/i
+              /gemini_errors\s*<<EOF/i,
+              /"stats"\s*:/i
             ];
-            const looksLikeJson = /^\\s*[\\[{]/.test(raw);
-            const hasRequiredHeading = /AI Assistant:\\s*Plan of Action/i.test(raw);
+            const looksLikeJson = /^\s*[\[{]/.test(raw);
+            const hasRequiredHeading = /AI Assistant:\s*Plan of Action/i.test(raw);
             const hasRequest = /Request understood:/i.test(raw);
-            const numberedSteps = (raw.match(/^\\s*\\d+[.)]\\s+.+$/gm) || []).length;
+            const numberedSteps = (raw.match(/^\s*\d+[.)]\s+.+$/gm) || []).length;
             const hasVerification = /test|verification|checks|acceptance criteria/i.test(raw);
             const tooLarge = raw.length > 20000;
             const invalid = !raw ||
