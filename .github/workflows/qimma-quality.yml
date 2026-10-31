@@ -5,7 +5,9 @@ on:
     paths:
       - "index.html"
       - "docs/index.html"
-      - ".github/workflows/qimma-quality.yml"
+      - ".github/workflows/**"
+      - ".github/commands/**"
+      - ".github/qimma-agent-routing.yml"
       - "supabase/migrations/**"
       - "supabase/functions/**"
 
@@ -175,4 +177,17 @@ jobs:
               path.write_text(script, encoding="utf-8")
               subprocess.run(["node", "--check", str(path)], check=True)
           print(f"Passed: synchronized pages and {len(parser.scripts)} JavaScript block(s).")
+          PY
+
+      - name: Validate agent workflow and command configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          ruby -e 'require "yaml"; Dir.glob(".github/workflows/*.yml").each { |f| YAML.load_file(f); puts "YAML OK: #{f}" }; YAML.load_file(".github/qimma-agent-routing.yml")'
+          python3 - <<'PY'
+          import glob, tomllib
+          for path in glob.glob(".github/commands/*.toml"):
+              with open(path, "rb") as handle:
+                  tomllib.load(handle)
+              print(f"TOML OK: {path}")
           PY
