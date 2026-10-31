@@ -95,14 +95,14 @@ Deno.serve(async (req:Request) => {
       return respond(200,{quiz_id:quizId,title:quiz.title,subject:quiz.subject,questions:banks[quiz.bank||quiz.subject].map(({id,prompt,options})=>({id,prompt,options}))});
     }
     if(action!=="submit_quiz") return respond(400,{error:"طلب غير معروف."});
+    const questions=banks[quiz.bank||quiz.subject];
     const answers=body.answers;
-    if(!Array.isArray(answers)||answers.length!==5) return respond(400,{error:"أجب عن الأسئلة الخمسة قبل التسليم."});
+    if(!Array.isArray(answers)||answers.length!==questions.length) return respond(400,{error:"أجب عن جميع أسئلة الاختبار قبل التسليم."});
     const answerMap=new Map<string,number>();
     for(const item of answers) {
       if(!item||typeof item.id!=="string"||!Number.isInteger(item.choice)||item.choice<0||item.choice>3||answerMap.has(item.id)) return respond(400,{error:"راجع إجاباتك وحاول مرة أخرى."});
       answerMap.set(item.id,item.choice);
     }
-    const questions=banks[quiz.bank||quiz.subject];
     if(questions.some(q=>!answerMap.has(q.id))||answerMap.size!==questions.length) return respond(400,{error:"إجابات الاختبار غير مكتملة."});
     const correct=questions.filter(q=>answerMap.get(q.id)===q.answer).length;
     const profileRes=await fetch(url+"/rest/v1/student_profiles?user_id=eq."+encodeURIComponent(userId)+"&select=school_grade",{headers:{apikey:service,Authorization:"Bearer "+service}});
@@ -111,10 +111,10 @@ Deno.serve(async (req:Request) => {
     if(!validGrades.has(grade)) return respond(400,{error:"حدّث صفك الدراسي من إعدادات الحساب قبل حفظ النتيجة."});
     const stage=stageFor(grade);
     const points=correct*quiz.pointsPerCorrect;
-    const saved=await fetch(url+"/rest/v1/rpc/record_qimma_assessment",{method:"POST",headers:{apikey:service,Authorization:"Bearer "+service,"Content-Type":"application/json"},body:JSON.stringify({p_user_id:userId,p_stage:stage,p_grade:grade,p_subject:quiz.subject,p_score:correct*10,p_correct_count:correct,p_question_count:5,p_points:points})});
+    const saved=await fetch(url+"/rest/v1/rpc/record_qimma_assessment",{method:"POST",headers:{apikey:service,Authorization:"Bearer "+service,"Content-Type":"application/json"},body:JSON.stringify({p_user_id:userId,p_stage:stage,p_grade:grade,p_subject:quiz.subject,p_score:correct*10,p_correct_count:correct,p_question_count:questions.length,p_points:points})});
     const result=await saved.json().catch(()=>null);
     if(!saved.ok){if(String(result?.message||"").includes("Daily assessment limit"))return respond(429,{error:"وصلت للحد اليومي للاختبارات (20 محاولة). ارجع بكرة وكمّل تدريبك."});return respond(503,{error:"تعذر حفظ نتيجتك الآن. لم نحتسب نقاطًا؛ حاول مرة أخرى."});}
-    return respond(200,{score:correct*20,correct_count:correct,question_count:5,points_awarded:points,total_points:Number(result?.points||0),completed_count:Number(result?.completed_count||0),review:questions.map(q=>({id:q.id,correct_choice:q.answer,explanation:q.explanation}))});
+    return respond(200,{score:Math.round(correct*100/questions.length),correct_count:correct,question_count:questions.length,points_awarded:points,total_points:Number(result?.points||0),completed_count:Number(result?.completed_count||0),review:questions.map(q=>({id:q.id,correct_choice:q.answer,explanation:q.explanation}))});
   } catch (_) {
     return respond(500,{error:"حدث خطأ غير متوقع. حاول مرة أخرى."});
   }
