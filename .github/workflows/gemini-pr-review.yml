@@ -2,7 +2,7 @@ name: Gemini PR Review
 
 on:
   pull_request:
-    types: [opened, reopened, ready_for_review]
+    types: [opened, reopened, ready_for_review, synchronize, edited]
     # Avoid spending free-tier Gemini quota on every small commit.
   workflow_dispatch:
     inputs:
