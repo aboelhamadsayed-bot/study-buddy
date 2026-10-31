@@ -83,7 +83,7 @@ jobs:
           if not assessment_fn.exists():
               raise SystemExit("The assessment Edge Function source is missing")
           function_source = assessment_fn.read_text(encoding="utf-8")
-          for marker in ["auth/v1/user", "record_qimma_assessment", "questions:banks[quiz.bank||quiz.subject].map", "Daily assessment limit"]:
+          for marker in ["auth/v1/user", "record_qimma_assessment", "questions:banks[quiz.bank||quiz.subject].map", "questions.length", "Math.round(correct*100/questions.length)", "Daily assessment limit"]:
               if marker not in function_source:
                   raise SystemExit(f"Missing secure assessment behavior: {marker}")
 
@@ -110,7 +110,7 @@ jobs:
 
           if source.count("e.target.closest('.open-subject')") != 1:
               raise SystemExit("Subject cards must have exactly one click handler")
-          if "form.reportValidity()" not in source or "selected===null?null:Number(selected)" not in source:
+          if "form.reportValidity()" not in source or "selected===null?null:Number(selected)" not in source or "item.question_count||5" not in source:
               raise SystemExit("Assessment submission must reject unanswered questions")
           if "Qimma assessment submission failed:" not in source or "saved.data.question_count||data.questions.length" not in source:
               raise SystemExit("Assessment submission must recover from network errors and display the actual question count")
