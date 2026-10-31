@@ -46,13 +46,21 @@ jobs:
                 per_page: 100
               });
               const currentComment = context.payload.comment;
-              const hasEarlierPlan = comments.some(comment =>
-                comment.id !== currentComment.id &&
+              const plans = comments.filter(comment =>
                 comment.user?.type === "Bot" &&
-                (comment.body || "").includes("AI Assistant: Plan of Action") &&
-                Date.parse(comment.created_at) < Date.parse(currentComment.created_at)
-              );
-              if (!hasEarlierPlan) command = "no_plan";
+                /AI Assistant: Plan of Action/i.test(comment.body || "") &&
+                /Request understood:/i.test(comment.body || "")
+              ).sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
+              const latestPlan = plans[0];
+              const issueTitle = context.payload.issue?.title || "";
+              const titleTerms = issueTitle.toLowerCase().split(/[^a-z0-9]+/).filter(word => word.length > 3);
+              const planText = (latestPlan?.body || "").toLowerCase();
+              const matchesCurrentIssue = !!latestPlan &&
+                titleTerms.every(word => planText.includes(word)) &&
+                Date.parse(latestPlan.created_at) < Date.parse(currentComment.created_at);
+              const approvalIsAfterLatestPlan = !!latestPlan &&
+                Date.parse(currentComment.created_at) > Date.parse(latestPlan.created_at);
+              if (!matchesCurrentIssue || !approvalIsAfterLatestPlan) command = "no_plan";
             }
 
             core.setOutput("command", command);
