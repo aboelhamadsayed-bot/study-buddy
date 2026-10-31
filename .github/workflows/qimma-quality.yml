@@ -94,6 +94,21 @@ jobs:
           if "answer:q.answer" in ai_exam_source or "correct_choice" in ai_exam_source.split("const safeQuestions")[0]:
               raise SystemExit("AI exam answer key must not be returned to the browser")
 
+          agent_runtime = Path("supabase/functions/_shared/qimma-agent-runtime.ts")
+          agent_ids = ["smart-teacher", "lesson-summarizer", "exam-builder", "study-planner", "problem-solver", "language-coach", "learning-researcher", "academic-mentor"]
+          if not agent_runtime.exists():
+              raise SystemExit("Specialized agent runtime is missing")
+          agent_runtime_text = agent_runtime.read_text(encoding="utf-8")
+          for marker in ["consume_tutor_request", "GEMINI_API_KEY", "roles:Record", "handleAgent"]:
+              if marker not in agent_runtime_text:
+                  raise SystemExit(f"Missing specialized agent runtime behavior: {marker}")
+          for agent_id in agent_ids:
+              entry = Path(f"supabase/functions/qimma-agent-{agent_id}/index.ts")
+              if not entry.exists() or f'handleAgent(req,"{agent_id}")' not in entry.read_text(encoding="utf-8"):
+                  raise SystemExit(f"Missing independent agent endpoint: {agent_id}")
+          if "qimma-agent-'+agent" not in source or 'id="chatAgent"' not in source:
+              raise SystemExit("Assistant UI must route requests to the selected specialized agent")
+
           assessment_fn = Path("supabase/functions/qimma-assessments/index.ts")
           if not assessment_fn.exists():
               raise SystemExit("The assessment Edge Function source is missing")
