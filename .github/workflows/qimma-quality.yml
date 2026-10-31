@@ -40,7 +40,7 @@ jobs:
           if "نسخة واجهة تجريبية" in source or "وصلني سؤالك!" in source:
               raise SystemExit("A placeholder assistant response is still present")
           required_integrations = [
-              "functions.invoke('qimma-tutor'",
+              "functions.invoke('qimma-agent-'+agent",
               "functions.invoke('qimma-assessments'",
               "from('student_progress').select",
               "from('student_posts').insert(payload)",
