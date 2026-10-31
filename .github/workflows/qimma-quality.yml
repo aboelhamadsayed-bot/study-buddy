@@ -83,6 +83,17 @@ jobs:
           if not dynamic_rpc_migration.exists():
               raise SystemExit("Dynamic assessment RPC migration is missing")
 
+          ai_exam_fn = Path("supabase/functions/qimma-ai-exams/index.ts")
+          ai_exam_migration = Path("supabase/migrations/20261031123000_add_qimma_ai_generated_exams.sql")
+          if not ai_exam_fn.exists() or not ai_exam_migration.exists():
+              raise SystemExit("AI exam function or secure storage migration is missing")
+          ai_exam_source = ai_exam_fn.read_text(encoding="utf-8")
+          for marker in ["GEMINI_API_KEY", "submit_qimma_generated_exam", "qimma_generated_exams", "questions.length!==count", "safeQuestions"]:
+              if marker not in ai_exam_source:
+                  raise SystemExit(f"Missing AI exam security/validation behavior: {marker}")
+          if "answer:q.answer" in ai_exam_source or "correct_choice" in ai_exam_source.split("const safeQuestions")[0]:
+              raise SystemExit("AI exam answer key must not be returned to the browser")
+
           assessment_fn = Path("supabase/functions/qimma-assessments/index.ts")
           if not assessment_fn.exists():
               raise SystemExit("The assessment Edge Function source is missing")
