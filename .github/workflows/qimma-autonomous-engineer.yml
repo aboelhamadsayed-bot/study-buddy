@@ -1,0 +1,94 @@
+name: Qimma Autonomous Engineering Agent
+
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: "Optional issue number to triage"
+        required: false
+        type: string
+      dry_run:
+        description: "Report findings without posting an issue comment"
+        required: false
+        default: true
+        type: boolean
+  issues:
+    types: [opened, labeled]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: read
+
+concurrency:
+  group: qimma-autonomous-triage-${{ github.event.issue.number || github.event.inputs.issue_number || 'daily' }}
+  cancel-in-progress: false
+
+jobs:
+  triage:
+    if: >-
+      ${{ github.event_name != 'issues' ||
+      (github.event.issue.pull_request == null &&
+      (github.event.action == 'opened' ||
+      github.event.label.name == 'ai-triage')) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Prepare bounded triage context
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        run: |
+          set -euo pipefail
+          mkdir -p .gemini
+          jq -n --arg event "$EVENT_NAME" --arg number "$ISSUE_NUMBER" \
+            --arg title "$ISSUE_TITLE" --arg body "$ISSUE_BODY" \
+            --arg dry_run "$DRY_RUN" \
+            '{event_name:$event,issue_number:$number,title:$title,description:$body,dry_run:$dry_run}' \
+            > .gemini/context.json
+      - name: Install Qimma triage command
+        run: |
+          mkdir -p .gemini/commands
+          cp .github/commands/qimma-autonomous-triage.toml .gemini/commands/qimma-autonomous-triage.toml
+      - name: Run bounded Gemini triage
+        id: triage
+        uses: google-github-actions/run-gemini-cli@v0
+        env:
+          GEMINI_CLI_TRUST_WORKSPACE: "true"
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          gemini_model: gemini-3.5-flash-lite
+          prompt: /qimma-autonomous-triage
+          github_issue_number: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+          settings: |
+            {
+              "model": { "maxSessionTurns": 12 },
+              "mcpServers": {
+                "github": {
+                  "command": "docker",
+                  "args": ["run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN", "ghcr.io/github/github-mcp-server:v0.27.0"],
+                  "includeTools": ["issue_read", "list_issues", "list_pull_requests", "add_issue_comment", "get_commit", "get_file_contents", "list_commits", "search_code"],
+                  "env": { "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}" }
+                }
+              },
+              "tools": { "core": [] }
+            }
+      - name: Reject empty triage result
+        if: success()
+        env:
+          SUMMARY: ${{ steps.triage.outputs.summary }}
+        run: |
+          set -euo pipefail
+          if [[ -z "$(printf '%s' "${SUMMARY:-}" | xargs)" ]]; then
+            echo "::error::Gemini returned no triage summary; this run is not successful."
+            exit 1
+          fi
