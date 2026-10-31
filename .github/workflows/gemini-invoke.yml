@@ -51,24 +51,24 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
-          gemini_model: gemini-3.5-flash-lite
+          gemini_model: gemini-3.8-flash
           prompt: /qimma-plan
           github_issue_number: ${{ !github.event.issue.pull_request && github.event.issue.number }}
           github_pr_number: ${{ github.event.pull_request.number || (github.event.issue.pull_request && github.event.issue.number) }}
           settings: |
             {
-              "model": { "maxSessionTurns": 20 },
+              "model": { "maxSessionTurns": 12 },
               "mcpServers": {
                 "github": {
                   "command": "docker",
                   "args": ["run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN", "ghcr.io/github/github-mcp-server:v0.27.0"],
                   "includeTools": ["issue_read", "list_issues", "search_issues", "pull_request_read", "list_pull_requests", "search_pull_requests", "get_commit", "get_file_contents", "list_commits", "search_code"],
-                  "env": { "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}" }
+                  "env": { "GITHUB_PERSONAL_ACCESS_TOKEN": "\${GITHUB_TOKEN}" }
                 }
               },
               "tools": { "core": [] }
             }
-      - name: Publish Gemini plan
+      - name: Validate and publish Gemini plan
         if: steps.gemini.outcome == 'success'
         uses: actions/github-script@v7
         env:
@@ -76,18 +76,50 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         with:
           script: |
-            const plan = (process.env.GEMINI_PLAN || "").trim();
+            const raw = (process.env.GEMINI_PLAN || "").replace(/\r/g, "").trim();
             const issue_number = Number(process.env.ISSUE_NUMBER);
-            if (!plan || !Number.isInteger(issue_number) || issue_number < 1) {
-              core.setFailed("Gemini returned no plan or the issue number is invalid; no comment was published.");
+
+            // A successful CLI process is not proof that the model returned a plan.
+            // Reject the exact failure modes previously published as fake plans.
+            const invalidMarkers = [
+              /"response"\s*:\s*""/i,
+              /"error"\s*:/i,
+              /INVALID_STREAM/i,
+              /MALFORMED_FUNCTION_CALL/i,
+              /gemini_errors\s*<<EOF/i,
+              /"stats"\s*:/i
+            ];
+            const looksLikeJson = /^\s*[\[{]/.test(raw);
+            const hasRequiredHeading = /AI Assistant:\s*Plan of Action/i.test(raw);
+            const hasRequest = /Request understood:/i.test(raw);
+            const numberedSteps = (raw.match(/^\s*\d+[.)]\s+.+$/gm) || []).length;
+            const hasVerification = /test|verification|checks|acceptance criteria/i.test(raw);
+            const tooLarge = raw.length > 20000;
+            const invalid = !raw ||
+              looksLikeJson ||
+              invalidMarkers.some(pattern => pattern.test(raw)) ||
+              !hasRequiredHeading ||
+              !hasRequest ||
+              numberedSteps < 2 ||
+              !hasVerification ||
+              tooLarge ||
+              !Number.isInteger(issue_number) ||
+              issue_number < 1;
+
+            if (invalid) {
+              core.setFailed(
+                "Gemini did not return a valid Markdown plan. No issue comment was published and approval remains blocked."
+              );
               return;
             }
-            const body = plan.includes("AI Assistant: Plan of Action")
-              ? plan
-              : "## AI Assistant: Plan of Action\n\n" + plan;
+
+            const body = raw.startsWith("#")
+              ? raw
+              : "## " + raw;
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number,
               body
             });
+            core.info("Validated Markdown plan published. Awaiting explicit owner approval.");
