@@ -44,6 +44,7 @@ jobs:
           mkdir -p .gemini/commands
           cp .github/commands/qimma-plan.toml .gemini/commands/qimma-plan.toml
           cp .github/commands/qimma-execute.toml .gemini/commands/qimma-execute.toml
+          cp .github/commands/qimma-autonomous-fix.toml .gemini/commands/qimma-autonomous-fix.toml
       - name: Run Gemini CLI (approved plan only)
         id: gemini
         uses: google-github-actions/run-gemini-cli@v0
