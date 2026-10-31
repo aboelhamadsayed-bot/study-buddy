@@ -44,7 +44,9 @@ jobs:
           mkdir -p .gemini/commands
           cp .github/commands/qimma-plan.toml .gemini/commands/qimma-plan.toml
           cp .github/commands/qimma-execute.toml .gemini/commands/qimma-execute.toml
+          cp .github/commands/qimma-autonomous-fix.toml .gemini/commands/qimma-autonomous-fix.toml
       - name: Run Gemini CLI (approved plan only)
+        id: gemini
         uses: google-github-actions/run-gemini-cli@v0
         env:
           GEMINI_CLI_TRUST_WORKSPACE: "true"
@@ -68,3 +70,24 @@ jobs:
               },
               "tools": { "core": [] }
             }
+
+      - name: Reject empty or unverified Gemini execution
+        if: success()
+        env:
+          GEMINI_SUMMARY: ${{ steps.gemini.outputs.summary }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          GH_TOKEN: ${{ github.token }}
+          GH_REPOSITORY: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          summary="$(printf '%s' "${GEMINI_SUMMARY:-}" | tr -d '\r' | xargs)"
+          if [[ -z "$summary" ]]; then
+            echo "::error::Gemini CLI exited without a usable execution summary. This run must not be reported as successful."
+            exit 1
+          fi
+          if ! grep -Eqi 'pull request|https://github.com/.*/pull/[0-9]+' <<< "$summary"; then
+            echo "::error::Gemini summary does not identify a reviewable pull request. Refusing a success result."
+            exit 1
+          fi
+          echo "Gemini returned a non-empty summary identifying a pull request."

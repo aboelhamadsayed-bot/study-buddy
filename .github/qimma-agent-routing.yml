@@ -1,0 +1,32 @@
+version: 1
+coordinator:
+  provider: gemini-cli
+  role: "scope control, orchestration, delivery report"
+specialists:
+  frontend_accessibility:
+    focus: ["HTML", "CSS", "JavaScript", "responsive UI", "accessibility"]
+    required_review: true
+  assessments_library:
+    focus: ["exams", "question banks", "grading", "library", "PDF resources"]
+    required_review: true
+  supabase_security:
+    focus: ["Supabase", "Edge Functions", "authentication", "RLS", "migrations"]
+    required_review: true
+    stop_if_unapproved: true
+  testing_qa:
+    focus: ["regression tests", "CI", "quality gates", "test coverage"]
+    required_review: true
+  documentation:
+    focus: ["README", "developer docs", "user guidance"]
+    required_review: false
+fallback:
+  enabled_only_if_credentials_configured: true
+  provider: null
+  on_unavailable: "stop-and-report"
+limits:
+  max_repair_attempts_per_finding: 1
+  max_parallel_runs: 1
+  timeout_minutes: 30
+  auto_merge: false
+  auto_deploy: false
+  production_migrations: false
