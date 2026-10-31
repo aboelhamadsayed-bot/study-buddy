@@ -15,7 +15,7 @@ on:
         default: true
         type: boolean
   issues:
-    types: [opened, labeled]
+    types: [labeled]
 
 permissions:
   contents: read
@@ -31,8 +31,8 @@ jobs:
     if: >-
       ${{ github.event_name != 'issues' ||
       (github.event.issue.pull_request == null &&
-      (github.event.action == 'opened' ||
-      github.event.label.name == 'ai-triage')) }}
+      github.event.action == 'labeled' &&
+      github.event.label.name == 'ai-triage') }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
